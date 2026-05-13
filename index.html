@@ -23,8 +23,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <!-- CSS الرئيسي المطلوب -->
   <link rel="stylesheet" href="main/styles.css" />
+  <link rel="stylesheet" href="main/lang.css" />
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WHRP4DELSR"></script>
   <script>
@@ -35,6 +35,7 @@
   </script>
 
   <script src="main/script.js" defer></script>
+  <script src="main/lang.js" defer></script>
 
   <style>
     .social-card[data-longcopy] {
@@ -72,17 +73,28 @@
 
         <div class="hero-text">
           <span class="status">BUSY</span>
-          <h1>عُـمَر | Omar</h1>
-          <p>دامك دخلت كمل معروفك وشوف الباقي..!</p>
+          <h1 data-i18n="heroName">عُـمَر | Omar</h1>
+          <p data-i18n="heroDesc">دامك دخلت كمل معروفك وشوف الباقي..!</p>
         </div>
       </div>
+
+      <button
+        id="langToggleBtn"
+        class="lang-toggle"
+        type="button"
+        aria-label="تبديل اللغة"
+        title="تبديل اللغة"
+      >
+        <i class="fa-solid fa-language"></i>
+        <span class="lang-hint" data-i18n="langHint">تغيير اللغة</span>
+      </button>
 
       <div class="hero-actions"></div>
     </section>
 
     <section class="section-title enhanced">
       <span class="section-icon"><i class="fa-solid fa-link"></i></span>
-      <span>روابط التواصل</span>
+      <span data-i18n="socialLinksTitle">روابط التواصل</span>
     </section>
 
     <section class="links-grid links">
@@ -96,26 +108,10 @@
         <span class="badge-vip">PRIVATE</span>
         <span class="social-icon"><i class="fa-brands fa-instagram"></i></span>
         <div class="social-text">
-          <strong>انستجرام</strong>
+          <strong data-i18n="instagramAr">انستجرام</strong>
           <span>Instagram</span>
         </div>
       </a>
-
-      <!--
-      <a class="social-card wa-card"
-         href="https://wa.me/message/BZTIWEE5JKS3A1"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-longcopy
-         data-copy-text="https://wa.me/message/BZTIWEE5JKS3A1"
-         aria-label="واتساب">
-        <span class="social-icon"><i class="fa-brands fa-whatsapp"></i></span>
-        <div class="social-text">
-          <strong>واتساب</strong>
-          <span>WhatsApp</span>
-        </div>
-      </a>
-      -->
 
       <a class="social-card sc-card"
          href="https://www.snapchat.com/add/omar-gdmi"
@@ -127,7 +123,7 @@
         <span class="badge-vip">PRIVATE</span>
         <span class="social-icon"><i class="fa-brands fa-snapchat-ghost"></i></span>
         <div class="social-text">
-          <strong>سناب شات</strong>
+          <strong data-i18n="snapchatAr">سناب شات</strong>
           <span>Snapchat</span>
         </div>
       </a>
@@ -142,7 +138,7 @@
         <span class="badge-vip">PRIVATE</span>
         <span class="social-icon"><i class="fa-brands fa-tiktok"></i></span>
         <div class="social-text">
-          <strong>تيك توك</strong>
+          <strong data-i18n="tiktokAr">تيك توك</strong>
           <span>TikTok</span>
         </div>
       </a>
@@ -157,7 +153,7 @@
         <span class="badge-vip">PRIVATE</span>
         <span class="social-icon"><i class="fa-brands fa-facebook-f"></i></span>
         <div class="social-text">
-          <strong>فيسبوك</strong>
+          <strong data-i18n="facebookAr">فيسبوك</strong>
           <span>Facebook</span>
         </div>
       </a>
@@ -176,23 +172,6 @@
           <span>@omar.a.z3</span>
         </div>
       </a>
-
-      <!--
-    <a class="social-card ig-card vip-card drawer-card"
-         href="https://www.instagram.com/3mar.close"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-longcopy
-         data-copy-text="https://www.instagram.com/3mar.close"
-         aria-label="انستغرام خاص">
-        <span class="badge-vip">PRIVATE</span>
-        <span class="social-icon"><i class="fa-solid fa-user-lock"></i></span>
-        <div class="social-text">
-          <strong>انستغرام؟</strong>
-          <span>Private Instagram</span>
-        </div>
-      </a>
--->
 
       <a class="social-card github-card drawer-card"
          href="https://github.com/Omar-i9"
@@ -221,80 +200,77 @@
           <span>omar-g4</span>
         </div>
       </a>
-<!-- Steam -->
-<a class="social-card steam-card drawer-card"
-   href="https://steamcommunity.com/id/omar_gg33/"
-   target="_blank"
-   rel="noopener noreferrer"
-   data-longcopy
-   data-copy-text="https://steamcommunity.com/id/omar_gg33/"
-   aria-label="Steam">
-  <span class="social-icon"><i class="fa-brands fa-steam"></i></span>
-  <div class="social-text">
-    <strong>Steam</strong>
-    <span>omar_gg33</span>
-  </div>
-</a>
 
-<!-- Twitch -->
-<a class="social-card twitch-card drawer-card"
-   href="https://www.twitch.tv/gdmi3"
-   target="_blank"
-   rel="noopener noreferrer"
-   data-longcopy
-   data-copy-text="https://www.twitch.tv/gdmi3"
-   aria-label="Twitch">
-  <span class="social-icon"><i class="fa-brands fa-twitch"></i></span>
-  <div class="social-text">
-    <strong>Twitch</strong>
-    <span>gdmi3</span>
-  </div>
-</a>
+      <a class="social-card steam-card drawer-card"
+         href="https://steamcommunity.com/id/omar_gg33/"
+         target="_blank"
+         rel="noopener noreferrer"
+         data-longcopy
+         data-copy-text="https://steamcommunity.com/id/omar_gg33/"
+         aria-label="Steam">
+        <span class="social-icon"><i class="fa-brands fa-steam"></i></span>
+        <div class="social-text">
+          <strong>Steam</strong>
+          <span>omar_gg33</span>
+        </div>
+      </a>
 
-<!-- X (Twitter) -->
-<a class="social-card x-card drawer-card"
-   href="https://x.com/OGdmi90694"
-   target="_blank"
-   rel="noopener noreferrer"
-   data-longcopy
-   data-copy-text="https://x.com/OGdmi90694"
-   aria-label="X">
-  <span class="social-icon"><i class="fa-brands fa-x-twitter"></i></span>
-  <div class="social-text">
-    <strong>X</strong>
-    <span>@OGdmi90694</span>
-  </div>
-</a>
+      <a class="social-card twitch-card drawer-card"
+         href="https://www.twitch.tv/gdmi3"
+         target="_blank"
+         rel="noopener noreferrer"
+         data-longcopy
+         data-copy-text="https://www.twitch.tv/gdmi3"
+         aria-label="Twitch">
+        <span class="social-icon"><i class="fa-brands fa-twitch"></i></span>
+        <div class="social-text">
+          <strong>Twitch</strong>
+          <span>gdmi3</span>
+        </div>
+      </a>
 
-<!-- Spotify -->
-<a class="social-card spotify-card drawer-card"
-   href="https://open.spotify.com/user/31zq4egkwu5qt6armgjuvey2tgga"
-   target="_blank"
-   rel="noopener noreferrer"
-   data-longcopy
-   data-copy-text="https://open.spotify.com/user/31zq4egkwu5qt6armgjuvey2tgga"
-   aria-label="Spotify">
-  <span class="social-icon"><i class="fa-brands fa-spotify"></i></span>
-  <div class="social-text">
-    <strong>Spotify</strong>
-    <span>Omar</span>
-  </div>
-</a>
+      <a class="social-card x-card drawer-card"
+         href="https://x.com/OGdmi90694"
+         target="_blank"
+         rel="noopener noreferrer"
+         data-longcopy
+         data-copy-text="https://x.com/OGdmi90694"
+         aria-label="X">
+        <span class="social-icon"><i class="fa-brands fa-x-twitter"></i></span>
+        <div class="social-text">
+          <strong>X</strong>
+          <span>@OGdmi90694</span>
+        </div>
+      </a>
 
-<!-- Tellonym -->
-<a class="social-card tellonym-card drawer-card"
-   href="https://tellonym.me/omar.gdmi"
-   target="_blank"
-   rel="noopener noreferrer"
-   data-longcopy
-   data-copy-text="https://tellonym.me/omar.gdmi"
-   aria-label="Tellonym">
-  <span class="social-icon"><i class="fa-solid fa-comment-dots"></i></span>
-  <div class="social-text">
-    <strong>Tellonym</strong>
-    <span>omar.gdmi</span>
-  </div>
-</a>
+      <a class="social-card spotify-card drawer-card"
+         href="https://open.spotify.com/user/31zq4egkwu5qt6armgjuvey2tgga"
+         target="_blank"
+         rel="noopener noreferrer"
+         data-longcopy
+         data-copy-text="https://open.spotify.com/user/31zq4egkwu5qt6armgjuvey2tgga"
+         aria-label="Spotify">
+        <span class="social-icon"><i class="fa-brands fa-spotify"></i></span>
+        <div class="social-text">
+          <strong>Spotify</strong>
+          <span>Omar</span>
+        </div>
+      </a>
+
+      <a class="social-card tellonym-card drawer-card"
+         href="https://tellonym.me/omar.gdmi"
+         target="_blank"
+         rel="noopener noreferrer"
+         data-longcopy
+         data-copy-text="https://tellonym.me/omar.gdmi"
+         aria-label="Tellonym">
+        <span class="social-icon"><i class="fa-solid fa-comment-dots"></i></span>
+        <div class="social-text">
+          <strong>Tellonym</strong>
+          <span>omar.gdmi</span>
+        </div>
+      </a>
+
       <button class="social-card ds-card"
               type="button"
               id="openDiscordBtn"
@@ -303,52 +279,52 @@
               aria-label="ديسكورد">
         <span class="social-icon"><i class="fa-brands fa-discord"></i></span>
         <div class="social-text">
-          <strong>ديسكورد</strong>
+          <strong data-i18n="discordAr">ديسكورد</strong>
           <span>Discord</span>
-          <span class="social-note">اضغط لفتح البطاقة داخل الموقع</span>
+          <span class="social-note" data-i18n="discordNote">اضغط لفتح البطاقة داخل الموقع</span>
         </div>
       </button>
     </section>
 
     <section class="section-title enhanced">
       <span class="section-icon"><i class="fa-solid fa-copy"></i></span>
-      <span>نسخ سريع</span>
+      <span data-i18n="quickCopyTitle">نسخ سريع</span>
     </section>
 
     <section class="copy-list">
       <div class="copy-row">
         <div class="copy-meta">
-          <span>Steam Friend Code</span>
+          <span data-i18n="steamFriendLabel">Steam Friend Code</span>
           <strong>1586913441</strong>
         </div>
-        <button class="copy-btn" data-copy="1586913441" type="button">نسخ</button>
+        <button class="copy-btn" data-copy="1586913441" type="button" data-i18n="copyBtn">نسخ</button>
       </div>
 
       <div class="copy-row">
         <div class="copy-meta">
-          <span>Epic Games</span>
+          <span data-i18n="epicGamesLabel">Epic Games</span>
           <strong>Omar-G4</strong>
         </div>
-        <button class="copy-btn" data-copy="Omar-G4" type="button">نسخ</button>
+        <button class="copy-btn" data-copy="Omar-G4" type="button" data-i18n="copyBtn">نسخ</button>
       </div>
     </section>
 
     <section class="section-title enhanced">
       <span class="section-icon"><i class="fa-solid fa-diagram-project"></i></span>
-      <span>مشروع؟</span>
+      <span data-i18n="projectTitle">مشروع؟</span>
     </section>
 
     <a class="work-card" href="https://omar-i9.github.io/taamenn/" target="_blank" rel="noopener noreferrer">
       <img src="photo/tameen-logo.jpeg" alt="تأمين" class="work-logo" />
       <div class="work-text">
-        <strong>تأمين</strong>
-        <span>"بين نبضِ العطاءِ ووقارِ الختام.. يُجمد التطوير ليبقى المشروعُ إرثاً تقنياً، ورمزاً لرحلةٍ اكتملت فخلدت."</span>
+        <strong data-i18n="projectName">تأمين</strong>
+        <span data-i18n="projectDesc">"بين نبضِ العطاءِ ووقارِ الختام.. يُجمد التطوير ليبقى المشروعُ إرثاً تقنياً، ورمزاً لرحلةٍ اكتملت فخلدت."</span>
       </div>
       <i class="fa-solid fa-arrow-left"></i>
     </a>
 
-    <div class="hero-card-footer">الفولو <em>ما بكهربك</em></div>
-    <div class="hero-card-footer">شغل الصفحة يقدر<em>!بـ 47 ساعة عمل</em></div>
+    <div class="hero-card-footer" data-i18n="footerLine1">الفولو <em>ما بكهربك</em></div>
+    <div class="hero-card-footer" data-i18n="footerLine2">كل حساباتي هون <em>ليش بعرفش</em></div>
   </main>
 
   <section class="music-sheet" id="musicSheet" aria-label="قائمة الموسيقى">
@@ -364,7 +340,7 @@
     <div class="music-top">
       <img src="" id="musicCover" alt="غلاف الأغنية" class="music-cover" />
       <div class="music-info">
-        <span class="label">Now Playing</span>
+        <span class="label" data-i18n="nowPlaying">Now Playing</span>
         <strong id="songTitle">اسم الأغنية</strong>
         <span id="songArtist">main / mp3</span>
       </div>
@@ -405,11 +381,11 @@
 
     <div class="playlist-box">
       <div class="playlist-head">
-        <strong>قائمة الأغاني</strong>
+        <strong data-i18n="playlistTitle">قائمة الأغاني</strong>
         <span id="playlistCount">11 أغنية</span>
       </div>
       <div class="playlist" id="playlist"></div>
-      <div class="audio-state" id="audioState">اضغط على أي أغنية للتشغيل</div>
+      <div class="audio-state" id="audioState" data-i18n="audioState">اضغط على أي أغنية للتشغيل</div>
     </div>
 
     <audio id="audio" preload="metadata" src=""></audio>
@@ -421,8 +397,9 @@
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p class="site-footer__brand">عُـمَر | Omar</p>
-      <p class="site-footer__text">جميع الحقوق غير محفوظة © 2026</p>
+      <p class="site-footer__brand" data-i18n="footerBrand">عُـمَر | Omar</p>
+      <p class="site-footer__text" data-i18n="footerText1">جميع الحقوق غير محفوظة © 2026</p>
+      <p class="site-footer__text" data-i18n-html="footerText2">بتعرف انه كل هاد شغل ايدي؟</p>
     </div>
   </footer>
 
@@ -442,15 +419,15 @@
           <img src="photo/profile.jpeg" alt="شعار الموقع" class="qr-logo" />
         </div>
 
-        <h3 id="shareTitle">بوابة المشاركة</h3>
-        <p>امسح الكود أو شارك الرابط مباشرة</p>
+        <h3 id="shareTitle" data-i18n="shareTitle">بوابة المشاركة</h3>
+        <p data-i18n="shareText">امسح الكود أو شارك الرابط مباشرة</p>
       </div>
 
       <div class="share-link-box">
         <input id="shareUrlInput" class="share-url-input" type="text" readonly value="https://omar-i9.github.io/my-profiles/" />
         <button class="share-copy-btn" id="copyShareBtn" type="button">
           <i class="fa-solid fa-copy"></i>
-          نسخ
+          <span data-i18n="shareCopy">نسخ</span>
         </button>
       </div>
     </div>
@@ -470,173 +447,174 @@
   </div>
 
   <script>
-    (function () {
-      const $ = (id) => document.getElementById(id);
+(function () {
+  const $ = (id) => document.getElementById(id);
 
-      const openDiscordBtn = $('openDiscordBtn');
-      const pageOverlay = $('pageOverlay');
-      const closePageBtn = $('closePageBtn');
-      const pageFrame = $('pageFrame');
+  const openDiscordBtn = $('openDiscordBtn');
+  const pageOverlay = $('pageOverlay');
+  const closePageBtn = $('closePageBtn');
+  const pageFrame = $('pageFrame');
 
-      const sharePortalBtn = $('sharePortalBtn');
-      const shareOverlay = $('shareOverlay');
-      const closeShare = $('closeShare');
-      const copyShareBtn = $('copyShareBtn');
-      const shareUrlInput = $('shareUrlInput');
-      const shareQrImg = $('shareQrImg');
+  const sharePortalBtn = $('sharePortalBtn');
+  const shareOverlay = $('shareOverlay');
+  const closeShare = $('closeShare');
+  const copyShareBtn = $('copyShareBtn');
+  const shareUrlInput = $('shareUrlInput');
+  const shareQrImg = $('shareQrImg');
 
-      const toast = $('toast');
-      const moreSocialsBackdrop = $('moreSocialsBackdrop');
+  const toast = $('toast');
+  const moreSocialsBackdrop = $('moreSocialsBackdrop');
 
-      function hasOpenPanel() {
-        return Boolean(
-          (pageOverlay && pageOverlay.classList.contains('show')) ||
-          (shareOverlay && shareOverlay.classList.contains('show'))
-        );
+  function hasOpenPanel() {
+    return Boolean(
+      (pageOverlay && pageOverlay.classList.contains('show')) ||
+      (shareOverlay && shareOverlay.classList.contains('show'))
+    );
+  }
+
+  function updateBodyLock() {
+    document.body.style.overflow = hasOpenPanel() ? 'hidden' : '';
+  }
+
+  function showToast(message = 'تم النسخ') {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 1800);
+  }
+
+  async function copyText(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        temp.setAttribute('readonly', '');
+        temp.style.position = 'fixed';
+        temp.style.top = '-9999px';
+        temp.style.opacity = '0';
+        document.body.appendChild(temp);
+        temp.focus();
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
       }
+      showToast('تم النسخ');
+    } catch (err) {
+      showToast('تعذر النسخ');
+    }
+  }
 
-      function updateBodyLock() {
-        document.body.style.overflow = hasOpenPanel() ? 'hidden' : '';
-      }
+  function openPageOverlay() {
+    if (!pageOverlay || !pageFrame) return;
+    pageFrame.src = 'main/Discord.html';
+    pageOverlay.classList.add('show');
+    pageOverlay.setAttribute('aria-hidden', 'false');
+    updateBodyLock();
+  }
 
-      function showToast(message = 'تم النسخ') {
-        if (!toast) return;
-        toast.textContent = message;
-        toast.classList.add('show');
-        clearTimeout(showToast._timer);
-        showToast._timer = setTimeout(() => {
-          toast.classList.remove('show');
-        }, 1800);
-      }
+  function closePageOverlay() {
+    if (!pageOverlay || !pageFrame) return;
+    pageOverlay.classList.remove('show');
+    pageOverlay.setAttribute('aria-hidden', 'true');
+    pageFrame.src = '';
+    updateBodyLock();
+  }
 
-      async function copyText(text) {
-        try {
-          if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(text);
-          } else {
-            const temp = document.createElement('textarea');
-            temp.value = text;
-            temp.setAttribute('readonly', '');
-            temp.style.position = 'fixed';
-            temp.style.top = '-9999px';
-            temp.style.opacity = '0';
-            document.body.appendChild(temp);
-            temp.focus();
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-          }
-          showToast('تم النسخ');
-        } catch (err) {
-          showToast('تعذر النسخ');
-        }
-      }
+  function openShare() {
+    if (!shareOverlay) return;
+    shareOverlay.classList.add('show');
+    shareOverlay.setAttribute('aria-hidden', 'false');
+    updateBodyLock();
 
-      function openPageOverlay() {
-        if (!pageOverlay || !pageFrame) return;
-        pageFrame.src = 'main/Discord.html';
-        pageOverlay.classList.add('show');
-        pageOverlay.setAttribute('aria-hidden', 'false');
-        updateBodyLock();
-      }
+    if (shareUrlInput) {
+      shareUrlInput.value = window.location.href;
+    }
 
-      function closePageOverlay() {
-        if (!pageOverlay || !pageFrame) return;
-        pageOverlay.classList.remove('show');
-        pageOverlay.setAttribute('aria-hidden', 'true');
-        pageFrame.src = '';
-        updateBodyLock();
-      }
+    if (shareQrImg) {
+      const url = encodeURIComponent(window.location.href);
+      shareQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${url}`;
+    }
+  }
 
-      function openShare() {
-        if (!shareOverlay) return;
-        shareOverlay.classList.add('show');
-        shareOverlay.setAttribute('aria-hidden', 'false');
-        updateBodyLock();
+  function closeShareModal() {
+    if (!shareOverlay) return;
+    shareOverlay.classList.remove('show');
+    shareOverlay.setAttribute('aria-hidden', 'true');
+    updateBodyLock();
+  }
 
-        if (shareUrlInput) {
-          shareUrlInput.value = window.location.href;
-        }
+  if (openDiscordBtn) {
+    openDiscordBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPageOverlay();
+    });
+  }
 
-        if (shareQrImg) {
-          const url = encodeURIComponent(window.location.href);
-          shareQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${url}`;
-        }
-      }
+  if (closePageBtn) {
+    closePageBtn.addEventListener('click', closePageOverlay);
+  }
 
-      function closeShareModal() {
-        if (!shareOverlay) return;
-        shareOverlay.classList.remove('show');
-        shareOverlay.setAttribute('aria-hidden', 'true');
-        updateBodyLock();
-      }
+  if (pageOverlay) {
+    pageOverlay.addEventListener('click', (e) => {
+      if (e.target === pageOverlay) closePageOverlay();
+    });
+  }
 
-      if (openDiscordBtn) {
-        openDiscordBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          openPageOverlay();
-        });
-      }
+  if (sharePortalBtn) {
+    sharePortalBtn.addEventListener('click', openShare);
+  }
 
-      if (closePageBtn) {
-        closePageBtn.addEventListener('click', closePageOverlay);
-      }
+  if (closeShare) {
+    closeShare.addEventListener('click', closeShareModal);
+  }
 
-      if (pageOverlay) {
-        pageOverlay.addEventListener('click', (e) => {
-          if (e.target === pageOverlay) closePageOverlay();
-        });
-      }
+  if (shareOverlay) {
+    shareOverlay.addEventListener('click', (e) => {
+      if (e.target === shareOverlay) closeShareModal();
+    });
+  }
 
-      if (sharePortalBtn) {
-        sharePortalBtn.addEventListener('click', openShare);
-      }
+  if (copyShareBtn) {
+    copyShareBtn.addEventListener('click', () => {
+      if (shareUrlInput) copyText(shareUrlInput.value);
+    });
+  }
 
-      if (closeShare) {
-        closeShare.addEventListener('click', closeShareModal);
-      }
+  document.addEventListener('click', (e) => {
+    const copyBtn = e.target.closest?.('[data-copy]');
+    if (copyBtn) {
+      const value = copyBtn.getAttribute('data-copy') || '';
+      if (value) copyText(value);
+    }
+  });
 
-      if (shareOverlay) {
-        shareOverlay.addEventListener('click', (e) => {
-          if (e.target === shareOverlay) closeShareModal();
-        });
-      }
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'close-discord') {
+      closePageOverlay();
+    }
+  });
 
-      if (copyShareBtn) {
-        copyShareBtn.addEventListener('click', () => {
-          if (shareUrlInput) copyText(shareUrlInput.value);
-        });
-      }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closePageOverlay();
+      closeShareModal();
+    }
+  });
 
-      document.addEventListener('click', (e) => {
-        const copyBtn = e.target.closest?.('[data-copy]');
-        if (copyBtn) {
-          const value = copyBtn.getAttribute('data-copy') || '';
-          if (value) copyText(value);
-        }
-      });
+  if (moreSocialsBackdrop) {
+    moreSocialsBackdrop.setAttribute('aria-hidden', 'true');
+  }
 
-      window.addEventListener('message', (event) => {
-        if (event.data && event.data.type === 'close-discord') {
-          closePageOverlay();
-        }
-      });
+  updateBodyLock();
+})();
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          closePageOverlay();
-          closeShareModal();
-        }
-      });
-
-      if (moreSocialsBackdrop) {
-        moreSocialsBackdrop.setAttribute('aria-hidden', 'true');
-      }
-
-      updateBodyLock();
-    })();
-
-    const titles = [
+const titles = [
   "اهلين تعال كل يوم 👋",
   "Omar Profiles"
 ];
@@ -650,7 +628,7 @@ const titleEl = document.querySelector("title");
 
 function typeEffect() {
   const current = titles[i];
-  
+
   if (isDeleting) {
     charIndex--;
   } else {
@@ -660,9 +638,8 @@ function typeEffect() {
   titleEl.textContent = current.substring(0, charIndex);
 
   if (!isDeleting && charIndex === current.length) {
-    setTimeout(() => isDeleting = true, 1200);
-  } 
-  else if (isDeleting && charIndex === 0) {
+    setTimeout(() => (isDeleting = true), 1200);
+  } else if (isDeleting && charIndex === 0) {
     isDeleting = false;
     i = (i + 1) % titles.length;
   }
@@ -672,8 +649,6 @@ function typeEffect() {
 
 typeEffect();
 
-
-// تغيير لما المستخدم يطلع من الصفحة
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     titleEl.textContent = "لا تهرب خليكككك";
@@ -686,7 +661,6 @@ document.addEventListener("visibilitychange", () => {
     }, 800);
   }
 });
-
-  </script>
+</script>
 </body>
 </html>
