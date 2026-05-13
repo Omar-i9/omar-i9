@@ -1,0 +1,100 @@
+.hero-wrapper{
+  position: relative;
+  overflow: visible;
+}
+
+.lang-toggle{
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(10, 14, 22, .76);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 9999;
+  pointer-events: auto;
+  box-shadow: 0 10px 26px rgba(0,0,0,.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.lang-toggle i{
+  font-size: 19px;
+  line-height: 1;
+}
+
+.lang-toggle:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.28);
+  background: rgba(18, 24, 36, .92);
+  box-shadow: 0 14px 32px rgba(0,0,0,.34);
+}
+
+.lang-toggle:active{
+  transform: translateY(0) scale(.97);
+}
+
+.lang-toggle:focus-visible{
+  outline: 2px solid rgba(110,168,255,.9);
+  outline-offset: 3px;
+}
+
+.lang-hint{
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 1;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: rgba(0,0,0,.84);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.lang-hint::after{
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 13px;
+  border: 6px solid transparent;
+  border-top-color: rgba(0,0,0,.84);
+}
+
+.lang-toggle:hover .lang-hint,
+.lang-toggle:focus-visible .lang-hint{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html[dir="ltr"] body{
+  direction: ltr;
+}
+
+html[dir="ltr"] .hero-wrapper,
+html[dir="ltr"] .site-footer,
+html[dir="ltr"] .share-top,
+html[dir="ltr"] .music-info,
+html[dir="ltr"] .social-text,
+html[dir="ltr"] .copy-meta{
+  text-align: left;
+}
+
+html[dir="rtl"] .hero-wrapper,
+html[dir="rtl"] .site-footer,
+html[dir="rtl"] .share-top,
+html[dir="rtl"] .music-info,
+html[dir="rtl"] .social-text,
+html[dir="rtl"] .copy-meta{
+  text-align: right;
+}
