@@ -1,16 +1,25 @@
-.hero-wrapper{
+/* ================================================================
+   lang.css — Omar Profiles
+   ملف CSS مخصص لتبديل اللغة عربي / إنجليزي
+   لا يُدمج داخل styles.css — يُحمَّل بشكل مستقل
+   ================================================================ */
+
+/* ────────────────────────────────────────────────────────────────
+   01 · زر تبديل اللغة
+   ──────────────────────────────────────────────────────────────── */
+.hero-wrapper {
   position: relative;
   overflow: visible;
 }
 
-.lang-toggle{
+.lang-toggle {
   position: absolute;
   right: 14px;
   bottom: 14px;
   width: 46px;
   height: 46px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.14);
+  border: 1px solid rgba(255, 255, 255, .14);
   background: rgba(10, 14, 22, .76);
   color: #fff;
   display: grid;
@@ -18,83 +27,318 @@
   cursor: pointer;
   z-index: 9999;
   pointer-events: auto;
-  box-shadow: 0 10px 26px rgba(0,0,0,.28);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .28);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
 }
 
-.lang-toggle i{
+.lang-toggle i {
   font-size: 19px;
   line-height: 1;
+  pointer-events: none;
 }
 
-.lang-toggle:hover{
+.lang-toggle:hover {
   transform: translateY(-2px);
-  border-color: rgba(255,255,255,.28);
-  background: rgba(18, 24, 36, .92);
-  box-shadow: 0 14px 32px rgba(0,0,0,.34);
+  border-color: rgba(255, 255, 255, .30);
+  background: rgba(18, 24, 36, .94);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, .36);
 }
 
-.lang-toggle:active{
-  transform: translateY(0) scale(.97);
+.lang-toggle:active {
+  transform: translateY(0) scale(.96);
 }
 
-.lang-toggle:focus-visible{
-  outline: 2px solid rgba(110,168,255,.9);
+.lang-toggle:focus-visible {
+  outline: 2px solid rgba(110, 168, 255, .9);
   outline-offset: 3px;
 }
 
-.lang-hint{
+/* ── Tooltip الـ hover ── */
+.lang-hint {
   position: absolute;
   right: 0;
   bottom: calc(100% + 10px);
   white-space: nowrap;
   font-size: 11px;
+  font-weight: 700;
   line-height: 1;
-  padding: 7px 10px;
+  padding: 7px 11px;
   border-radius: 10px;
-  background: rgba(0,0,0,.84);
+  background: rgba(0, 0, 0, .86);
   color: #fff;
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);
   transition: opacity .18s ease, transform .18s ease;
+  z-index: 10;
 }
 
-.lang-hint::after{
+.lang-hint::after {
   content: "";
   position: absolute;
   top: 100%;
   right: 13px;
   border: 6px solid transparent;
-  border-top-color: rgba(0,0,0,.84);
+  border-top-color: rgba(0, 0, 0, .86);
 }
 
 .lang-toggle:hover .lang-hint,
-.lang-toggle:focus-visible .lang-hint{
+.lang-toggle:focus-visible .lang-hint {
   opacity: 1;
   transform: translateY(0);
 }
 
-html[dir="ltr"] body{
+/* ────────────────────────────────────────────────────────────────
+   02 · انتقال سلس عند تبديل الاتجاه
+   ──────────────────────────────────────────────────────────────── */
+body,
+.hero-text,
+.hero-card-footer,
+.section-title,
+.social-text,
+.social-text strong,
+.social-text span,
+.copy-meta,
+.copy-meta span,
+.copy-meta strong,
+.work-text,
+.work-text strong,
+.work-text span,
+.music-info,
+.track-meta,
+.drawer-head,
+.playlist-head,
+.site-footer__inner {
+  transition: text-align .22s ease;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   03 · LTR — اتجاه يسار لما تكون اللغة إنجليزية
+   ──────────────────────────────────────────────────────────────── */
+html[dir="ltr"] body {
   direction: ltr;
 }
 
-html[dir="ltr"] .hero-wrapper,
+/* محاذاة نصوص — يسار */
+html[dir="ltr"] .hero-text,
+html[dir="ltr"] .hero-card-footer,
+html[dir="ltr"] .section-title,
+html[dir="ltr"] .section-title.enhanced,
+html[dir="ltr"] .social-text,
+html[dir="ltr"] .copy-meta,
+html[dir="ltr"] .work-text,
+html[dir="ltr"] .music-info,
+html[dir="ltr"] .track-meta,
+html[dir="ltr"] .drawer-head,
+html[dir="ltr"] .playlist-head,
+html[dir="ltr"] .site-footer__inner,
 html[dir="ltr"] .site-footer,
 html[dir="ltr"] .share-top,
-html[dir="ltr"] .music-info,
-html[dir="ltr"] .social-text,
-html[dir="ltr"] .copy-meta{
+html[dir="ltr"] .audio-state {
   text-align: left;
 }
 
-html[dir="rtl"] .hero-wrapper,
+/* copy-row — يعكس الترتيب في LTR */
+html[dir="ltr"] .copy-row {
+  flex-direction: row;
+}
+
+/* سهم بطاقة المشروع — يعكس في LTR */
+html[dir="ltr"] .work-card i.fa-arrow-left {
+  transform: scaleX(-1);
+}
+
+/* زر اللغة — يتحرك لليسار في LTR */
+html[dir="ltr"] .lang-toggle {
+  right: auto;
+  left: 14px;
+}
+
+html[dir="ltr"] .lang-hint {
+  right: auto;
+  left: 0;
+}
+
+html[dir="ltr"] .lang-hint::after {
+  right: auto;
+  left: 13px;
+}
+
+/* الـ badge vip — في LTR يكون يسار */
+html[dir="ltr"] .badge-vip,
+html[dir="ltr"] .badge-vip-neo {
+  right: auto;
+  left: 9px;
+}
+
+/* Drawer close button */
+html[dir="ltr"] .drawer-close {
+  left: auto;
+  right: 12px;
+}
+
+/* Music sheet close */
+html[dir="ltr"] .sheet-close {
+  left: auto;
+  right: 10px;
+}
+
+/* music-top padding */
+html[dir="ltr"] .music-top {
+  padding-inline-start: 0;
+  padding-inline-end: 40px;
+}
+
+/* Close share button */
+html[dir="ltr"] .close-share {
+  right: auto;
+  left: 10px;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   04 · RTL — اتجاه يمين لما تكون اللغة عربية (الافتراضي)
+   ──────────────────────────────────────────────────────────────── */
+html[dir="rtl"] body {
+  direction: rtl;
+}
+
+/* محاذاة نصوص — يمين */
+html[dir="rtl"] .hero-text,
+html[dir="rtl"] .hero-card-footer,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .section-title.enhanced,
+html[dir="rtl"] .social-text,
+html[dir="rtl"] .copy-meta,
+html[dir="rtl"] .work-text,
+html[dir="rtl"] .music-info,
+html[dir="rtl"] .track-meta,
+html[dir="rtl"] .drawer-head,
+html[dir="rtl"] .playlist-head,
+html[dir="rtl"] .site-footer__inner,
 html[dir="rtl"] .site-footer,
 html[dir="rtl"] .share-top,
-html[dir="rtl"] .music-info,
-html[dir="rtl"] .social-text,
-html[dir="rtl"] .copy-meta{
+html[dir="rtl"] .audio-state {
   text-align: right;
+}
+
+/* copy-row — الترتيب الطبيعي في RTL */
+html[dir="rtl"] .copy-row {
+  flex-direction: row;
+}
+
+/* زر اللغة — يمين في RTL */
+html[dir="rtl"] .lang-toggle {
+  right: 14px;
+  left: auto;
+}
+
+html[dir="rtl"] .lang-hint {
+  right: 0;
+  left: auto;
+}
+
+html[dir="rtl"] .lang-hint::after {
+  right: 13px;
+  left: auto;
+}
+
+/* الـ badges — يمين في RTL */
+html[dir="rtl"] .badge-vip,
+html[dir="rtl"] .badge-vip-neo {
+  right: 9px;
+  left: auto;
+}
+
+/* Drawer close button */
+html[dir="rtl"] .drawer-close {
+  left: 12px;
+  right: auto;
+}
+
+/* Music sheet close */
+html[dir="rtl"] .sheet-close {
+  left: 10px;
+  right: auto;
+}
+
+/* music-top padding */
+html[dir="rtl"] .music-top {
+  padding-inline-start: 40px;
+  padding-inline-end: 0;
+}
+
+/* Close share button */
+html[dir="rtl"] .close-share {
+  right: 10px;
+  left: auto;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   05 · عناصر تبقى LTR دائماً بغض النظر عن اللغة
+   ──────────────────────────────────────────────────────────────── */
+
+/* شريط الوقت والصوت — LTR دائماً */
+.time-row,
+.volume-row,
+.seek-wrap,
+.seek,
+.volume,
+.volume-value,
+.share-url-input {
+  direction: ltr !important;
+}
+
+/* معرّفات المنصات (usernames) — LTR دائماً */
+.social-text span:not(.social-note),
+.track-meta span {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* الآية القرآنية — RTL دائماً */
+.ayah-float,
+.ayah-text,
+.ayah-ref,
+.ayah-note,
+.ayah-detail {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   06 · بطاقات التواصل — البطاقة نفسها تبقى centered
+   ──────────────────────────────────────────────────────────────── */
+
+/* الأيقونة والنص يبقون متمركزين في المنتصف بغض النظر عن اللغة */
+html[dir="ltr"] .social-card,
+html[dir="rtl"] .social-card {
+  text-align: center;
+}
+
+html[dir="ltr"] .social-text,
+html[dir="rtl"] .social-text {
+  text-align: center !important;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   07 · تحسينات الـ Responsive لزر اللغة
+   ──────────────────────────────────────────────────────────────── */
+@media (max-width: 420px) {
+  .lang-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    bottom: 10px;
+  }
+
+  html[dir="rtl"] .lang-toggle { right: 10px; }
+  html[dir="ltr"] .lang-toggle { left: 10px; right: auto; }
+
+  .lang-toggle i { font-size: 16px; }
 }
