@@ -3,29 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0f16" />
+  <meta name="theme-color" content="#060a12" />
   <meta name="color-scheme" content="dark" />
   <meta name="description" content="صفحة Omar Profiles تجمع كل الروابط والحسابات في مكان واحد" />
 
-  <meta property="og:title" content="عُـمَر | Omar" />
+  <meta property="og:title"       content="عُـمَر | Omar" />
   <meta property="og:description" content="كل حساباتي في مكان واحد" />
-  <meta property="og:image" content="https://omar-i9.github.io/my-profiles/photo/profile.jpeg" />
-  <meta property="og:url" content="https://omar-i9.github.io/my-profiles/" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="p:domain_verify" content="2bceaee4e3d7c3a47ea83686e0fd2281" />
+  <meta property="og:image"       content="https://omar-i9.github.io/my-profiles/photo/profile.jpeg" />
+  <meta property="og:url"         content="https://omar-i9.github.io/my-profiles/" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="p:domain_verify"    content="2bceaee4e3d7c3a47ea83686e0fd2281" />
 
   <title id="tabTitle">Omar Profiles</title>
 
-  <link rel="icon" href="https://omar-i9.github.io/my-profiles/photo/profile.jpeg" type="image/jpeg" />
+  <link rel="icon"            href="https://omar-i9.github.io/my-profiles/photo/profile.jpeg" type="image/jpeg" />
   <link rel="apple-touch-icon" href="https://omar-i9.github.io/my-profiles/photo/tameen-logo.jpeg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect"      href="https://fonts.googleapis.com" />
+  <link rel="preconnect"      href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
+  <!-- ملف الـ CSS الجديد -->
   <link rel="stylesheet" href="main/styles.css" />
   <link rel="stylesheet" href="main/lang.css" />
 
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WHRP4DELSR"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -34,50 +36,63 @@
     gtag('config', 'G-WHRP4DELSR');
   </script>
 
-  <script src="main/script.js" defer></script>
-  <script src="main/lang.js" defer></script>
+  <script src="main/script.js"  defer></script>
+  <script src="main/lang.js"    defer></script>
 
   <style>
+    /* حماية من التحديد اللمسي على البطاقات */
     .social-card[data-longcopy] {
       -webkit-touch-callout: none;
       user-select: none;
     }
-
-    .is-hidden {
-      display: none !important;
-    }
+    .is-hidden { display: none !important; }
   </style>
 </head>
 
 <body>
+
+  <!-- ═══════════════════════════════════════════
+       آية عائمة — Ayah Float Widget
+  ════════════════════════════════════════════ -->
   <div class="ayah-float" id="ayahFloat" aria-label="آية قرآنية متغيرة">
     <div class="ayah-top">
       <span class="ayah-pill">آية</span>
       <span class="ayah-num" id="ayahNum">1</span>
     </div>
-    <div class="ayah-text" id="ayahText"></div>
-    <div class="ayah-ref" id="ayahRef"></div>
-    <div class="ayah-note" id="ayahNote"></div>
+    <div class="ayah-text"   id="ayahText"></div>
+    <div class="ayah-ref"    id="ayahRef"></div>
+    <div class="ayah-note"   id="ayahNote"></div>
     <div class="ayah-detail" id="ayahDetail"></div>
   </div>
 
+  <!-- ═══════════════════════════════════════════
+       التطبيق الرئيسي
+  ════════════════════════════════════════════ -->
   <main class="app">
+
+  <!-- ═══════════════════════════
+       بطاقة البروفايل — Hero
+  ════════════════════════════ -->
     <section class="hero-wrapper">
+
+      <!-- الصورة الشخصية -->
       <div class="avatar">
         <img src="photo/profile.jpeg" alt="صورة الملف الشخصي" />
         <div class="status-indicator"></div>
       </div>
 
+      <!-- جسم البطاقة -->
       <div class="hero-card-body">
         <div class="moving-border-line"></div>
 
         <div class="hero-text">
           <span class="status">BUSY</span>
           <h1 data-i18n="heroName">عُـمَر | Omar</h1>
-          <p data-i18n="heroDesc">دامك دخلت كمل معروفك وشوف الباقي..!</p>
+          <p  data-i18n="heroDesc">دامك دخلت كمل معروفك وشوف الباقي..!</p>
         </div>
       </div>
 
+      <!-- زر تبديل اللغة -->
       <button
         id="langToggleBtn"
         class="lang-toggle"
@@ -89,31 +104,44 @@
         <span class="lang-hint" data-i18n="langHint">تغيير اللغة</span>
       </button>
 
+      <!-- أزرار الإجراءات (تُملأ بـ JS) -->
       <div class="hero-actions"></div>
+
     </section>
 
+    <!-- ═══════════════════════════
+         عنوان قسم روابط التواصل
+    ════════════════════════════ -->
     <section class="section-title enhanced">
       <span class="section-icon"><i class="fa-solid fa-link"></i></span>
       <span data-i18n="socialLinksTitle">روابط التواصل</span>
     </section>
 
+    <!-- ═══════════════════════════
+         شبكة البطاقات الاجتماعية
+    ════════════════════════════ -->
     <section class="links-grid links">
-      <a class="social-card ig-card"
+
+      <!-- ── Instagram ── -->
+      <a class="social-card ig-card wave-auto"
          href="https://www.instagram.com/omar.a.z3"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://www.instagram.com/omar.a.z3"
          aria-label="انستجرام">
-        <span class="badge-vip">PRIVATE</span>
-        <span class="social-icon"><i class="fa-brands fa-instagram"></i></span>
+        <span class="badge-vip-neo">PUBLIC</span>
+        <span class="social-icon">
+          <i class="fa-brands fa-instagram"></i>
+        </span>
         <div class="social-text">
           <strong data-i18n="instagramAr">انستجرام</strong>
-          <span>Instagram</span>
+          <span>omar.a.z3</span>
         </div>
       </a>
 
-      <a class="social-card sc-card"
+      <!-- ── Snapchat ── -->
+      <a class="social-card sc-card wave-auto"
          href="https://www.snapchat.com/add/omar-gdmi"
          target="_blank"
          rel="noopener noreferrer"
@@ -121,29 +149,35 @@
          data-copy-text="https://www.snapchat.com/add/omar-gdmi"
          aria-label="سناب شات">
         <span class="badge-vip">PRIVATE</span>
-        <span class="social-icon"><i class="fa-brands fa-snapchat-ghost"></i></span>
+        <span class="social-icon">
+          <i class="fa-brands fa-snapchat-ghost"></i>
+        </span>
         <div class="social-text">
           <strong data-i18n="snapchatAr">سناب شات</strong>
-          <span>Snapchat</span>
+          <span>omar-gdmi</span>
         </div>
       </a>
 
-      <a class="social-card tk-card"
+      <!-- ── TikTok ── -->
+      <a class="social-card tk-card wave-auto"
          href="https://www.tiktok.com/@gdmi_33"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://www.tiktok.com/@gdmi_33"
          aria-label="تيك توك">
-        <span class="badge-vip">PRIVATE</span>
-        <span class="social-icon"><i class="fa-brands fa-tiktok"></i></span>
+        <span class="badge-vip-neo">PUBLIC</span>
+        <span class="social-icon">
+          <i class="fa-brands fa-tiktok"></i>
+        </span>
         <div class="social-text">
           <strong data-i18n="tiktokAr">تيك توك</strong>
-          <span>TikTok</span>
+          <span>gdmi_33</span>
         </div>
       </a>
 
-      <a class="social-card fb-card"
+      <!-- ── Facebook ── -->
+      <a class="social-card fb-card wave-auto"
          href="https://www.facebook.com/3mar.a.z3"
          target="_blank"
          rel="noopener noreferrer"
@@ -151,14 +185,17 @@
          data-copy-text="https://www.facebook.com/3mar.a.z3"
          aria-label="فيسبوك">
         <span class="badge-vip">PRIVATE</span>
-        <span class="social-icon"><i class="fa-brands fa-facebook-f"></i></span>
+        <span class="social-icon">
+          <i class="fa-brands fa-facebook-f"></i>
+        </span>
         <div class="social-text">
           <strong data-i18n="facebookAr">فيسبوك</strong>
-          <span>Facebook</span>
+          <span>3mar.a.z3</span>
         </div>
       </a>
 
-      <a class="social-card threads-card drawer-card"
+      <!-- ── Threads ── -->
+      <a class="social-card threads-card drawer-card wave-auto"
          href="https://www.threads.com/@omar.a.z3"
          target="_blank"
          rel="noopener noreferrer"
@@ -166,132 +203,166 @@
          data-copy-text="https://www.threads.com/@omar.a.z3"
          aria-label="Threads">
         <span class="badge-vip">PRIVATE</span>
-        <span class="social-icon"><i class="fa-brands fa-threads"></i></span>
+        <span class="social-icon">
+          <i class="fa-brands fa-threads"></i>
+        </span>
         <div class="social-text">
-          <strong>Threads</strong>
+          <strong data-i18n="threadsAr">ثريدز</strong>
           <span>@omar.a.z3</span>
         </div>
       </a>
 
-      <a class="social-card github-card drawer-card"
+      <!-- ── GitHub ── -->
+      <a class="social-card github-card drawer-card wave-auto"
          href="https://github.com/Omar-i9"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://github.com/Omar-i9"
          aria-label="GitHub">
-        <span class="social-icon"><i class="fa-brands fa-github"></i></span>
+        <span class="social-icon">
+          <i class="fa-brands fa-github"></i>
+        </span>
         <div class="social-text">
-          <strong>GitHub</strong>
+          <strong data-i18n="githubAr">جيت هاب</strong>
           <span>Omar-i9</span>
         </div>
       </a>
 
-      <a class="social-card chess-card drawer-card"
+      <!-- ── Chess.com ── -->
+      <a class="social-card chess-card drawer-card wave-auto"
          href="https://www.chess.com/member/omar-g4"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://www.chess.com/member/omar-g4"
          aria-label="Chess.com">
-        <span class="social-icon"><i class="fa-solid fa-chess"></i></span>
+        <span class="social-icon">
+          <i class="fa-solid fa-chess"></i>
+        </span>
         <div class="social-text">
-          <strong>Chess.com</strong>
+          <strong data-i18n="chessAr">شطرنج</strong>
           <span>omar-g4</span>
         </div>
       </a>
 
-      <a class="social-card steam-card drawer-card"
+      <!-- ── Steam ── -->
+      <a class="social-card steam-card drawer-card wave-auto"
          href="https://steamcommunity.com/id/omar_gg33/"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://steamcommunity.com/id/omar_gg33/"
          aria-label="Steam">
-        <span class="social-icon"><i class="fa-brands fa-steam"></i></span>
+        <span class="badge-vip-neo">PUBLIC</span>
+        <span class="social-icon">
+          <i class="fa-brands fa-steam"></i>
+        </span>
         <div class="social-text">
-          <strong>Steam</strong>
+          <strong data-i18n="steamAr">ستيم</strong>
           <span>omar_gg33</span>
         </div>
       </a>
 
-      <a class="social-card twitch-card drawer-card"
+      <!-- ── Twitch ── -->
+      <a class="social-card twitch-card drawer-card wave-auto"
          href="https://www.twitch.tv/gdmi3"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://www.twitch.tv/gdmi3"
          aria-label="Twitch">
-        <span class="social-icon"><i class="fa-brands fa-twitch"></i></span>
+        <span class="social-icon">
+          <i class="fa-brands fa-twitch"></i>
+        </span>
         <div class="social-text">
-          <strong>Twitch</strong>
+          <strong data-i18n="twitchAr">تويتش</strong>
           <span>gdmi3</span>
         </div>
       </a>
 
-      <a class="social-card x-card drawer-card"
+      <!-- ── X / Twitter ── -->
+      <a class="social-card x-card drawer-card wave-auto"
          href="https://x.com/OGdmi90694"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://x.com/OGdmi90694"
          aria-label="X">
-        <span class="social-icon"><i class="fa-brands fa-x-twitter"></i></span>
+        <span class="badge-vip-neo">PUBLIC</span>
+        <span class="social-icon">
+          <i class="fa-brands fa-x-twitter"></i>
+        </span>
         <div class="social-text">
-          <strong>X</strong>
+          <strong data-i18n="xAr">اكس</strong>
           <span>@OGdmi90694</span>
         </div>
       </a>
 
-      <a class="social-card spotify-card drawer-card"
+      <!-- ── Spotify ── -->
+      <a class="social-card spotify-card drawer-card wave-auto"
          href="https://open.spotify.com/user/31zq4egkwu5qt6armgjuvey2tgga"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://open.spotify.com/user/31zq4egkwu5qt6armgjuvey2tgga"
          aria-label="Spotify">
-        <span class="social-icon"><i class="fa-brands fa-spotify"></i></span>
+        <span class="badge-vip-neo">PUBLIC</span>
+        <span class="social-icon">
+          <i class="fa-brands fa-spotify"></i>
+        </span>
         <div class="social-text">
-          <strong>Spotify</strong>
+          <strong data-i18n="spotifyAr">اسبوتيفاي</strong>
           <span>Omar</span>
         </div>
       </a>
 
-      <a class="social-card tellonym-card drawer-card"
+      <!-- ── Tellonym ── -->
+      <a class="social-card tellonym-card drawer-card wave-auto"
          href="https://tellonym.me/omar.gdmi"
          target="_blank"
          rel="noopener noreferrer"
          data-longcopy
          data-copy-text="https://tellonym.me/omar.gdmi"
          aria-label="Tellonym">
-        <span class="social-icon"><i class="fa-solid fa-comment-dots"></i></span>
+        <span class="social-icon">
+          <i class="fa-solid fa-comment-dots"></i>
+        </span>
         <div class="social-text">
-          <strong>Tellonym</strong>
+          <strong data-i18n="tellonymAr">تيلونيوم</strong>
           <span>omar.gdmi</span>
         </div>
       </a>
 
-      <button class="social-card ds-card"
+      <!-- ── Discord (button — opens iframe overlay) ── -->
+      <button class="social-card ds-card wave-auto"
               type="button"
               id="openDiscordBtn"
               data-longcopy
               data-copy-text="gdmi_3"
               aria-label="ديسكورد">
-        <span class="social-icon"><i class="fa-brands fa-discord"></i></span>
+        <span class="social-icon">
+          <i class="fa-brands fa-discord"></i>
+        </span>
         <div class="social-text">
           <strong data-i18n="discordAr">ديسكورد</strong>
           <span>Discord</span>
           <span class="social-note" data-i18n="discordNote">اضغط لفتح البطاقة داخل الموقع</span>
         </div>
       </button>
-    </section>
 
+    </section><!-- /links-grid -->
+
+    <!-- ═══════════════════════════
+         نسخ سريع — Quick Copy
+    ════════════════════════════ -->
     <section class="section-title enhanced">
       <span class="section-icon"><i class="fa-solid fa-copy"></i></span>
       <span data-i18n="quickCopyTitle">نسخ سريع</span>
     </section>
 
     <section class="copy-list">
+
       <div class="copy-row">
         <div class="copy-meta">
           <span data-i18n="steamFriendLabel">Steam Friend Code</span>
@@ -307,29 +378,44 @@
         </div>
         <button class="copy-btn" data-copy="Omar-G4" type="button" data-i18n="copyBtn">نسخ</button>
       </div>
+
     </section>
 
+    <!-- ═══════════════════════════
+         مشروع — Project Card
+    ════════════════════════════ -->
     <section class="section-title enhanced">
       <span class="section-icon"><i class="fa-solid fa-diagram-project"></i></span>
       <span data-i18n="projectTitle">مشروع؟</span>
     </section>
 
-    <a class="work-card" href="https://omar-i9.github.io/taamenn/" target="_blank" rel="noopener noreferrer">
+    <a class="work-card"
+       href="https://omar-i9.github.io/taamenn/"
+       target="_blank"
+       rel="noopener noreferrer">
       <img src="photo/tameen-logo.jpeg" alt="تأمين" class="work-logo" />
       <div class="work-text">
         <strong data-i18n="projectName">تأمين</strong>
-        <span data-i18n="projectDesc">"بين نبضِ العطاءِ ووقارِ الختام.. يُجمد التطوير ليبقى المشروعُ إرثاً تقنياً، ورمزاً لرحلةٍ اكتملت فخلدت."</span>
+        <span data-i18n="projectDesc">
+          "بين نبضِ العطاءِ ووقارِ الختام.. يُجمد التطوير ليبقى المشروعُ إرثاً تقنياً، ورمزاً لرحلةٍ اكتملت فخلدت."
+        </span>
       </div>
       <i class="fa-solid fa-arrow-left"></i>
     </a>
 
+    <!-- فوتر داخلي -->
     <div class="hero-card-footer" data-i18n="footerLine1">الفولو <em>ما بكهربك</em></div>
-    <div class="hero-card-footer" data-i18n="footerLine2">كل حساباتي هون <em>ليش بعرفش</em></div>
-  </main>
 
+  </main><!-- /app -->
+
+  <!-- ═══════════════════════════════════════════
+       مشغّل الموسيقى — Music Sheet
+  ════════════════════════════════════════════ -->
   <section class="music-sheet" id="musicSheet" aria-label="قائمة الموسيقى">
+
     <button class="sheet-close" id="closeMusicBtn" type="button" aria-label="إغلاق">×</button>
 
+    <!-- إيكوالايزر -->
     <div class="visualizer">
       <div class="bar"></div>
       <div class="bar"></div>
@@ -337,6 +423,7 @@
       <div class="bar"></div>
     </div>
 
+    <!-- معلومات الأغنية الحالية -->
     <div class="music-top">
       <img src="" id="musicCover" alt="غلاف الأغنية" class="music-cover" />
       <div class="music-info">
@@ -346,6 +433,7 @@
       </div>
     </div>
 
+    <!-- أزرار التحكم -->
     <div class="music-controls">
       <button class="control-btn" id="prevSongBtn" type="button" aria-label="الأغنية السابقة">
         <i class="fa-solid fa-backward-step"></i>
@@ -358,57 +446,96 @@
       </button>
     </div>
 
+    <!-- الوقت -->
     <div class="time-row">
       <span id="currentTime">0:00</span>
       <span id="totalTime">0:00</span>
     </div>
 
+    <!-- شريط التقديم -->
     <div class="seek-wrap" id="seekWrap">
       <div class="progress">
         <span id="progressBar"></span>
       </div>
-      <input id="seekBar" class="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="شريط الوقت" />
+      <input id="seekBar"
+             class="seek"
+             type="range"
+             min="0"
+             max="100"
+             value="0"
+             step="0.1"
+             aria-label="شريط الوقت" />
       <div class="seek-tooltip" id="seekTooltip">0:00</div>
     </div>
 
+    <!-- شريط الصوت -->
     <div class="volume-row">
       <button class="volume-icon" id="volumeIconBtn" type="button" aria-label="الصوت">
         <i class="fa-solid fa-volume-high" id="volumeIcon"></i>
       </button>
-      <input id="volumeBar" class="volume" type="range" min="0" max="100" value="90" step="1" aria-label="شريط الصوت" />
+      <input id="volumeBar"
+             class="volume"
+             type="range"
+             min="0"
+             max="100"
+             value="90"
+             step="1"
+             aria-label="شريط الصوت" />
       <div class="volume-value" id="volumeValue">90%</div>
     </div>
 
+    <!-- قائمة الأغاني -->
     <div class="playlist-box">
       <div class="playlist-head">
         <strong data-i18n="playlistTitle">قائمة الأغاني</strong>
         <span id="playlistCount">11 أغنية</span>
       </div>
       <div class="playlist" id="playlist"></div>
-      <div class="audio-state" id="audioState" data-i18n="audioState">اضغط على أي أغنية للتشغيل</div>
+      <div class="audio-state" id="audioState" data-i18n="audioState">
+        اضغط على أي أغنية للتشغيل
+      </div>
     </div>
 
     <audio id="audio" preload="metadata" src=""></audio>
   </section>
 
+  <!-- ═══════════════════════════════════════════
+       Toast Notification
+  ════════════════════════════════════════════ -->
   <div class="toast" id="toast">تم النسخ</div>
 
-  <div class="drawer-backdrop" id="moreSocialsBackdrop"></div>
+  <!-- ═══════════════════════════════════════════
+       Drawer Backdrop (for social drawer)
+  ════════════════════════════════════════════ -->
+  <div class="drawer-backdrop" id="moreSocialsBackdrop" aria-hidden="true"></div>
 
+  <!-- ═══════════════════════════════════════════
+       Footer الموقع
+  ════════════════════════════════════════════ -->
   <footer class="site-footer">
     <div class="site-footer__inner">
       <p class="site-footer__brand" data-i18n="footerBrand">عُـمَر | Omar</p>
-      <p class="site-footer__text" data-i18n="footerText1">جميع الحقوق غير محفوظة © 2026</p>
-      <p class="site-footer__text" data-i18n-html="footerText2">بتعرف انه كل هاد شغل ايدي؟</p>
+      <p class="site-footer__text"  data-i18n="footerText1">جميع الحقوق غير محفوظة © 2026</p>
+      <p class="site-footer__text"  data-i18n-html="footerText2">بتعرف انه كل هاد شغل ايدي؟</p>
     </div>
   </footer>
 
+  <!-- ═══════════════════════════════════════════
+       زر مشاركة الموقع — Share FAB
+  ════════════════════════════════════════════ -->
   <button class="share-fab" id="sharePortalBtn" type="button" aria-label="مشاركة الموقع">
     <i class="fa-solid fa-share-nodes"></i>
   </button>
 
+  <!-- ═══════════════════════════════════════════
+       نافذة المشاركة — Share Overlay
+  ════════════════════════════════════════════ -->
   <div id="shareOverlay" class="share-overlay" aria-hidden="true">
-    <div class="share-modal pixel-card" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+    <div class="share-modal pixel-card"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="shareTitle">
+
       <button id="closeShare" class="close-share" type="button" aria-label="إغلاق">&times;</button>
 
       <div class="share-top">
@@ -420,19 +547,27 @@
         </div>
 
         <h3 id="shareTitle" data-i18n="shareTitle">بوابة المشاركة</h3>
-        <p data-i18n="shareText">امسح الكود أو شارك الرابط مباشرة</p>
+        <p  data-i18n="shareText">امسح الكود أو شارك الرابط مباشرة</p>
       </div>
 
       <div class="share-link-box">
-        <input id="shareUrlInput" class="share-url-input" type="text" readonly value="https://omar-i9.github.io/my-profiles/" />
+        <input id="shareUrlInput"
+               class="share-url-input"
+               type="text"
+               readonly
+               value="https://omar-i9.github.io/my-profiles/" />
         <button class="share-copy-btn" id="copyShareBtn" type="button">
           <i class="fa-solid fa-copy"></i>
           <span data-i18n="shareCopy">نسخ</span>
         </button>
       </div>
+
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════
+       Page Overlay — Discord iframe
+  ════════════════════════════════════════════ -->
   <div class="page-overlay" id="pageOverlay" aria-hidden="true">
     <div class="page-overlay-panel">
       <button class="page-close" id="closePageBtn" type="button" aria-label="إغلاق">×</button>
@@ -446,221 +581,177 @@
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════
+       سكريبت الأوفرليز + النسخ + عنوان التاب
+  ════════════════════════════════════════════ -->
   <script>
-(function () {
-  const $ = (id) => document.getElementById(id);
+  (function () {
+    const $ = (id) => document.getElementById(id);
 
-  const openDiscordBtn = $('openDiscordBtn');
-  const pageOverlay = $('pageOverlay');
-  const closePageBtn = $('closePageBtn');
-  const pageFrame = $('pageFrame');
+    const openDiscordBtn   = $('openDiscordBtn');
+    const pageOverlay      = $('pageOverlay');
+    const closePageBtn     = $('closePageBtn');
+    const pageFrame        = $('pageFrame');
 
-  const sharePortalBtn = $('sharePortalBtn');
-  const shareOverlay = $('shareOverlay');
-  const closeShare = $('closeShare');
-  const copyShareBtn = $('copyShareBtn');
-  const shareUrlInput = $('shareUrlInput');
-  const shareQrImg = $('shareQrImg');
+    const sharePortalBtn   = $('sharePortalBtn');
+    const shareOverlay     = $('shareOverlay');
+    const closeShare       = $('closeShare');
+    const copyShareBtn     = $('copyShareBtn');
+    const shareUrlInput    = $('shareUrlInput');
+    const shareQrImg       = $('shareQrImg');
 
-  const toast = $('toast');
-  const moreSocialsBackdrop = $('moreSocialsBackdrop');
+    const toast            = $('toast');
+    const moreSocialsBackdrop = $('moreSocialsBackdrop');
 
-  function hasOpenPanel() {
-    return Boolean(
-      (pageOverlay && pageOverlay.classList.contains('show')) ||
-      (shareOverlay && shareOverlay.classList.contains('show'))
-    );
-  }
+    /* ── helpers ── */
+    function hasOpenPanel() {
+      return Boolean(
+        (pageOverlay  && pageOverlay.classList.contains('show')) ||
+        (shareOverlay && shareOverlay.classList.contains('show'))
+      );
+    }
 
-  function updateBodyLock() {
-    document.body.style.overflow = hasOpenPanel() ? 'hidden' : '';
-  }
+    function updateBodyLock() {
+      document.body.style.overflow = hasOpenPanel() ? 'hidden' : '';
+    }
 
-  function showToast(message = 'تم النسخ') {
-    if (!toast) return;
-    toast.textContent = message;
-    toast.classList.add('show');
+    function showToast(message = 'تم النسخ') {
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
 
-    clearTimeout(showToast._timer);
-    showToast._timer = setTimeout(() => {
-      toast.classList.remove('show');
-    }, 1800);
-  }
-
-  async function copyText(text) {
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        const temp = document.createElement('textarea');
-        temp.value = text;
-        temp.setAttribute('readonly', '');
-        temp.style.position = 'fixed';
-        temp.style.top = '-9999px';
-        temp.style.opacity = '0';
-        document.body.appendChild(temp);
-        temp.focus();
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
+    async function copyText(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const temp = document.createElement('textarea');
+          temp.value = text;
+          temp.setAttribute('readonly', '');
+          temp.style.cssText = 'position:fixed;top:-9999px;opacity:0;';
+          document.body.appendChild(temp);
+          temp.focus();
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+        }
+        showToast('تم النسخ ✓');
+      } catch {
+        showToast('تعذر النسخ');
       }
-      showToast('تم النسخ');
-    } catch (err) {
-      showToast('تعذر النسخ');
-    }
-  }
-
-  function openPageOverlay() {
-    if (!pageOverlay || !pageFrame) return;
-    pageFrame.src = 'main/Discord.html';
-    pageOverlay.classList.add('show');
-    pageOverlay.setAttribute('aria-hidden', 'false');
-    updateBodyLock();
-  }
-
-  function closePageOverlay() {
-    if (!pageOverlay || !pageFrame) return;
-    pageOverlay.classList.remove('show');
-    pageOverlay.setAttribute('aria-hidden', 'true');
-    pageFrame.src = '';
-    updateBodyLock();
-  }
-
-  function openShare() {
-    if (!shareOverlay) return;
-    shareOverlay.classList.add('show');
-    shareOverlay.setAttribute('aria-hidden', 'false');
-    updateBodyLock();
-
-    if (shareUrlInput) {
-      shareUrlInput.value = window.location.href;
     }
 
-    if (shareQrImg) {
-      const url = encodeURIComponent(window.location.href);
-      shareQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${url}`;
+    /* ── Discord overlay ── */
+    function openPageOverlay() {
+      if (!pageOverlay || !pageFrame) return;
+      pageFrame.src = 'main/Discord.html';
+      pageOverlay.classList.add('show');
+      pageOverlay.setAttribute('aria-hidden', 'false');
+      updateBodyLock();
     }
-  }
 
-  function closeShareModal() {
-    if (!shareOverlay) return;
-    shareOverlay.classList.remove('show');
-    shareOverlay.setAttribute('aria-hidden', 'true');
-    updateBodyLock();
-  }
+    function closePageOverlay() {
+      if (!pageOverlay || !pageFrame) return;
+      pageOverlay.classList.remove('show');
+      pageOverlay.setAttribute('aria-hidden', 'true');
+      pageFrame.src = '';
+      updateBodyLock();
+    }
 
-  if (openDiscordBtn) {
-    openDiscordBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openPageOverlay();
+    /* ── Share overlay ── */
+    function openShare() {
+      if (!shareOverlay) return;
+      shareOverlay.classList.add('show');
+      shareOverlay.setAttribute('aria-hidden', 'false');
+      updateBodyLock();
+      if (shareUrlInput)  shareUrlInput.value = window.location.href;
+      if (shareQrImg) {
+        const url = encodeURIComponent(window.location.href);
+        shareQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${url}`;
+      }
+    }
+
+    function closeShareModal() {
+      if (!shareOverlay) return;
+      shareOverlay.classList.remove('show');
+      shareOverlay.setAttribute('aria-hidden', 'true');
+      updateBodyLock();
+    }
+
+    /* ── Event listeners ── */
+    openDiscordBtn?.addEventListener('click', (e) => { e.preventDefault(); openPageOverlay(); });
+    closePageBtn?.addEventListener('click', closePageOverlay);
+    pageOverlay?.addEventListener('click', (e) => { if (e.target === pageOverlay) closePageOverlay(); });
+
+    sharePortalBtn?.addEventListener('click', openShare);
+    closeShare?.addEventListener('click', closeShareModal);
+    shareOverlay?.addEventListener('click', (e) => { if (e.target === shareOverlay) closeShareModal(); });
+    copyShareBtn?.addEventListener('click', () => { if (shareUrlInput) copyText(shareUrlInput.value); });
+
+    /* ── Global copy delegation ── */
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest?.('[data-copy]');
+      if (btn) {
+        const val = btn.getAttribute('data-copy') || '';
+        if (val) copyText(val);
+      }
     });
-  }
 
-  if (closePageBtn) {
-    closePageBtn.addEventListener('click', closePageOverlay);
-  }
-
-  if (pageOverlay) {
-    pageOverlay.addEventListener('click', (e) => {
-      if (e.target === pageOverlay) closePageOverlay();
+    /* ── iframe message ── */
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'close-discord') closePageOverlay();
     });
-  }
 
-  if (sharePortalBtn) {
-    sharePortalBtn.addEventListener('click', openShare);
-  }
-
-  if (closeShare) {
-    closeShare.addEventListener('click', closeShareModal);
-  }
-
-  if (shareOverlay) {
-    shareOverlay.addEventListener('click', (e) => {
-      if (e.target === shareOverlay) closeShareModal();
+    /* ── Escape key ── */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closePageOverlay(); closeShareModal(); }
     });
-  }
 
-  if (copyShareBtn) {
-    copyShareBtn.addEventListener('click', () => {
-      if (shareUrlInput) copyText(shareUrlInput.value);
-    });
-  }
+    /* ── Backdrop aria ── */
+    if (moreSocialsBackdrop) moreSocialsBackdrop.setAttribute('aria-hidden', 'true');
 
-  document.addEventListener('click', (e) => {
-    const copyBtn = e.target.closest?.('[data-copy]');
-    if (copyBtn) {
-      const value = copyBtn.getAttribute('data-copy') || '';
-      if (value) copyText(value);
-    }
-  });
+    updateBodyLock();
+  })();
 
-  window.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'close-discord') {
-      closePageOverlay();
-    }
-  });
+  /* ══════════════════════════════
+     تأثير الكتابة على عنوان التاب
+  ══════════════════════════════ */
+  const titles     = ['اهلين تعال كل يوم 👋', 'Omar Profiles'];
+  let i            = 0;
+  let charIndex    = 0;
+  let isDeleting   = false;
+  const speed      = 50;
+  const titleEl    = document.querySelector('title');
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closePageOverlay();
-      closeShareModal();
-    }
-  });
+  function typeEffect() {
+    const current = titles[i];
+    charIndex += isDeleting ? -1 : 1;
+    titleEl.textContent = current.substring(0, charIndex);
 
-  if (moreSocialsBackdrop) {
-    moreSocialsBackdrop.setAttribute('aria-hidden', 'true');
-  }
-
-  updateBodyLock();
-})();
-
-const titles = [
-  "اهلين تعال كل يوم 👋",
-  "Omar Profiles"
-];
-
-let i = 0;
-let charIndex = 0;
-let isDeleting = false;
-let speed = 50;
-
-const titleEl = document.querySelector("title");
-
-function typeEffect() {
-  const current = titles[i];
-
-  if (isDeleting) {
-    charIndex--;
-  } else {
-    charIndex++;
-  }
-
-  titleEl.textContent = current.substring(0, charIndex);
-
-  if (!isDeleting && charIndex === current.length) {
-    setTimeout(() => (isDeleting = true), 1200);
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    i = (i + 1) % titles.length;
-  }
-
-  setTimeout(typeEffect, isDeleting ? speed / 2 : speed);
-}
-
-typeEffect();
-
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    titleEl.textContent = "لا تهرب خليكككك";
-  } else {
-    titleEl.textContent = "رجعت هيك😎";
-    setTimeout(() => {
-      i = 0;
-      charIndex = 0;
+    if (!isDeleting && charIndex === current.length) {
+      setTimeout(() => (isDeleting = true), 1200);
+    } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
-    }, 800);
+      i = (i + 1) % titles.length;
+    }
+    setTimeout(typeEffect, isDeleting ? speed / 2 : speed);
   }
-});
-</script>
+
+  typeEffect();
+
+  /* ── Tab visibility trick ── */
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      titleEl.textContent = 'لا تهرب خليكككك';
+    } else {
+      titleEl.textContent = 'رجعت هيك 😎';
+      setTimeout(() => { i = 0; charIndex = 0; isDeleting = false; }, 800);
+    }
+  });
+  </script>
+
 </body>
 </html>
