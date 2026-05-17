@@ -126,22 +126,22 @@ html[dir="ltr"] body {
 }
 
 /* محاذاة نصوص — يسار */
-html[dir="ltr"] .hero-text,
-html[dir="ltr"] .hero-card-footer,
-html[dir="ltr"] .section-title,
-html[dir="ltr"] .section-title.enhanced,
-html[dir="ltr"] .social-text,
-html[dir="ltr"] .copy-meta,
-html[dir="ltr"] .work-text,
-html[dir="ltr"] .music-info,
-html[dir="ltr"] .track-meta,
-html[dir="ltr"] .drawer-head,
-html[dir="ltr"] .playlist-head,
-html[dir="ltr"] .site-footer__inner,
-html[dir="ltr"] .site-footer,
-html[dir="ltr"] .share-top,
-html[dir="ltr"] .audio-state {
-  text-align: left;
+html[dir="rtl"] .hero-text,
+html[dir="rtl"] .hero-card-footer,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .section-title.enhanced,
+html[dir="rtl"] .social-text,
+html[dir="rtl"] .copy-meta,
+html[dir="rtl"] .work-text,
+html[dir="rtl"] .music-info,
+html[dir="rtl"] .track-meta,
+html[dir="rtl"] .drawer-head,
+html[dir="rtl"] .playlist-head,
+html[dir="rtl"] .site-footer__inner,
+html[dir="rtl"] .site-footer,
+html[dir="rtl"] .share-top,
+html[dir="rtl"] .audio-state {
+  text-align: center; /* ✅ كان right */
 }
 
 /* copy-row — يعكس الترتيب في LTR */
@@ -224,7 +224,7 @@ html[dir="rtl"] .site-footer__inner,
 html[dir="rtl"] .site-footer,
 html[dir="rtl"] .share-top,
 html[dir="rtl"] .audio-state {
-  text-align: right;
+  text-align: center; /* ✅ كان right */
 }
 
 /* copy-row — الترتيب الطبيعي في RTL */

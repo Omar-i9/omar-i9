@@ -3239,3 +3239,50 @@ body[data-device="desktop"] .desktop-only { display: inline-grid; }
 /* ============================================================
    END OF FILE — OMAR PROFILES v2.0 — Billie × Ocean Edition
    ============================================================ */
+
+
+   /* ============================================================
+   38 · تحسينات الأداء على الجوال
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* إيقاف حركة الخلفية — أثقل شيء */
+  body::before,
+  body::after {
+    animation: none;
+    filter: blur(28px);
+    opacity: 0.28;
+  }
+
+  /* إزالة backdrop-filter من البطاقات — 13 عنصر متكرر */
+  .social-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* إزالة backdrop-filter من tracks */
+  .track {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* إيقاف shimmer — hero card */
+  .hero-card-body::before,
+  .moving-border-line {
+    animation: none;
+    opacity: 0;
+  }
+
+  /* badge NEO — وقف تدفق الألوان، خلّي الـ float بس */
+  .badge-vip-neo {
+    animation: vipNeoFloat 3.6s cubic-bezier(.37,0,.63,1) infinite;
+    background-position: 0% 50%;
+  }
+
+  /* إيقاف الـ flicker على hover */
+  .social-card:hover .social-icon,
+  .social-card:focus-visible .social-icon,
+  .social-card:active .social-icon {
+    animation: none;
+  }
+}

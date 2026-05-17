@@ -100,13 +100,21 @@
   /* ═══════════════════════════════════════════
      تطبيق اللغة
   ════════════════════════════════════════════ */
-  function applyLanguage(lang) {
-    const t = translations[lang] || translations.ar;
-    const isRTL = lang === 'ar';
+function applyLanguage(lang) {
+  const t = translations[lang] || translations.ar;
+  const isRTL = lang === 'ar';
 
-    /* اتجاه الصفحة */
-    html.lang = lang;
-    html.dir  = isRTL ? 'rtl' : 'ltr';
+  html.lang = lang;
+  html.dir  = isRTL ? 'rtl' : 'ltr';
+
+    // ✅ أضف هاد السطر هون — يثبت التوسيط دايماً
+  document.body.style.textAlign = 'center';
+
+  // بعد سطر textAlign
+  document.querySelectorAll('.your-flex-container').forEach(el => {
+    el.style.justifyContent = 'center';
+  });
+
 
     /* حفظ التفضيل */
     try { localStorage.setItem('siteLang', lang); } catch (_) { /* private mode */ }
