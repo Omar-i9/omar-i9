@@ -1,0 +1,475 @@
+/* ═══════════════════════════════════════════════════════════════
+   EV Telemetry — Project Card  |  ev-card.css
+   
+   ✦ كل CSS محدود بـ .evc-root — آمن للحقن في أي كود
+   ✦ لا يوجد :root — ما في تأثير على باقي الموقع أبداً
+   ✦ تقنيات مستخدمة:
+       - CSS custom properties scoped على الـ component
+       - conic-gradient للحدود الدوارة
+       - backdrop-filter للزجاج الداكن
+       - clip-path للتأثيرات الهندسية
+       - CSS @keyframes متعددة ومتداخلة
+       - will-change للأداء في الـ transform
+═══════════════════════════════════════════════════════════════ */
+
+/* ══ الخط (حطه في الـ <head> تبع موقعك إذا ما موجود) ══════
+   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+   ═══════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. المتغيرات — محدودة بـ .evc-root بدل :root
+   ───────────────────────────────────────────────────────────── */
+.evc-root {
+  /* ألوان */
+  --c-bg:       #0c1118;
+  --c-surface:  #101820;
+  --c-border:   #1a2535;
+  --c-cyan:     #00d4ff;
+  --c-green:    #00ff88;
+  --c-amber:    #ffaa00;
+  --c-red:      #ff3355;
+  --c-text:     #cce4f6;
+  --c-dim:      #3d607a;
+  --c-muted:    #162030;
+
+  /* إيقاعات الحركة */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur:        0.4s;
+
+  /* للحدود الكهربائية — JS بيغير هاد */
+  --border-angle: 0deg;
+
+  /* للإمالة ثلاثية الأبعاد — JS بيغير هاد */
+  --rx: 0deg;
+  --ry: 0deg;
+
+  position: relative;
+  width: 100%;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  direction: rtl;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. الحدود الكهربائية الدوارة
+   كيف تشتغل: طبقة زجاجية بـ conic-gradient تتحرك بـ JS
+   ───────────────────────────────────────────────────────────── */
+.evc-border {
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 15px;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 20%,
+    var(--c-cyan) 40%,
+    var(--c-green) 50%,
+    var(--c-cyan) 60%,
+    transparent 80%
+  );
+
+  /* الخدعة: -webkit-mask تخفي الداخل وتبقي الحافة بس */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.evc-root:hover .evc-border {
+  opacity: 1;
+  /* JS يدور الـ --border-angle بشكل مستمر */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. الكارد الداخلي — الجزء المرئي الفعلي
+   ───────────────────────────────────────────────────────────── */
+.evc-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  background: var(--c-bg);
+
+  /* زجاج داكن */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+
+  /* الإمالة ثلاثية الأبعاد — JS يغير --rx و --ry */
+  transform:
+    perspective(800px)
+    rotateX(var(--rx))
+    rotateY(var(--ry))
+    translateZ(0);
+  will-change: transform;
+  transition:
+    transform 0.12s linear,
+    border-color var(--dur) var(--ease-out),
+    background var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.evc-root:hover .evc-inner {
+  border-color: #00d4ff33;
+  background: var(--c-surface);
+  box-shadow:
+    0 0 0 1px #00d4ff15,
+    0 12px 40px #00000070,
+    0 0 60px #00d4ff0a,
+    inset 0 1px 0 #ffffff08;
+}
+
+/* وميض داخلي عند الـ hover — gradient overlay */
+.evc-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% -20%,
+    #00d4ff0d,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+}
+.evc-root:hover .evc-inner::before { opacity: 1; }
+
+/* تأثير scan-line خفي — يعطي إحساس HUD حقيقي */
+.evc-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    #ffffff03 3px,
+    #ffffff03 4px
+  );
+  pointer-events: none;
+  border-radius: 14px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. الأيقونة
+   ───────────────────────────────────────────────────────────── */
+.evc-icon-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.evc-icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: var(--c-muted);
+  border: 1px solid #1e3a50;
+  border-radius: 10px;
+  transition:
+    transform var(--dur) var(--ease-snap),
+    background var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.evc-root:hover .evc-icon {
+  transform: scale(1.1) rotate(-8deg);
+  background: #0a2035;
+  border-color: var(--c-cyan);
+  box-shadow:
+    0 0 20px #00d4ff40,
+    inset 0 0 14px #00d4ff18;
+}
+
+/* نبضة LIVE */
+.evc-live {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-green);
+}
+
+.evc-dot {
+  display: block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--c-green);
+  box-shadow: 0 0 6px var(--c-green);
+  animation: evc-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes evc-pulse {
+  0%, 100% { opacity: 1; transform: scale(1);   box-shadow: 0 0 6px #00ff88; }
+  50%       { opacity: 0.35; transform: scale(0.6); box-shadow: 0 0 2px #00ff88; }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. المحتوى النصي
+   ───────────────────────────────────────────────────────────── */
+.evc-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.evc-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  opacity: 0.6;
+  font-family: 'Rajdhani', sans-serif;
+  transition: opacity var(--dur);
+}
+.evc-root:hover .evc-tag { opacity: 1; }
+
+/* العنوان مع تأثير Glitch */
+.evc-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-cyan);
+  letter-spacing: 0.05em;
+  margin: 0;
+  position: relative;
+  transition: text-shadow var(--dur) var(--ease-out);
+}
+
+.evc-root:hover .evc-title {
+  text-shadow:
+    0 0 20px #00d4ffaa,
+    0 0 40px #00d4ff44;
+  animation: evc-glitch 3s infinite;
+}
+
+/* الـ Glitch يستخدم data-text attribute للنسخ المزيفة */
+.evc-title::before,
+.evc-title::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; right: 0;
+  color: var(--c-cyan);
+  opacity: 0;
+}
+.evc-title::before { color: var(--c-red);  }
+.evc-title::after  { color: var(--c-green); }
+
+.evc-root:hover .evc-title::before {
+  opacity: 0.7;
+  animation: evc-glitch-r 3s infinite 0.05s;
+}
+.evc-root:hover .evc-title::after {
+  opacity: 0.5;
+  animation: evc-glitch-l 3s infinite 0.1s;
+}
+
+@keyframes evc-glitch {
+  0%, 94%, 100%  { transform: translate(0); }
+  95%  { transform: translate(-1px, 1px); }
+  96%  { transform: translate(1px, -1px); }
+  97%  { transform: translate(-1px); }
+  98%  { transform: translate(1px); }
+}
+@keyframes evc-glitch-r {
+  0%, 94%, 100%  { transform: translate(0); clip-path: none; opacity: 0; }
+  95%  { transform: translate(2px, -1px); clip-path: inset(20% 0 60% 0); opacity: 0.7; }
+  96%  { transform: translate(-1px, 1px); clip-path: inset(60% 0 10% 0); opacity: 0.6; }
+  97%  { opacity: 0; }
+}
+@keyframes evc-glitch-l {
+  0%, 94%, 100%  { transform: translate(0); clip-path: none; opacity: 0; }
+  95%  { transform: translate(-2px, 1px); clip-path: inset(40% 0 40% 0); opacity: 0.5; }
+  96%  { transform: translate(1px);       clip-path: inset(80% 0 5% 0);  opacity: 0.4; }
+  97%  { opacity: 0; }
+}
+
+.evc-desc {
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: var(--c-dim);
+  margin: 0;
+  transition: color var(--dur) var(--ease-out);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.evc-root:hover .evc-desc { color: #5a8aaa; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. شريط الأرقام الحية
+   ───────────────────────────────────────────────────────────── */
+.evc-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--c-muted);
+  direction: ltr;
+}
+
+.evc-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.18rem;
+}
+
+.evc-stat b {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--c-text);
+  min-width: 30px;
+  display: inline-block;
+  text-align: right;
+  transition: color 0.15s, text-shadow 0.15s;
+}
+
+.evc-stat small {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--c-dim);
+  letter-spacing: 0.08em;
+}
+
+.evc-sep {
+  color: var(--c-muted);
+  font-size: 0.7rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.evc-root:hover .evc-stat b {
+  color: var(--c-cyan);
+  text-shadow: 0 0 10px #00d4ff66;
+}
+
+/* لون خاص للـ power عند الـ regen */
+.evc-stat b.regen { color: var(--c-green) !important; text-shadow: 0 0 10px #00ff8866 !important; }
+.evc-stat b.warn  { color: var(--c-amber) !important; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. السهم
+   ───────────────────────────────────────────────────────────── */
+.evc-arrow {
+  font-size: 1.1rem;
+  color: var(--c-dim);
+  flex-shrink: 0;
+  margin-right: auto;
+  margin-left: 0;
+  transition:
+    color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-snap),
+    text-shadow var(--dur) var(--ease-out);
+  line-height: 1;
+}
+
+.evc-root:hover .evc-arrow {
+  color: var(--c-cyan);
+  transform: translateX(-7px);
+  text-shadow: 0 0 14px var(--c-cyan);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. شريط التقدم الـ SOC (أسفل البطاقة)
+   ───────────────────────────────────────────────────────────── */
+.evc-progress-bar {
+  height: 2px;
+  background: var(--c-muted);
+  border-radius: 0 0 14px 14px;
+  overflow: hidden;
+  margin-top: 1px;
+}
+
+.evc-progress-fill {
+  height: 100%;
+  width: 85%;
+  background: linear-gradient(90deg, #00ff8800, var(--c-green), var(--c-cyan));
+  border-radius: 2px;
+  transition: width 0.6s var(--ease-out), background 0.4s;
+  box-shadow: 0 0 8px var(--c-cyan);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. جزيئات الشرارة (JS يضيفها ديناميكياً)
+   ───────────────────────────────────────────────────────────── */
+.evc-spark {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  border-radius: 50%;
+  animation: evc-spark-out 0.55s ease-out forwards;
+}
+
+@keyframes evc-spark-out {
+  0%   { opacity: 1; transform: translate(0,0)                     scale(1); }
+  60%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(var(--sdx), var(--sdy)) scale(0); }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. حالة الضغط والـ focus
+   ───────────────────────────────────────────────────────────── */
+.evc-inner:active {
+  transform:
+    perspective(800px)
+    rotateX(var(--rx))
+    rotateY(var(--ry))
+    translateZ(-4px)
+    scale(0.98);
+}
+
+.evc-inner:focus-visible {
+  outline: 2px solid var(--c-cyan);
+  outline-offset: 4px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. Responsive
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 420px) {
+  .evc-inner    { padding: 0.75rem 0.9rem; gap: 0.7rem; }
+  .evc-icon     { width: 38px; height: 38px; font-size: 1.2rem; }
+  .evc-title    { font-size: 0.95rem; }
+  .evc-desc     { display: none; }           /* تُخفى على الشاشات الصغيرة جداً */
+  .evc-stat b   { font-size: 0.82rem; }
+}
