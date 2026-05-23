@@ -16,16 +16,23 @@
 
   <title id="tabTitle">Omar Profiles</title>
 
-  <link rel="icon"            href="photo/profile.jpeg" type="image/jpeg" />
+  <link rel="icon"             href="photo/profile.jpeg" type="image/jpeg" />
   <link rel="apple-touch-icon" href="photo/profile.jpeg" />
-  <link rel="preconnect"      href="https://fonts.googleapis.com" />
-  <link rel="preconnect"      href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect"       href="https://fonts.googleapis.com" />
+  <link rel="preconnect"       href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- الخط الأساسي للموقع -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- خط Rajdhani للأرقام في بطاقة EV — مضاف هون في المكان الصح -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <!-- ملف الـ CSS الجديد -->
+  <!-- ملفات الـ CSS للموقع الرئيسي -->
   <link rel="stylesheet" href="main/styles.css" />
   <link rel="stylesheet" href="main/lang.css" />
+  <!-- CSS بطاقة EV — مضاف هون فقط بدون أي style block -->
+  <link rel="stylesheet" href="main/ev-card.css" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WHRP4DELSR"></script>
@@ -36,8 +43,8 @@
     gtag('config', 'G-WHRP4DELSR');
   </script>
 
-  <script src="main/script.js"  defer></script>
-  <script src="main/lang.js"    defer></script>
+  <script src="main/script.js" defer></script>
+  <script src="main/lang.js"   defer></script>
 
   <style>
     /* حماية من التحديد اللمسي على البطاقات */
@@ -47,6 +54,7 @@
     }
     .is-hidden { display: none !important; }
   </style>
+
 </head>
 
 <body>
@@ -60,7 +68,7 @@
       <span class="label-tag">اضغط للتفاصيل</span>
       <span class="ayah-num" id="ayahNum">1</span>
     </div>
-    <div class="ayah-texشt"   id="ayahText"></div>
+    <div class="ayah-text"   id="ayahText"></div>
     <div class="ayah-ref"    id="ayahRef"></div>
     <div class="ayah-note"   id="ayahNote"></div>
     <div class="ayah-detail" id="ayahDetail"></div>
@@ -71,9 +79,9 @@
   ════════════════════════════════════════════ -->
   <main class="app">
 
-  <!-- ═══════════════════════════
-       بطاقة البروفايل — Hero
-  ════════════════════════════ -->
+    <!-- ═══════════════════════════
+         بطاقة البروفايل — Hero
+    ════════════════════════════ -->
     <section class="hero-wrapper">
 
       <!-- الصورة الشخصية -->
@@ -267,23 +275,6 @@
         </div>
       </a>
 
-      <!-- ── Twitch ── 
-      <a class="social-card twitch-card drawer-card wave-auto"
-         href="https://www.twitch.tv/gdmi3"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-longcopy
-         data-copy-text="https://www.twitch.tv/gdmi3"
-         aria-label="Twitch">
-        <span class="social-icon">
-          <i class="fa-brands fa-twitch"></i>
-        </span>
-        <div class="social-text">
-          <strong data-i18n="twitchAr">تويتش</strong>
-          <span>gdmi3</span>
-        </div>
-      </a>-->
-
       <!-- ── X / Twitter ── -->
       <a class="social-card x-card drawer-card wave-auto"
          href="https://x.com/OGdmi90694"
@@ -320,23 +311,6 @@
         </div>
       </a>
 
-      <!-- ── Tellonym ── 
-      <a class="social-card tellonym-card drawer-card wave-auto"
-         href="https://tellonym.me/omar.gdmi"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-longcopy
-         data-copy-text="https://tellonym.me/omar.gdmi"
-         aria-label="Tellonym">
-        <span class="social-icon">
-          <i class="fa-solid fa-comment-dots"></i>
-        </span>
-        <div class="social-text">
-          <strong data-i18n="tellonymAr">تيلونيوم</strong>
-          <span>omar.gdmi</span>
-        </div>
-      </a>  -->
-
       <!-- ── Discord (button — opens iframe overlay) ── -->
       <button class="social-card ds-card wave-auto"
               type="button"
@@ -344,7 +318,7 @@
               data-longcopy
               data-copy-text="gdmi_3"
               aria-label="ديسكورد">
-              <span class="badge-vip">PRIVATE</span>
+        <span class="badge-vip">PRIVATE</span>
         <span class="social-icon">
           <i class="fa-brands fa-discord"></i>
         </span>
@@ -385,13 +359,14 @@
     </section>
 
     <!-- ═══════════════════════════
-         مشروع — Project Card
+         مشروع — Project Cards
     ════════════════════════════ -->
     <section class="section-title enhanced">
       <span class="section-icon"><i class="fa-solid fa-diagram-project"></i></span>
       <span data-i18n="projectTitle">مشروع؟</span>
     </section>
 
+    <!-- بطاقة تأمين (الأصلية) -->
     <a class="work-card"
        href="https://omar-i9.github.io/taamenn/"
        target="_blank"
@@ -405,6 +380,82 @@
       </div>
       <i class="fa-solid fa-arrow-left"></i>
     </a>
+
+    <!-- ═══════════════════════════
+         بطاقة EV Telemetry — مضافة هون بدون أي wrapper زيادة
+    ════════════════════════════ -->
+    
+        <section class="section-title enhanced">
+      <span class="section-icon"><i class="fa-solid fa-diagram-project"></i></span>
+      <span data-i18n="projectTitle2">مشروع نسخه تجريبية</span>
+    </section>
+
+    <div class="evc-root" id="evCard">
+
+      <!-- الحدود الكهربائية الدوارة -->
+      <div class="evc-border" aria-hidden="true"></div>
+
+      <!-- الرابط الرئيسي -->
+      <a class="evc-inner"
+         href="https://ev-telemetry-dashboard.onrender.com/"
+         target="_blank"
+         rel="noopener noreferrer">
+
+        <!-- يمين: أيقونة + حالة -->
+        <div class="evc-icon-col">
+          <div class="evc-icon">⚡</div>
+          <div class="evc-live">
+            <i class="evc-dot"></i>
+            <span>LIVE</span>
+          </div>
+        </div>
+
+        <!-- وسط: نص + أرقام -->
+        <div class="evc-content">
+          <div class="evc-tag" data-i18n="projectTitle3">قد يستغرق وقت لتحميل الصفحة لاول مرة</div>
+          <h3 class="evc-title" data-text="EV Telemetry Dashboard">
+            EV Telemetry Dashboard
+          </h3>
+          <p class="evc-desc" data-i18n="projectDesc5">
+            لوحة تحكم حية لسيارة كهربائية — فيزياء بطارية ومحرك حقيقية، WebSocket، HUD احترافي.
+          </p>
+
+          <!-- شريط الأرقام الحية -->
+          <div class="evc-stats" dir="ltr">
+            <span class="evc-stat">
+              <b id="evcSpeed">0</b>
+              <small>km/h</small>
+            </span>
+            <span class="evc-sep">|</span>
+            <span class="evc-stat">
+              <b id="evcSoc">85.0</b>
+              <small>SOC%</small>
+            </span>
+            <span class="evc-sep">|</span>
+            <span class="evc-stat">
+              <b id="evcPow">0.0</b>
+              <small>kW</small>
+            </span>
+            <span class="evc-sep">|</span>
+            <span class="evc-stat">
+              <b id="evcTemp">28</b>
+              <small>°C</small>
+            </span>
+          </div>
+        </div>
+
+        <!-- يسار: سهم -->
+        <div class="evc-arrow">←</div>
+
+      </a>
+
+      <!-- شريط التقدم التيليمتري (SOC) -->
+      <div class="evc-progress-bar">
+        <div class="evc-progress-fill" id="evcBar"></div>
+      </div>
+
+    </div>
+    <!-- /evc-root — البطاقة مغلقة صح هون ↑ -->
 
     <!-- فوتر داخلي -->
     <div class="hero-card-footer" data-i18n="footerLine1">الفولو <em>ما بكهربك</em></div>
@@ -508,7 +559,7 @@
   <div class="toast" id="toast">تم النسخ</div>
 
   <!-- ═══════════════════════════════════════════
-       Drawer Backdrop (for social drawer)
+       Drawer Backdrop
   ════════════════════════════════════════════ -->
   <div class="drawer-backdrop" id="moreSocialsBackdrop" aria-hidden="true"></div>
 
@@ -583,204 +634,191 @@
   </div>
 
   <!-- ═══════════════════════════════════════════
-       سكريبت الأوفرليز + النسخ + عنوان التاب
+       سكريبت الأوفرليز + النسخ + عنوان التاب المطور
   ════════════════════════════════════════════ -->
-<!-- ═══════════════════════════════════════════
-     سكريبت الأوفرليز + النسخ + عنوان التاب المطور
-     ════════════════════════════════════════════ -->
-<script>
-(function () {
-    // 1. الإعدادات والثوابت البرمجية (Configuration)
-    const TARGET_URL = 'https://omar-i9.github.io/omar-i9/';
-    const TYPER_TITLES = ['اهلين تعال كل يوم 👋', 'Omar Profiles'];
-    const TYPER_SPEED = 50;
+  <script>
+  (function () {
+      // 1. الإعدادات والثوابت البرمجية
+      const TARGET_URL    = 'https://omar-i9.github.io/omar-i9/';
+      const TYPER_TITLES  = ['اهلين تعال كل يوم 👋', 'Omar Profiles'];
+      const TYPER_SPEED   = 50;
 
-    // 2. جلب عناصر الـ DOM وتخزينها (DOM Caching)
-    const $ = (id) => document.getElementById(id);
-    const titleEl = document.querySelector('title');
-    
-    const openDiscordBtn     = $('openDiscordBtn');
-    const pageOverlay        = $('pageOverlay');
-    const pageFrame          = $('pageFrame');
-    const sharePortalBtn     = $('sharePortalBtn');
-    const shareOverlay       = $('shareOverlay');
-    const closeShare         = $('closeShare');
-    const copyShareBtn       = $('copyShareBtn');
-    const shareUrlInput      = $('shareUrlInput');
-    const shareQrImg         = $('shareQrImg');
-    const toast              = $('toast');
-    const moreSocialsBackdrop = $('moreSocialsBackdrop');
+      // 2. جلب عناصر الـ DOM
+      const $ = (id) => document.getElementById(id);
+      const titleEl = document.querySelector('title');
 
-    // متغيرات حالة أنيميشن العنوان
-    let typerIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typerTimer = null;
-    let isTabActive = true;
+      const openDiscordBtn      = $('openDiscordBtn');
+      const pageOverlay         = $('pageOverlay');
+      const pageFrame           = $('pageFrame');
+      const sharePortalBtn      = $('sharePortalBtn');
+      const shareOverlay        = $('shareOverlay');
+      const closeShare          = $('closeShare');
+      const copyShareBtn        = $('copyShareBtn');
+      const shareUrlInput       = $('shareUrlInput');
+      const shareQrImg          = $('shareQrImg');
+      const toast               = $('toast');
+      const moreSocialsBackdrop = $('moreSocialsBackdrop');
 
-    // 3. دالات المساعدة العامة (Global Helpers)
-    function hasOpenPanel() {
-        return Boolean(
-            pageOverlay?.classList.contains('show') || 
-            shareOverlay?.classList.contains('show')
-        );
-    }
+      // متغيرات أنيميشن العنوان
+      let typerIndex  = 0;
+      let charIndex   = 0;
+      let isDeleting  = false;
+      let typerTimer  = null;
+      let isTabActive = true;
 
-    function updateBodyLock() {
-        document.body.style.overflow = hasOpenPanel() ? 'hidden' : '';
-    }
+      // 3. دوال المساعدة
+      function hasOpenPanel() {
+          return Boolean(
+              pageOverlay?.classList.contains('show') ||
+              shareOverlay?.classList.contains('show')
+          );
+      }
 
-    function showToast(message = 'تم النسخ') {
-        if (!toast) return;
-        toast.textContent = message;
-        toast.classList.add('show');
-        clearTimeout(showToast._timer);
-        showToast._timer = setTimeout(() => toast.classList.remove('show'), 1800);
-    }
+      function updateBodyLock() {
+          document.body.style.overflow = hasOpenPanel() ? 'hidden' : '';
+      }
 
-    async function copyText(text) {
-        try {
-            if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(text);
-            } else {
-                const temp = document.createElement('textarea');
-                temp.value = text;
-                temp.setAttribute('readonly', '');
-                temp.style.cssText = 'position:fixed;top:-9999px;opacity:0;';
-                document.body.appendChild(temp);
-                temp.focus();
-                temp.select();
-                document.execCommand('copy');
-                document.body.removeChild(temp);
-            }
-            showToast('تم النسخ ✓');
-        } catch {
-            showToast('تعذر النسخ');
-        }
-    }
+      function showToast(message = 'تم النسخ') {
+          if (!toast) return;
+          toast.textContent = message;
+          toast.classList.add('show');
+          clearTimeout(showToast._timer);
+          showToast._timer = setTimeout(() => toast.classList.remove('show'), 1800);
+      }
 
-    // 4. منطق نافذة الديسكورد (Discord Overlay Logic)
-    function openPageOverlay() {
-        if (!pageOverlay || !pageFrame) return;
-        pageFrame.src = 'main/Discord.html';
-        pageOverlay.classList.add('show');
-        pageOverlay.setAttribute('aria-hidden', 'false');
-        updateBodyLock();
-    }
+      async function copyText(text) {
+          try {
+              if (navigator.clipboard && window.isSecureContext) {
+                  await navigator.clipboard.writeText(text);
+              } else {
+                  const temp = document.createElement('textarea');
+                  temp.value = text;
+                  temp.setAttribute('readonly', '');
+                  temp.style.cssText = 'position:fixed;top:-9999px;opacity:0;';
+                  document.body.appendChild(temp);
+                  temp.focus();
+                  temp.select();
+                  document.execCommand('copy');
+                  document.body.removeChild(temp);
+              }
+              showToast('تم النسخ ✓');
+          } catch {
+              showToast('تعذر النسخ');
+          }
+      }
 
-    function closePageOverlay() {
-        if (!pageOverlay || !pageFrame) return;
-        pageOverlay.classList.remove('show');
-        pageOverlay.setAttribute('aria-hidden', 'true');
-        pageFrame.src = '';
-        updateBodyLock();
-    }
+      // 4. منطق نافذة الديسكورد
+      function openPageOverlay() {
+          if (!pageOverlay || !pageFrame) return;
+          pageFrame.src = 'main/Discord.html';
+          pageOverlay.classList.add('show');
+          pageOverlay.setAttribute('aria-hidden', 'false');
+          updateBodyLock();
+      }
 
-    // 5. منطق نافذة المشاركة (Share Overlay Logic)
-    function openShare() {
-        if (!shareOverlay) return;
-        shareOverlay.classList.add('show');
-        shareOverlay.setAttribute('aria-hidden', 'false');
-        updateBodyLock();
-        
-        if (shareUrlInput) shareUrlInput.value = TARGET_URL;
-        if (shareQrImg) {
-            const urlEncoded = encodeURIComponent(TARGET_URL);
-            shareQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${urlEncoded}`;
-        }
-    }
+      function closePageOverlay() {
+          if (!pageOverlay || !pageFrame) return;
+          pageOverlay.classList.remove('show');
+          pageOverlay.setAttribute('aria-hidden', 'true');
+          pageFrame.src = '';
+          updateBodyLock();
+      }
 
-    function closeShareModal() {
-        if (!shareOverlay) return;
-        shareOverlay.classList.remove('show');
-        shareOverlay.setAttribute('aria-hidden', 'true');
-        updateBodyLock();
-    }
+      // 5. منطق نافذة المشاركة
+      function openShare() {
+          if (!shareOverlay) return;
+          shareOverlay.classList.add('show');
+          shareOverlay.setAttribute('aria-hidden', 'false');
+          updateBodyLock();
+          if (shareUrlInput) shareUrlInput.value = TARGET_URL;
+          if (shareQrImg) {
+              const urlEncoded = encodeURIComponent(TARGET_URL);
+              shareQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${urlEncoded}`;
+          }
+      }
 
-    // 6. تأثير الكتابة الذكي لعنوان التاب (Smart Typewriter Effect)
-    function typeEffect() {
-        // لو المستخدم خرج من التاب، بنوقف الـ Loop تماماً لمنع العشوائية stutters
-        if (!isTabActive || !titleEl) return;
+      function closeShareModal() {
+          if (!shareOverlay) return;
+          shareOverlay.classList.remove('show');
+          shareOverlay.setAttribute('aria-hidden', 'true');
+          updateBodyLock();
+      }
 
-        const currentWord = TYPER_TITLES[typerIndex];
-        charIndex += isDeleting ? -1 : 1;
-        titleEl.textContent = currentWord.substring(0, charIndex);
+      // 6. تأثير الكتابة لعنوان التاب
+      function typeEffect() {
+          if (!isTabActive || !titleEl) return;
+          const currentWord = TYPER_TITLES[typerIndex];
+          charIndex += isDeleting ? -1 : 1;
+          titleEl.textContent = currentWord.substring(0, charIndex);
+          let currentSpeed = isDeleting ? TYPER_SPEED / 2 : TYPER_SPEED;
+          if (!isDeleting && charIndex === currentWord.length) {
+              currentSpeed = 1200;
+              isDeleting = true;
+          } else if (isDeleting && charIndex === 0) {
+              isDeleting = false;
+              typerIndex = (typerIndex + 1) % TYPER_TITLES.length;
+          }
+          typerTimer = setTimeout(typeEffect, currentSpeed);
+      }
 
-        let currentSpeed = isDeleting ? TYPER_SPEED / 2 : TYPER_SPEED;
+      // 7. مراقبة رؤية الصفحة
+      function handleVisibilityChange() {
+          if (!titleEl) return;
+          if (document.hidden) {
+              isTabActive = false;
+              clearTimeout(typerTimer);
+              titleEl.textContent = 'لا تهرب خليكككك';
+          } else {
+              isTabActive = true;
+              titleEl.textContent = 'رجعت هيك 😎';
+              clearTimeout(typerTimer);
+              typerTimer = setTimeout(() => {
+                  typerIndex  = 0;
+                  charIndex   = 0;
+                  isDeleting  = false;
+                  typeEffect();
+              }, 1200);
+          }
+      }
 
-        if (!isDeleting && charIndex === currentWord.length) {
-            currentSpeed = 1200; // مدة الانتظار عند اكتمال الكلمة
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            typerIndex = (typerIndex + 1) % TYPER_TITLES.length;
-        }
+      // 8. تعيين مستمعي الأحداث
+      function initEvents() {
+          openDiscordBtn?.addEventListener('click', (e) => { e.preventDefault(); openPageOverlay(); });
+          pageOverlay?.addEventListener('click',   (e) => { if (e.target === pageOverlay) closePageOverlay(); });
+          sharePortalBtn?.addEventListener('click', openShare);
+          closeShare?.addEventListener('click',     closeShareModal);
+          shareOverlay?.addEventListener('click',   (e) => { if (e.target === shareOverlay) closeShareModal(); });
+          copyShareBtn?.addEventListener('click',   () => { if (shareUrlInput) copyText(shareUrlInput.value); });
 
-        typerTimer = setTimeout(typeEffect, currentSpeed);
-    }
+          document.addEventListener('click', (e) => {
+              const btn = e.target.closest?.('[data-copy]');
+              if (btn) {
+                  const val = btn.getAttribute('data-copy') || '';
+                  if (val) copyText(val);
+              }
+          });
 
-    // 7. مراقبة حالة رؤية الصفحة (Tab Visibility Control)
-    function handleVisibilityChange() {
-        if (!titleEl) return;
+          window.addEventListener('message', (event) => {
+              if (event.data?.type === 'close-discord') closePageOverlay();
+          });
 
-        if (document.hidden) {
-            isTabActive = false;
-            clearTimeout(typerTimer);
-            titleEl.textContent = 'لا تهرب خليكككك';
-        } else {
-            isTabActive = true;
-            titleEl.textContent = 'رجعت هيك 😎';
-            // ننتظر ثانية ثم نُعيد تشغيل الأنيميشن بسلاسة من البداية
-            clearTimeout(typerTimer);
-            typerTimer = setTimeout(() => {
-                typerIndex = 0;
-                charIndex = 0;
-                isDeleting = false;
-                typeEffect();
-            }, 1200);
-        }
-    }
+          document.addEventListener('keydown', (e) => {
+              if (e.key === 'Escape') { closePageOverlay(); closeShareModal(); }
+          });
 
-    // 8. إعداد وتعيين مستمعي الأحداث (Event Listeners & Delegation)
-    function initEvents() {
-        // أحداث الديسكورد والمشاركة
-        openDiscordBtn?.addEventListener('click', (e) => { e.preventDefault(); openPageOverlay(); });
-        pageOverlay?.addEventListener('click', (e) => { if (e.target === pageOverlay) closePageOverlay(); });
-        
-        sharePortalBtn?.addEventListener('click', openShare);
-        closeShare?.addEventListener('click', closeShareModal);
-        shareOverlay?.addEventListener('click', (e) => { if (e.target === shareOverlay) closeShareModal(); });
-        copyShareBtn?.addEventListener('click', () => { if (shareUrlInput) copyText(shareUrlInput.value); });
+          document.addEventListener('visibilitychange', handleVisibilityChange);
+      }
 
-        // مستمع تفويض النسخ الشامل [data-copy]
-        document.addEventListener('click', (e) => {
-            const btn = e.target.closest?.('[data-copy]');
-            if (btn) {
-                const val = btn.getAttribute('data-copy') || '';
-                if (val) copyText(val);
-            }
-        });
+      // 9. التشغيل الابتدائي
+      if (moreSocialsBackdrop) moreSocialsBackdrop.setAttribute('aria-hidden', 'true');
+      updateBodyLock();
+      initEvents();
+      typeEffect();
+  })();
+  </script>
 
-        // رسائل الـ iframe وزر الـ Escape
-        window.addEventListener('message', (event) => {
-            if (event.data?.type === 'close-discord') closePageOverlay();
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closePageOverlay(); closeShareModal(); }
-        });
-
-        // مراقبة التاب
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-    }
-
-    // 9. تشغيل السكريبت الابتدائي (Initialization)
-    if (moreSocialsBackdrop) moreSocialsBackdrop.setAttribute('aria-hidden', 'true');
-    updateBodyLock();
-    initEvents();
-    typeEffect(); // تشغيل حركة العنوان فوراً
-})();
-</script>
+  <!-- سكريبت بطاقة EV — في آخر الـ body للأداء الأمثل -->
+  <script src="main/ev-card.js"></script>
 
 </body>
 </html>
