@@ -1215,6 +1215,9 @@ input {
   --hover-glow:    rgba(129,182,76,0.30);
 }
 
+
+
+
 /* Steam */
 .st-card,
 .steam-card {
@@ -2475,6 +2478,86 @@ input {
 .chess-card   .social-icon  { color: #81b648; }
 .twitch-card  .social-icon  { color: #9146FF; }
 .pinterest-card .social-icon { color: #E60023; }
+
+
+.chess-card { --glow: rgba(129,182,76,0.38); }
+.chess-card .social-icon { color: #81b648; }
+/* Chess.com */
+.chess-card {
+  --brand:         #81b648;
+  --icon-bg:       rgba(105,146,62,0.12);
+  --icon-fg:       #81b648;
+  --hover-icon-bg: #81b648;
+  --hover-icon-fg: #fff;
+  --hover-border:  rgba(129,182,76,0.28);
+  --hover-glow:    rgba(129,182,76,0.30);
+}
+
+/* حاوية الأيقونة */
+.chess-card .social-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* الشعار 2D مثل الصورة */
+.chess-card .brilliant-badge {
+  position: absolute;
+  top: -7px;
+  left: -12px;
+
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #17c2b1 !important;
+  color: #ffffff !important;
+
+  font-family: Arial Black, Impact, sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+
+  box-shadow: 0 0 4px rgba(23, 194, 177, 0.22);
+
+  transform: rotate(0deg);
+  user-select: none;
+  pointer-events: none;
+  z-index: 5;
+
+  animation: brilliantPulse 8s ease-in-out infinite;
+}
+
+/* توهج خفيف جدًا */
+.chess-card .brilliant-badge::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(23, 194, 177, 0.14) 0%, transparent 72%);
+  filter: blur(1.5px);
+  z-index: -1;
+}
+
+/* نبض بطيء جدًا وشبه غير ملحوظ */
+@keyframes brilliantPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 4px rgba(23, 194, 177, 0.22);
+  }
+
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 6px rgba(23, 194, 177, 0.30);
+  }
+}
 
 /* ============================================================
    29 · TOAST NOTIFICATION
