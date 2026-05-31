@@ -1305,6 +1305,28 @@ input {
   --hover-glow:    rgba(230,0,35,0.30);
 }
 
+/* Kick */
+.kick-card {
+  --brand:         #53FC18;
+  --icon-bg:       rgba(83,252,24,0.10);
+  --icon-fg:       #53FC18;
+  --hover-icon-bg: #53FC18;
+  --hover-icon-fg:  #111;
+  --hover-border:  rgba(83,252,24,0.30);
+  --hover-glow:     rgba(83,252,24,0.38);
+}
+
+/* Twitch */
+.twitch-card {
+  --brand:         #9146FF;
+  --icon-bg:       rgba(145,70,255,0.10);
+  --icon-fg:       #9146FF;
+  --hover-icon-bg: #9146FF;
+  --hover-icon-fg:  #fff;
+  --hover-border:  rgba(145,70,255,0.30);
+  --hover-glow:     rgba(145,70,255,0.38);
+}
+
 /* VIP Gold */
 .vip-card {
   background: var(--royal-bg);
