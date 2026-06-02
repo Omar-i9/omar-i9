@@ -170,7 +170,24 @@
     }
   }
 
-  setInterval(tickTelemetry, 80);
+  let telemetryInterval = null;
+
+  function startTelemetry() {
+    if (!telemetryInterval) telemetryInterval = setInterval(tickTelemetry, 80);
+  }
+
+  function stopTelemetry() {
+    if (!telemetryInterval) return;
+    clearInterval(telemetryInterval);
+    telemetryInterval = null;
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopTelemetry();
+    else startTelemetry();
+  });
+
+  startTelemetry();
 
 
   // ═══════════════════════════════════════════════════════════

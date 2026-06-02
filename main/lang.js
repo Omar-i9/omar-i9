@@ -49,7 +49,7 @@
       audioState:       'اضغط على أي أغنية للتشغيل',
       pageTitle:        'Omar Profiles',
       ariaBtn:          'تبديل اللغة إلى الإنجليزية',
-      footerLine1:      'الفولو ما بكهربك',
+      footerLine1:      'الفولو <em>ما بكهربك</em>',
       footerLine2:      'كل حساباتي هون ليش بعرفش',
     },
     en: {
@@ -93,7 +93,7 @@
       audioState:       'Click any song to play',
       pageTitle:        'Omar Profiles',
       ariaBtn:          'Switch language to Arabic',
-      footerLine1:      'Following won\'t electrocute you',
+      footerLine1:      'Following won\'t <em>electrocute you</em>',
       footerLine2:      'All my accounts are right here — why not?',
     }
   };
@@ -111,24 +111,25 @@
 function applyLanguage(lang) {
   const t = translations[lang] || translations.ar;
   const isRTL = lang === 'ar';
+  const app = document.querySelector('.app');
+
+  if (app) app.style.opacity = '0.7';
 
   html.lang = lang;
   html.dir  = isRTL ? 'rtl' : 'ltr';
-
-    // ✅ أضف هاد السطر هون — يثبت التوسيط دايماً
-  document.body.style.textAlign = 'center';
-
-  // بعد سطر textAlign
-  document.querySelectorAll('.your-flex-container').forEach(el => {
-    el.style.justifyContent = 'center';
-  });
-
 
     /* حفظ التفضيل */
     try { localStorage.setItem('siteLang', lang); } catch (_) { /* private mode */ }
 
     /* عنوان التاب */
     if (titleEl) titleEl.textContent = t.pageTitle;
+
+    /* وصف الصفحة لمحركات البحث والمشاركة */
+    document.querySelector('meta[name="description"]')?.setAttribute('content',
+      lang === 'en'
+        ? "Omar\'s profile page — all accounts in one place"
+        : 'صفحة Omar Profiles تجمع كل الروابط والحسابات في مكان واحد'
+    );
 
     /* نصوص data-i18n */
     document.querySelectorAll('[data-i18n]').forEach((el) => {
@@ -161,6 +162,10 @@ function applyLanguage(lang) {
     if (langBtn) {
       langBtn.dataset.lang = lang;
     }
+
+    requestAnimationFrame(() => {
+      if (app) app.style.opacity = '1';
+    });
   }
 
   /* ═══════════════════════════════════════════

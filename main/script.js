@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const FALLBACK_COVER = "./photo/profile.jpeg";
   const SHARE_URL = "https://omar-i9.github.io/my-profiles/";
   const SHARE_TEXT = "هذا موقعي، تفضل الرابط:";
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches || false;
 
   // ==========================================
   // 2. ربط عناصر الـ DOM
@@ -71,27 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const musicControls = document.querySelector(".music-controls");
   const sectionTitles = Array.from(document.querySelectorAll(".section-title"));
 
-  // عناصر المشاركة والتواصل
-  const moreSocialsBtn = document.getElementById("moreSocialsBtn");
-  const moreSocialsDrawer = document.getElementById("moreSocialsDrawer");
-  const moreSocialsBackdrop = document.getElementById("moreSocialsBackdrop");
-  const moreSocialsClose = document.getElementById("moreSocialsClose");
-
+  // عناصر المشاركة الموجودة فعلياً في HTML
   const sharePortalBtn = document.getElementById("sharePortalBtn");
   const shareOverlay = document.getElementById("shareOverlay");
   const closeShareBtn = document.getElementById("closeShare");
   const shareQrImg = document.getElementById("shareQrImg");
   const shareUrlInput = document.getElementById("shareUrlInput");
   const copyShareBtn = document.getElementById("copyShareBtn");
-  const nativeShareBtn = document.getElementById("nativeShareBtn");
-  const desktopSheetBtn = document.getElementById("desktopSheetBtn");
-  const openLinkBtn = document.getElementById("openLinkBtn");
-  const fakeShareSheet = document.getElementById("fakeShareSheet");
-  const sheetBackdrop = fakeShareSheet?.querySelector(".sheet-backdrop");
-  const closeSheetBtn = document.getElementById("closeSheetBtn");
-  const waShare = document.getElementById("waShare");
-  const fbShare = document.getElementById("fbShare");
-  const tgShare = document.getElementById("tgShare");
 
   // ==========================================
   // 3. قواعد البيانات (الأغاني والآيات)
@@ -261,17 +248,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function showToast(message) {
+  function showToast(message, type = "success") {
     if (!toast) return;
-    toast.textContent = message;
-    toast.classList.add("show");
+    if ("vibrate" in navigator) navigator.vibrate(type === "error" ? [30, 20, 30] : 25);
+    const icons = { success: "✓", error: "✗", info: "ℹ" };
+    toast.innerHTML = `<span class="toast-icon">${icons[type] || icons.success}</span><span>${message}</span>`;
+    toast.className = `toast toast--${type} show`;
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+    toastTimer = setTimeout(() => { toast.className = "toast"; }, 1800);
   }
 
   function copyText(text) {
     if (!text) return;
-    copyToClipboard(text).then((ok) => showToast(ok ? "تم النسخ" : "تعذر النسخ"));
+    const btn = Array.from(document.querySelectorAll("[data-copy]")).find((el) => el.dataset.copy === text);
+    copyToClipboard(text).then((ok) => {
+      showToast(ok ? "تم النسخ" : "تعذر النسخ", ok ? "success" : "error");
+      if (ok && btn) {
+        const row = btn.closest(".copy-row");
+        row?.classList.add("copied-flash");
+        setTimeout(() => row?.classList.remove("copied-flash"), 700);
+      }
+    });
   }
 
   // ==========================================
@@ -535,7 +532,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const coverCandidates = getCoverCandidates(song);
       return `
         <div class="track${index === currentSongIndex ? " active" : ""}${fav ? " fav" : ""}" data-index="${index}" tabindex="0" role="button" aria-label="تشغيل ${song.title}">
-          <img class="track-cover" src="${coverCandidates[0]}" alt="غلاف ${song.title}" data-cover-index="${index}">
+          <div class="track-cover-wrap">
+            <img class="track-cover" src="${coverCandidates[0]}" alt="غلاف ${song.title}" loading="lazy" data-cover-index="${index}">
+            <div class="track-cover-skeleton" aria-hidden="true"></div>
+          </div>
           <div class="track-meta">
             <strong>${song.title}</strong>
             <span>${song.fileLabel}</span>
@@ -551,6 +551,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const index = Number(img.dataset.coverIndex);
       const song = songs[index];
       applyImageFallback(img, getCoverCandidates(song));
+      if (img.complete && img.naturalWidth > 0) img.classList.add("loaded");
+      img.addEventListener("load", () => img.classList.add("loaded"), { once: true });
     });
 
     playlistEl.querySelectorAll(".track").forEach((track) => {
@@ -643,9 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
     savePlaybackSnapshot();
 
     if (autoplay) {
-      // شغلنا النبض هون كمان احتياط لما يشتغل الصوت
-      initAudioPulse();
-      audio.play().catch(() => showToast("المتصفح منع التشغيل التلقائي"));
+      audio.play().catch(() => showToast("المتصفح منع التشغيل التلقائي", "error"));
     }
 
     if (restoreTime !== null) {
@@ -656,8 +656,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function playSong(index) {
     if (index === currentSongIndex && audio?.src) {
-      initAudioPulse();
-      audio.play().catch(() => showToast("المتصفح منع التشغيل"));
+      audio.play().catch(() => showToast("المتصفح منع التشغيل", "error"));
       return;
     }
     loadSong(index, true, { pushHistory: true });
@@ -708,7 +707,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!audio) return;
     initAudioPulse(); // تشغيل الـ AudioContext بأول تفاعل من المستخدم عشان سياسات المتصفح
     if (audio.paused) {
-      audio.play().catch(() => showToast("المتصفح منع التشغيل"));
+      audio.play().catch(() => showToast("المتصفح منع التشغيل", "error"));
     } else {
       audio.pause();
     }
@@ -958,6 +957,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     sectionTitles.forEach((el) => {
+      if (el.querySelector(".section-icon")) { el.dataset.enhanced = "1"; return; }
       if (el.dataset.enhanced === "1") return;
       const label = el.textContent.trim();
       const icon = map[label] || "fa-circle";
@@ -1217,6 +1217,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (dx > 5 || dy > 5) {
         ayahDragState.started = true;
+        e.preventDefault();
         toggleAyahExpanded(false);
         moveAyahTo(e.clientX - ayahDragState.offsetX, e.clientY - ayahDragState.offsetY);
       }
@@ -1303,60 +1304,12 @@ document.addEventListener("DOMContentLoaded", () => {
     shareOverlay.setAttribute("aria-hidden", "true");
   }
 
-  function openSheet() {
-    if (!fakeShareSheet) return;
-    fakeShareSheet.classList.add("active");
-    fakeShareSheet.setAttribute("aria-hidden", "false");
-  }
-
-  function closeSheet() {
-    if (!fakeShareSheet) return;
-    fakeShareSheet.classList.remove("active");
-    fakeShareSheet.setAttribute("aria-hidden", "true");
-  }
-
-  function openMoreSocials() {
-    document.body.classList.add("drawer-open");
-    moreSocialsDrawer?.classList.add("open");
-    moreSocialsBackdrop?.classList.add("open");
-  }
-
-  function closeMoreSocials() {
-    document.body.classList.remove("drawer-open");
-    moreSocialsDrawer?.classList.remove("open");
-    moreSocialsBackdrop?.classList.remove("open");
-  }
 
   function initShareLinks() {
     if (shareQrImg) {
       shareQrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" + encodeURIComponent(SHARE_URL) + "&margin=10";
     }
-
     if (shareUrlInput) shareUrlInput.value = SHARE_URL;
-    if (waShare) waShare.href = `https://wa.me/?text=${encodeURIComponent(`${SHARE_TEXT}\n${SHARE_URL}`)}`;
-    if (fbShare) fbShare.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_URL)}`;
-    if (tgShare) tgShare.href = `https://t.me/share/url?url=${encodeURIComponent(SHARE_URL)}&text=${encodeURIComponent(SHARE_TEXT)}`;
-
-    const mail = fakeShareSheet?.querySelector('[data-act="mail"]');
-    if (mail) {
-      mail.href = `mailto:?subject=${encodeURIComponent(document.title)}&body=${encodeURIComponent(`${SHARE_TEXT}\n${SHARE_URL}`)}`;
-    }
-  }
-
-  async function doNativeShare() {
-    const shareData = {
-      title: document.title,
-      text: SHARE_TEXT,
-      url: SHARE_URL,
-    };
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-        return;
-      } catch {}
-    }
-    openSheet();
   }
 
   function initShareUI() {
@@ -1374,50 +1327,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     copyShareBtn?.addEventListener("click", async () => {
       const ok = await copyToClipboard(shareUrlInput?.value || SHARE_URL);
-      showToast(ok ? "تم نسخ الرابط" : "تعذر نسخ الرابط");
+      showToast(ok ? "تم نسخ الرابط" : "تعذر نسخ الرابط", ok ? "success" : "error");
     });
 
-    nativeShareBtn?.addEventListener("click", doNativeShare);
-    desktopSheetBtn?.addEventListener("click", openSheet);
-    openLinkBtn?.addEventListener("click", () => {
-      window.open(shareUrlInput?.value || SHARE_URL, "_blank", "noopener,noreferrer");
-    });
-
-    sheetBackdrop?.addEventListener("click", closeSheet);
-    closeSheetBtn?.addEventListener("click", closeSheet);
-
-    fakeShareSheet?.addEventListener("click", async (e) => {
-      const btn = e.target.closest("[data-act]");
-      if (!btn) return;
-      const act = btn.getAttribute("data-act");
-
-      if (act === "copy") {
-        const ok = await copyToClipboard(SHARE_URL);
-        showToast(ok ? "تم نسخ الرابط" : "تعذر النسخ");
-        closeSheet();
-        return;
-      }
-
-      if (act === "open") {
-        window.open(SHARE_URL, "_blank", "noopener,noreferrer");
-        closeSheet();
-        return;
-      }
-
-      if (act === "wa" || act === "fb" || act === "tg") {
-        closeSheet();
-      }
-    });
-
-    moreSocialsBtn?.addEventListener("click", (e) => {
-      e.preventDefault();
-      pulseWave(moreSocialsBtn);
-      makeRipple(e, moreSocialsBtn);
-      openMoreSocials();
-    });
-
-    moreSocialsBackdrop?.addEventListener("click", closeMoreSocials);
-    moreSocialsClose?.addEventListener("click", closeMoreSocials);
   }
 
   // ==========================================
@@ -1465,15 +1377,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initMiscUI() {
-    moreSocialsBtn?.classList.add("soft-float", "wave-auto");
     initRippleStyle();
 
-    // تأثير حركة الخلفية مع الماوس
+    // تأثير حركة الخلفية مع الماوس — throttled بـ requestAnimationFrame
+    let mouseMoveRAF = null;
+    let lastMouseEvent = null;
     document.addEventListener("mousemove", (e) => {
-      const moveX = (e.clientX * 0.05) / 8;
-      const moveY = (e.clientY * 0.05) / 8;
-      document.body.style.backgroundPosition = `${moveX}px ${moveY}px`;
-    });
+      lastMouseEvent = e;
+      if (mouseMoveRAF) return;
+      mouseMoveRAF = requestAnimationFrame(() => {
+        const moveX = (lastMouseEvent.clientX * 0.05) / 8;
+        const moveY = (lastMouseEvent.clientY * 0.05) / 8;
+        document.body.style.backgroundPosition = `${moveX}px ${moveY}px`;
+        mouseMoveRAF = null;
+      });
+    }, { passive: true });
 
     // إحصائيات المتصفح عند الضغط على الصورة الرمزية
     const profileImg = document.querySelector(".avatar-img") || document.querySelector(".avatar img") || document.querySelector('img[src$="profile.jpeg"]');
@@ -1484,12 +1402,69 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // حركة ظهور الكروت بالتتابع
-    document.querySelectorAll('.social-card').forEach((card, index) => {
-      setTimeout(() => {
-        card.classList.add('appear');
-      }, index * 100); 
+    // خط سفلي لامع + Ripple حقيقي عند النقر
+    document.querySelectorAll(".social-card").forEach((card) => {
+      if (!card.querySelector(".card-bottom-line")) {
+        const line = document.createElement("div");
+        line.className = "card-bottom-line";
+        line.setAttribute("aria-hidden", "true");
+        card.appendChild(line);
+      }
+
+      card.addEventListener("pointerdown", (e) => {
+        if (reducedMotion) return;
+        makeRipple(e, card);
+      }, { passive: true });
     });
+
+    // حركة ظهور الكروت عند دخولها الشاشة بدل تشغيلها كلها دفعة واحدة
+    const cards = document.querySelectorAll(".social-card");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("appear");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.08, rootMargin: "0px 0px -20px 0px" });
+
+      cards.forEach((card, index) => {
+        if (!reducedMotion) card.style.transitionDelay = `${index * 55}ms`;
+        observer.observe(card);
+      });
+    } else {
+      cards.forEach((card) => card.classList.add("appear"));
+    }
+
+    // Magnetic tilt خفيف على بطاقة البروفايل في الديسكتوب
+    const heroCard = document.querySelector(".hero-card-body");
+    if (heroCard && !window.matchMedia("(pointer: coarse)").matches && !reducedMotion) {
+      heroCard.addEventListener("mousemove", (e) => {
+        const rect = heroCard.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = ((e.clientX - cx) / (rect.width / 2)) * 4;
+        const dy = ((e.clientY - cy) / (rect.height / 2)) * 3;
+        heroCard.style.transform = `translateY(-4px) perspective(800px) rotateX(${-dy}deg) rotateY(${dx}deg)`;
+      });
+      heroCard.addEventListener("mouseleave", () => {
+        heroCard.style.transform = "";
+        heroCard.style.transition = "transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1)";
+        setTimeout(() => { heroCard.style.transition = ""; }, 600);
+      });
+    }
+
+    // شريط تقدم التمرير
+    const scrollProgress = document.getElementById("scrollProgress");
+    if (scrollProgress) {
+      const updateScrollProgress = () => {
+        const max = document.body.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? window.scrollY / max : 0;
+        scrollProgress.style.transform = `scaleX(${pct})`;
+      };
+      updateScrollProgress();
+      window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    }
 
     // نسخ بالزر اليمين (Context Menu)
     document.querySelectorAll(".social-card").forEach((card) => {
@@ -1506,7 +1481,7 @@ document.addEventListener("DOMContentLoaded", () => {
             card.offsetHeight;
             card.style.animation = "softFloat 0.3s ease";
           } else {
-            showToast("تعذر النسخ");
+            showToast("تعذر النسخ", "error");
           }
         });
       });
@@ -1560,7 +1535,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 el.dataset.ignoreClick = "0";
               }, 120);
             } else {
-              showToast("تعذر النسخ");
+              showToast("تعذر النسخ", "error");
             }
           }, holdMs);
         });
@@ -1598,18 +1573,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
   function bindEvents() {
     musicFab?.addEventListener("click", () => {
-      musicSheet.classList.add("open");
-      overlay.classList.add("open");
+      musicSheet?.classList.add("open");
+      overlay?.classList.add("open");
+      overlay?.setAttribute("aria-hidden", "false");
     });
 
     closeMusicBtn?.addEventListener("click", () => {
-      musicSheet.classList.remove("open");
-      overlay.classList.remove("open");
+      musicSheet?.classList.remove("open");
+      overlay?.classList.remove("open");
+      overlay?.setAttribute("aria-hidden", "true");
     });
 
     overlay?.addEventListener("click", () => {
-      musicSheet.classList.remove("open");
-      overlay.classList.remove("open");
+      musicSheet?.classList.remove("open");
+      overlay?.classList.remove("open");
+      overlay?.setAttribute("aria-hidden", "true");
       closeTrackMenu();
     });
 
@@ -1643,6 +1621,7 @@ document.addEventListener("DOMContentLoaded", () => {
       audio.addEventListener("play", () => {
         setPlayIcon(true);
         updatePulse(true);
+        musicFab?.classList.add("playing");
         if (audioState) audioState.textContent = `يعمل الآن: ${currentSong().title}`;
         const sub = document.getElementById("nowPlayingSub");
         if (sub) sub.textContent = "يعمل الآن";
@@ -1652,6 +1631,7 @@ document.addEventListener("DOMContentLoaded", () => {
       audio.addEventListener("pause", () => {
         setPlayIcon(false);
         updatePulse(false);
+        musicFab?.classList.remove("playing");
         if (audioState) audioState.textContent = `متوقف: ${currentSong().title}`;
         const sub = document.getElementById("nowPlayingSub");
         if (sub) sub.textContent = "متوقف";
@@ -1721,16 +1701,15 @@ document.addEventListener("DOMContentLoaded", () => {
       showSeekTooltip();
     }, { passive: true });
 
-    seekWrap?.addEventListener("touchend", hideSeekTooltipSoon);
+    seekWrap?.addEventListener("touchend", hideSeekTooltipSoon, { passive: true });
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         closeTrackMenu();
-        musicSheet.classList.remove("open");
-        overlay.classList.remove("open");
+        musicSheet?.classList.remove("open");
+        overlay?.classList.remove("open");
+        overlay?.setAttribute("aria-hidden", "true");
         closeModal();
-        closeSheet();
-        closeMoreSocials();
       }
       if (e.key === "ArrowRight") nextSong();
       if (e.key === "ArrowLeft") prevSong();
@@ -1744,6 +1723,8 @@ document.addEventListener("DOMContentLoaded", () => {
       maybeResumePlaybackOnGesture();
     });
 
+    document.addEventListener("pointerdown", () => initAudioPulse(), { once: true, passive: true });
+    document.addEventListener("keydown", () => initAudioPulse(), { once: true });
     document.addEventListener("pointerdown", maybeResumePlaybackOnGesture, { passive: true });
     document.addEventListener("touchstart", maybeResumePlaybackOnGesture, { passive: true });
     document.addEventListener("beforeunload", savePlaybackSnapshot);
@@ -1756,7 +1737,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function initGlobalShareHelpers() {
     window.copySiteLink = async () => {
       const ok = await copyToClipboard(SHARE_URL);
-      showToast(ok ? "تم نسخ الرابط" : "تعذر نسخ الرابط");
+      showToast(ok ? "تم نسخ الرابط" : "تعذر نسخ الرابط", ok ? "success" : "error");
     };
   }
 
