@@ -195,7 +195,7 @@ I like to build projects with attention to:
   [Taamenn Project](https://omar-i9.github.io/taamenn/)
 
 - 📸 **Instagram / إنستغرام:**  
-  `Add your real Instagram link here`
+  `(https://www.instagram.com/omar.a.z3)`
 
 - 💻 **GitHub Profile / حسابي على GitHub:**  
   [Omar-i9](https://github.com/Omar-i9)
