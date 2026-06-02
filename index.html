@@ -9,7 +9,10 @@
 
   <meta property="og:title"       content="عُـمَر | Omar" />
   <meta property="og:description" content="كل حساباتي في مكان واحد" />
-  <meta property="og:image"       content="photo/profile.jpeg" />
+  <meta property="og:image"       content="https://omar-i9.github.io/omar-i9/photo/profile.jpeg" />
+  <meta property="og:image:width"  content="800" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:type"         content="profile" />
   <meta property="og:url"         content="https://omar-i9.github.io/my-profiles/" />
   <meta name="twitter:card"       content="summary_large_image" />
   <meta name="p:domain_verify"    content="2bceaee4e3d7c3a47ea83686e0fd2281" />
@@ -59,6 +62,8 @@
 
 <body>
 
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════════
        آية عائمة — Ayah Float Widget
   ════════════════════════════════════════════ -->
@@ -86,7 +91,7 @@
 
       <!-- الصورة الشخصية -->
       <div class="avatar">
-        <img src="photo/profile.jpeg" alt="صورة الملف الشخصي" />
+        <img src="photo/profile.jpeg" alt="صورة الملف الشخصي" loading="eager" />
         <div class="status-indicator"></div>
       </div>
 
@@ -355,7 +360,9 @@
               id="openDiscordBtn"
               data-longcopy
               data-copy-text="gdmi_3"
-              aria-label="ديسكورد">
+              aria-label="فتح بطاقة الديسكورد"
+              aria-haspopup="dialog"
+              aria-expanded="false">
         <span class="badge-vip">PRIVATE</span>
         <span class="social-icon">
           <i class="fa-brands fa-discord"></i>
@@ -410,7 +417,7 @@
        href="https://omar-i9.github.io/taamenn/"
        target="_blank"
        rel="noopener noreferrer">
-      <img src="photo/tameen-logo.jpeg" alt="تأمين" class="work-logo" />
+      <img src="photo/tameen-logo.jpeg" alt="تأمين" class="work-logo" loading="lazy" />
       <div class="work-text">
         <strong data-i18n="projectName">تأمين</strong>
         <span data-i18n="projectDesc">
@@ -497,7 +504,7 @@
     <!-- /evc-root — البطاقة مغلقة صح هون ↑ -->
 
     <!-- فوتر داخلي -->
-    <div class="hero-card-footer" data-i18n="footerLine1">الفولو <em>ما بكهربك</em></div>
+    <div class="hero-card-footer" data-i18n-html="footerLine1">الفولو <em>ما بكهربك</em></div>
 
   </main><!-- /app -->
 
@@ -518,7 +525,7 @@
 
     <!-- معلومات الأغنية الحالية -->
     <div class="music-top">
-      <img src="" id="musicCover" alt="غلاف الأغنية" class="music-cover" />
+      <img src="" id="musicCover" alt="غلاف الأغنية" class="music-cover" loading="lazy" />
       <div class="music-info">
         <span class="label" data-i18n="nowPlaying">Now Playing</span>
         <strong id="songTitle">اسم الأغنية</strong>
@@ -592,6 +599,15 @@
     <audio id="audio" preload="metadata" src=""></audio>
   </section>
 
+
+  <!-- Music FAB -->
+  <button class="music-fab" id="musicFab" type="button" aria-label="مشغل الموسيقى">
+    <i class="fa-solid fa-music"></i>
+  </button>
+
+  <!-- Generic overlay -->
+  <div class="overlay" id="overlay" role="presentation" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════════
        Toast Notification
   ════════════════════════════════════════════ -->
@@ -635,7 +651,7 @@
         <div class="retro-badge">PIXEL SHARE</div>
 
         <div class="qr-wrapper">
-          <img id="shareQrImg" src="https://omar-i9.github.io/omar-i9/" class="main-qr" />
+          <img id="shareQrImg" src="https://omar-i9.github.io/my-profiles/" class="main-qr" alt="QR code لمشاركة الموقع" loading="lazy" />
         </div>
 
         <h3 id="shareTitle" data-i18n="shareTitle">بوابة المشاركة</h3>
@@ -678,7 +694,7 @@
   <script>
   (function () {
       // 1. الإعدادات والثوابت البرمجية
-      const TARGET_URL    = 'https://omar-i9.github.io/omar-i9/';
+      const TARGET_URL    = 'https://omar-i9.github.io/my-profiles/';
       const TYPER_TITLES  = ['اهلين تعال كل يوم 👋', 'Omar Profiles'];
       const TYPER_SPEED   = 50;
 
@@ -752,6 +768,7 @@
           pageFrame.src = 'main/Discord.html';
           pageOverlay.classList.add('show');
           pageOverlay.setAttribute('aria-hidden', 'false');
+          openDiscordBtn?.setAttribute('aria-expanded', 'true');
           updateBodyLock();
       }
 
@@ -759,6 +776,7 @@
           if (!pageOverlay || !pageFrame) return;
           pageOverlay.classList.remove('show');
           pageOverlay.setAttribute('aria-hidden', 'true');
+          openDiscordBtn?.setAttribute('aria-expanded', 'false');
           pageFrame.src = '';
           updateBodyLock();
       }
