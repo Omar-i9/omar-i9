@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://omar-i9.github.io/my-profiles/sitemap.xml
+Sitemap: https://omar-i9.github.io/omar-i9/sitemap.xml

@@ -1,0 +1,49 @@
+.app {
+  position: relative;
+  width: min(var(--content), calc(100% - 28px));
+  margin-inline: auto;
+  padding: 76px 0 32px;
+}
+
+.section-title {
+  width: 100%;
+  margin: 34px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  color: #d7e5f6;
+  font-weight: 900;
+  font-size: 1.03rem;
+  letter-spacing: -.2px;
+}
+
+html[dir="ltr"] .section-title { justify-content: flex-start; }
+
+.section-title.enhanced .section-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: var(--cyan-2);
+  background: linear-gradient(145deg, rgba(0,234,255,.18), rgba(139,92,246,.08));
+  border: 1px solid rgba(0,234,255,.18);
+  box-shadow: var(--glow-cyan);
+}
+
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  width: 100%;
+}
+
+.copy-list,
+.projects-list {
+  display: grid;
+  width: 100%;
+  gap: 12px;
+}
