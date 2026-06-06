@@ -1,0 +1,466 @@
+.ayah-float {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 50;
+  width: min(360px, calc(100vw - 32px));
+  min-height: 152px;
+  padding: 16px 18px 14px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(0,234,255,.18), transparent 38%),
+    linear-gradient(145deg, rgba(9, 15, 28, .86), rgba(5, 10, 18, .9));
+  border: 1px solid rgba(0,234,255,.18);
+  box-shadow: 0 18px 40px rgba(0,0,0,.38), 0 0 34px rgba(0,234,255,.08), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  cursor: grab;
+  user-select: none;
+  transition: transform .42s var(--ease-spring), opacity .34s var(--ease), border-color .28s var(--ease), filter .28s var(--ease);
+  isolation: isolate;
+  overflow: hidden;
+}
+html[dir="ltr"] .ayah-float { left: auto; right: 16px; }
+.ayah-float:active { cursor: grabbing; }
+.ayah-float:hover { border-color: rgba(0,234,255,.34); transform: translateY(-2px); }
+
+.ayah-orbit {
+  position: absolute;
+  inset: -70px auto auto -70px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,234,255,.16);
+  background: radial-gradient(circle, rgba(0,234,255,.11), transparent 64%);
+  opacity: .7;
+  animation: ayahOrbit 7s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+html[dir="ltr"] .ayah-orbit { left: auto; right: -70px; }
+
+.ayah-float::after {
+  content: "";
+  position: absolute;
+  inset: auto 12% 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,234,255,.88), rgba(20,231,192,.72), transparent);
+  opacity: .68;
+  animation: lineBreathe 3.6s ease-in-out infinite;
+}
+
+.ayah-float.is-detail {
+  width: min(430px, calc(100vw - 32px));
+}
+.ayah-float.is-detail .ayah-detail {
+  max-height: 310px;
+  opacity: 1;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.ayah-float.is-water-out {
+  animation: waterOut .46s var(--ease) forwards;
+}
+.ayah-float.is-water-in {
+  animation: waterIn .58s var(--ease-spring) both;
+}
+.ayah-float.is-hidden-hard {
+  display: none;
+}
+
+.ayah-eye {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 14px;
+  background: rgba(255,255,255,.045);
+  color: #dff9ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+html[dir="ltr"] .ayah-eye { left: auto; right: 12px; }
+.ayah-eye:hover,
+.ayah-eye:focus-visible { transform: translateY(-2px) rotate(-6deg); background: rgba(0,234,255,.12); border-color: rgba(0,234,255,.28); color: var(--cyan-2); }
+
+.ayah-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-inline-start: 44px;
+}
+html[dir="ltr"] .ayah-top { justify-content: flex-start; padding-inline-start: 0; padding-inline-end: 44px; }
+.ayah-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: #dffaff;
+  font-weight: 900;
+  background: rgba(0,234,255,.12);
+  border: 1px solid rgba(0,234,255,.22);
+}
+.label-tag { color: var(--cyan-2); font-size: .78rem; font-weight: 900; margin-inline-start: auto; }
+html[dir="ltr"] .label-tag { margin-inline-start: 0; margin-inline-end: auto; }
+.ayah-text {
+  text-align: end;
+  font-size: 1.06rem;
+  line-height: 1.65;
+  font-weight: 900;
+  color: #f7fbff;
+  letter-spacing: .1px;
+}
+.ayah-translation {
+  margin-top: 5px;
+  text-align: end;
+  direction: ltr;
+  color: rgba(215,230,248,.76);
+  font-size: .78rem;
+  line-height: 1.45;
+  font-weight: 700;
+}
+html[dir="ltr"] .ayah-translation { text-align: left; }
+.ayah-ref { text-align: end; margin-top: 6px; color: var(--cyan); font-weight: 900; font-size: .86rem; }
+.ayah-note { text-align: end; color: var(--muted); font-weight: 800; font-size: .84rem; }
+.ayah-detail {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: #b8c8dc;
+  font-size: .84rem;
+  line-height: 1.72;
+  text-align: end;
+  transition: max-height .7s var(--ease), opacity .36s var(--ease), margin .36s var(--ease), padding .36s var(--ease);
+}
+.ayah-swap { animation: ayahSwap .45s var(--ease); }
+
+.ayah-dock {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 49;
+  min-width: 58px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(0,234,255,.22);
+  background: linear-gradient(145deg, rgba(7, 18, 31, .9), rgba(4, 9, 18, .92));
+  color: #dffaff;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  box-shadow: 0 16px 34px rgba(0,0,0,.34), 0 0 20px rgba(0,234,255,.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+html[dir="ltr"] .ayah-dock { left: auto; right: 18px; }
+.ayah-dock.show { display: inline-flex; animation: waterDockIn .48s var(--ease-spring) both; }
+.ayah-dock i { color: var(--cyan); filter: drop-shadow(0 0 8px rgba(0,234,255,.6)); }
+
+@keyframes ayahOrbit {
+  to { transform: translate(18px, 18px) scale(1.14); opacity: .95; }
+}
+@keyframes waterOut {
+  0% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); border-radius: 22px; }
+  45% { transform: translateY(-8px) scale(1.025); border-radius: 28px; }
+  100% { opacity: 0; transform: translateY(28px) scale(.82); filter: blur(8px); border-radius: 999px; }
+}
+@keyframes waterIn {
+  0% { opacity: 0; transform: translateY(26px) scale(.82); filter: blur(8px); border-radius: 999px; }
+  58% { opacity: 1; transform: translateY(-7px) scale(1.025); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); border-radius: 22px; }
+}
+@keyframes waterDockIn {
+  0% { opacity: 0; transform: translateY(-8px) scale(.8); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@media (max-width: 560px) {
+  .ayah-float { width: min(318px, calc(100vw - 22px)); left: 11px; top: 11px; padding: 14px 15px 12px; }
+  html[dir="ltr"] .ayah-float { right: 11px; left: auto; }
+  .ayah-float.is-detail { width: min(360px, calc(100vw - 22px)); }
+  .ayah-detail { font-size: .8rem; line-height: 1.65; }
+  .ayah-dock { top: 12px; left: 12px; }
+  html[dir="ltr"] .ayah-dock { right: 12px; left: auto; }
+}
+
+/* v5 polish: smaller ayah typography, safer header spacing, smoother reading */
+.ayah-float {
+  min-height: 136px;
+  padding: 15px 16px 13px;
+}
+.ayah-eye {
+  width: 34px;
+  height: 34px;
+  top: 10px;
+  left: 10px;
+  border-radius: 12px;
+  font-size: .92rem;
+}
+html[dir="ltr"] .ayah-eye { left: auto; right: 10px; }
+.ayah-top {
+  gap: 7px;
+  margin-bottom: 6px;
+  padding-left: 52px;
+  padding-right: 0;
+  justify-content: flex-end;
+}
+html[dir="ltr"] .ayah-top {
+  justify-content: flex-start;
+  padding-left: 0;
+  padding-right: 52px;
+}
+.ayah-pill {
+  min-width: 42px;
+  height: 27px;
+  padding: 0 9px;
+  font-size: .82rem;
+}
+.label-tag {
+  margin-inline-start: 0;
+  font-size: .66rem;
+  line-height: 1.2;
+  opacity: .84;
+  white-space: nowrap;
+}
+html[dir="ltr"] .label-tag { margin-inline-end: 0; }
+.ayah-text {
+  font-size: .94rem;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+.ayah-translation {
+  font-size: .7rem;
+  line-height: 1.38;
+  opacity: .9;
+}
+.ayah-ref {
+  font-size: .78rem;
+  margin-top: 5px;
+}
+.ayah-note {
+  font-size: .76rem;
+  line-height: 1.45;
+}
+.ayah-detail {
+  font-size: .78rem;
+  line-height: 1.68;
+}
+.ayah-float.is-detail .ayah-detail {
+  max-height: 340px;
+}
+
+/* v6 ayah progress ring + detail-only copy */
+@property --ayah-progress {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+.ayah-float {
+  --ayah-duration: 22000ms;
+  --ayah-progress: 0%;
+}
+.ayah-top {
+  align-items: center;
+}
+.ayah-ring {
+  position: relative;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: conic-gradient(from -90deg, var(--cyan) var(--ayah-progress), rgba(255,255,255,.08) 0);
+  box-shadow: 0 0 12px rgba(0,234,255,.22);
+  opacity: .95;
+}
+.ayah-ring::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  background: rgba(5, 10, 18, .96);
+}
+.ayah-ring::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: inherit;
+  background: currentColor;
+  color: var(--cyan-2);
+  box-shadow: 0 0 12px currentColor;
+  animation: ringColorShift 6s ease-in-out infinite alternate;
+}
+.ayah-ring.is-running {
+  animation: ayahRingFill var(--ayah-duration) linear forwards, ringGlowShift var(--ayah-duration) linear forwards;
+}
+.ayah-float.is-detail .ayah-ring.is-running {
+  animation-duration: var(--ayah-duration), var(--ayah-duration);
+}
+@keyframes ayahRingFill {
+  from { --ayah-progress: 0%; }
+  to { --ayah-progress: 100%; }
+}
+@keyframes ringGlowShift {
+  0% { filter: hue-rotate(0deg) saturate(1); }
+  100% { filter: hue-rotate(95deg) saturate(1.25); }
+}
+@keyframes ringColorShift {
+  from { color: var(--cyan-2); }
+  to { color: var(--violet); }
+}
+.ayah-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  margin-top: 10px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,234,255,.18);
+  background: rgba(0,234,255,.07);
+  color: #dff9ff;
+  font-size: .72rem;
+  font-weight: 900;
+  opacity: 0;
+  transform: translateY(8px) scale(.96);
+  pointer-events: none;
+  transition: opacity .28s var(--ease), transform .34s var(--ease-spring), background .28s var(--ease), border-color .28s var(--ease);
+}
+.ayah-float.is-detail .ayah-copy-btn {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.ayah-copy-btn:hover,
+.ayah-copy-btn:focus-visible,
+.ayah-copy-btn.is-copied {
+  background: rgba(0,234,255,.14);
+  border-color: rgba(0,234,255,.34);
+  color: #fff;
+}
+.ayah-float.is-detail .label-tag {
+  color: var(--cyan-2);
+}
+@media (max-width: 560px) {
+  .ayah-ring { width: 21px; height: 21px; }
+  .ayah-copy-btn { min-height: 30px; font-size: .68rem; margin-top: 8px; }
+}
+
+
+/* v6.1 mobile polish: compact ayah card for phones */
+@media (max-width: 560px) {
+  .ayah-float {
+    top: 7px;
+    left: 7px;
+    width: min(258px, calc(100vw - 14px));
+    min-height: 88px;
+    padding: 9px 10px 9px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.36), 0 0 20px rgba(0,234,255,.07);
+  }
+  html[dir="ltr"] .ayah-float { right: 7px; left: auto; }
+  .ayah-float.is-detail {
+    width: min(300px, calc(100vw - 14px));
+  }
+  .ayah-float.is-detail .ayah-detail {
+    max-height: 210px;
+    margin-top: 7px;
+    padding-top: 7px;
+  }
+  .ayah-orbit { display: none; }
+  .ayah-eye {
+    width: 27px;
+    height: 27px;
+    top: 7px;
+    left: 7px;
+    border-radius: 10px;
+    font-size: .72rem;
+  }
+  html[dir="ltr"] .ayah-eye { right: 7px; left: auto; }
+  .ayah-top {
+    gap: 4px;
+    margin-bottom: 3px;
+    padding-left: 34px;
+    min-height: 27px;
+  }
+  html[dir="ltr"] .ayah-top { padding-right: 34px; padding-left: 0; }
+  .ayah-pill {
+    min-width: 28px;
+    height: 20px;
+    padding: 0 6px;
+    font-size: .58rem;
+  }
+  .ayah-ring {
+    width: 17px;
+    height: 17px;
+  }
+  .ayah-ring::before { inset: 3px; }
+  .ayah-ring::after { inset: 6px; }
+  .label-tag {
+    font-size: .48rem;
+    max-width: 108px;
+    line-height: 1.15;
+    opacity: .75;
+  }
+  .ayah-text {
+    font-size: .72rem;
+    line-height: 1.42;
+    font-weight: 900;
+  }
+  .ayah-translation {
+    margin-top: 3px;
+    font-size: .52rem;
+    line-height: 1.25;
+  }
+  .ayah-ref {
+    margin-top: 3px;
+    font-size: .58rem;
+  }
+  .ayah-note {
+    font-size: .56rem;
+    line-height: 1.28;
+  }
+  .ayah-detail {
+    font-size: .61rem;
+    line-height: 1.5;
+  }
+  .ayah-copy-btn {
+    min-height: 24px;
+    margin-top: 6px;
+    padding: 0 8px;
+    border-radius: 9px;
+    font-size: .56rem;
+    gap: 4px;
+  }
+  .ayah-dock {
+    top: 9px;
+    left: 9px;
+    min-width: 44px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 13px;
+    font-size: .72rem;
+  }
+  html[dir="ltr"] .ayah-dock { right: 9px; left: auto; }
+}
+@media (max-width: 370px) {
+  .ayah-float { width: min(242px, calc(100vw - 12px)); }
+  .ayah-float.is-detail { width: calc(100vw - 12px); }
+  .label-tag { max-width: 96px; }
+  .ayah-text { font-size: .68rem; }
+}
