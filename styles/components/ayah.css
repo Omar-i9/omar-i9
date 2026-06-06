@@ -464,3 +464,123 @@ html[dir="ltr"] .label-tag { margin-inline-end: 0; }
   .label-tag { max-width: 96px; }
   .ayah-text { font-size: .68rem; }
 }
+
+/* v7 tiny mobile ayah: readable, top-left, never blocks the site */
+.ayah-float { z-index: 90; }
+@media (max-width: 560px) {
+  .ayah-float,
+  html[dir="ltr"] .ayah-float {
+    top: max(8px, env(safe-area-inset-top));
+    left: 8px;
+    right: auto;
+    width: min(214px, calc(100vw - 16px));
+    min-height: 76px;
+    padding: 8px 9px 8px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(0,0,0,.34), 0 0 18px rgba(0,234,255,.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .ayah-float:hover { transform: none; }
+  .ayah-float.is-detail,
+  html[dir="ltr"] .ayah-float.is-detail {
+    width: min(286px, calc(100vw - 16px));
+    max-height: min(58vh, 390px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ayah-float.is-detail::-webkit-scrollbar { width: 4px; }
+  .ayah-float.is-detail::-webkit-scrollbar-thumb { background: rgba(0,234,255,.28); border-radius: 999px; }
+  .ayah-orbit { display: none; }
+  .ayah-eye {
+    top: 6px;
+    left: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 9px;
+    font-size: .66rem;
+  }
+  html[dir="ltr"] .ayah-eye { left: 6px; right: auto; }
+  .ayah-top,
+  html[dir="ltr"] .ayah-top {
+    justify-content: flex-end;
+    gap: 4px;
+    min-height: 23px;
+    margin-bottom: 3px;
+    padding-left: 28px;
+    padding-right: 0;
+  }
+  .ayah-pill {
+    min-width: 28px;
+    height: 19px;
+    padding: 0 6px;
+    font-size: .56rem;
+  }
+  .ayah-ring { width: 16px; height: 16px; box-shadow: 0 0 8px rgba(0,234,255,.16); }
+  .ayah-ring::before { inset: 3px; }
+  .ayah-ring::after { inset: 6px; }
+  .label-tag {
+    max-width: 82px;
+    font-size: .46rem;
+    line-height: 1.15;
+    opacity: .72;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ayah-text {
+    font-size: .62rem;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+  .ayah-translation {
+    margin-top: 2px;
+    font-size: .48rem;
+    line-height: 1.28;
+  }
+  .ayah-ref {
+    margin-top: 2px;
+    font-size: .5rem;
+  }
+  .ayah-note {
+    font-size: .5rem;
+    line-height: 1.28;
+  }
+  .ayah-detail {
+    font-size: .58rem;
+    line-height: 1.58;
+  }
+  .ayah-float.is-detail .ayah-detail {
+    max-height: 185px;
+    margin-top: 6px;
+    padding-top: 6px;
+  }
+  .ayah-copy-btn {
+    min-height: 24px;
+    margin-top: 6px;
+    padding: 0 8px;
+    border-radius: 9px;
+    font-size: .52rem;
+    gap: 4px;
+  }
+  .ayah-dock,
+  html[dir="ltr"] .ayah-dock {
+    top: max(8px, env(safe-area-inset-top));
+    left: 8px;
+    right: auto;
+    min-width: 40px;
+    height: 32px;
+    padding: 0 9px;
+    border-radius: 12px;
+    font-size: .68rem;
+    gap: 5px;
+  }
+}
+@media (max-width: 370px) {
+  .ayah-float,
+  html[dir="ltr"] .ayah-float { width: min(196px, calc(100vw - 14px)); left: 7px; }
+  .ayah-float.is-detail,
+  html[dir="ltr"] .ayah-float.is-detail { width: min(268px, calc(100vw - 14px)); }
+  .label-tag { max-width: 70px; }
+}

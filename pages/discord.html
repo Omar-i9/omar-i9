@@ -2,333 +2,272 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
-  <title>gdmi_3 — Discord Card</title>
+  <title>Discord Card</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #050711;
-      --panel: rgba(12, 17, 34, .82);
-      --border: rgba(255,255,255,.1);
-      --text: #f5f7ff;
-      --muted: rgba(230,237,255,.64);
+      --panel: rgba(10, 15, 29, .94);
+      --line: rgba(255,255,255,.1);
+      --text: #f8fbff;
+      --muted: rgba(226,237,255,.66);
       --discord: #5865f2;
       --cyan: #22d3ee;
-      --pink: #ec4899;
       --green: #22c55e;
-      --gold: #f59e0b;
       --ease: cubic-bezier(.22,.9,.22,1);
+      --spring: cubic-bezier(.18,.95,.24,1.12);
     }
     * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
-      min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: 18px;
+      padding: 12px;
       font-family: Cairo, system-ui, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 18% 10%, rgba(88,101,242,.34), transparent 32%),
-        radial-gradient(circle at 86% 78%, rgba(34,211,238,.22), transparent 34%),
-        linear-gradient(145deg, #050711, #090a17 58%, #101129);
+        radial-gradient(circle at 18% 8%, rgba(88,101,242,.24), transparent 34%),
+        radial-gradient(circle at 88% 78%, rgba(34,211,238,.14), transparent 32%),
+        linear-gradient(145deg, #040711, #070a17 60%, #0a1021);
       overflow: hidden;
     }
-    .noise, .grid, .particles { position: fixed; inset: 0; pointer-events: none; }
-    .grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(circle at 50% 45%, black 0 50%, transparent 82%);
-      animation: drift 18s linear infinite;
-    }
-    .noise { opacity: .08; background-image: radial-gradient(circle, #fff 0 1px, transparent 1px); background-size: 18px 18px; }
     .card {
       position: relative;
-      z-index: 2;
-      width: min(430px, 100%);
-      border-radius: 30px;
+      width: min(380px, 100%);
+      max-height: min(560px, calc(100dvh - 24px));
+      border-radius: 24px;
       overflow: hidden;
-      background: linear-gradient(165deg, rgba(15, 20, 42, .88), rgba(7, 10, 21, .9));
+      background: linear-gradient(165deg, rgba(12, 18, 35, .96), rgba(5, 8, 17, .98));
       border: 1px solid rgba(88,101,242,.28);
-      box-shadow: 0 34px 90px rgba(0,0,0,.62), 0 0 80px rgba(88,101,242,.12), inset 0 1px 0 rgba(255,255,255,.06);
-      backdrop-filter: blur(22px);
-      animation: cardIn .7s var(--ease) both;
-    }
-    .banner {
-      height: 118px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(ellipse at 12% 52%, rgba(88,101,242,.78), transparent 50%),
-        radial-gradient(ellipse at 86% 42%, rgba(34,211,238,.62), transparent 48%),
-        radial-gradient(ellipse at 50% 116%, rgba(236,72,153,.28), transparent 52%),
-        linear-gradient(135deg, #131638, #071426);
-    }
-    .banner::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(110deg, transparent 0 30%, rgba(255,255,255,.22) 46%, transparent 62% 100%);
-      transform: translateX(-120%);
-      animation: scan 4.8s ease-in-out infinite;
-    }
-    .banner::after {
-      content: "";
-      position: absolute;
-      left: -10%; right: -10%; bottom: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(88,101,242,.86), rgba(34,211,238,.7), transparent);
+      box-shadow: 0 28px 80px rgba(0,0,0,.62), 0 0 40px rgba(88,101,242,.12);
+      animation: popIn .46s var(--spring) both;
+      display: flex;
+      flex-direction: column;
     }
     .close {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 10px;
+      left: 10px;
       z-index: 5;
-      width: 42px;
-      height: 42px;
-      border-radius: 15px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.28);
-      color: white;
-      font-size: 1.35rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 13px;
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(0,0,0,.32);
+      color: #fff;
+      font-size: 1.25rem;
       cursor: pointer;
-      transition: transform .22s var(--ease), background .22s var(--ease);
+      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
     }
-    .close:hover { transform: translateY(-2px) rotate(-5deg); background: rgba(88,101,242,.36); }
-    .avatar-wrap {
+    .close:hover { transform: translateY(-2px) rotate(-4deg); background: rgba(88,101,242,.36); border-color: rgba(88,101,242,.45); }
+    .banner {
+      height: 112px;
+      background: url('../assets/img/discord-dino-banner.svg') center/cover no-repeat;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      flex: 0 0 auto;
+    }
+    .content {
+      position: relative;
+      padding: 58px 16px 16px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+    .content::-webkit-scrollbar { width: 5px; }
+    .content::-webkit-scrollbar-thumb { background: rgba(88,101,242,.45); border-radius: 999px; }
+    .avatar {
       position: absolute;
-      top: 70px;
-      right: 22px;
-      width: 104px;
-      height: 104px;
+      top: -44px;
+      right: 18px;
+      width: 86px;
+      height: 86px;
       border-radius: 50%;
-      padding: 5px;
-      background: conic-gradient(from 0deg, var(--discord), var(--cyan), var(--pink), var(--discord));
-      animation: ring 4.2s linear infinite;
-      box-shadow: 0 20px 42px rgba(0,0,0,.46), 0 0 28px rgba(88,101,242,.35);
-      z-index: 4;
+      padding: 4px;
+      background: linear-gradient(145deg, var(--discord), var(--cyan));
+      box-shadow: 0 18px 36px rgba(0,0,0,.45), 0 0 24px rgba(88,101,242,.28);
     }
-    .avatar-wrap img {
-      width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 5px solid #050711;
-      animation: avatarFloat 3.2s ease-in-out infinite;
-    }
-    .status {
-      position: absolute;
-      left: 0;
-      bottom: 6px;
-      width: 24px; height: 24px;
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       border-radius: 50%;
       border: 4px solid #050711;
+    }
+    .dot {
+      position: absolute;
+      left: 6px;
+      bottom: 8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 0 0 rgba(34,197,94,.6);
-      animation: onlinePulse 1.8s ease-out infinite;
+      border: 3px solid #050711;
+      box-shadow: 0 0 14px rgba(34,197,94,.54);
     }
-    .content { padding: 72px 22px 22px; }
-    .name-row { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
-    .name h1 { margin: 0; font-size: 1.62rem; line-height: 1.1; font-weight: 900; letter-spacing: -.4px; }
-    .tag { margin-top: 5px; color: var(--muted); font-family: Rajdhani, Cairo, sans-serif; font-size: 1.02rem; font-weight: 700; direction: ltr; text-align: right; }
-    .discord-logo {
-      width: 52px; height: 52px; border-radius: 17px;
-      display: grid; place-items: center;
-      background: rgba(88,101,242,.18);
-      border: 1px solid rgba(88,101,242,.34);
-      color: #fff;
-      font-weight: 900;
-      font-family: Rajdhani, sans-serif;
-      box-shadow: 0 0 28px rgba(88,101,242,.2);
-      animation: logoWiggle 2.6s ease-in-out infinite;
-    }
-    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
-    .badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      font-size: .76rem;
-      font-weight: 900;
-      border: 1px solid var(--b);
-      background: color-mix(in srgb, var(--b) 18%, transparent);
-      color: #fff;
-      transition: transform .22s var(--ease), filter .22s var(--ease);
-    }
-    .badge:hover { transform: translateY(-2px); filter: drop-shadow(0 0 10px var(--b)); }
-    .bio {
-      margin: 0 0 16px;
-      color: rgba(230,237,255,.74);
-      line-height: 1.7;
-      font-weight: 700;
-      font-size: .94rem;
-    }
-    .panel {
-      border-radius: 20px;
-      padding: 14px;
-      background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.08);
+    .head {
       display: grid;
-      gap: 10px;
+      gap: 4px;
+      padding-inline-end: 102px;
+      min-height: 54px;
     }
-    .activity {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 12px;
-      align-items: center;
-      min-height: 62px;
+    h1 { margin: 0; font-size: 1.32rem; line-height: 1.15; font-weight: 900; }
+    .tag {
       direction: ltr;
+      text-align: right;
+      color: var(--muted);
+      font-family: Rajdhani, Cairo, sans-serif;
+      font-size: 1.04rem;
+      font-weight: 700;
     }
-    .activity-icon {
-      width: 48px; height: 48px; border-radius: 16px;
-      display: grid; place-items: center;
-      background: linear-gradient(145deg, rgba(88,101,242,.34), rgba(34,211,238,.14));
-      border: 1px solid rgba(255,255,255,.08);
-      animation: cubeFloat 2.7s ease-in-out infinite;
+    .mini {
+      margin: 14px 0 0;
+      display: grid;
+      gap: 9px;
     }
-    .activity strong { display: block; font-size: .98rem; }
-    .activity span { display: block; color: var(--muted); font-size: .82rem; margin-top: 2px; }
-    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
-    button.action, a.action {
-      min-height: 48px;
+    .row {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.055);
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.075);
+      direction: ltr;
+      text-align: left;
+    }
+    .row i {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      font-style: normal;
+      background: rgba(88,101,242,.18);
+      border: 1px solid rgba(88,101,242,.28);
+    }
+    .row strong { display: block; font-size: .9rem; }
+    .row span { display: block; margin-top: 2px; color: var(--muted); font-size: .72rem; }
+    .copy {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      min-height: 46px;
+      margin-top: 12px;
+      border: 1px solid rgba(34,211,238,.28);
+      border-radius: 15px;
+      background: linear-gradient(145deg, rgba(88,101,242,.22), rgba(34,211,238,.08));
       color: #fff;
+      font-weight: 900;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-weight: 900;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform .22s var(--ease), border-color .22s var(--ease), background .22s var(--ease);
-      position: relative;
-      overflow: hidden;
+      transition: transform .22s var(--ease), filter .22s var(--ease), border-color .22s var(--ease);
     }
-    .action:hover { transform: translateY(-3px); border-color: rgba(34,211,238,.36); background: rgba(88,101,242,.18); }
+    .copy:hover { transform: translateY(-2px); filter: brightness(1.08); border-color: rgba(34,211,238,.5); }
+    .copy::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.5);
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      left: var(--x, 50%);
+      top: var(--y, 50%);
+    }
+    .copy.rip::after { animation: ripple .55s ease-out; }
+    .hint {
+      margin: 10px 0 0;
+      color: rgba(226,237,255,.54);
+      font-size: .66rem;
+      text-align: center;
+      font-weight: 800;
+    }
     .toast {
       position: fixed;
-      left: 50%; bottom: 18px;
-      transform: translateX(-50%) translateY(14px);
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%) translateY(12px);
       opacity: 0;
-      padding: 10px 14px;
-      border-radius: 14px;
-      background: rgba(8, 13, 25, .94);
-      border: 1px solid rgba(34,211,238,.25);
-      color: #eaffff;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(6, 13, 24, .96);
+      border: 1px solid rgba(34,211,238,.22);
+      color: #fff;
+      font-size: .78rem;
       font-weight: 900;
-      box-shadow: 0 16px 34px rgba(0,0,0,.38);
-      transition: opacity .24s var(--ease), transform .24s var(--ease);
-      z-index: 20;
+      transition: opacity .22s var(--ease), transform .22s var(--ease);
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    .pt {
-      position: absolute;
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--c);
-      box-shadow: 0 0 10px var(--c);
-      opacity: 0;
-      animation: floatUp linear infinite;
-    }
-    @keyframes drift { to { background-position: 42px 42px, 42px 42px; } }
-    @keyframes cardIn { from { opacity: 0; transform: translateY(28px) scale(.96); filter: blur(8px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
-    @keyframes scan { 0%,44% { transform: translateX(-125%); opacity: 0; } 56% { opacity: .8; } 100% { transform: translateX(125%); opacity: 0; } }
-    @keyframes ring { to { transform: rotate(360deg); } }
-    @keyframes avatarFloat { 0%,100% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(-3deg) scale(1.02); } }
-    @keyframes onlinePulse { 70% { box-shadow: 0 0 0 9px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
-    @keyframes logoWiggle { 0%,100% { transform: translateY(0) rotate(0); } 45% { transform: translateY(-3px) rotate(-5deg); } 70% { transform: rotate(4deg); } }
-    @keyframes cubeFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-    @keyframes floatUp { 0% { transform: translateY(14px); opacity: 0; } 12% { opacity: .75; } 100% { transform: translateY(-105vh) translateX(var(--dx)); opacity: 0; } }
-    @media (max-width: 420px) {
-      .avatar-wrap { right: 18px; width: 96px; height: 96px; }
-      .content { padding-inline: 18px; }
-      .actions { grid-template-columns: 1fr; }
-      .name h1 { font-size: 1.42rem; }
+    @keyframes popIn { from { opacity: 0; transform: translateY(24px) scale(.96); filter: blur(6px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+    @keyframes ripple { from { transform: translate(-50%, -50%) scale(0); opacity: .55; } to { transform: translate(-50%, -50%) scale(24); opacity: 0; } }
+    @media (max-width: 390px) {
+      body { padding: 9px; }
+      .card { max-height: calc(100dvh - 18px); border-radius: 22px; }
+      .banner { height: 104px; }
+      .content { padding: 52px 13px 13px; }
+      .avatar { width: 78px; height: 78px; top: -40px; right: 14px; }
+      .head { padding-inline-end: 92px; }
+      h1 { font-size: 1.18rem; }
+      .tag { font-size: .94rem; }
     }
   </style>
 </head>
 <body>
-  <div class="grid"></div>
-  <div class="noise"></div>
-  <div class="particles" id="particles"></div>
-
-  <article class="card">
-    <button class="close" id="closeBtn" aria-label="إغلاق">×</button>
-    <div class="banner"></div>
-    <div class="avatar-wrap">
-      <img src="../assets/img/profile.webp" alt="Omar profile image" />
-      <span class="status" title="Online"></span>
-    </div>
+  <article class="card" role="dialog" aria-label="بطاقة ديسكورد">
+    <button class="close" id="closeBtn" type="button" aria-label="إغلاق">×</button>
+    <div class="banner" aria-hidden="true"></div>
     <div class="content">
-      <div class="name-row">
-        <div class="name">
-          <h1>Omar | عُـمَر</h1>
-          <div class="tag">@gdmi_3</div>
-        </div>
-        <div class="discord-logo">DC</div>
+      <div class="avatar">
+        <img src="../assets/img/profile.webp" alt="Omar profile image" />
+        <span class="dot" aria-hidden="true"></span>
       </div>
-
-      <div class="badges">
-        <span class="badge" style="--b:#5865f2">● Discord</span>
-        <span class="badge" style="--b:#22d3ee">◆ Profile Card</span>
-        <span class="badge" style="--b:#22c55e">● Online-ish</span>
-      </div>
-
-      <p class="bio">بطاقة ديسكورد داخلية بتعرض الحساب بشكل أعمق: صورة، حالة، نشاط، ونسخ سريع للاسم. لا، مش بوت رسمي من ديسكورد، بس على الأقل الكارد صار عنده شخصية بدل مستطيل حزين.</p>
-
-      <div class="panel">
-        <div class="activity">
-          <div class="activity-icon">🎮</div>
-          <div>
-            <strong>Gaming / Coding Mode</strong>
-            <span>Usually around projects, games, EV ideas, and suspiciously many CSS effects.</span>
-          </div>
-        </div>
-        <div class="activity">
-          <div class="activity-icon">⚡</div>
-          <div>
-            <strong>EV Telemetry Builder</strong>
-            <span>Dashboard logic, UI interactions, and live-style technical cards.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button class="action" id="copyUser">نسخ username</button>
-        <a class="action" href="https://discord.com/" target="_blank" rel="noopener noreferrer">فتح Discord</a>
-      </div>
+      <header class="head">
+        <h1>Omar | عُـمَر</h1>
+        <div class="tag">@gdmi_3</div>
+      </header>
+      <section class="mini" aria-label="معلومات مختصرة">
+        <div class="row"><i>🎮</i><div><strong>Discord Username</strong><span>gdmi_3</span></div></div>
+        <div class="row"><i>⚡</i><div><strong>Status</strong><span>Gaming / Coding / Projects</span></div></div>
+      </section>
+      <button class="copy" id="copyUser" type="button"><span>نسخ username</span></button>
+      <p class="hint">اسحب داخل البطاقة للنزول والصعود</p>
     </div>
   </article>
   <div class="toast" id="toast">تم النسخ</div>
-
   <script>
-    const particles = document.getElementById('particles');
-    const colors = ['#5865f2', '#22d3ee', '#ec4899', '#ffffff'];
-    for (let i = 0; i < 34; i += 1) {
-      const dot = document.createElement('span');
-      dot.className = 'pt';
-      dot.style.left = Math.random() * 100 + '%';
-      dot.style.bottom = -10 - Math.random() * 40 + 'px';
-      dot.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
-      dot.style.setProperty('--c', colors[i % colors.length]);
-      dot.style.animationDuration = (8 + Math.random() * 10) + 's';
-      dot.style.animationDelay = (-Math.random() * 12) + 's';
-      particles.appendChild(dot);
-    }
-
     const toast = document.getElementById('toast');
+    const btn = document.getElementById('copyUser');
     function showToast(text) {
       toast.textContent = text;
       toast.classList.add('show');
       clearTimeout(showToast.t);
-      showToast.t = setTimeout(() => toast.classList.remove('show'), 1400);
+      showToast.t = setTimeout(() => toast.classList.remove('show'), 1300);
     }
-    document.getElementById('copyUser').addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText('gdmi_3'); showToast('تم نسخ gdmi_3'); }
-      catch (_) { showToast('انسخها يدويًا: gdmi_3'); }
-    });
+    async function copyUser(event) {
+      const rect = btn.getBoundingClientRect();
+      btn.style.setProperty('--x', `${event.clientX - rect.left}px`);
+      btn.style.setProperty('--y', `${event.clientY - rect.top}px`);
+      btn.classList.remove('rip');
+      void btn.offsetWidth;
+      btn.classList.add('rip');
+      try {
+        await navigator.clipboard.writeText('gdmi_3');
+        showToast('تم نسخ gdmi_3');
+      } catch (_) {
+        showToast('انسخها يدويًا: gdmi_3');
+      }
+    }
+    btn.addEventListener('click', copyUser);
     document.getElementById('closeBtn').addEventListener('click', () => {
       parent.postMessage({ type: 'close-discord' }, '*');
     });

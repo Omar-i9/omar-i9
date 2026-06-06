@@ -209,3 +209,32 @@ html[dir="rtl"] .share-profile-preview div { text-align: end; }
   0% { opacity: 1; transform: translateY(0) scale(1); border-radius: 28px; }
   100% { opacity: 0; transform: translateY(30px) scale(.86); border-radius: 999px; filter: blur(7px); }
 }
+
+/* v7 discord modal: one X inside the iframe card, scroll-friendly panel */
+.page-close { display: none !important; }
+.page-overlay { padding: 12px; }
+.page-overlay-panel {
+  width: min(420px, calc(100vw - 22px));
+  height: min(620px, calc(100dvh - 24px));
+  border-radius: 24px;
+  overflow: hidden;
+}
+@media (max-width: 560px) {
+  .share-modal {
+    width: min(360px, calc(100vw - 20px));
+    padding: 18px;
+    border-radius: 22px;
+  }
+  .qr-wrapper { width: 144px; height: 144px; border-radius: 20px; padding: 9px; }
+  .share-top h3 { font-size: 1.14rem; }
+  .share-top p { font-size: .76rem; }
+  .share-profile-preview { grid-template-columns: 42px 1fr; gap: 9px; border-radius: 15px; }
+  .share-profile-preview img { width: 42px; height: 42px; border-radius: 12px; }
+  .share-profile-preview span { font-size: .68rem; }
+  .share-url-input, .share-copy-btn, .native-share-btn { height: 42px; min-height: 42px; font-size: .76rem; border-radius: 13px; }
+  .page-overlay-panel {
+    width: min(360px, calc(100vw - 18px));
+    height: min(560px, calc(100dvh - 18px));
+    border-radius: 22px;
+  }
+}

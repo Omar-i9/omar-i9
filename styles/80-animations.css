@@ -67,3 +67,17 @@
   0% { opacity: 0; transform: translateY(26px) scale(.96); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* v7 softer entrance timing */
+.reveal {
+  transform: translateY(22px) scale(.992);
+  filter: blur(4px);
+  transition-duration: 680ms;
+}
+@media (max-width: 560px) {
+  .reveal {
+    transform: translateY(14px) scale(.996);
+    filter: blur(2px);
+    transition-duration: 620ms;
+  }
+}

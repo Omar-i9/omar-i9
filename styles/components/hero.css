@@ -582,3 +582,187 @@ body[data-status="sleeping"] .status-indicator::after { animation-duration: 3.6s
   .profile-popover { top: 126px; width: calc(100vw - 16px); }
   .hero-action { min-width: 88px; font-size: .68rem; }
 }
+
+/* v7 mobile/hero remake: smaller avatar, centered text, single clean radar ring */
+.hero-wrapper {
+  padding-top: 46px;
+  min-height: 252px;
+}
+.hero-card-body {
+  width: min(100%, 600px);
+  min-height: 206px;
+  padding: 88px 34px 40px;
+  justify-content: center;
+}
+.hero-text,
+html[dir="ltr"] .hero-text {
+  width: 100%;
+  text-align: center;
+  justify-items: center;
+  gap: 7px;
+}
+.status,
+html[dir="ltr"] .status {
+  justify-self: center;
+}
+.avatar {
+  top: 0;
+  width: 124px;
+  height: 124px;
+  padding: 7px;
+  box-shadow:
+    0 0 0 1px rgba(0,234,255,.25),
+    0 18px 48px rgba(0,0,0,.42),
+    0 0 28px rgba(0,234,255,.14);
+}
+.avatar::before {
+  inset: -10px;
+  border: 1.5px solid rgba(0,234,255,.42);
+  background: none;
+  mask: none;
+  animation: singleRadarPulse 2.55s ease-out infinite;
+}
+.avatar::after {
+  inset: 7px;
+  border: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.24), transparent 64%);
+  animation: avatarShine 6.5s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+.avatar picture::before,
+.avatar picture::after { content: none !important; }
+.avatar picture,
+.avatar img { border-width: 3px; }
+.status-indicator {
+  width: 18px;
+  height: 18px;
+  right: 12px;
+  bottom: 13px;
+  border-width: 3px;
+}
+.profile-popover {
+  position: fixed;
+  top: 92px;
+  left: 50%;
+  right: auto;
+  z-index: 10050;
+  width: min(340px, calc(100vw - 28px));
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,234,255,.24);
+  background: linear-gradient(145deg, rgba(8, 15, 28, .96), rgba(4, 9, 17, .98));
+  box-shadow: 0 22px 64px rgba(0,0,0,.56), 0 0 30px rgba(0,234,255,.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -10px) scale(.97);
+  transition: opacity .22s var(--ease), transform .34s var(--ease-spring);
+  text-align: center;
+}
+html[dir="ltr"] .profile-popover { left: 50%; right: auto; }
+.profile-popover.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0) scale(1);
+}
+.profile-popover span {
+  display: block;
+  color: var(--cyan-2);
+  font-size: .7rem;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+.profile-popover strong {
+  display: block;
+  color: #f7fbff;
+  font-size: .82rem;
+  line-height: 1.62;
+}
+
+@keyframes singleRadarPulse {
+  0% { opacity: .78; transform: scale(.96); box-shadow: 0 0 0 0 rgba(0,234,255,.28); }
+  72% { opacity: .18; transform: scale(1.13); box-shadow: 0 0 0 10px rgba(0,234,255,0); }
+  100% { opacity: 0; transform: scale(1.17); box-shadow: 0 0 0 0 rgba(0,234,255,0); }
+}
+
+@media (max-width: 560px) {
+  .hero-wrapper {
+    min-height: 218px;
+    padding-top: 32px;
+  }
+  .hero-card-body {
+    min-height: 172px;
+    padding: 68px 16px 32px;
+    border-radius: 24px;
+  }
+  .avatar {
+    width: 92px;
+    height: 92px;
+    top: 0;
+    padding: 5px;
+  }
+  .avatar::before { inset: -7px; }
+  .avatar::after { inset: 5px; opacity: .72; }
+  .status-indicator {
+    width: 14px;
+    height: 14px;
+    right: 9px;
+    bottom: 10px;
+    border-width: 2px;
+  }
+  .hero-text h1 {
+    font-size: 1.48rem;
+    line-height: 1.12;
+  }
+  .hero-text p {
+    font-size: .78rem;
+    line-height: 1.5;
+    max-width: 270px;
+  }
+  .status {
+    min-width: 58px;
+    height: 25px;
+    padding: 0 10px;
+    font-size: .68rem;
+    letter-spacing: .55px;
+  }
+  .hero-actions {
+    bottom: -20px;
+    width: min(100%, 304px);
+    gap: 6px;
+  }
+  .hero-action {
+    min-width: 92px;
+    height: 36px;
+    padding: 0 7px;
+    border-radius: 13px;
+    font-size: .66rem;
+    gap: 5px;
+  }
+  .hero-action i { font-size: .92rem; }
+  .lang-toggle {
+    top: 64px;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    font-size: 1rem;
+    right: 4px;
+  }
+  html[dir="ltr"] .lang-toggle { left: 4px; right: auto; }
+  .profile-popover {
+    top: 76px;
+    width: min(296px, calc(100vw - 22px));
+    padding: 10px 12px;
+    border-radius: 16px;
+  }
+  .profile-popover strong { font-size: .72rem; line-height: 1.55; }
+  .profile-popover span { font-size: .64rem; }
+}
+
+@media (max-width: 370px) {
+  .hero-card-body { padding-inline: 12px; }
+  .hero-action { min-width: 84px; font-size: .62rem; }
+  .hero-actions { width: min(100%, 282px); }
+  .hero-text h1 { font-size: 1.36rem; }
+}

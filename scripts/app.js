@@ -255,7 +255,7 @@
   }
 
   function flowerBurst(x, y, amount = 9) {
-    if (state.lowPower) amount = Math.min(amount, 4);
+    if (state.lowPower || matchMedia('(max-width: 560px)').matches) amount = Math.min(amount, 4);
     const colors = ['#5bf6ff', '#14e7c0', '#ff3d8e', '#f8ff00', '#8b5cf6', '#ffffff'];
     for (let i = 0; i < amount; i += 1) {
       const petal = document.createElement('span');

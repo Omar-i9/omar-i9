@@ -171,3 +171,213 @@
   .app { width: calc(100% - 12px); }
   .section-title { font-size: .8rem; }
 }
+
+/* v7 final mobile hammer: this file loads last, so these are the real phone rules. */
+@media (max-width: 560px) {
+  .app {
+    width: min(430px, calc(100% - 12px));
+    padding-top: 34px;
+  }
+  .hero-wrapper {
+    min-height: 218px;
+    padding-top: 32px;
+  }
+  .hero-card-body {
+    min-height: 172px;
+    padding: 68px 16px 32px;
+    border-radius: 24px;
+    justify-content: center;
+  }
+  .hero-text,
+  html[dir="ltr"] .hero-text {
+    text-align: center;
+    justify-items: center;
+    width: 100%;
+  }
+  .status,
+  html[dir="ltr"] .status {
+    justify-self: center;
+    min-width: 58px;
+    height: 25px;
+    padding: 0 10px;
+    font-size: .68rem;
+    letter-spacing: .55px;
+  }
+  .hero-text h1 { font-size: 1.48rem; line-height: 1.12; }
+  .hero-text p { font-size: .78rem; line-height: 1.5; max-width: 270px; }
+  .avatar {
+    width: 92px;
+    height: 92px;
+    top: 0;
+    padding: 5px;
+  }
+  .avatar::before {
+    inset: -7px;
+    border: 1.5px solid rgba(0,234,255,.42);
+    background: none;
+    mask: none;
+    animation: singleRadarPulse 2.55s ease-out infinite;
+  }
+  .avatar::after { inset: 5px; opacity: .72; }
+  .avatar picture::before,
+  .avatar picture::after { content: none !important; }
+  .status-indicator {
+    width: 14px;
+    height: 14px;
+    right: 9px;
+    bottom: 10px;
+    border-width: 2px;
+  }
+  .lang-toggle {
+    top: 64px;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    font-size: 1rem;
+    right: 4px;
+  }
+  html[dir="ltr"] .lang-toggle { left: 4px; right: auto; }
+  .hero-actions {
+    bottom: -20px;
+    width: min(100%, 304px);
+    gap: 6px;
+  }
+  .hero-action {
+    min-width: 92px;
+    height: 36px;
+    padding: 0 7px;
+    border-radius: 13px;
+    font-size: .66rem;
+    gap: 5px;
+  }
+  .hero-action i { font-size: .92rem; }
+  .profile-popover {
+    position: fixed;
+    top: 76px;
+    left: 50%;
+    right: auto;
+    z-index: 10050;
+    width: min(296px, calc(100vw - 22px));
+    padding: 10px 12px;
+    border-radius: 16px;
+    text-align: center;
+    transform: translate(-50%, -10px) scale(.97);
+  }
+  .profile-popover.show { transform: translate(-50%, 0) scale(1); }
+  .profile-popover strong { font-size: .72rem; line-height: 1.55; }
+  .profile-popover span { font-size: .64rem; }
+
+  .links-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .social-card {
+    min-height: 128px;
+    padding: 11px 8px;
+    border-radius: 18px;
+  }
+  .social-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 15px;
+    font-size: 1.74rem;
+    margin-bottom: 7px;
+  }
+  .social-text strong { font-size: .78rem; line-height: 1.15; }
+  .social-text span { font-size: .64rem; line-height: 1.25; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .badge-vip, .badge-vip-neo {
+    min-width: 50px;
+    height: 18px;
+    padding-inline: 6px;
+    font-size: .52rem;
+  }
+
+  .ayah-float,
+  html[dir="ltr"] .ayah-float {
+    top: max(8px, env(safe-area-inset-top));
+    left: 8px;
+    right: auto;
+    width: min(214px, calc(100vw - 16px));
+    min-height: 76px;
+    padding: 8px 9px 8px;
+    border-radius: 14px;
+    z-index: 90;
+    box-shadow: 0 12px 30px rgba(0,0,0,.34), 0 0 18px rgba(0,234,255,.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .ayah-float.is-detail,
+  html[dir="ltr"] .ayah-float.is-detail {
+    width: min(286px, calc(100vw - 16px));
+    max-height: min(58vh, 390px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ayah-orbit { display: none; }
+  .ayah-eye,
+  html[dir="ltr"] .ayah-eye {
+    top: 6px;
+    left: 6px;
+    right: auto;
+    width: 24px;
+    height: 24px;
+    border-radius: 9px;
+    font-size: .66rem;
+  }
+  .ayah-top,
+  html[dir="ltr"] .ayah-top {
+    justify-content: flex-end;
+    gap: 4px;
+    min-height: 23px;
+    margin-bottom: 3px;
+    padding-left: 28px;
+    padding-right: 0;
+  }
+  .ayah-pill { min-width: 28px; height: 19px; padding: 0 6px; font-size: .56rem; }
+  .ayah-ring { width: 16px; height: 16px; }
+  .ayah-ring::before { inset: 3px; }
+  .ayah-ring::after { inset: 6px; }
+  .label-tag { max-width: 82px; font-size: .46rem; line-height: 1.15; opacity: .72; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ayah-text { font-size: .62rem; line-height: 1.45; }
+  .ayah-translation { margin-top: 2px; font-size: .48rem; line-height: 1.28; }
+  .ayah-ref { margin-top: 2px; font-size: .5rem; }
+  .ayah-note { font-size: .5rem; line-height: 1.28; }
+  .ayah-detail { font-size: .58rem; line-height: 1.58; }
+  .ayah-float.is-detail .ayah-detail { max-height: 185px; margin-top: 6px; padding-top: 6px; }
+  .ayah-copy-btn { min-height: 24px; margin-top: 6px; padding: 0 8px; border-radius: 9px; font-size: .52rem; gap: 4px; }
+  .ayah-dock,
+  html[dir="ltr"] .ayah-dock {
+    top: max(8px, env(safe-area-inset-top));
+    left: 8px;
+    right: auto;
+    min-width: 40px;
+    height: 32px;
+    padding: 0 9px;
+    border-radius: 12px;
+    font-size: .68rem;
+    gap: 5px;
+  }
+
+  .section-title { margin-top: 22px; margin-bottom: 10px; font-size: .8rem; }
+  .copy-row { min-height: 68px; padding: 12px; border-radius: 18px; }
+  .copy-btn { min-width: 58px; height: 38px; border-radius: 13px; font-size: .7rem; }
+  .work-card { grid-template-columns: 52px 1fr 20px; padding: 12px; gap: 10px; border-radius: 18px; }
+  .work-logo { width: 52px; height: 52px; border-radius: 15px; }
+  .work-text strong { font-size: .86rem; }
+  .work-text span { font-size: .68rem; line-height: 1.42; }
+  .evc-inner { grid-template-columns: 50px 1fr; padding: 14px 12px; gap: 10px; border-radius: 18px; }
+  .evc-icon { width: 46px; height: 46px; }
+  .evc-title { font-size: .96rem; }
+  .evc-desc { font-size: .68rem; line-height: 1.45; }
+  .evc-stats { font-size: .7rem; }
+}
+@media (max-width: 370px) {
+  .app { width: calc(100% - 10px); }
+  .hero-action { min-width: 84px; font-size: .62rem; }
+  .hero-actions { width: min(100%, 282px); }
+  .hero-text h1 { font-size: 1.36rem; }
+  .social-card { min-height: 120px; padding-inline: 7px; }
+  .social-icon { width: 40px; height: 40px; font-size: 1.58rem; }
+  .ayah-float,
+  html[dir="ltr"] .ayah-float { width: min(196px, calc(100vw - 14px)); left: 7px; }
+  .ayah-float.is-detail,
+  html[dir="ltr"] .ayah-float.is-detail { width: min(268px, calc(100vw - 14px)); }
+  .label-tag { max-width: 70px; }
+}

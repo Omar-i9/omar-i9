@@ -44,3 +44,8 @@ sitemap.xml
 ## v6 Smart Polish
 
 This version adds automatic profile status, status-driven backgrounds, avatar micro-bio interaction, magnetic hero buttons, low-power detection for weaker phones, SEO/Open Graph cleanup, a version badge, and a better ayah card with a progress ring and detail-only copy button.
+
+
+## Current Version
+
+v7.0.0 - Mobile Remake
