@@ -1,0 +1,136 @@
+.version-badge {
+  appearance: none;
+  cursor: pointer;
+}
+
+.version-badge:hover,
+.version-badge:focus-visible {
+  color: #fff;
+  border-color: rgba(0,234,255,.34);
+  background: rgba(0,234,255,.1);
+  transform: translateY(-1px);
+}
+
+.version-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(1, 6, 14, .66);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: opacity var(--dur) var(--ease), visibility var(--dur) var(--ease);
+}
+
+.version-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.version-modal {
+  position: relative;
+  width: min(390px, 100%);
+  border-radius: 24px;
+  padding: 22px;
+  text-align: start;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0,234,255,.14), transparent 46%),
+    linear-gradient(145deg, rgba(12, 21, 38, .96), rgba(5, 10, 18, .98));
+  border: 1px solid rgba(0,234,255,.22);
+  box-shadow: 0 34px 90px rgba(0,0,0,.62), var(--glow-cyan);
+  transform: translateY(18px) scale(.98);
+  transition: transform 420ms var(--ease-spring);
+}
+
+.version-overlay.show .version-modal {
+  transform: translateY(0) scale(1);
+}
+
+.version-close {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 13px;
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  font-size: 1.35rem;
+}
+
+.version-kicker {
+  display: inline-flex;
+  width: max-content;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--cyan-2);
+  background: rgba(0,234,255,.08);
+  border: 1px solid rgba(0,234,255,.18);
+  font-weight: 900;
+  font-size: .72rem;
+}
+
+.version-modal h3 {
+  margin: 14px 48px 2px 0;
+  font-family: Rajdhani, Cairo, sans-serif;
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+html[dir="ltr"] .version-modal h3 {
+  margin: 14px 0 2px 48px;
+}
+
+.version-subtitle,
+.version-date {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.version-date {
+  margin-top: 5px;
+  font-size: .78rem;
+  color: var(--cyan);
+}
+
+.version-list {
+  margin: 16px 0;
+  padding-inline-start: 20px;
+  color: #dce8fa;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+.version-github {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,234,255,.24);
+  background: rgba(0,234,255,.09);
+  color: #fff;
+  font-weight: 900;
+}
+
+@media (max-width: 560px) {
+  .version-overlay {
+    align-items: end;
+    padding: 12px;
+  }
+  .version-modal {
+    width: 100%;
+    border-radius: 22px;
+    padding: 20px 18px;
+  }
+}

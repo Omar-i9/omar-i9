@@ -1,0 +1,118 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(34px) scale(.985);
+  filter: blur(6px);
+  transition:
+    opacity 760ms var(--ease),
+    transform 760ms var(--ease),
+    filter 760ms var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+@keyframes floatBlob {
+  to { transform: translate3d(70px, -40px, 0) scale(1.12); }
+}
+
+@keyframes heroScan {
+  0%, 42% { transform: translateX(-130%); opacity: 0; }
+  52% { opacity: .85; }
+  70%, 100% { transform: translateX(130%); opacity: 0; }
+}
+
+@keyframes lineBreathe {
+  0%, 100% { opacity: .28; transform: scaleX(.58); }
+  50% { opacity: .9; transform: scaleX(1); }
+}
+
+@keyframes avatarSpin { to { transform: rotate(360deg); } }
+@keyframes avatarShine {
+  0%, 50% { transform: translateX(-150%) rotate(22deg); opacity: 0; }
+  60% { opacity: .55; }
+  76%, 100% { transform: translateX(150%) rotate(22deg); opacity: 0; }
+}
+
+@keyframes evBorderSpin { to { transform: rotate(360deg); } }
+@keyframes dotPulse {
+  0%, 100% { opacity: .6; transform: scale(.8); }
+  50% { opacity: 1; transform: scale(1.22); }
+}
+
+@keyframes ripplePop {
+  0% { opacity: .8; transform: translate(-50%, -50%) scale(0); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(16); }
+}
+
+@keyframes petalBurst {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(.7) rotate(0deg); }
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)))
+      scale(.2)
+      rotate(var(--spin));
+  }
+}
+
+@keyframes ayahSwap {
+  0% { opacity: .3; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardIn {
+  0% { opacity: 0; transform: translateY(26px) scale(.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* v7 softer entrance timing */
+.reveal {
+  transform: translateY(22px) scale(.992);
+  filter: blur(4px);
+  transition-duration: 680ms;
+}
+@media (max-width: 560px) {
+  .reveal {
+    transform: translateY(14px) scale(.996);
+    filter: blur(2px);
+    transition-duration: 620ms;
+  }
+}
+
+/* v9.1: card entrance uses transform + opacity only for smoother phones */
+.social-card.reveal,
+.work-card.reveal,
+.evc-root.reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0) scale(.992);
+  filter: none;
+  transition:
+    opacity 620ms var(--ease),
+    transform 620ms var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+
+.social-card.reveal.is-visible,
+.work-card.reveal.is-visible,
+.evc-root.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.work-card.reveal,
+.evc-root.reveal {
+  transform: translate3d(0, 26px, 0) scale(.99);
+  transition-duration: 720ms;
+}
+
+@media (max-width: 560px) {
+  .social-card.reveal,
+  .work-card.reveal,
+  .evc-root.reveal {
+    transform: translate3d(0, 12px, 0) scale(.996);
+    transition-duration: 420ms;
+  }
+}

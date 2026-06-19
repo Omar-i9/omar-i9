@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#060a12" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="Omar Profiles v9: روابط عمر، المشاريع، أكواد اللعب، بطاقة آيات، ومشاركة سريعة في موقع شخصي خفيف." />
+  <meta name="keywords" content="Omar Profiles, Omar-i9, روابط عمر, Portfolio, GitHub Pages, EV Dashboard, تأمين, ألعاب, حسابات عمر" />
+  <meta name="author" content="Omar-i9" />
+  <link rel="canonical" href="https://omar-i9.github.io/omar-i9/" />
+
+  <meta property="og:title" content="Omar Profiles | عُـمَر" />
+  <meta property="og:description" content="روابط عمر، مشاريعه، أكواد اللعب، وبطاقة بروفايل خفيفة وسريعة في مكان واحد." />
+  <meta property="og:image" content="https://omar-i9.github.io/omar-i9/assets/img/og-image.jpg" />
+  <meta property="og:image:alt" content="Omar Profiles preview" />
+  <meta property="og:site_name" content="Omar Profiles" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://omar-i9.github.io/omar-i9/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Omar Profiles | عُـمَر" />
+  <meta name="twitter:description" content="روابطي، مشاريعي، وأكواد اللعب بمكان واحد." />
+  <meta name="twitter:image" content="https://omar-i9.github.io/omar-i9/assets/img/og-image.jpg" />
+  <meta name="p:domain_verify" content="2bceaee4e3d7c3a47ea83686e0fd2281" />
+
+  <title id="tabTitle">Omar Profiles | عُـمَر</title>
+
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="assets/img/icon-180.png" />
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="styles/00-tokens.css" />
+  <link rel="stylesheet" href="styles/01-base.css" />
+  <link rel="stylesheet" href="styles/02-layout.css" />
+  <link rel="stylesheet" href="styles/components/skeleton.css" />
+  <link rel="stylesheet" href="styles/components/hero.css" />
+  <link rel="stylesheet" href="styles/components/cards.css" />
+  <link rel="stylesheet" href="styles/components/projects.css" />
+  <link rel="stylesheet" href="styles/components/ayah.css" />
+  <link rel="stylesheet" href="styles/components/modals.css" />
+  <link rel="stylesheet" href="styles/components/version.css" />
+  <link rel="stylesheet" href="styles/components/footer.css" />
+  <link rel="stylesheet" href="styles/80-animations.css" />
+  <link rel="stylesheet" href="styles/90-responsive.css" />
+  <link rel="stylesheet" href="styles/components/language.css" />
+</head>
+
+<body>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="bg-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="site-skeleton" id="siteSkeleton" aria-hidden="true">
+    <div class="skeleton-shell">
+      <div class="sk-avatar"></div>
+      <div class="sk-card">
+        <span class="sk-line sk-name"></span>
+        <span class="sk-line sk-desc"></span>
+        <div class="sk-actions"><span></span><span></span><span></span></div>
+      </div>
+      <div class="sk-grid"><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <aside class="ayah-float reveal" id="ayahFloat" aria-label="آية قرآنية متغيرة" aria-live="polite">
+    <div class="ayah-orbit" aria-hidden="true"></div>
+    <button class="ayah-eye interactive" id="ayahEye" type="button" aria-label="إخفاء بطاقة الآية" data-burst>
+      <i class="fa-solid fa-eye-slash"></i>
+    </button>
+    <div class="ayah-top">
+      <span class="ayah-pill" data-i18n="ayahPill">آية</span>
+      <span class="ayah-ring" id="ayahRing" aria-hidden="true"></span>
+      <span class="label-tag" id="ayahHint" data-i18n="ayahHint">اضغط لعرض تفاصيل الآية</span>
+    </div>
+    <div class="ayah-text" id="ayahText"></div>
+    <div class="ayah-translation" id="ayahTranslation"></div>
+    <div class="ayah-ref" id="ayahRef"></div>
+    <div class="ayah-note" id="ayahNote"></div>
+    <div class="ayah-detail" id="ayahDetail"></div>
+    <button class="ayah-new-btn interactive" id="newAyahBtn" type="button" data-burst>
+      <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+      <span data-i18n="newAyah">آية جديدة</span>
+    </button>
+    <button class="ayah-copy-btn interactive" id="copyAyahBtn" type="button" data-burst>
+      <i class="fa-solid fa-copy" aria-hidden="true"></i>
+      <span data-i18n="copyAyah">نسخ الآية</span>
+    </button>
+  </aside>
+
+  <button class="ayah-dock interactive" id="ayahDock" type="button" aria-label="إظهار بطاقة الآية" data-burst>
+    <i class="fa-solid fa-water"></i>
+    <span data-i18n="showAyah">إظهار الآية</span>
+  </button>
+
+  <main class="app" id="app">
+    <section class="hero-wrapper reveal" id="heroSection" aria-label="بطاقة الملف الشخصي">
+      <button id="langToggleBtn" class="lang-toggle interactive" type="button" aria-label="تبديل اللغة" title="تبديل اللغة">
+        <i class="fa-solid fa-language"></i>
+        <span class="lang-hint" data-i18n="langHint">تغيير اللغة</span>
+      </button>
+
+      <button class="avatar interactive" id="avatarBtn" type="button" aria-label="تفاعل مع الصورة الشخصية">
+        <picture>
+          <source srcset="assets/img/profile.webp" type="image/webp" />
+          <img src="assets/img/profile.jpeg" alt="صورة الملف الشخصي" loading="eager" decoding="async" />
+        </picture>
+        <span class="status-indicator" aria-hidden="true"></span>
+      </button>
+
+      <div class="hero-card-body">
+        <div class="moving-border-line" aria-hidden="true"></div>
+        <div class="hero-text">
+          <span class="status" id="statusText" data-status="busy">BUSY</span>
+          <h1 data-i18n="heroName">عُـمَر | Omar</h1>
+          <p data-i18n="heroDesc">دامك دخلت كمل معروفك وشوف الباقي..!</p>
+        </div>
+      </div>
+
+      <div class="hero-actions" id="heroActions" aria-label="اختصارات مهمة"></div>
+
+      <div class="profile-popover" id="profilePopover" aria-live="polite">
+        <span data-i18n="profileKicker">نبذة سريعة</span>
+        <strong data-i18n="profileBio">طالب توجيهي 2009، هندسة كهربائية للسيارات الكهربائية والهايبرد، وبحاول أطلع من السنة بعقلي كامل.</strong>
+      </div>
+    </section>
+
+    <section class="section-title enhanced reveal">
+      <span class="section-icon"><i class="fa-solid fa-link"></i></span>
+      <span data-i18n="socialLinksTitle">روابط التواصل</span>
+    </section>
+
+    <section class="links-grid links" id="linksGrid" aria-label="روابط التواصل"></section>
+
+    <section class="section-title enhanced reveal">
+      <span class="section-icon"><i class="fa-solid fa-copy"></i></span>
+      <span data-i18n="quickCopyTitle">نسخ سريع</span>
+    </section>
+
+    <section class="copy-list" id="copyList" aria-label="نسخ سريع"></section>
+
+    <section class="section-title enhanced reveal">
+      <span class="section-icon"><i class="fa-solid fa-diagram-project"></i></span>
+      <span data-i18n="projectTitle">مشروع؟</span>
+    </section>
+
+    <section class="projects-list" id="projectsList" aria-label="المشاريع"></section>
+
+    <section class="section-title enhanced reveal">
+      <span class="section-icon"><i class="fa-solid fa-diagram-project"></i></span>
+      <span data-i18n="projectTitle2">مشروع نسخه تجريبية</span>
+    </section>
+
+    <section class="evc-root reveal" id="evCard" aria-label="EV Telemetry Dashboard">
+      <div class="evc-border" aria-hidden="true"></div>
+      <a class="evc-inner interactive" href="pages/project-ev.html">
+        <div class="evc-icon-col">
+          <div class="evc-icon">⚡</div>
+          <div class="evc-live"><i class="evc-dot"></i><span>LIVE</span></div>
+        </div>
+        <div class="evc-content">
+          <div class="evc-tag" data-i18n="projectTitle3">قد يستغرق وقت لتحميل الصفحة لاول مرة</div>
+          <h3 class="evc-title" data-text="EV Telemetry Dashboard">EV Telemetry Dashboard</h3>
+          <p class="evc-desc" data-i18n="projectDesc5">لوحة تحكم حية لسيارة كهربائية — فيزياء بطارية ومحرك حقيقية، WebSocket، HUD احترافي.</p>
+          <div class="evc-stats" dir="ltr">
+            <span class="evc-stat"><b id="evcSpeed">75</b><small>km/h</small></span>
+            <span class="evc-sep">|</span>
+            <span class="evc-stat"><b id="evcSoc">85.0</b><small>SOC%</small></span>
+            <span class="evc-sep">|</span>
+            <span class="evc-stat"><b id="evcPow">14.5</b><small>kW</small></span>
+            <span class="evc-sep">|</span>
+            <span class="evc-stat"><b id="evcTemp">32</b><small>°C</small></span>
+          </div>
+        </div>
+        <div class="evc-arrow">←</div>
+      </a>
+      <div class="evc-progress-bar"><div class="evc-progress-fill" id="evcBar"></div></div>
+    </section>
+
+    <div class="hero-card-footer reveal" data-i18n-html="footerLine1">الفولو <em>ما بكهربك</em></div>
+  </main>
+
+  <footer class="site-footer reveal">
+    <div class="site-footer__inner">
+      <p class="site-footer__brand" data-i18n="footerBrand">عُـمَر | Omar</p>
+      <p class="site-footer__text" data-i18n="footerText1">جميع الحقوق غير محفوظة © 2026</p>
+      <p class="site-footer__text" data-i18n-html="footerText2">بتعرف انه كل هاد شغل ايدي؟</p>
+      <button class="version-badge interactive" id="versionBadge" type="button" data-burst>v9 Preview • Portfolio Upgrade</button>
+    </div>
+  </footer>
+
+  <button class="share-fab interactive" id="sharePortalBtn" type="button" aria-label="مشاركة الموقع">
+    <i class="fa-solid fa-share-nodes"></i>
+  </button>
+
+  <div class="share-overlay" id="shareOverlay" aria-hidden="true">
+    <div class="share-modal pixel-card" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+      <button class="close-share interactive" id="closeShare" type="button" aria-label="إغلاق">&times;</button>
+      <div class="share-top">
+        <div class="retro-badge">PIXEL SHARE</div>
+        <div class="qr-wrapper"><img id="shareQrImg" src="" class="main-qr" alt="QR code لمشاركة الموقع" loading="lazy" /></div>
+        <h3 id="shareTitle" data-i18n="shareTitle">بوابة المشاركة</h3>
+        <p data-i18n="shareText">امسح الكود أو شارك الرابط مباشرة</p>
+      </div>
+      <div class="share-profile-preview" aria-hidden="true">
+        <img src="assets/img/profile.webp" alt="" loading="lazy" decoding="async" />
+        <div>
+          <strong data-i18n="sharePreviewTitle">صفحات عمر</strong>
+          <span data-i18n="sharePreviewText">كل حساباتي ومشاريعي وأكواد اللعب بمكان واحد.</span>
+        </div>
+      </div>
+      <div class="share-link-box">
+        <input id="shareUrlInput" class="share-url-input" type="text" readonly value="https://omar-i9.github.io/omar-i9/" />
+        <button class="share-copy-btn interactive" id="copyShareBtn" type="button"><i class="fa-solid fa-copy"></i><span data-i18n="shareCopy">نسخ</span></button>
+      </div>
+      <button class="native-share-btn interactive" id="nativeShareBtn" type="button" data-burst>
+        <i class="fa-solid fa-paper-plane"></i>
+        <span data-i18n="shareSend">إرسال رابط صفحاتي</span>
+      </button>
+      <div class="share-quick-actions" aria-label="مشاركة سريعة">
+        <button class="share-target-btn interactive" type="button" data-share-target="whatsapp" data-burst>
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+          <span data-i18n="shareWhatsApp">WhatsApp</span>
+        </button>
+        <button class="share-target-btn interactive" type="button" data-share-target="instagram" data-burst>
+          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          <span data-i18n="shareInstagram">Instagram</span>
+        </button>
+        <button class="share-target-btn interactive" type="button" data-share-target="snapchat" data-burst>
+          <i class="fa-brands fa-snapchat-ghost" aria-hidden="true"></i>
+          <span data-i18n="shareSnapchat">Snapchat</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="version-overlay" id="versionOverlay" aria-hidden="true">
+    <div class="version-modal" role="dialog" aria-modal="true" aria-labelledby="versionTitle">
+      <button class="version-close interactive" id="closeVersion" type="button" aria-label="إغلاق" data-i18n-aria="closeModal">&times;</button>
+      <span class="version-kicker" data-i18n="versionLabel">الإصدار</span>
+      <h3 id="versionTitle">v9 Preview</h3>
+      <p class="version-subtitle" id="versionSubtitle">Portfolio Upgrade</p>
+      <p class="version-date" id="versionDate"></p>
+      <ul class="version-list" id="versionList"></ul>
+      <a class="version-github interactive" id="versionGithub" href="https://github.com/Omar-i9/omar-i9" target="_blank" rel="noopener noreferrer" data-burst>
+        <i class="fa-brands fa-github" aria-hidden="true"></i>
+        <span data-i18n="versionGithub">GitHub</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="page-overlay" id="pageOverlay" aria-hidden="true">
+    <button class="page-close interactive" id="closePageBtn" type="button" aria-label="إغلاق">&times;</button>
+    <div class="page-overlay-panel">
+      <iframe id="pageFrame" class="page-frame" src="" title="Discord Profile" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">تم النسخ</div>
+
+  <script src="scripts/site-data.js" defer></script>
+  <script src="scripts/i18n.js" defer></script>
+  <script src="scripts/app.js" defer></script>
+  <script src="scripts/ev-card.js" defer></script>
+</body>
+</html>

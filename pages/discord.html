@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>Discord Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050711;
+      --panel: rgba(10, 15, 29, .96);
+      --line: rgba(255,255,255,.1);
+      --text: #f8fbff;
+      --muted: rgba(226,237,255,.68);
+      --discord: #5865f2;
+      --cyan: #22d3ee;
+      --ease: cubic-bezier(.22,.9,.22,1);
+      --spring: cubic-bezier(.18,.95,.24,1.08);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      font-family: Cairo, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(88,101,242,.18), transparent 34%),
+        radial-gradient(circle at 86% 78%, rgba(34,211,238,.12), transparent 32%),
+        linear-gradient(145deg, #040711, #070a17 60%, #0a1021);
+      overflow: hidden;
+    }
+    .card {
+      position: relative;
+      width: min(380px, 100%);
+      max-height: min(548px, calc(100dvh - 24px));
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(165deg, rgba(12, 18, 35, .97), rgba(5, 8, 17, .99));
+      border: 1px solid rgba(88,101,242,.28);
+      box-shadow: 0 28px 80px rgba(0,0,0,.62), 0 0 34px rgba(88,101,242,.12);
+      animation: popIn .38s var(--spring) both;
+      display: flex;
+      flex-direction: column;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 5;
+      width: 36px;
+      height: 36px;
+      border-radius: 13px;
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(0,0,0,.34);
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus-visible { outline: 2px solid rgba(34,211,238,.55); outline-offset: 2px; }
+    .banner {
+      min-height: 116px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0), rgba(5,7,17,.24)),
+        url('../assets/img/discord-dino-banner.svg') center/cover no-repeat,
+        linear-gradient(135deg, rgba(88,101,242,.46), rgba(34,211,238,.18));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      flex: 0 0 auto;
+    }
+    .content {
+      position: relative;
+      padding: 58px 16px 16px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+    .content::-webkit-scrollbar { width: 5px; }
+    .content::-webkit-scrollbar-thumb { background: rgba(88,101,242,.45); border-radius: 999px; }
+    .avatar {
+      position: absolute;
+      top: -44px;
+      right: 18px;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(145deg, var(--discord), var(--cyan));
+      box-shadow: 0 18px 36px rgba(0,0,0,.45), 0 0 24px rgba(88,101,242,.22);
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #050711;
+    }
+    .dot {
+      position: absolute;
+      left: 6px;
+      bottom: 8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #22c55e;
+      border: 3px solid #050711;
+      box-shadow: 0 0 12px rgba(34,197,94,.46);
+    }
+    .badge {
+      display: inline-flex;
+      width: max-content;
+      min-height: 24px;
+      align-items: center;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(88,101,242,.32);
+      background: rgba(88,101,242,.14);
+      color: #edf1ff;
+      font-size: .7rem;
+      font-weight: 900;
+    }
+    .head {
+      display: grid;
+      gap: 6px;
+      padding-inline-end: 102px;
+      min-height: 62px;
+    }
+    h1 { margin: 0; font-size: 1.3rem; line-height: 1.16; font-weight: 900; }
+    .tag {
+      direction: ltr;
+      text-align: right;
+      color: var(--muted);
+      font-family: Rajdhani, Cairo, sans-serif;
+      font-size: 1.04rem;
+      font-weight: 700;
+    }
+    .panel {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 17px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.045);
+      display: grid;
+      gap: 4px;
+      direction: ltr;
+      text-align: left;
+    }
+    .panel strong { font-size: .86rem; }
+    .panel span { color: var(--muted); font-size: .74rem; font-weight: 800; }
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      margin-top: 12px;
+    }
+    .copy,
+    .open-discord {
+      min-height: 44px;
+      border: 1px solid rgba(34,211,238,.28);
+      border-radius: 15px;
+      background: linear-gradient(145deg, rgba(88,101,242,.22), rgba(34,211,238,.08));
+      color: #fff;
+      font-weight: 900;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .copy:hover,
+    .copy:focus-visible,
+    .open-discord:hover,
+    .open-discord:focus-visible {
+      outline: 2px solid rgba(34,211,238,.5);
+      outline-offset: 2px;
+    }
+    .hint {
+      margin: 10px 0 0;
+      color: rgba(226,237,255,.54);
+      font-size: .66rem;
+      text-align: center;
+      font-weight: 800;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%) translateY(12px);
+      opacity: 0;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(6, 13, 24, .96);
+      border: 1px solid rgba(34,211,238,.22);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 900;
+      transition: opacity .22s var(--ease), transform .22s var(--ease);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @keyframes popIn { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (max-width: 390px) {
+      body { padding: 9px; }
+      .card { max-height: calc(100dvh - 18px); border-radius: 22px; }
+      .banner { min-height: 104px; }
+      .content { padding: 52px 13px 13px; }
+      .avatar { width: 78px; height: 78px; top: -40px; right: 14px; }
+      .head { padding-inline-end: 92px; }
+      h1 { font-size: 1.16rem; }
+      .tag { font-size: .94rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <article class="card" role="dialog" aria-label="بطاقة ديسكورد">
+    <button class="close" id="closeBtn" type="button" aria-label="إغلاق">×</button>
+    <div class="banner" aria-hidden="true"></div>
+    <div class="content">
+      <div class="avatar">
+        <img src="../assets/img/profile.webp" alt="Omar profile image" />
+        <span class="dot" aria-hidden="true"></span>
+      </div>
+      <header class="head">
+        <span class="badge">Private / Contact</span>
+        <h1>Omar | عُـمَر</h1>
+        <div class="tag">@gdmi_3</div>
+      </header>
+      <section class="panel" aria-label="Discord username">
+        <strong>Discord Username</strong>
+        <span>gdmi_3</span>
+      </section>
+      <div class="actions">
+        <button class="copy" id="copyUser" type="button">نسخ username</button>
+        <a class="open-discord" href="https://discord.com/" target="_blank" rel="noopener noreferrer">فتح Discord</a>
+      </div>
+      <p class="hint">البطاقة قابلة للتمرير داخلياً على الشاشة الصغيرة</p>
+    </div>
+  </article>
+  <div class="toast" id="toast">تم النسخ</div>
+  <script>
+    const toast = document.getElementById('toast');
+    const btn = document.getElementById('copyUser');
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(showToast.t);
+      showToast.t = setTimeout(() => toast.classList.remove('show'), 1300);
+    }
+    async function copyUser() {
+      try {
+        await navigator.clipboard.writeText('gdmi_3');
+        showToast('تم نسخ gdmi_3');
+      } catch (_) {
+        showToast('انسخها يدوياً: gdmi_3');
+      }
+    }
+    btn.addEventListener('click', copyUser);
+    document.getElementById('closeBtn').addEventListener('click', () => {
+      parent.postMessage({ type: 'close-discord' }, '*');
+    });
+  </script>
+</body>
+</html>

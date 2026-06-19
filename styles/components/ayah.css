@@ -1,0 +1,973 @@
+.ayah-float {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 50;
+  width: min(360px, calc(100vw - 32px));
+  min-height: 152px;
+  padding: 16px 18px 14px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(0,234,255,.18), transparent 38%),
+    linear-gradient(145deg, rgba(9, 15, 28, .86), rgba(5, 10, 18, .9));
+  border: 1px solid rgba(0,234,255,.18);
+  box-shadow: 0 18px 40px rgba(0,0,0,.38), 0 0 34px rgba(0,234,255,.08), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  cursor: grab;
+  user-select: none;
+  transition: transform .42s var(--ease-spring), opacity .34s var(--ease), border-color .28s var(--ease), filter .28s var(--ease);
+  isolation: isolate;
+  overflow: hidden;
+}
+html[dir="ltr"] .ayah-float { left: auto; right: 16px; }
+.ayah-float:active { cursor: grabbing; }
+.ayah-float:hover { border-color: rgba(0,234,255,.34); transform: translateY(-2px); }
+
+.ayah-orbit {
+  position: absolute;
+  inset: -70px auto auto -70px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,234,255,.16);
+  background: radial-gradient(circle, rgba(0,234,255,.11), transparent 64%);
+  opacity: .7;
+  animation: ayahOrbit 7s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+html[dir="ltr"] .ayah-orbit { left: auto; right: -70px; }
+
+.ayah-float::after {
+  content: "";
+  position: absolute;
+  inset: auto 12% 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,234,255,.88), rgba(20,231,192,.72), transparent);
+  opacity: .68;
+  animation: lineBreathe 3.6s ease-in-out infinite;
+}
+
+.ayah-float.is-detail {
+  width: min(430px, calc(100vw - 32px));
+}
+.ayah-float.is-detail .ayah-detail {
+  max-height: 310px;
+  opacity: 1;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.ayah-float.is-water-out {
+  animation: waterOut .46s var(--ease) forwards;
+}
+.ayah-float.is-water-in {
+  animation: waterIn .58s var(--ease-spring) both;
+}
+.ayah-float.is-hidden-hard {
+  display: none;
+}
+
+.ayah-eye {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 14px;
+  background: rgba(255,255,255,.045);
+  color: #dff9ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+html[dir="ltr"] .ayah-eye { left: auto; right: 12px; }
+.ayah-eye:hover,
+.ayah-eye:focus-visible { transform: translateY(-2px) rotate(-6deg); background: rgba(0,234,255,.12); border-color: rgba(0,234,255,.28); color: var(--cyan-2); }
+
+.ayah-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-inline-start: 44px;
+}
+html[dir="ltr"] .ayah-top { justify-content: flex-start; padding-inline-start: 0; padding-inline-end: 44px; }
+.ayah-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: #dffaff;
+  font-weight: 900;
+  background: rgba(0,234,255,.12);
+  border: 1px solid rgba(0,234,255,.22);
+}
+.label-tag { color: var(--cyan-2); font-size: .78rem; font-weight: 900; margin-inline-start: auto; }
+html[dir="ltr"] .label-tag { margin-inline-start: 0; margin-inline-end: auto; }
+.ayah-text {
+  text-align: end;
+  font-size: 1.06rem;
+  line-height: 1.65;
+  font-weight: 900;
+  color: #f7fbff;
+  letter-spacing: .1px;
+}
+.ayah-translation {
+  margin-top: 5px;
+  text-align: end;
+  direction: ltr;
+  color: rgba(215,230,248,.76);
+  font-size: .78rem;
+  line-height: 1.45;
+  font-weight: 700;
+}
+html[dir="ltr"] .ayah-translation { text-align: left; }
+.ayah-ref { text-align: end; margin-top: 6px; color: var(--cyan); font-weight: 900; font-size: .86rem; }
+.ayah-note { text-align: end; color: var(--muted); font-weight: 800; font-size: .84rem; }
+.ayah-detail {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: #b8c8dc;
+  font-size: .84rem;
+  line-height: 1.72;
+  text-align: end;
+  transition: max-height .7s var(--ease), opacity .36s var(--ease), margin .36s var(--ease), padding .36s var(--ease);
+}
+.ayah-swap { animation: ayahSwap .45s var(--ease); }
+
+.ayah-dock {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 49;
+  min-width: 58px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(0,234,255,.22);
+  background: linear-gradient(145deg, rgba(7, 18, 31, .9), rgba(4, 9, 18, .92));
+  color: #dffaff;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  box-shadow: 0 16px 34px rgba(0,0,0,.34), 0 0 20px rgba(0,234,255,.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+html[dir="ltr"] .ayah-dock { left: auto; right: 18px; }
+.ayah-dock.show { display: inline-flex; animation: waterDockIn .48s var(--ease-spring) both; }
+.ayah-dock i { color: var(--cyan); filter: drop-shadow(0 0 8px rgba(0,234,255,.6)); }
+
+@keyframes ayahOrbit {
+  to { transform: translate(18px, 18px) scale(1.14); opacity: .95; }
+}
+@keyframes waterOut {
+  0% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); border-radius: 22px; }
+  45% { transform: translateY(-8px) scale(1.025); border-radius: 28px; }
+  100% { opacity: 0; transform: translateY(28px) scale(.82); filter: blur(8px); border-radius: 999px; }
+}
+@keyframes waterIn {
+  0% { opacity: 0; transform: translateY(26px) scale(.82); filter: blur(8px); border-radius: 999px; }
+  58% { opacity: 1; transform: translateY(-7px) scale(1.025); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); border-radius: 22px; }
+}
+@keyframes waterDockIn {
+  0% { opacity: 0; transform: translateY(-8px) scale(.8); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@media (max-width: 560px) {
+  .ayah-float { width: min(318px, calc(100vw - 22px)); left: 11px; top: 11px; padding: 14px 15px 12px; }
+  html[dir="ltr"] .ayah-float { right: 11px; left: auto; }
+  .ayah-float.is-detail { width: min(360px, calc(100vw - 22px)); }
+  .ayah-detail { font-size: .8rem; line-height: 1.65; }
+  .ayah-dock { top: 12px; left: 12px; }
+  html[dir="ltr"] .ayah-dock { right: 12px; left: auto; }
+}
+
+/* v5 polish: smaller ayah typography, safer header spacing, smoother reading */
+.ayah-float {
+  min-height: 136px;
+  padding: 15px 16px 13px;
+}
+.ayah-eye {
+  width: 34px;
+  height: 34px;
+  top: 10px;
+  left: 10px;
+  border-radius: 12px;
+  font-size: .92rem;
+}
+html[dir="ltr"] .ayah-eye { left: auto; right: 10px; }
+.ayah-top {
+  gap: 7px;
+  margin-bottom: 6px;
+  padding-left: 52px;
+  padding-right: 0;
+  justify-content: flex-end;
+}
+html[dir="ltr"] .ayah-top {
+  justify-content: flex-start;
+  padding-left: 0;
+  padding-right: 52px;
+}
+.ayah-pill {
+  min-width: 42px;
+  height: 27px;
+  padding: 0 9px;
+  font-size: .82rem;
+}
+.label-tag {
+  margin-inline-start: 0;
+  font-size: .66rem;
+  line-height: 1.2;
+  opacity: .84;
+  white-space: nowrap;
+}
+html[dir="ltr"] .label-tag { margin-inline-end: 0; }
+.ayah-text {
+  font-size: .94rem;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+.ayah-translation {
+  font-size: .7rem;
+  line-height: 1.38;
+  opacity: .9;
+}
+.ayah-ref {
+  font-size: .78rem;
+  margin-top: 5px;
+}
+.ayah-note {
+  font-size: .76rem;
+  line-height: 1.45;
+}
+.ayah-detail {
+  font-size: .78rem;
+  line-height: 1.68;
+}
+.ayah-float.is-detail .ayah-detail {
+  max-height: 340px;
+}
+
+/* v6 ayah progress ring + detail-only copy */
+@property --ayah-progress {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+.ayah-float {
+  --ayah-duration: 22000ms;
+  --ayah-progress: 0%;
+}
+.ayah-top {
+  align-items: center;
+}
+.ayah-ring {
+  position: relative;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: conic-gradient(from -90deg, var(--cyan) var(--ayah-progress), rgba(255,255,255,.08) 0);
+  box-shadow: 0 0 12px rgba(0,234,255,.22);
+  opacity: .95;
+}
+.ayah-ring::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  background: rgba(5, 10, 18, .96);
+}
+.ayah-ring::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: inherit;
+  background: currentColor;
+  color: var(--cyan-2);
+  box-shadow: 0 0 12px currentColor;
+  animation: ringColorShift 6s ease-in-out infinite alternate;
+}
+.ayah-ring.is-running {
+  animation: ayahRingFill var(--ayah-duration) linear forwards, ringGlowShift var(--ayah-duration) linear forwards;
+}
+.ayah-float.is-detail .ayah-ring.is-running {
+  animation-duration: var(--ayah-duration), var(--ayah-duration);
+}
+@keyframes ayahRingFill {
+  from { --ayah-progress: 0%; }
+  to { --ayah-progress: 100%; }
+}
+@keyframes ringGlowShift {
+  0% { filter: hue-rotate(0deg) saturate(1); }
+  100% { filter: hue-rotate(95deg) saturate(1.25); }
+}
+@keyframes ringColorShift {
+  from { color: var(--cyan-2); }
+  to { color: var(--violet); }
+}
+.ayah-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  margin-top: 10px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,234,255,.18);
+  background: rgba(0,234,255,.07);
+  color: #dff9ff;
+  font-size: .72rem;
+  font-weight: 900;
+  opacity: 0;
+  transform: translateY(8px) scale(.96);
+  pointer-events: none;
+  transition: opacity .28s var(--ease), transform .34s var(--ease-spring), background .28s var(--ease), border-color .28s var(--ease);
+}
+.ayah-new-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 30px;
+  margin-top: 8px;
+  margin-inline-end: 7px;
+  padding: 0 10px;
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.045);
+  color: #dff9ff;
+  font-size: .68rem;
+  font-weight: 900;
+  transition: transform .24s var(--ease), border-color .24s var(--ease), background .24s var(--ease);
+}
+.ayah-new-btn:hover,
+.ayah-new-btn:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(0,234,255,.3);
+  background: rgba(0,234,255,.1);
+}
+.ayah-float.is-detail .ayah-copy-btn {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.ayah-copy-btn:hover,
+.ayah-copy-btn:focus-visible,
+.ayah-copy-btn.is-copied {
+  background: rgba(0,234,255,.14);
+  border-color: rgba(0,234,255,.34);
+  color: #fff;
+}
+.ayah-float.is-detail .label-tag {
+  color: var(--cyan-2);
+}
+@media (max-width: 560px) {
+  .ayah-ring { width: 21px; height: 21px; }
+  .ayah-copy-btn { min-height: 30px; font-size: .68rem; margin-top: 8px; }
+  .ayah-new-btn { min-height: 28px; font-size: .62rem; }
+}
+
+
+/* v6.1 mobile polish: compact ayah card for phones */
+@media (max-width: 560px) {
+  .ayah-float {
+    top: 7px;
+    left: 7px;
+    width: min(258px, calc(100vw - 14px));
+    min-height: 88px;
+    padding: 9px 10px 9px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.36), 0 0 20px rgba(0,234,255,.07);
+  }
+  html[dir="ltr"] .ayah-float { right: 7px; left: auto; }
+  .ayah-float.is-detail {
+    width: min(300px, calc(100vw - 14px));
+  }
+  .ayah-float.is-detail .ayah-detail {
+    max-height: 210px;
+    margin-top: 7px;
+    padding-top: 7px;
+  }
+  .ayah-orbit { display: none; }
+  .ayah-eye {
+    width: 27px;
+    height: 27px;
+    top: 7px;
+    left: 7px;
+    border-radius: 10px;
+    font-size: .72rem;
+  }
+  html[dir="ltr"] .ayah-eye { right: 7px; left: auto; }
+  .ayah-top {
+    gap: 4px;
+    margin-bottom: 3px;
+    padding-left: 34px;
+    min-height: 27px;
+  }
+  html[dir="ltr"] .ayah-top { padding-right: 34px; padding-left: 0; }
+  .ayah-pill {
+    min-width: 28px;
+    height: 20px;
+    padding: 0 6px;
+    font-size: .58rem;
+  }
+  .ayah-ring {
+    width: 17px;
+    height: 17px;
+  }
+  .ayah-ring::before { inset: 3px; }
+  .ayah-ring::after { inset: 6px; }
+  .label-tag {
+    font-size: .48rem;
+    max-width: 108px;
+    line-height: 1.15;
+    opacity: .75;
+  }
+  .ayah-text {
+    font-size: .72rem;
+    line-height: 1.42;
+    font-weight: 900;
+  }
+  .ayah-translation {
+    margin-top: 3px;
+    font-size: .52rem;
+    line-height: 1.25;
+  }
+  .ayah-ref {
+    margin-top: 3px;
+    font-size: .58rem;
+  }
+  .ayah-note {
+    font-size: .56rem;
+    line-height: 1.28;
+  }
+  .ayah-detail {
+    font-size: .61rem;
+    line-height: 1.5;
+  }
+  .ayah-copy-btn {
+    min-height: 24px;
+    margin-top: 6px;
+    padding: 0 8px;
+    border-radius: 9px;
+    font-size: .56rem;
+    gap: 4px;
+  }
+  .ayah-new-btn {
+    min-height: 23px;
+    margin-top: 5px;
+    padding: 0 7px;
+    border-radius: 8px;
+    font-size: .48rem;
+    gap: 4px;
+  }
+  .ayah-dock {
+    top: 9px;
+    left: 9px;
+    min-width: 44px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 13px;
+    font-size: .72rem;
+  }
+  html[dir="ltr"] .ayah-dock { right: 9px; left: auto; }
+}
+@media (max-width: 370px) {
+  .ayah-float { width: min(242px, calc(100vw - 12px)); }
+  .ayah-float.is-detail { width: calc(100vw - 12px); }
+  .label-tag { max-width: 96px; }
+  .ayah-text { font-size: .68rem; }
+}
+
+/* v7 tiny mobile ayah: readable, top-left, never blocks the site */
+.ayah-float { z-index: 90; }
+@media (max-width: 560px) {
+  .ayah-float,
+  html[dir="ltr"] .ayah-float {
+    top: max(8px, env(safe-area-inset-top));
+    left: 8px;
+    right: auto;
+    width: min(214px, calc(100vw - 16px));
+    min-height: 76px;
+    padding: 8px 9px 8px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(0,0,0,.34), 0 0 18px rgba(0,234,255,.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .ayah-float:hover { transform: none; }
+  .ayah-float.is-detail,
+  html[dir="ltr"] .ayah-float.is-detail {
+    width: min(286px, calc(100vw - 16px));
+    max-height: min(58vh, 390px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ayah-float.is-detail::-webkit-scrollbar { width: 4px; }
+  .ayah-float.is-detail::-webkit-scrollbar-thumb { background: rgba(0,234,255,.28); border-radius: 999px; }
+  .ayah-orbit { display: none; }
+  .ayah-eye {
+    top: 6px;
+    left: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 9px;
+    font-size: .66rem;
+  }
+  html[dir="ltr"] .ayah-eye { left: 6px; right: auto; }
+  .ayah-top,
+  html[dir="ltr"] .ayah-top {
+    justify-content: flex-end;
+    gap: 4px;
+    min-height: 23px;
+    margin-bottom: 3px;
+    padding-left: 28px;
+    padding-right: 0;
+  }
+  .ayah-pill {
+    min-width: 28px;
+    height: 19px;
+    padding: 0 6px;
+    font-size: .56rem;
+  }
+  .ayah-ring { width: 16px; height: 16px; box-shadow: 0 0 8px rgba(0,234,255,.16); }
+  .ayah-ring::before { inset: 3px; }
+  .ayah-ring::after { inset: 6px; }
+  .label-tag {
+    max-width: 82px;
+    font-size: .46rem;
+    line-height: 1.15;
+    opacity: .72;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ayah-text {
+    font-size: .62rem;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+  .ayah-translation {
+    margin-top: 2px;
+    font-size: .48rem;
+    line-height: 1.28;
+  }
+  .ayah-ref {
+    margin-top: 2px;
+    font-size: .5rem;
+  }
+  .ayah-note {
+    font-size: .5rem;
+    line-height: 1.28;
+  }
+  .ayah-detail {
+    font-size: .58rem;
+    line-height: 1.58;
+  }
+  .ayah-float.is-detail .ayah-detail {
+    max-height: 185px;
+    margin-top: 6px;
+    padding-top: 6px;
+  }
+  .ayah-copy-btn {
+    min-height: 24px;
+    margin-top: 6px;
+    padding: 0 8px;
+    border-radius: 9px;
+    font-size: .52rem;
+    gap: 4px;
+  }
+  .ayah-dock,
+  html[dir="ltr"] .ayah-dock {
+    top: max(8px, env(safe-area-inset-top));
+    left: 8px;
+    right: auto;
+    min-width: 40px;
+    height: 32px;
+    padding: 0 9px;
+    border-radius: 12px;
+    font-size: .68rem;
+    gap: 5px;
+  }
+}
+@media (max-width: 370px) {
+  .ayah-float,
+  html[dir="ltr"] .ayah-float { width: min(196px, calc(100vw - 14px)); left: 7px; }
+  .ayah-float.is-detail,
+  html[dir="ltr"] .ayah-float.is-detail { width: min(268px, calc(100vw - 14px)); }
+  .label-tag { max-width: 70px; }
+}
+
+/* v8 — ultra-smooth tiny Ayah card: language-aware side, no janky swaps */
+.ayah-float {
+  contain: layout paint style;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  touch-action: none;
+}
+html[dir="rtl"] .ayah-float { left: 16px; right: auto; }
+html[dir="ltr"] .ayah-float { right: 16px; left: auto; }
+html[dir="rtl"] .ayah-dock { left: 18px; right: auto; }
+html[dir="ltr"] .ayah-dock { right: 18px; left: auto; }
+
+.ayah-float.is-dragging {
+  transition: opacity .18s var(--ease), border-color .18s var(--ease), filter .18s var(--ease) !important;
+  filter: saturate(1.08) brightness(1.03);
+}
+
+.ayah-text,
+.ayah-translation,
+.ayah-ref,
+.ayah-note,
+.ayah-detail,
+.ayahHint,
+#ayahHint {
+  will-change: opacity, transform;
+  transition: opacity 160ms var(--ease), transform 160ms var(--ease), filter 160ms var(--ease);
+  transform: translate3d(0, 0, 0);
+}
+.ayah-float.is-switching .ayah-text,
+.ayah-float.is-switching .ayah-translation,
+.ayah-float.is-switching .ayah-ref,
+.ayah-float.is-switching .ayah-note,
+.ayah-float.is-switching .ayah-detail,
+.ayah-float.is-switching #ayahHint {
+  opacity: 0;
+  transform: translate3d(0, 5px, 0) scale(.992);
+  filter: blur(1px);
+}
+.ayah-float.is-fresh .ayah-text,
+.ayah-float.is-fresh .ayah-translation,
+.ayah-float.is-fresh .ayah-ref,
+.ayah-float.is-fresh .ayah-note,
+.ayah-float.is-fresh .ayah-detail,
+.ayah-float.is-fresh #ayahHint {
+  animation: ayahContentIn 440ms cubic-bezier(.18,.78,.26,1) both;
+}
+.ayah-float.is-side-switching,
+.ayah-dock.is-side-switching {
+  animation: ayahSideSwitch 520ms cubic-bezier(.18,.78,.26,1) both;
+}
+@keyframes ayahContentIn {
+  0% { opacity: 0; transform: translate3d(0, 7px, 0) scale(.992); filter: blur(1.5px); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+}
+@keyframes ayahSideSwitch {
+  0% { opacity: .35; transform: translate3d(0, -4px, 0) scale(.965); }
+  58% { opacity: 1; transform: translate3d(0, 2px, 0) scale(1.01); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@media (max-width: 560px) {
+  html[dir="rtl"] .ayah-float,
+  .ayah-float {
+    top: max(7px, env(safe-area-inset-top));
+    left: 7px !important;
+    right: auto !important;
+    width: min(188px, calc(100vw - 14px));
+    min-height: 66px;
+    padding: 7px 8px 7px;
+    border-radius: 12px;
+    border-color: rgba(0,234,255,.15);
+    box-shadow: 0 10px 24px rgba(0,0,0,.32), 0 0 12px rgba(0,234,255,.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  html[dir="ltr"] .ayah-float {
+    left: auto !important;
+    right: 7px !important;
+  }
+  .ayah-float.is-detail,
+  html[dir="rtl"] .ayah-float.is-detail {
+    width: min(258px, calc(100vw - 14px));
+    max-height: min(54vh, 340px);
+  }
+  html[dir="ltr"] .ayah-float.is-detail {
+    right: 7px !important;
+    left: auto !important;
+  }
+  .ayah-eye {
+    top: 5px;
+    left: 5px;
+    right: auto;
+    width: 21px;
+    height: 21px;
+    border-radius: 8px;
+    font-size: .58rem;
+  }
+  html[dir="ltr"] .ayah-eye { right: 5px; left: auto; }
+  .ayah-top,
+  html[dir="rtl"] .ayah-top {
+    justify-content: flex-end;
+    gap: 3px;
+    min-height: 20px;
+    margin-bottom: 2px;
+    padding-left: 25px;
+    padding-right: 0;
+  }
+  html[dir="ltr"] .ayah-top {
+    justify-content: flex-start;
+    padding-left: 0;
+    padding-right: 25px;
+  }
+  .ayah-pill {
+    min-width: 24px;
+    height: 17px;
+    padding: 0 5px;
+    font-size: .5rem;
+  }
+  .ayah-ring { width: 14px; height: 14px; }
+  .ayah-ring::before { inset: 3px; }
+  .ayah-ring::after { inset: 5.5px; }
+  .label-tag {
+    max-width: 64px;
+    font-size: .4rem;
+    line-height: 1.1;
+    opacity: .68;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ayah-text {
+    font-size: .56rem;
+    line-height: 1.42;
+  }
+  .ayah-translation {
+    margin-top: 1px;
+    font-size: .42rem;
+    line-height: 1.22;
+  }
+  .ayah-ref {
+    margin-top: 1px;
+    font-size: .45rem;
+  }
+  .ayah-note {
+    font-size: .44rem;
+    line-height: 1.24;
+  }
+  .ayah-detail {
+    font-size: .52rem;
+    line-height: 1.55;
+  }
+  .ayah-float.is-detail .ayah-detail {
+    max-height: 170px;
+    margin-top: 5px;
+    padding-top: 5px;
+  }
+  .ayah-copy-btn {
+    min-height: 22px;
+    margin-top: 5px;
+    padding: 0 7px;
+    border-radius: 8px;
+    font-size: .48rem;
+  }
+  .ayah-dock,
+  html[dir="rtl"] .ayah-dock {
+    top: max(7px, env(safe-area-inset-top));
+    left: 7px !important;
+    right: auto !important;
+    min-width: 34px;
+    height: 30px;
+    padding: 0 8px;
+    border-radius: 11px;
+    font-size: .6rem;
+  }
+  html[dir="ltr"] .ayah-dock {
+    left: auto !important;
+    right: 7px !important;
+  }
+}
+@media (max-width: 370px) {
+  .ayah-float,
+  html[dir="rtl"] .ayah-float { width: min(176px, calc(100vw - 12px)); left: 6px !important; }
+  html[dir="ltr"] .ayah-float { right: 6px !important; left: auto !important; }
+  .ayah-float.is-detail,
+  html[dir="rtl"] .ayah-float.is-detail { width: min(246px, calc(100vw - 12px)); }
+  .label-tag { max-width: 56px; }
+  .ayah-text { font-size: .53rem; }
+}
+
+/* v8.1 — even smoother/smaller Ayah card, no mobile stutter */
+.ayah-float {
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 360ms cubic-bezier(.18,.78,.26,1),
+    opacity 260ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+.ayah-float.is-switching .ayah-text,
+.ayah-float.is-switching .ayah-translation,
+.ayah-float.is-switching .ayah-ref,
+.ayah-float.is-switching .ayah-note,
+.ayah-float.is-switching .ayah-detail,
+.ayah-float.is-switching #ayahHint {
+  transition-duration: 135ms;
+  transform: translate3d(0, 4px, 0) scale(.996);
+}
+.ayah-float.is-fresh .ayah-text,
+.ayah-float.is-fresh .ayah-translation,
+.ayah-float.is-fresh .ayah-ref,
+.ayah-float.is-fresh .ayah-note,
+.ayah-float.is-fresh .ayah-detail,
+.ayah-float.is-fresh #ayahHint {
+  animation-duration: 380ms;
+}
+@media (max-width: 560px) {
+  .ayah-float,
+  html[dir="rtl"] .ayah-float {
+    width: min(176px, calc(100vw - 14px));
+    min-height: 62px;
+    padding: 6px 7px 6px;
+    border-radius: 11px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .ayah-float.is-detail,
+  html[dir="rtl"] .ayah-float.is-detail {
+    width: min(238px, calc(100vw - 14px));
+    max-height: min(52vh, 320px);
+  }
+  html[dir="ltr"] .ayah-float.is-detail {
+    width: min(238px, calc(100vw - 14px));
+  }
+  .ayah-eye {
+    width: 19px;
+    height: 19px;
+    font-size: .52rem;
+  }
+  .ayah-top,
+  html[dir="rtl"] .ayah-top {
+    min-height: 18px;
+    padding-left: 22px;
+  }
+  html[dir="ltr"] .ayah-top {
+    padding-right: 22px;
+  }
+  .ayah-pill {
+    min-width: 22px;
+    height: 16px;
+    font-size: .47rem;
+  }
+  .ayah-ring {
+    width: 13px;
+    height: 13px;
+  }
+  .ayah-ring::before { inset: 2.8px; }
+  .ayah-ring::after { inset: 5px; }
+  .label-tag {
+    max-width: 54px;
+    font-size: .37rem;
+  }
+  .ayah-text {
+    font-size: .52rem;
+    line-height: 1.38;
+  }
+  .ayah-translation {
+    font-size: .39rem;
+  }
+  .ayah-ref {
+    font-size: .42rem;
+  }
+  .ayah-note {
+    font-size: .41rem;
+  }
+  .ayah-detail {
+    font-size: .49rem;
+    line-height: 1.5;
+  }
+  .ayah-float.is-switching .ayah-text,
+  .ayah-float.is-switching .ayah-translation,
+  .ayah-float.is-switching .ayah-ref,
+  .ayah-float.is-switching .ayah-note,
+  .ayah-float.is-switching .ayah-detail,
+  .ayah-float.is-switching #ayahHint {
+    filter: none;
+    transform: translate3d(0, 3px, 0);
+  }
+  .ayah-copy-btn {
+    min-height: 20px;
+    font-size: .45rem;
+    border-radius: 7px;
+  }
+}
+@media (max-width: 370px) {
+  .ayah-float,
+  html[dir="rtl"] .ayah-float { width: min(164px, calc(100vw - 12px)); }
+  .ayah-float.is-detail,
+  html[dir="rtl"] .ayah-float.is-detail,
+  html[dir="ltr"] .ayah-float.is-detail { width: min(226px, calc(100vw - 12px)); }
+  .ayah-text { font-size: .5rem; }
+  .label-tag { max-width: 48px; }
+}
+
+/* v9 compact controls: keep the ayah useful without blocking mobile UI */
+.ayah-float { pointer-events: auto; }
+.ayah-new-btn i { font-size: .86em; }
+@media (max-width: 560px) {
+  .ayah-new-btn {
+    min-height: 19px;
+    margin-top: 4px;
+    margin-inline-end: 4px;
+    padding: 0 6px;
+    border-radius: 7px;
+    font-size: .43rem;
+  }
+  .ayah-new-btn span { max-width: 46px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+/* v9.1: keep ayah tiny, language-aware, and motion-only on transform/opacity */
+.ayah-float {
+  transition:
+    transform 300ms cubic-bezier(.18,.78,.26,1),
+    opacity 220ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+html[dir="rtl"] .ayah-float {
+  left: 16px;
+  right: auto;
+}
+
+html[dir="ltr"] .ayah-float {
+  left: auto;
+  right: 16px;
+}
+
+@media (max-width: 560px) {
+  html[dir="rtl"] .ayah-float,
+  .ayah-float {
+    left: 7px !important;
+    right: auto !important;
+    top: max(7px, env(safe-area-inset-top));
+    width: min(176px, calc(100vw - 14px));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  html[dir="ltr"] .ayah-float {
+    left: auto !important;
+    right: 7px !important;
+  }
+}
