@@ -87,11 +87,22 @@ html[dir="rtl"] .scroll-progress { transform-origin: right center; }
 .is-hidden { display: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: .001ms !important;
+  html { scroll-behavior: auto; }
+  .reveal { filter: none !important; transform: translate3d(0, 8px, 0) scale(.998) !important; }
+  .reveal.is-visible { transform: translate3d(0, 0, 0) scale(1) !important; }
+  .bg-aurora span,
+  .bg-grid,
+  .avatar::before,
+  .avatar::after,
+  .status-indicator::after,
+  .evc-border,
+  .ayah-orbit {
+    animation-duration: 18s !important;
+  }
+  .ripple,
+  .flower-petal,
+  .neon-streak {
+    animation-duration: 260ms !important;
   }
 }
 
@@ -229,9 +240,8 @@ body.low-power-mode .bg-grid,
 body.low-power-mode .avatar::before,
 body.low-power-mode .avatar::after,
 body.low-power-mode .ayah-orbit {
-  animation-duration: 1ms !important;
-  animation-iteration-count: 1 !important;
-  opacity: .18;
+  animation-duration: 26s !important;
+  opacity: .14;
 }
 body.low-power-mode .social-card,
 body.low-power-mode .hero-card-body,
@@ -245,8 +255,23 @@ body.low-power-mode .flower-petal:nth-child(n+5) { display: none; }
 body.user-reduced-motion *,
 body.user-reduced-motion *::before,
 body.user-reduced-motion *::after {
-  animation-duration: .001ms !important;
-  animation-iteration-count: 1 !important;
   scroll-behavior: auto !important;
-  transition-duration: .001ms !important;
+  transition-duration: 180ms !important;
+}
+body.user-reduced-motion .bg-aurora span,
+body.user-reduced-motion .bg-grid,
+body.user-reduced-motion .avatar::before,
+body.user-reduced-motion .avatar::after,
+body.user-reduced-motion .status-indicator::after,
+body.user-reduced-motion .evc-border,
+body.user-reduced-motion .ayah-orbit {
+  animation-duration: 18s !important;
+  opacity: .14;
+}
+body.user-reduced-motion .reveal {
+  filter: none !important;
+  transform: translate3d(0, 8px, 0) scale(.998) !important;
+}
+body.user-reduced-motion .reveal.is-visible {
+  transform: translate3d(0, 0, 0) scale(1) !important;
 }

@@ -717,6 +717,38 @@ html[dir="ltr"] .brilliant-badge { left: -3px; right: auto; }
   content: '✦';
 }
 
+.neon-streak {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 24px;
+  height: 2px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--streak-color, #5bf6ff), #fff);
+  box-shadow: 0 0 10px var(--streak-color, #5bf6ff);
+  transform: translate(-50%, -50%) rotate(var(--rot, 0rad)) scaleX(.25);
+  animation: neonStreakBurst 420ms cubic-bezier(.18,.78,.26,1) forwards;
+}
+
+@keyframes neonStreakBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--rot, 0rad)) scaleX(.2);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)))
+      rotate(var(--rot, 0rad))
+      scaleX(.92);
+  }
+}
+
 @media (max-width: 560px), (hover: none) {
   .social-card::after,
   .work-card::after,

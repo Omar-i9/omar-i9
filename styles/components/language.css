@@ -9,6 +9,8 @@ html[dir="ltr"] body { direction: ltr; }
 .lang-toggle {
   overflow: visible !important;
   isolation: isolate;
+  --mag-x: 0px;
+  --mag-y: 0px;
 }
 
 .lang-toggle::before {
@@ -143,6 +145,79 @@ html[dir="ltr"] .share-fab { left: 22px; right: auto; }
 
 html[dir="rtl"] .close-share { right: auto; left: 0; }
 html[dir="ltr"] .close-share { left: auto; right: 0; }
+
+/* v9.1 smooth polish: premium language interaction */
+.lang-toggle {
+  transform: translate3d(var(--mag-x), var(--mag-y), 0);
+  transition:
+    transform 260ms cubic-bezier(.18,.78,.26,1),
+    background 220ms var(--ease),
+    border-color 220ms var(--ease),
+    color 220ms var(--ease),
+    box-shadow 260ms var(--ease);
+}
+
+.lang-toggle::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 0 32%, rgba(255,255,255,.58) 45%, transparent 58% 100%);
+  opacity: 0;
+  transform: translate3d(-135%, 0, 0) skewX(-14deg);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.lang-toggle.is-clicking {
+  animation: langPremiumClick 420ms cubic-bezier(.18,.78,.26,1) both;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lang-toggle:hover,
+  .lang-toggle:focus-visible {
+    transform: translate3d(var(--mag-x), calc(var(--mag-y) - 4px), 0) scale(1.035);
+    border-color: rgba(0,234,255,.42);
+    box-shadow:
+      0 18px 36px rgba(0,0,0,.35),
+      0 0 24px rgba(0,234,255,.22),
+      inset 0 1px 0 rgba(255,255,255,.09);
+    animation: langBreathGlow 2.4s ease-in-out infinite;
+  }
+
+  .lang-toggle:hover::after,
+  .lang-toggle:focus-visible::after {
+    animation: langShineSweep 1.25s ease-out infinite;
+  }
+}
+
+@keyframes langPremiumClick {
+  0% { transform: translate3d(var(--mag-x), var(--mag-y), 0) scale(1); }
+  28% { transform: translate3d(var(--mag-x), calc(var(--mag-y) + 4px), 0) scale(.92); }
+  64% { transform: translate3d(var(--mag-x), calc(var(--mag-y) - 2px), 0) scale(1.045); }
+  100% { transform: translate3d(var(--mag-x), var(--mag-y), 0) scale(1); }
+}
+
+@keyframes langBreathGlow {
+  0%, 100% { filter: drop-shadow(0 0 7px rgba(0,234,255,.28)); }
+  50% { filter: drop-shadow(0 0 15px rgba(139,92,246,.34)); }
+}
+
+@keyframes langShineSweep {
+  0%, 38% { opacity: 0; transform: translate3d(-135%, 0, 0) skewX(-14deg); }
+  55% { opacity: .62; }
+  78%, 100% { opacity: 0; transform: translate3d(135%, 0, 0) skewX(-14deg); }
+}
+
+@media (max-width: 560px), (hover: none) {
+  .lang-toggle {
+    transition-duration: 180ms;
+  }
+  .lang-toggle::before,
+  .lang-toggle::after {
+    display: none;
+  }
+}
 
 @media (max-width: 560px) {
   html[dir="rtl"] .hero-card-body,

@@ -347,7 +347,7 @@
   }
 
   function flowerBurst(x, y, amount = 9) {
-    amount = state.lowPower ? 0 : 1;
+    amount = state.lowPower ? Math.min(3, amount) : amount;
     if (!amount) return;
     const colors = ['#5bf6ff', '#14e7c0', '#ff3d8e', '#f8ff00', '#8b5cf6', '#ffffff'];
     for (let i = 0; i < amount; i += 1) {
@@ -364,6 +364,26 @@
       petal.style.setProperty('--petal-color', colors[i % colors.length]);
       document.body.appendChild(petal);
       petal.addEventListener('animationend', () => petal.remove(), { once: true });
+    }
+  }
+
+  function streakBurst(x, y, amount = 7) {
+    amount = state.lowPower ? Math.min(3, amount) : amount;
+    if (!amount) return;
+    const colors = ['#5bf6ff', '#14e7c0', '#ff3d8e', '#f8ff00', '#8b5cf6'];
+    for (let i = 0; i < amount; i += 1) {
+      const streak = document.createElement('span');
+      streak.className = 'neon-streak';
+      const angle = ((Math.PI * 2) / amount) * i + (Math.random() * .32 - .16);
+      const distance = 22 + Math.random() * 34;
+      streak.style.left = `${x}px`;
+      streak.style.top = `${y}px`;
+      streak.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
+      streak.style.setProperty('--dy', `${Math.sin(angle) * distance}px`);
+      streak.style.setProperty('--rot', `${angle}rad`);
+      streak.style.setProperty('--streak-color', colors[i % colors.length]);
+      document.body.appendChild(streak);
+      streak.addEventListener('animationend', () => streak.remove(), { once: true });
     }
   }
 
@@ -484,7 +504,7 @@
     const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (!canHover || state.lowPower) return;
     document.addEventListener('pointermove', (event) => {
-      const target = event.target.closest?.('.magnetic, .hero-action, .native-share-btn, .share-copy-btn');
+      const target = event.target.closest?.('.magnetic, .hero-action, .native-share-btn, .share-copy-btn, .lang-toggle');
       if (!target) return;
       const rect = target.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - .5;
@@ -493,7 +513,7 @@
       target.style.setProperty('--mag-y', `${y * 7}px`);
     });
     document.addEventListener('pointerleave', (event) => {
-      const target = event.target.closest?.('.magnetic, .hero-action, .native-share-btn, .share-copy-btn');
+      const target = event.target.closest?.('.magnetic, .hero-action, .native-share-btn, .share-copy-btn, .lang-toggle');
       if (!target) return;
       target.style.removeProperty('--mag-x');
       target.style.removeProperty('--mag-y');
@@ -590,7 +610,8 @@
     const item = list[state.ayahIndex % list.length];
     if (!item) return '';
     const ref = i18n?.lang === 'en' ? item.refEn : item.refAr;
-    return `${item.text}\n${ref}\n${site.baseUrl || location.href}`;
+    const category = i18n?.lang === 'en' ? item.categoryEn : item.categoryAr;
+    return `${item.text}\n${ref}${category ? `\n${category}` : ''}\n${site.baseUrl || location.href}`;
   }
 
   function updateAyah(index) {
@@ -601,6 +622,7 @@
     const item = list[index % list.length];
     const lang = i18n?.lang || 'ar';
     const isEn = lang === 'en';
+    const category = isEn ? item.categoryEn : item.categoryAr;
     const card = $('#ayahFloat');
     const els = {
       text: $('#ayahText'),
@@ -611,13 +633,16 @@
       hint: $('#ayahHint')
     };
 
-    if (card) card.classList.add('is-switching');
+    if (card) {
+      card.dataset.category = item.category || '';
+      card.classList.add('is-switching');
+    }
 
     window.setTimeout(() => {
       if (els.text) els.text.textContent = item.text;
       if (els.translation) els.translation.textContent = item.en || '';
       if (els.ref) els.ref.textContent = isEn ? `[${item.refEn}]` : `[${item.refAr}]`;
-      if (els.note) els.note.textContent = isEn ? (item.noteEn || '') : (item.noteAr || '');
+      if (els.note) els.note.textContent = [category, isEn ? item.noteEn : item.noteAr].filter(Boolean).join(' • ');
       if (els.detail) els.detail.textContent = isEn ? (item.tafsirEn || '') : (item.tafsirAr || '');
       if (els.hint) els.hint.textContent = i18n?.t('ayahHint', isEn ? 'Tap to view tafsir' : 'اضغط لعرض تفاصيل الآية');
 
@@ -647,10 +672,14 @@
 
   function scheduleNextAyah() {
     clearTimeout(state.ayahTimer);
+    const card = $('#ayahFloat');
+    if (card?.classList.contains('is-hidden-hard')) {
+      $('#ayahRing')?.classList.remove('is-running');
+      return;
+    }
     const delay = nextAyahDelay();
     restartAyahRing(delay);
     state.ayahTimer = setTimeout(() => {
-      const card = $('#ayahFloat');
       if (card && !card.classList.contains('is-hidden-hard')) {
         state.ayahIndex = nextAyahIndex();
         updateAyah(state.ayahIndex);
@@ -668,7 +697,45 @@
     const savedIndex = Number(safeStorageGet('omar_last_ayah_index'));
     state.ayahIndex = Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < (site.ayahs || []).length ? savedIndex : nextAyahIndex();
     updateAyah(state.ayahIndex);
-    scheduleNextAyah();
+    const savedVisibility = safeStorageGet('omar_ayah_card_state');
+    const shouldShow = savedVisibility === 'shown';
+
+    function syncAyahButtons(visible) {
+      card.setAttribute('aria-hidden', visible ? 'false' : 'true');
+      dock?.setAttribute('aria-expanded', visible ? 'true' : 'false');
+      dock?.setAttribute('aria-label', i18n?.t('showAyah', 'إظهار الآية') || 'إظهار الآية');
+      eye?.setAttribute('aria-label', i18n?.t('hideAyah', 'إخفاء الآية') || 'إخفاء الآية');
+    }
+
+    function setAyahVisible(visible, animate = true) {
+      safeStorageSet('omar_ayah_card_state', visible ? 'shown' : 'hidden');
+      syncAyahButtons(visible);
+      clearTimeout(state.ayahTimer);
+      if (visible) {
+        card.classList.remove('is-hidden-hard', 'is-water-out');
+        dock?.classList.remove('show');
+        requestAnimationFrame(() => {
+          if (animate) card.classList.add('is-water-in');
+          setTimeout(() => card.classList.remove('is-water-in'), 380);
+          scheduleNextAyah();
+        });
+        return;
+      }
+      card.classList.remove('is-water-in', 'is-detail');
+      $('#ayahRing')?.classList.remove('is-running');
+      if (!animate) {
+        card.classList.add('is-hidden-hard');
+        dock?.classList.add('show');
+        return;
+      }
+      card.classList.add('is-water-out');
+      setTimeout(() => {
+        card.classList.add('is-hidden-hard');
+        dock?.classList.add('show');
+      }, 350);
+    }
+
+    setAyahVisible(shouldShow, false);
 
     document.addEventListener('omar:languagechange', () => { alignAyahToLanguage(); updateAyah(state.ayahIndex); });
 
@@ -680,25 +747,8 @@
       scheduleNextAyah();
     });
 
-    function hideCard() {
-      card.classList.add('is-water-out');
-      setTimeout(() => {
-        card.classList.add('is-hidden-hard');
-        dock?.classList.add('show');
-      }, 430);
-    }
-    function showCard() {
-      card.classList.remove('is-hidden-hard');
-      dock?.classList.remove('show');
-      requestAnimationFrame(() => {
-        card.classList.remove('is-water-out');
-        card.classList.add('is-water-in');
-        setTimeout(() => card.classList.remove('is-water-in'), 620);
-      });
-    }
-
-    eye?.addEventListener('click', (event) => { event.stopPropagation(); hideCard(); });
-    dock?.addEventListener('click', showCard);
+    eye?.addEventListener('click', (event) => { event.stopPropagation(); setAyahVisible(false); });
+    dock?.addEventListener('click', () => setAyahVisible(true));
     $('#copyAyahBtn')?.addEventListener('click', (event) => {
       event.stopPropagation();
       copyText(getCurrentAyahCopyText(), event.currentTarget);
@@ -805,7 +855,11 @@
       const burstTarget = event.target.closest?.('[data-burst], .interactive, .social-card, .work-card, .copy-row, .evc-inner');
       if (burstTarget) {
         makeRipple(burstTarget, event);
-        if (burstTarget.matches('.social-card, .hero-action, .avatar, .share-fab, .work-card, .copy-btn')) {
+        if (burstTarget.matches('.social-card, .hero-action, .avatar, .share-fab, .work-card, .copy-btn, .lang-toggle')) {
+          if (burstTarget.matches('.lang-toggle')) {
+            streakBurst(event.clientX, event.clientY, 7);
+            return;
+          }
           flowerBurst(event.clientX, event.clientY, burstTarget.matches('.avatar') ? 14 : 8);
         }
       }
@@ -847,8 +901,10 @@
 
     $('#langToggleBtn')?.addEventListener('click', (event) => {
       const btn = event.currentTarget;
-      btn.classList.add('is-switching');
-      setTimeout(() => btn.classList.remove('is-switching'), 520);
+      btn.classList.add('is-switching', 'is-clicking');
+      btn.style.setProperty('--click-x', `${event.clientX}px`);
+      btn.style.setProperty('--click-y', `${event.clientY}px`);
+      setTimeout(() => btn.classList.remove('is-switching', 'is-clicking'), 420);
       i18n?.toggleLanguage();
     });
     $('#sharePortalBtn')?.addEventListener('click', openShare);
