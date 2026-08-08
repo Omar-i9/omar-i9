@@ -39,10 +39,12 @@
       .replaceAll("'", '&#039;');
   }
 
-  function icon(className) {
-    return `<i class="${escapeHtml(className)}" aria-hidden="true"></i>`;
+function icon(className) {
+  if (/\.(svg|png|webp)$/i.test(className)) {
+    return `<img src="${escapeHtml(className)}" alt="" class="brand-icon-img" loading="lazy" decoding="async">`;
   }
-
+  return `<i class="${escapeHtml(className)}" aria-hidden="true"></i>`;
+}
   const socialOrder = ['instagram', 'snapchat', 'github', 'tiktok', 'discord', 'tiktok-gdmi33'];
   const badgeKeys = {
     featured: 'badgeFeatured',
@@ -109,20 +111,21 @@
     }).join('');
   }
 
-  function renderCopyRows() {
-    const wrap = $('#copyList');
-    if (!wrap) return;
-    wrap.innerHTML = (site.quickCopy || []).map((item, index) => {
-      const label = escapeHtml(i18n?.t(item.labelKey, item.label) || item.label);
-      const copyLabel = escapeHtml(i18n?.t('copyBtn', 'نسخ') || 'نسخ');
-      return `
-        <div class="copy-row reveal" style="--delay:${index * 70}ms">
-          <div class="copy-meta"><span data-i18n="${escapeHtml(item.labelKey)}">${label}</span><strong>${escapeHtml(item.value)}</strong></div>
-          <button class="copy-btn interactive" type="button" data-copy="${escapeHtml(item.value)}" data-burst data-i18n="copyBtn">${copyLabel}</button>
-        </div>
-      `;
-    }).join('');
-  }
+function renderCopyRows() {
+  const wrap = $('#copyList');
+  if (!wrap) return;
+  wrap.innerHTML = (site.quickCopy || []).map((item, index) => {
+    const label = escapeHtml(i18n?.t(item.labelKey, item.label) || item.label);
+    const copyLabel = escapeHtml(i18n?.t('copyBtn', 'نسخ') || 'نسخ');
+    return `
+      <div class="copy-row reveal" style="--delay:${index * 70}ms">
+        ${item.icon ? `<span class="copy-icon">${icon(item.icon)}</span>` : ''}
+        <div class="copy-meta"><span data-i18n="${escapeHtml(item.labelKey)}">${label}</span><strong>${escapeHtml(item.value)}</strong></div>
+        <button class="copy-btn interactive" type="button" data-copy="${escapeHtml(item.value)}" data-burst data-i18n="copyBtn">${copyLabel}</button>
+      </div>
+    `;
+  }).join('');
+}
 
   function renderProjects() {
     const wrap = $('#projectsList');

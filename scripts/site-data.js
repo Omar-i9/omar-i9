@@ -56,14 +56,13 @@ window.OMAR_SITE = {
       "id": "tiktok",
       "group": "social",
       "className": "tk-card",
-      "badge": "PRIVATE",
+      "badge": "PUBLIC",
       "badgeType": "vip",
-      "badges": ["private"],
-      "icon": "fa-brands fa-tiktok",
+      "icon": "assets/img/brands/tiktok.svg",
       "titleKey": "tiktokAr",
       "title": "تيك توك",
-      "handle": "gdmi_33",
-      "url": "https://www.tiktok.com/@gdmi_33"
+      "handle": "gdmii_33",
+      "url": "https://www.tiktok.com/@gdmii_33"
     },
     {
       "id": "snapchat",
@@ -72,7 +71,7 @@ window.OMAR_SITE = {
       "badge": "PRIVATE",
       "badgeType": "vip",
       "badges": ["featured", "private"],
-      "icon": "fa-brands fa-snapchat-ghost",
+      "icon": "assets/img/brands/snapchat.svg",
       "titleKey": "snapchatAr",
       "title": "سناب شات",
       "handle": "omar-gdmi",
@@ -85,7 +84,7 @@ window.OMAR_SITE = {
       "badge": "PUBLIC",
       "badgeType": "neo",
       "badges": ["featured", "public"],
-      "icon": "fa-brands fa-instagram",
+      "icon": "assets/img/brands/instagram.svg",
       "titleKey": "instagramAr",
       "title": "انستجرام",
       "handle": "omar.a.z3",
@@ -98,7 +97,7 @@ window.OMAR_SITE = {
       "badge": "PUBLIC",
       "badgeType": "neo",
       "badges": ["official"],
-      "icon": "fa-brands fa-github",
+      "icon": "assets/img/brands/github.svg",
       "titleKey": "githubAr",
       "title": "جيت هاب",
       "handle": "Omar-i9",
@@ -111,7 +110,7 @@ window.OMAR_SITE = {
       "badge": "PRIVATE",
       "badgeType": "vip",
       "badges": ["private"],
-      "icon": "fa-brands fa-threads",
+      "icon": "assets/img/brands/threads.svg",
       "titleKey": "threadsAr",
       "title": "ثريدز",
       "handle": "@omar.a.z3",
@@ -124,25 +123,11 @@ window.OMAR_SITE = {
       "badge": "PRIVATE",
       "badgeType": "vip",
       "badges": ["private"],
-      "icon": "fa-brands fa-facebook-f",
+      "icon": "assets/img/brands/facebook.svg",
       "titleKey": "facebookAr",
       "title": "فيسبوك",
       "handle": "3mar.a.z3",
       "url": "https://www.facebook.com/3mar.a.z3"
-    },
-    {
-      "id": "tiktok-gdmi33",
-      "group": "social",
-      "className": "tk-alt-card wave-auto",
-      "badge": "PRIVATE",
-      "badgeType": "vip",
-      "badges": ["private"],
-      "icon": "fa-brands fa-tiktok",
-      "titleKey": "tiktokAr",
-      "title": "تيك توك",
-      "handle": "gdmi33",
-      "url": "https://www.tiktok.com/@gdmi33",
-      "longCopy": true
     },
     {
       "id": "chess",
@@ -151,8 +136,7 @@ window.OMAR_SITE = {
       "badge": "PRIVATE",
       "badgeType": "vip",
       "badges": ["private"],
-      "icon": "fa-solid fa-chess",
-      "extraBadge": "!!",
+      "icon": "assets/img/brands/chessdotcom.svg",
       "titleKey": "chessAr",
       "title": "شطرنج",
       "handle": "omar-g4",
@@ -164,8 +148,8 @@ window.OMAR_SITE = {
       "className": "steam-card",
       "badge": "PRIVATE",
       "badgeType": "vip",
-      "badges": ["private"],
-      "icon": "fa-brands fa-steam",
+      "badges": ["featured", "private"],
+      "icon": "assets/img/brands/steam.svg",
       "titleKey": "steamAr",
       "title": "ستيم",
       "handle": "omar_gg33",
@@ -178,7 +162,7 @@ window.OMAR_SITE = {
       "badge": "PUBLIC",
       "badgeType": "neo",
       "badges": ["public"],
-      "icon": "fa-brands fa-x-twitter",
+      "icon": "assets/img/brands/x.svg",
       "titleKey": "xAr",
       "title": "اكس",
       "handle": "@OGdmi90694",
@@ -191,47 +175,22 @@ window.OMAR_SITE = {
       "badge": "PUBLIC",
       "badgeType": "neo",
       "badges": ["public"],
-      "icon": "fa-brands fa-spotify",
+      "icon": "assets/img/brands/spotify.svg",
       "titleKey": "spotifyAr",
       "title": "اسبوتيفاي",
       "handle": "Omar",
       "url": "https://open.spotify.com/user/31zq4egkwu5qt6armgjuvey2tgga"
     },
 {
-  id: "rockstar-games",
-  group: "gaming",
-  className: "rockstar-card",
-  badges: ["official"],
-  icon: "brand-image",
-  iconImage: "assets/img/brands/rockstar-games.svg",
-  titleKey: "rockstarGames",
-  title: "Rockstar Games",
-  handle: "Rockstar Games",
-  url: "https://www.rockstargames.com/"
-},
-{
-  id: "ubisoft",
-  group: "gaming",
-  className: "ubisoft-card",
-  badges: ["official"],
-  icon: "brand-image",
-  iconImage: "assets/img/brands/ubisoft.svg",
-  titleKey: "ubisoft",
-  title: "Ubisoft",
-  handle: "Ubisoft",
-  url: "https://www.ubisoft.com/"
-},
-{
-  id: "ea",
-  group: "gaming",
-  className: "ea-card",
-  badges: ["official"],
-  icon: "brand-image",
-  iconImage: "assets/img/brands/ea.svg",
-  titleKey: "ea",
-  title: "Electronic Arts",
-  handle: "EA",
-  url: "https://www.ea.com/"
+  "id": "rockstar",
+  "group": "gaming",
+  "className": "rockstar-card",
+  "badges": ["official"],
+  "icon": "assets/img/brands/rockstar-games.svg",
+  "titleKey": "rockstarAr",
+  "title": "روكستار",
+  "handle": "Omar-G4",
+  "url": "https://socialclub.rockstargames.com/member/Omar-G4/games"
 },
     {
       "id": "discord",
@@ -240,7 +199,7 @@ window.OMAR_SITE = {
       "badge": "PRIVATE",
       "badgeType": "vip",
       "badges": ["private", "contact"],
-      "icon": "fa-brands fa-discord",
+      "icon": "assets/img/brands/discord.svg",
       "titleKey": "discordAr",
       "title": "ديسكورد",
       "handleKey": "discordNote",
@@ -253,13 +212,27 @@ window.OMAR_SITE = {
     {
       "labelKey": "steamFriendLabel",
       "label": "Steam Friend Code",
-      "value": "1586913441"
+      "value": "1586913441",
+      "icon": "assets/img/brands/steam.svg"
     },
     {
       "labelKey": "epicGamesLabel",
       "label": "Epic Games",
-      "value": "Omar-G4"
-    }
+      "value": "Omar-G4",
+      "icon": "assets/img/brands/epicgames.svg"
+    },
+  {
+    "labelKey": "ubisoftLabel",
+    "label": "Ubisoft Connect",
+    "value": "Omar-G4",
+    "icon": "assets/img/brands/ubisoft.svg"
+  },
+  {
+    "labelKey": "eaLabel",
+    "label": "EA Account",
+    "value": "gdmi3",
+    "icon": "assets/img/brands/ea.svg"
+  }
   ],
   "projects": [
     {

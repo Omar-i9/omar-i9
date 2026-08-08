@@ -199,25 +199,6 @@ html[dir="ltr"] .social-badges {
 .social-card:hover .social-icon::before { opacity: .16; transform: scale(1.08); }
 .social-icon i { position: relative; z-index: 1; }
 
-.brilliant-badge {
-  position: absolute;
-  top: 5px;
-  left: 6px;
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  background: #17c2b1;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,.88);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial Black, Impact, sans-serif;
-  font-size: .84rem;
-  font-weight: 900;
-  box-shadow: 0 0 8px rgba(23,194,177,.42);
-}
-
 .social-text { display: grid; gap: 3px; transform: translateZ(20px); }
 .social-text strong { font-size: 1.04rem; line-height: 1.22; font-weight: 900; color: #fff; }
 .social-text span { color: var(--muted); font-weight: 700; font-size: .88rem; }
@@ -300,11 +281,6 @@ html[dir="ltr"] .copy-meta { text-align: start; }
   transform: rotate(var(--rot, 0deg));
 }
 
-/* v4: brand-invert cards + cleaner chess brilliant badge */
-.social-card {
-  --brand: var(--cyan);
-  --brand-rgb: 0,234,255;
-}
 .ig-card { --brand: #ff3d8e; --brand-rgb: 255,61,142; }
 .sc-card { --brand: #f8ff00; --brand-rgb: 248,255,0; }
 .tk-card { --brand: #00eaff; --brand-rgb: 0,234,255; }
@@ -344,26 +320,6 @@ html[dir="ltr"] .copy-meta { text-align: start; }
 
 .social-card:active { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-3px) scale(.99); }
 
-.brilliant-badge {
-  top: -4px;
-  left: 9px;
-  z-index: 6;
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  background: #17c2b1;
-  color: #fff;
-  box-shadow: none;
-  outline: 2px solid rgba(5, 10, 18, .88);
-  font-size: .82rem;
-  transform: none;
-}
-html[dir="ltr"] .brilliant-badge { left: auto; right: 9px; }
-.chess-card:hover .brilliant-badge,
-.chess-card:focus-visible .brilliant-badge {
-  animation: badgePop2d .72s var(--ease-spring) both;
-}
 
 .copy-btn:hover,
 .copy-btn:focus-visible,
@@ -382,30 +338,6 @@ html[dir="ltr"] .brilliant-badge { left: auto; right: 9px; }
   100% { transform: scale(1.04) rotate(0deg); }
 }
 
-/* v5 polish: privacy badges translate cleanly and chess Brilliant floats above icon */
-.badge-vip,
-.badge-vip-neo {
-  letter-spacing: .6px;
-}
-.brilliant-badge {
-  top: -11px;
-  left: -3px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #17c2b1;
-  color: #fff;
-  border: 1px solid #fff;
-  box-shadow: none;
-  transform: rotate(-16deg) translateZ(36px);
-  animation: brilliantFloat 2.8s ease-in-out infinite;
-  z-index: 4;
-}
-html[dir="ltr"] .brilliant-badge { left: -3px; right: auto; }
-@keyframes brilliantFloat {
-  0%, 100% { transform: rotate(-16deg) translateY(0) translateZ(36px); }
-  50% { transform: rotate(-10deg) translateY(-5px) translateZ(36px); }
-}
 .social-card:active,
 .social-card.is-pressed {
   background:
@@ -484,16 +416,6 @@ html[dir="ltr"] .brilliant-badge { left: -3px; right: auto; }
     font-size: .49rem;
     letter-spacing: .2px;
   }
-  html[dir="ltr"] .badge-vip,
-  html[dir="ltr"] .badge-vip-neo { right: auto; left: 7px; }
-  .brilliant-badge {
-    width: 23px;
-    height: 23px;
-    font-size: .62rem;
-    top: -8px;
-    left: -2px;
-  }
-  html[dir="ltr"] .brilliant-badge { left: -2px; right: auto; }
 
   .copy-row {
     min-height: 68px;
@@ -542,13 +464,6 @@ html[dir="ltr"] .brilliant-badge { left: -3px; right: auto; }
     padding-inline: 6px;
     border-radius: 999px;
     font-size: .52rem;
-  }
-  .brilliant-badge {
-    width: 22px;
-    height: 22px;
-    font-size: .62rem;
-    top: -8px;
-    left: -5px;
   }
   .copy-row {
     min-height: 68px;
@@ -764,4 +679,19 @@ html[dir="ltr"] .brilliant-badge { left: -3px; right: auto; }
     transform: translate3d(0, -1px, 0) scale(.99);
     filter: brightness(1.04);
   }
+}
+
+.copy-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+}
+
+.copy-icon .brand-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
