@@ -5,65 +5,1499 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#060a12" />
   <meta name="color-scheme" content="dark" />
-  <meta name="description" content="تفاصيل مشروع تأمين ضمن محفظة Omar v9." />
-  <title>تأمين | Omar Portfolio</title>
+  <meta name="description" content="Taameen project showcase: technical heritage, release evolution, architecture, and repository metrics." />
+  <title data-i18n="metaTitle">تأمين | Technical Heritage</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../styles/00-tokens.css" />
   <link rel="stylesheet" href="../styles/01-base.css" />
   <style>
-    body { min-height: 100vh; display: grid; place-items: center; padding: 22px; }
-    .page { width: min(760px, 100%); display: grid; gap: 18px; }
-    .hero {
-      border-radius: 26px;
-      padding: 24px;
-      border: 1px solid rgba(0,234,255,.18);
-      background: linear-gradient(145deg, rgba(12,21,38,.86), rgba(5,10,18,.94));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+    :root {
+      --page-max: 1180px;
+      --line: rgba(148,184,211,.16);
+      --panel: rgba(8, 16, 30, .72);
+      --panel-strong: rgba(7, 14, 26, .9);
+      --soft: rgba(215,230,248,.72);
+      --gold: #e7c75f;
+      --green: #35f29a;
+      --ease-premium: cubic-bezier(.18,.78,.26,1);
     }
-    .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand img { width: 58px; height: 58px; border-radius: 18px; border: 1px solid rgba(255,255,255,.12); }
-    h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1; }
-    .badge { padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(0,234,255,.24); color: var(--cyan-2); font-family: Rajdhani, Cairo, sans-serif; font-weight: 900; }
-    p { margin: 16px 0 0; color: var(--muted); font-weight: 750; line-height: 1.8; }
-    .english { direction: ltr; text-align: left; }
-    .tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding: 0; list-style: none; }
-    .tech li { padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); color: #dce8fa; font-weight: 800; font-size: .82rem; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
-    .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 14px; border-radius: 14px; border: 1px solid rgba(0,234,255,.24); background: rgba(0,234,255,.08); color: #fff; font-weight: 900; text-decoration: none; }
-    .btn.secondary { background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.1); }
-    @media (max-width: 560px) { body { padding: 12px; } .hero { padding: 18px; border-radius: 22px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); } }
+
+    * { box-sizing: border-box; }
+    html { min-height: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Cairo, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 6%, rgba(0,234,255,.21), transparent 31%),
+        radial-gradient(circle at 86% 18%, rgba(231,199,95,.12), transparent 28%),
+        radial-gradient(circle at 52% 92%, rgba(139,92,246,.14), transparent 32%),
+        linear-gradient(135deg, #031118 0%, #050a12 48%, #101022 100%);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(rgba(0,234,255,.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,234,255,.026) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.04) 0 1px, transparent 1.5px);
+      background-size: 72px 72px, 72px 72px, 36px 36px;
+      mask-image: radial-gradient(circle at 50% 18%, black 0 42%, transparent 78%);
+      animation: gridDrift 26s linear infinite;
+    }
+
+    body::after {
+      background:
+        linear-gradient(115deg, transparent 0 38%, rgba(0,234,255,.08) 45%, transparent 52% 100%),
+        linear-gradient(245deg, transparent 0 44%, rgba(231,199,95,.065) 52%, transparent 60% 100%);
+      opacity: .7;
+      animation: beamFloat 12s var(--ease-premium) infinite alternate;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .page-shell {
+      position: relative;
+      width: min(var(--page-max), calc(100% - 36px));
+      margin: 0 auto;
+      padding: 22px 0 52px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 58px;
+      margin-bottom: 18px;
+      padding: 8px;
+      border: 1px solid rgba(0,234,255,.14);
+      border-radius: 18px;
+      background: rgba(5, 10, 18, .72);
+      box-shadow: 0 18px 42px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .crumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 13px;
+      border-radius: 13px;
+      color: #eafcff;
+      font-weight: 900;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: transform 220ms var(--ease-premium), border-color 220ms var(--ease), background 220ms var(--ease);
+    }
+
+    .crumb:hover,
+    .crumb:focus-visible {
+      transform: translate3d(0, -2px, 0);
+      border-color: rgba(0,234,255,.32);
+      background: rgba(0,234,255,.09);
+      outline: none;
+    }
+
+    .lang-switch {
+      position: relative;
+      min-width: 46px;
+      height: 42px;
+      border: 1px solid rgba(0,234,255,.22);
+      border-radius: 13px;
+      background: rgba(0,234,255,.08);
+      color: var(--cyan-2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 220ms var(--ease-premium), border-color 220ms var(--ease), background 220ms var(--ease);
+    }
+
+    .lang-switch:hover,
+    .lang-switch:focus-visible {
+      transform: translate3d(0, -2px, 0);
+      border-color: rgba(231,199,95,.38);
+      background: rgba(231,199,95,.1);
+      outline: none;
+    }
+
+    .lang-switch::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0 36%, rgba(255,255,255,.54), transparent 62% 100%);
+      opacity: 0;
+      transform: translate3d(-120%, 0, 0);
+    }
+
+    .lang-switch:hover::after { animation: shineSweep 1.2s ease-out; }
+
+    .hero {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid rgba(0,234,255,.18);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(0,234,255,.18), transparent 34%),
+        radial-gradient(circle at 88% 24%, rgba(231,199,95,.13), transparent 28%),
+        linear-gradient(145deg, rgba(12, 22, 40, .86), rgba(5, 10, 18, .94));
+      box-shadow: 0 34px 90px rgba(0,0,0,.46), 0 0 38px rgba(0,234,255,.1), inset 0 1px 0 rgba(255,255,255,.07);
+      isolation: isolate;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero::before {
+      inset: -1px;
+      background:
+        linear-gradient(120deg, transparent 0 24%, rgba(0,234,255,.16) 39%, transparent 54% 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 72px);
+      opacity: .65;
+      animation: heroScan 8s var(--ease-premium) infinite;
+    }
+
+    .hero::after {
+      inset: auto 8% 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,234,255,.86), rgba(231,199,95,.72), transparent);
+      animation: lineBreathe 3.5s ease-in-out infinite;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, .72fr);
+      gap: 34px;
+      align-items: center;
+      padding: clamp(24px, 5vw, 54px);
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 18px;
+      text-align: start;
+    }
+
+    .kicker,
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: max-content;
+      max-width: 100%;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      color: var(--cyan-2);
+      background: rgba(0,234,255,.08);
+      border: 1px solid rgba(0,234,255,.18);
+      font-weight: 900;
+      font-size: .78rem;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3.2rem, 11vw, 7.6rem);
+      line-height: .88;
+      font-weight: 900;
+      letter-spacing: 0;
+      color: #fff;
+      text-shadow: 0 26px 60px rgba(0,0,0,.56), 0 0 28px rgba(0,234,255,.18);
+    }
+
+    .hero-lede {
+      max-width: 720px;
+      margin: 0;
+      color: rgba(226,237,255,.78);
+      font-size: clamp(1rem, 2.2vw, 1.24rem);
+      line-height: 1.9;
+      font-weight: 750;
+    }
+
+    .hero-actions,
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      position: relative;
+      min-height: 48px;
+      padding: 0 16px;
+      border: 1px solid rgba(0,234,255,.22);
+      border-radius: 15px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(0,234,255,.14), transparent 58%),
+        rgba(0,234,255,.08);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 900;
+      overflow: hidden;
+      box-shadow: 0 16px 34px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.06);
+      transition: transform 240ms var(--ease-premium), border-color 220ms var(--ease), background 220ms var(--ease), box-shadow 220ms var(--ease);
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,.055);
+      border-color: rgba(255,255,255,.11);
+      color: #e9f5ff;
+    }
+
+    .btn.gold {
+      color: #151609;
+      background: linear-gradient(135deg, var(--gold), #fff0a5);
+      border-color: rgba(231,199,95,.66);
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0 36%, rgba(255,255,255,.44), transparent 62% 100%);
+      opacity: 0;
+      transform: translate3d(-120%, 0, 0);
+      pointer-events: none;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translate3d(0, -3px, 0);
+      border-color: rgba(0,234,255,.42);
+      box-shadow: 0 22px 48px rgba(0,0,0,.34), 0 0 24px rgba(0,234,255,.14);
+      outline: none;
+    }
+
+    .btn:hover::after,
+    .btn:focus-visible::after { animation: shineSweep 1s ease-out; }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .logo-orb {
+      position: relative;
+      width: min(310px, 64vw);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255,255,255,.1), transparent 38%),
+        linear-gradient(145deg, rgba(10, 22, 39, .92), rgba(4, 9, 18, .96));
+      border: 1px solid rgba(0,234,255,.22);
+      box-shadow: 0 30px 78px rgba(0,0,0,.46), 0 0 42px rgba(0,234,255,.14), inset 0 1px 0 rgba(255,255,255,.08);
+      overflow: hidden;
+    }
+
+    .logo-orb::before,
+    .logo-orb::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(0,234,255,.16);
+      border-radius: 28px;
+      pointer-events: none;
+    }
+
+    .logo-orb::after {
+      inset: -40%;
+      border: 0;
+      background: conic-gradient(from 0deg, transparent, rgba(0,234,255,.28), transparent 35%, rgba(231,199,95,.22), transparent 68%);
+      animation: rotateSoft 10s linear infinite;
+    }
+
+    .logo-orb img {
+      position: relative;
+      z-index: 2;
+      width: 58%;
+      border-radius: 24px;
+      filter: drop-shadow(0 18px 32px rgba(0,0,0,.46));
+    }
+
+    .status-stack {
+      width: min(340px, 100%);
+      display: grid;
+      gap: 9px;
+    }
+
+    .status-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 44px;
+      padding: 0 13px;
+      border-radius: 14px;
+      color: #eafcff;
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.09);
+      font-weight: 850;
+    }
+
+    .status-chip b {
+      color: var(--gold);
+      font-family: Rajdhani, Cairo, sans-serif;
+      letter-spacing: .35px;
+    }
+
+    section.block {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 4vw, 2.35rem);
+      line-height: 1.12;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .section-head p {
+      max-width: 820px;
+      margin: 0;
+      color: var(--soft);
+      line-height: 1.8;
+      font-weight: 750;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .metrics-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+    .glass-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(0,234,255,.11), transparent 34%),
+        linear-gradient(145deg, rgba(10, 21, 38, .74), rgba(5, 10, 18, .88));
+      box-shadow: 0 18px 42px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.055);
+      transition: transform 260ms var(--ease-premium), border-color 220ms var(--ease), box-shadow 220ms var(--ease);
+      isolation: isolate;
+    }
+
+    .glass-card::before,
+    .glass-card::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .glass-card::before {
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0,234,255,.82), rgba(231,199,95,.56), rgba(139,92,246,.66));
+      opacity: 0;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      transition: opacity 220ms var(--ease);
+    }
+
+    .glass-card::after {
+      right: 12px;
+      bottom: 12px;
+      width: 54px;
+      height: 54px;
+      border-right: 1px solid rgba(0,234,255,.22);
+      border-bottom: 1px solid rgba(0,234,255,.22);
+      border-radius: 0 0 14px 0;
+      opacity: .7;
+      transform: translate3d(0, 0, 0);
+      transition: opacity 220ms var(--ease), transform 260ms var(--ease-premium), border-color 220ms var(--ease);
+    }
+
+    html[dir="rtl"] .glass-card::after {
+      right: auto;
+      left: 12px;
+      border-right: 0;
+      border-left: 1px solid rgba(0,234,255,.22);
+      border-radius: 0 0 0 14px;
+    }
+
+    .glass-card:hover,
+    .glass-card:focus-within {
+      transform: translate3d(0, -4px, 0);
+      border-color: rgba(0,234,255,.3);
+      box-shadow: 0 25px 58px rgba(0,0,0,.38), 0 0 26px rgba(0,234,255,.11);
+    }
+
+    .glass-card:hover::before,
+    .glass-card:focus-within::before { opacity: .72; }
+
+    .glass-card:hover::after,
+    .glass-card:focus-within::after {
+      opacity: 1;
+      transform: translate3d(-4px, -4px, 0);
+      border-color: rgba(231,199,95,.38);
+    }
+
+    .info-card {
+      min-height: 156px;
+      padding: 18px;
+      display: grid;
+      align-content: space-between;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--cyan-2);
+      background: rgba(0,234,255,.09);
+      border: 1px solid rgba(0,234,255,.18);
+      box-shadow: 0 0 18px rgba(0,234,255,.1);
+    }
+
+    .info-card span,
+    .metric span {
+      color: rgba(215,230,248,.62);
+      font-size: .76rem;
+      font-weight: 900;
+    }
+
+    .info-card strong,
+    .metric strong {
+      color: #fff;
+      font-family: Rajdhani, Cairo, sans-serif;
+      font-size: 1.38rem;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--soft);
+      font-size: .82rem;
+      line-height: 1.55;
+      font-weight: 750;
+    }
+
+    .metric {
+      min-height: 132px;
+      padding: 16px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      gap: 7px;
+    }
+
+    .metric strong {
+      font-size: clamp(1.8rem, 5vw, 2.65rem);
+      color: var(--cyan-2);
+      text-shadow: 0 0 20px rgba(0,234,255,.2);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 12px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      inset: 22px auto 22px 19px;
+      width: 2px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--cyan), var(--gold), var(--violet));
+      opacity: .42;
+      transform-origin: top;
+      animation: timelineFlow 4.5s ease-in-out infinite;
+    }
+
+    html[dir="rtl"] .timeline::before {
+      left: auto;
+      right: 19px;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    html[dir="rtl"] .timeline-item {
+      grid-template-columns: 1fr 42px;
+    }
+
+    .timeline-dot {
+      position: relative;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: #07111e;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      box-shadow: 0 0 20px rgba(0,234,255,.2);
+    }
+
+    html[dir="rtl"] .timeline-dot { order: 2; }
+
+    .timeline-card {
+      padding: 18px;
+    }
+
+    .timeline-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      min-height: 24px;
+      padding: 0 9px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      color: #dffaff;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.09);
+      font-family: Rajdhani, Cairo, sans-serif;
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .45px;
+    }
+
+    .tag.gold {
+      color: #151609;
+      background: linear-gradient(135deg, var(--gold), #fff0a5);
+      border-color: transparent;
+    }
+
+    .timeline-card h3,
+    .feature-card h3,
+    .heritage-card h3 {
+      margin: 0 0 7px;
+      color: #fff;
+      font-size: 1.05rem;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .timeline-card p,
+    .feature-card p,
+    .heritage-card p {
+      margin: 0;
+      color: var(--soft);
+      line-height: 1.72;
+      font-weight: 730;
+      font-size: .9rem;
+    }
+
+    .feature-card,
+    .heritage-card {
+      min-height: 220px;
+      padding: 18px;
+      display: grid;
+      align-content: start;
+      gap: 12px;
+    }
+
+    .heritage-panel {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .architecture-map {
+      padding: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .map-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    html[dir="rtl"] .map-row {
+      grid-template-columns: 1fr 150px;
+    }
+
+    .map-node,
+    .map-detail {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.045);
+      color: #eafcff;
+      font-weight: 850;
+    }
+
+    .map-node {
+      justify-content: center;
+      color: var(--cyan-2);
+      background: rgba(0,234,255,.08);
+      border-color: rgba(0,234,255,.16);
+    }
+
+    .map-detail {
+      color: rgba(226,237,255,.76);
+      font-size: .84rem;
+      line-height: 1.5;
+    }
+
+    .source-note {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(231,199,95,.2);
+      background: rgba(231,199,95,.07);
+      color: rgba(255,247,214,.86);
+      line-height: 1.7;
+      font-weight: 800;
+    }
+
+    .corner-energy {
+      position: fixed;
+      z-index: -1;
+      width: 180px;
+      height: 180px;
+      pointer-events: none;
+      opacity: .7;
+    }
+
+    .corner-energy::before,
+    .corner-energy::after {
+      content: "";
+      position: absolute;
+      border-color: rgba(0,234,255,.28);
+      border-style: solid;
+      filter: drop-shadow(0 0 12px rgba(0,234,255,.24));
+      animation: cornerPulse 3.8s ease-in-out infinite;
+    }
+
+    .corner-energy::before {
+      inset: 0;
+      border-width: 0 0 2px 2px;
+      border-radius: 0 0 0 24px;
+    }
+
+    .corner-energy::after {
+      left: 24px;
+      bottom: 24px;
+      width: 72px;
+      height: 2px;
+      border-width: 0;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--gold), transparent);
+      animation: cornerTrace 2.8s ease-in-out infinite;
+    }
+
+    .corner-left { left: 0; bottom: 0; }
+    .corner-right { right: 0; bottom: 0; transform: scaleX(-1); }
+
+    .reveal {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0) scale(.992);
+      transition: opacity 650ms var(--ease), transform 650ms var(--ease-premium);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    @keyframes gridDrift {
+      to { background-position: 72px 72px, 72px 72px, 36px 36px; }
+    }
+
+    @keyframes beamFloat {
+      from { transform: translate3d(-2%, -1%, 0); opacity: .48; }
+      to { transform: translate3d(2%, 1%, 0); opacity: .78; }
+    }
+
+    @keyframes heroScan {
+      0%, 38% { transform: translate3d(-28%, 0, 0); opacity: .4; }
+      62% { opacity: .72; }
+      100% { transform: translate3d(28%, 0, 0); opacity: .4; }
+    }
+
+    @keyframes lineBreathe {
+      0%, 100% { opacity: .28; transform: scaleX(.46); }
+      50% { opacity: .88; transform: scaleX(1); }
+    }
+
+    @keyframes rotateSoft { to { transform: rotate(360deg); } }
+
+    @keyframes shineSweep {
+      0% { opacity: 0; transform: translate3d(-120%, 0, 0); }
+      42% { opacity: .7; }
+      100% { opacity: 0; transform: translate3d(120%, 0, 0); }
+    }
+
+    @keyframes timelineFlow {
+      0%, 100% { transform: scaleY(.72); opacity: .3; }
+      50% { transform: scaleY(1); opacity: .56; }
+    }
+
+    @keyframes cornerPulse {
+      0%, 100% { opacity: .28; transform: translate3d(0, 0, 0); }
+      50% { opacity: .72; transform: translate3d(4px, -4px, 0); }
+    }
+
+    @keyframes cornerTrace {
+      0%, 100% { opacity: .18; transform: scaleX(.35); }
+      50% { opacity: .86; transform: scaleX(1); }
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner,
+      .heritage-panel {
+        grid-template-columns: 1fr;
+      }
+      .hero { min-height: auto; }
+      .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .metrics-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .page-shell {
+        width: min(430px, calc(100% - 18px));
+        padding-top: 10px;
+      }
+      .topbar {
+        top: 8px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      .crumb span { display: none; }
+      .hero {
+        border-radius: 24px;
+      }
+      .hero-inner {
+        gap: 24px;
+        padding: 22px 16px 24px;
+      }
+      .hero h1 {
+        font-size: clamp(3rem, 18vw, 4.7rem);
+      }
+      .hero-lede {
+        font-size: .92rem;
+        line-height: 1.75;
+      }
+      .logo-orb {
+        width: min(230px, 70vw);
+        border-radius: 26px;
+      }
+      .info-grid,
+      .feature-grid,
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+      .info-card,
+      .feature-card,
+      .heritage-card,
+      .timeline-card {
+        padding: 15px;
+        border-radius: 18px;
+      }
+      .timeline-item,
+      html[dir="rtl"] .timeline-item {
+        grid-template-columns: 34px 1fr;
+      }
+      html[dir="rtl"] .timeline-dot { order: 0; }
+      .timeline::before,
+      html[dir="rtl"] .timeline::before {
+        left: 16px;
+        right: auto;
+      }
+      .timeline-dot {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+      }
+      .map-row,
+      html[dir="rtl"] .map-row {
+        grid-template-columns: 1fr;
+      }
+      .map-node {
+        justify-content: flex-start;
+      }
+      html[dir="rtl"] .map-node {
+        justify-content: flex-end;
+      }
+      .corner-energy {
+        width: 116px;
+        height: 116px;
+        opacity: .38;
+      }
+      body::before,
+      body::after {
+        opacity: .55;
+        animation-duration: 34s;
+      }
+      .glass-card:hover,
+      .glass-card:focus-within {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .page-shell { width: calc(100% - 14px); }
+      .btn { width: 100%; }
+      .hero-actions,
+      .action-row { width: 100%; }
+      .status-chip { font-size: .82rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      body::before,
+      body::after,
+      .hero::before,
+      .hero::after,
+      .logo-orb::after,
+      .timeline::before,
+      .corner-energy::before,
+      .corner-energy::after {
+        animation-duration: 28s !important;
+      }
+      .reveal {
+        transform: translate3d(0, 8px, 0) scale(.998);
+        transition-duration: 260ms;
+      }
+    }
   </style>
 </head>
 <body>
-  <main class="page">
-    <section class="hero">
-      <div class="top">
-        <div class="brand">
-          <img src="../assets/img/tameen-logo.webp" alt="Taamenn logo" />
-          <div>
-            <span class="badge">LEGACY</span>
-            <h1>تأمين</h1>
+  <div class="corner-energy corner-left" aria-hidden="true"></div>
+  <div class="corner-energy corner-right" aria-hidden="true"></div>
+
+  <main class="page-shell">
+    <nav class="topbar" aria-label="Project navigation">
+      <a class="crumb" href="../index.html">
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        <span data-i18n="backPortfolio">رجوع للمحفظة</span>
+      </a>
+      <button class="lang-switch" id="langToggle" type="button" aria-label="تغيير اللغة">
+        <i class="fa-solid fa-language" aria-hidden="true"></i>
+      </button>
+    </nav>
+
+    <section class="hero reveal">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="kicker"><i class="fa-solid fa-shield-halved"></i><span data-i18n="heroKicker">إرث تقني محفوظ</span></span>
+          <h1 data-i18n="heroTitle">تأمين</h1>
+          <p class="hero-lede" data-i18n="heroLede">صفحة عرض تقنية لمشروع تأمين 2026: تطبيق ثابت تطور من منصة مباريات إلى نظام يحتوي أرشيفًا، رادارًا تكتيكيًا، خدمات طقس وصلاة، مركز خصوصية، ومساعدًا ذكيًا محليًا.</p>
+          <div class="hero-actions">
+            <a class="btn gold" href="https://omar-i9.github.io/taamenn/" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-up-right-from-square"></i>
+              <span data-i18n="visitProject">زيارة المشروع</span>
+            </a>
+            <a class="btn" href="https://github.com/Omar-i9/taamenn" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="githubRepo">مستودع GitHub</span>
+            </a>
+            <a class="btn secondary" href="../index.html">
+              <i class="fa-solid fa-house"></i>
+              <span data-i18n="backShort">المحفظة</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="logo-orb" aria-hidden="true">
+            <img src="../assets/img/tameen-logo.webp" alt="" />
+          </div>
+          <div class="status-stack" aria-label="Project status">
+            <div class="status-chip"><span data-i18n="statusLabel">الحالة</span><b>LEGACY</b></div>
+            <div class="status-chip"><span data-i18n="versionLabel">البناء الحالي</span><b>V5.11</b></div>
+            <div class="status-chip"><span data-i18n="updatedLabel">آخر تحديث</span><b>2026-06-30</b></div>
           </div>
         </div>
       </div>
-      <p>مشروع تأمين محفوظ كإرث تقني خفيف ضمن رحلة عمر. الصفحة هنا تعطي تفاصيل مختصرة بدون تعقيد وتحافظ على الرابط الأصلي للمشروع.</p>
-      <p class="english">Taamenn is preserved as a lightweight technical legacy from Omar's journey. This detail page keeps the original live project link while preparing the site for a cleaner v9 portfolio.</p>
-      <ul class="tech" aria-label="التقنيات">
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>GitHub Pages</li>
-      </ul>
     </section>
-    <nav class="actions" aria-label="روابط المشروع">
-      <a class="btn" href="https://omar-i9.github.io/taamenn/" target="_blank" rel="noopener noreferrer">زيارة المشروع</a>
-      <a class="btn secondary" href="../index.html">رجوع للموقع</a>
-    </nav>
+
+    <section class="block reveal" style="--delay:80ms">
+      <div class="section-head">
+        <span class="eyebrow"><i class="fa-solid fa-chart-simple"></i><span data-i18n="metricsKicker">مقاييس من المستودع</span></span>
+        <h2 data-i18n="metricsTitle">حجم المشروع الحالي</h2>
+        <p data-i18n="metricsText">تم تحليل README، ملفات docs، البنية، Service Worker، وسجل commits المتاح في المستودع بتاريخ 2026-07-05.</p>
+      </div>
+      <div class="grid metrics-grid">
+        <article class="metric glass-card"><strong data-count="75">0</strong><span data-i18n="metricFiles">ملفًا متتبعًا</span></article>
+        <article class="metric glass-card"><strong data-count="17669">0</strong><span data-i18n="metricLines">سطرًا تقريبًا</span></article>
+        <article class="metric glass-card"><strong data-count="27">0</strong><span data-i18n="metricCss">ملف CSS</span></article>
+        <article class="metric glass-card"><strong data-count="26">0</strong><span data-i18n="metricJs">ملف JavaScript</span></article>
+        <article class="metric glass-card"><strong data-count="24">0</strong><span data-i18n="metricModules">وحدة JS</span></article>
+        <article class="metric glass-card"><strong data-count="15">0</strong><span data-i18n="metricDocs">ملف توثيق</span></article>
+      </div>
+    </section>
+
+    <section class="block reveal" style="--delay:120ms">
+      <div class="section-head">
+        <span class="eyebrow"><i class="fa-solid fa-circle-info"></i><span data-i18n="infoKicker">معلومات المشروع</span></span>
+        <h2 data-i18n="infoTitle">بطاقات تقنية سريعة</h2>
+      </div>
+      <div class="grid info-grid">
+        <article class="info-card glass-card">
+          <i class="card-icon fa-solid fa-code-branch"></i>
+          <span data-i18n="cardVersionLabel">الإصدار</span>
+          <strong>V5.x</strong>
+          <p data-i18n="cardVersionText">المستودع يحتوي tag باسم v5.2، وملف الكاش الحالي يشير إلى v5-11-focused-ux-cleanup.</p>
+        </article>
+        <article class="info-card glass-card">
+          <i class="card-icon fa-solid fa-layer-group"></i>
+          <span data-i18n="cardArchitectureLabel">المعمارية</span>
+          <strong>Static SPA</strong>
+          <p data-i18n="cardArchitectureText">صفحة HTML رئيسية، router بالهاش، وحدات ES modules، وبيانات محلية منفصلة.</p>
+        </article>
+        <article class="info-card glass-card">
+          <i class="card-icon fa-solid fa-microchip"></i>
+          <span data-i18n="cardStackLabel">التقنيات</span>
+          <strong>HTML/CSS/JS</strong>
+          <p data-i18n="cardStackText">لا يوجد build system أو npm. المشروع مناسب للنشر المباشر على GitHub Pages.</p>
+        </article>
+        <article class="info-card glass-card">
+          <i class="card-icon fa-solid fa-globe"></i>
+          <span data-i18n="cardLanguagesLabel">اللغة</span>
+          <strong data-i18n="cardLanguagesValue">عربية أساسية</strong>
+          <p data-i18n="cardLanguagesText">واجهة المشروع الأصلية RTL بالعربية، وصفحة العرض هذه تدعم العربية والإنجليزية.</p>
+        </article>
+        <article class="info-card glass-card">
+          <i class="card-icon fa-solid fa-clock-rotate-left"></i>
+          <span data-i18n="cardActivityLabel">النشاط</span>
+          <strong>12</strong>
+          <p data-i18n="cardActivityText">تمت قراءة 12 commit متاحًا، آخرها في 2026-06-30.</p>
+        </article>
+        <article class="info-card glass-card">
+          <i class="card-icon fa-solid fa-database"></i>
+          <span data-i18n="cardDataLabel">البيانات</span>
+          <strong>Local</strong>
+          <p data-i18n="cardDataText">يعتمد على data/site-data.js و data/injuries-data.js مع تخزين محلي للخيارات.</p>
+        </article>
+        <article class="info-card glass-card">
+          <i class="card-icon fa-solid fa-rotate"></i>
+          <span data-i18n="cardPwaLabel">الأوفلاين</span>
+          <strong>SW Cache</strong>
+          <p data-i18n="cardPwaText">ملف sw.js يجهز كاش للملفات الأساسية ويتجنب fallback خاطئ لملفات JS/CSS.</p>
+        </article>
+        <article class="info-card glass-card">
+          <i class="card-icon fa-solid fa-scale-balanced"></i>
+          <span data-i18n="cardLicenseLabel">الرخصة</span>
+          <strong data-i18n="cardLicenseValue">غير موضحة</strong>
+          <p data-i18n="cardLicenseText">لم يظهر ملف LICENSE ضمن الملفات التي تم تحليلها، لذلك لم أضع ترخيصًا مفترضًا.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block reveal" style="--delay:160ms">
+      <div class="section-head">
+        <span class="eyebrow"><i class="fa-solid fa-timeline"></i><span data-i18n="timelineKicker">Project Evolution</span></span>
+        <h2 data-i18n="timelineTitle">رحلة التطور</h2>
+        <p data-i18n="timelineText">الخط الزمني التالي مبني على README، ملفات docs، وسجل commits المتاح، مع تجنب أي تاريخ غير موجود في المستودع.</p>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V3.4</span><span class="tag" data-i18n="timelineNoDate">تاريخ غير محدد في docs</span></div>
+            <h3 data-i18n="t1Title">طبقة الصحة والقبلة</h3>
+            <p data-i18n="t1Text">أضافت الوثائق صفحة الإصابات والحالات، سجلًا مخفيًا، صفحة قبلة وبوصلة، فحص قدرات الجهاز، وتحسين تجربة الجوال مع زر مشاركة لقطة الصفحة.</p>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V3.5</span><span class="tag" data-i18n="timelineNoDate">تاريخ غير محدد في docs</span></div>
+            <h3 data-i18n="t2Title">إصلاح التعافي والرادار</h3>
+            <p data-i18n="t2Text">فصل الحالات النشطة عن سجل التعافي تلقائيًا، وأضاف شريط مرحلة الحالة، وحسن لمس وسحب الرادار، مع طبقة CSS مستقلة للإصلاحات.</p>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-users-viewfinder"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V3.8</span><span class="tag">Radar Pro</span></div>
+            <h3 data-i18n="t3Title">تطور الرادار التكتيكي</h3>
+            <p data-i18n="t3Text">أعيد بناء منطق السحب والتحريك، أضيفت لوحات جانبية، قائمة أسماء سريعة، نافذة تعديل لاعب، وتكتيك مرتدة 2-1-1، مع ترميم تلقائي للتخزين القديم.</p>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-pause"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V3.9</span><span class="tag">Maintenance</span></div>
+            <h3 data-i18n="t4Title">إيقاف الرادار مؤقتًا</h3>
+            <p data-i18n="t4Text">تمت إزالة مسار وأزرار الرادار من الواجهة مؤقتًا لحماية باقي الموقع، مع إبقاء ملفات الرادار محفوظة للعودة إليها لاحقًا.</p>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-route"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V4.0</span><span class="tag">Navigation</span></div>
+            <h3 data-i18n="t5Title">استقرار التنقل</h3>
+            <p data-i18n="t5Text">ركز الإصدار على تقوية زر المزيد، ترتيب الصفحات الثانوية، منع الطبقات الزخرفية من تعطيل الضغط، وتحديث Service Worker لجلب ملفات CSS وJS الجديدة.</p>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V5.2</span><span class="tag">2026-06-21</span></div>
+            <h3 data-i18n="t6Title">مركز الخصوصية والأمان</h3>
+            <p data-i18n="t6Text">أضيف مسار #security، نظام موافقة Cookies، لوحة تفضيلات، حذف بيانات تأمين من الجهاز، ونموذج بلاغ أمني، مع توضيح أن المشروع static ولا يملك جلسات دخول.</p>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-crosshairs"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V5</span><span class="tag">Radar Rebuild</span></div>
+            <h3 data-i18n="t7Title">عودة الرادار كصفحة حقيقية</h3>
+            <p data-i18n="t7Text">عاد مسار radar، وأعيد بناء js/modules/tactical.js من الصفر، وأضيف css/22-radar-rebuild.css، مع مفاتيح تخزين v5 وترحيل آمن من المفاتيح القديمة.</p>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-brain"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V5.4 / V5.6</span><span class="tag">AI</span></div>
+            <h3 data-i18n="t8Title">نضج المساعد الذكي</h3>
+            <p data-i18n="t8Text">تطور المساعد من قراءة بيانات الموقع إلى حزمة معرفة محلية، تصنيف نوايا، مستويات أمان، retrieval، قوالب ردود، اقتراحات accordion، ودردشة عائمة، دون وضع API key داخل الواجهة.</p>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"><i class="fa-solid fa-gem"></i></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta"><span class="tag gold">V5.11</span><span class="tag">2026-06-30</span></div>
+            <h3 data-i18n="t9Title">تنظيف تجربة الاستخدام</h3>
+            <p data-i18n="t9Text">آخر commits المتاحة تشير إلى declutter home، تحسين صفحات Taamen UX، وتحديث site-data.js. ملف Service Worker الحالي يسمي البناء focused UX cleanup.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block reveal" style="--delay:180ms">
+      <div class="section-head">
+        <span class="eyebrow"><i class="fa-solid fa-code"></i><span data-i18n="evoKicker">What Changed</span></span>
+        <h2 data-i18n="evoTitle">Project Evolution</h2>
+        <p data-i18n="evoText">التغييرات لم تكن مجرد زخرفة: أغلب الإصدارات عالجت حدودًا عملية في التنقل، التخزين، الرادار، الخصوصية، والمساعد المحلي.</p>
+      </div>
+      <div class="grid feature-grid">
+        <article class="feature-card glass-card">
+          <i class="card-icon fa-solid fa-compass-drafting"></i>
+          <h3 data-i18n="e1Title">من صفحات إلى نظام routes</h3>
+          <p data-i18n="e1Text">وجود router.js وقائمة validRoutes جعل التطبيق يعمل كـSPA ثابتة، مع انتقالات hash بدل صفحات منفصلة كثيرة.</p>
+        </article>
+        <article class="feature-card glass-card">
+          <i class="card-icon fa-solid fa-database"></i>
+          <h3 data-i18n="e2Title">بيانات مفصولة عن الواجهة</h3>
+          <p data-i18n="e2Text">ملفات data/site-data.js و data/injuries-data.js جعلت تحديث المباريات والإصابات والتكتيكات أقرب لتحرير بيانات بدل تعديل layout.</p>
+        </article>
+        <article class="feature-card glass-card">
+          <i class="card-icon fa-solid fa-mobile-screen"></i>
+          <h3 data-i18n="e3Title">جوال أقل ازدحامًا</h3>
+          <p data-i18n="e3Text">وثائق V4 و V5.6 تشير إلى تقليل ازدحام الجوال، فصل صفحات المزيد، وتحسين جودة تفاعل AI على الشاشات الصغيرة.</p>
+        </article>
+        <article class="feature-card glass-card">
+          <i class="card-icon fa-solid fa-shield"></i>
+          <h3 data-i18n="e4Title">خصوصية أوضح</h3>
+          <p data-i18n="e4Text">تمت إضافة مركز خصوصية، إعدادات Cookies، حذف بيانات الجهاز، ورسالة صريحة بأن المفاتيح السرية لا توضع داخل ملفات الواجهة.</p>
+        </article>
+        <article class="feature-card glass-card">
+          <i class="card-icon fa-solid fa-futbol"></i>
+          <h3 data-i18n="e5Title">رادار أكثر استقرارًا</h3>
+          <p data-i18n="e5Text">الرادار مر بدورة إيقاف ثم إعادة بناء، وهي إشارة نضج: حفظ الملفات، إصلاح التخزين، ثم العودة بمفاتيح v5 ومنطق جديد.</p>
+        </article>
+        <article class="feature-card glass-card">
+          <i class="card-icon fa-solid fa-cloud-arrow-down"></i>
+          <h3 data-i18n="e6Title">كاش أوضح</h3>
+          <p data-i18n="e6Text">Service Worker يضع قائمة ملفات صريحة ويتجنب إرجاع HTML لطلبات JS/CSS عند الفشل، لتقليل أخطاء syntax في المتصفح.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block reveal" style="--delay:220ms">
+      <div class="section-head">
+        <span class="eyebrow"><i class="fa-solid fa-landmark"></i><span data-i18n="heritageKicker">Technical Heritage</span></span>
+        <h2 data-i18n="heritageTitle">الإرث التقني</h2>
+      </div>
+      <div class="heritage-panel">
+        <article class="heritage-card glass-card">
+          <i class="card-icon fa-solid fa-seedling"></i>
+          <h3 data-i18n="heritage1Title">نضج تدريجي لا قفزة واحدة</h3>
+          <p data-i18n="heritage1Text">المستودع يوضح مشروعًا نما بإصلاحات متتابعة: صحة وقبلة، إصابات، رادار، تنقل، أمان، ثم AI. هذا يعطيه قيمة كأثر تقني لمسار تعلّم وتطوير عملي.</p>
+        </article>
+        <div class="architecture-map glass-card">
+          <div class="map-row">
+            <div class="map-node"><i class="fa-solid fa-window-maximize"></i><span>index.html</span></div>
+            <div class="map-detail" data-i18n="map1">App shell واحد يحتوي الصفحات والحوارات والأزرار الأساسية.</div>
+          </div>
+          <div class="map-row">
+            <div class="map-node"><i class="fa-solid fa-diagram-project"></i><span>js/app.js</span></div>
+            <div class="map-detail" data-i18n="map2">نقطة boot تستدعي الساعة، الثيم، الراوتر، الخدمات، AI، الرادار، الإصابات، والقبلة.</div>
+          </div>
+          <div class="map-row">
+            <div class="map-node"><i class="fa-solid fa-route"></i><span>router.js</span></div>
+            <div class="map-detail" data-i18n="map3">تنقل hash routes مع active states وإغلاق قوائم الجوال والمزيد.</div>
+          </div>
+          <div class="map-row">
+            <div class="map-node"><i class="fa-solid fa-database"></i><span>data</span></div>
+            <div class="map-detail" data-i18n="map4">بيانات الموقع والإصابات منفصلة عن منطق العرض.</div>
+          </div>
+          <div class="map-row">
+            <div class="map-node"><i class="fa-solid fa-rotate"></i><span>sw.js</span></div>
+            <div class="map-detail" data-i18n="map5">كاش للأصول الأساسية وتعامل حذر مع الطلبات الخارجية والملفات البرمجية.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block reveal" style="--delay:240ms">
+      <div class="source-note">
+        <strong data-i18n="sourceTitle">مصادر التحليل:</strong>
+        <span data-i18n="sourceText"> README.md، docs/V3_5_UPDATE_NOTES.md، docs/V3_8_RADAR_PRO_NOTES.md، docs/V3_9_RADAR_PAUSED_NOTES.md، docs/V4_0_NAVIGATION_STABILITY_NOTES.md، docs/V5_*، sw.js، manifest.json، js/app.js، js/modules/router.js، وسجل commits.</span>
+      </div>
+    </section>
   </main>
+
+  <script>
+    const dict = {
+      ar: {
+        metaTitle: 'تأمين | Technical Heritage',
+        backPortfolio: 'رجوع للمحفظة',
+        heroKicker: 'إرث تقني محفوظ',
+        heroTitle: 'تأمين',
+        heroLede: 'صفحة عرض تقنية لمشروع تأمين 2026: تطبيق ثابت تطور من منصة مباريات إلى نظام يحتوي أرشيفًا، رادارًا تكتيكيًا، خدمات طقس وصلاة، مركز خصوصية، ومساعدًا ذكيًا محليًا.',
+        visitProject: 'زيارة المشروع',
+        githubRepo: 'مستودع GitHub',
+        backShort: 'المحفظة',
+        statusLabel: 'الحالة',
+        versionLabel: 'البناء الحالي',
+        updatedLabel: 'آخر تحديث',
+        metricsKicker: 'مقاييس من المستودع',
+        metricsTitle: 'حجم المشروع الحالي',
+        metricsText: 'تم تحليل README، ملفات docs، البنية، Service Worker، وسجل commits المتاح في المستودع بتاريخ 2026-07-05.',
+        metricFiles: 'ملفًا متتبعًا',
+        metricLines: 'سطرًا تقريبًا',
+        metricCss: 'ملف CSS',
+        metricJs: 'ملف JavaScript',
+        metricModules: 'وحدة JS',
+        metricDocs: 'ملف توثيق',
+        infoKicker: 'معلومات المشروع',
+        infoTitle: 'بطاقات تقنية سريعة',
+        cardVersionLabel: 'الإصدار',
+        cardVersionText: 'المستودع يحتوي tag باسم v5.2، وملف الكاش الحالي يشير إلى v5-11-focused-ux-cleanup.',
+        cardArchitectureLabel: 'المعمارية',
+        cardArchitectureText: 'صفحة HTML رئيسية، router بالهاش، وحدات ES modules، وبيانات محلية منفصلة.',
+        cardStackLabel: 'التقنيات',
+        cardStackText: 'لا يوجد build system أو npm. المشروع مناسب للنشر المباشر على GitHub Pages.',
+        cardLanguagesLabel: 'اللغة',
+        cardLanguagesValue: 'عربية أساسية',
+        cardLanguagesText: 'واجهة المشروع الأصلية RTL بالعربية، وصفحة العرض هذه تدعم العربية والإنجليزية.',
+        cardActivityLabel: 'النشاط',
+        cardActivityText: 'تمت قراءة 12 commit متاحًا، آخرها في 2026-06-30.',
+        cardDataLabel: 'البيانات',
+        cardDataText: 'يعتمد على data/site-data.js و data/injuries-data.js مع تخزين محلي للخيارات.',
+        cardPwaLabel: 'الأوفلاين',
+        cardPwaText: 'ملف sw.js يجهز كاش للملفات الأساسية ويتجنب fallback خاطئ لملفات JS/CSS.',
+        cardLicenseLabel: 'الرخصة',
+        cardLicenseValue: 'غير موضحة',
+        cardLicenseText: 'لم يظهر ملف LICENSE ضمن الملفات التي تم تحليلها، لذلك لم أضع ترخيصًا مفترضًا.',
+        timelineKicker: 'Project Evolution',
+        timelineTitle: 'رحلة التطور',
+        timelineText: 'الخط الزمني التالي مبني على README، ملفات docs، وسجل commits المتاح، مع تجنب أي تاريخ غير موجود في المستودع.',
+        timelineNoDate: 'تاريخ غير محدد في docs',
+        t1Title: 'طبقة الصحة والقبلة',
+        t1Text: 'أضافت الوثائق صفحة الإصابات والحالات، سجلًا مخفيًا، صفحة قبلة وبوصلة، فحص قدرات الجهاز، وتحسين تجربة الجوال مع زر مشاركة لقطة الصفحة.',
+        t2Title: 'إصلاح التعافي والرادار',
+        t2Text: 'فصل الحالات النشطة عن سجل التعافي تلقائيًا، وأضاف شريط مرحلة الحالة، وحسن لمس وسحب الرادار، مع طبقة CSS مستقلة للإصلاحات.',
+        t3Title: 'تطور الرادار التكتيكي',
+        t3Text: 'أعيد بناء منطق السحب والتحريك، أضيفت لوحات جانبية، قائمة أسماء سريعة، نافذة تعديل لاعب، وتكتيك مرتدة 2-1-1، مع ترميم تلقائي للتخزين القديم.',
+        t4Title: 'إيقاف الرادار مؤقتًا',
+        t4Text: 'تمت إزالة مسار وأزرار الرادار من الواجهة مؤقتًا لحماية باقي الموقع، مع إبقاء ملفات الرادار محفوظة للعودة إليها لاحقًا.',
+        t5Title: 'استقرار التنقل',
+        t5Text: 'ركز الإصدار على تقوية زر المزيد، ترتيب الصفحات الثانوية، منع الطبقات الزخرفية من تعطيل الضغط، وتحديث Service Worker لجلب ملفات CSS وJS الجديدة.',
+        t6Title: 'مركز الخصوصية والأمان',
+        t6Text: 'أضيف مسار #security، نظام موافقة Cookies، لوحة تفضيلات، حذف بيانات تأمين من الجهاز، ونموذج بلاغ أمني، مع توضيح أن المشروع static ولا يملك جلسات دخول.',
+        t7Title: 'عودة الرادار كصفحة حقيقية',
+        t7Text: 'عاد مسار radar، وأعيد بناء js/modules/tactical.js من الصفر، وأضيف css/22-radar-rebuild.css، مع مفاتيح تخزين v5 وترحيل آمن من المفاتيح القديمة.',
+        t8Title: 'نضج المساعد الذكي',
+        t8Text: 'تطور المساعد من قراءة بيانات الموقع إلى حزمة معرفة محلية، تصنيف نوايا، مستويات أمان، retrieval، قوالب ردود، اقتراحات accordion، ودردشة عائمة، دون وضع API key داخل الواجهة.',
+        t9Title: 'تنظيف تجربة الاستخدام',
+        t9Text: 'آخر commits المتاحة تشير إلى declutter home، تحسين صفحات Taamen UX، وتحديث site-data.js. ملف Service Worker الحالي يسمي البناء focused UX cleanup.',
+        evoKicker: 'What Changed',
+        evoTitle: 'Project Evolution',
+        evoText: 'التغييرات لم تكن مجرد زخرفة: أغلب الإصدارات عالجت حدودًا عملية في التنقل، التخزين، الرادار، الخصوصية، والمساعد المحلي.',
+        e1Title: 'من صفحات إلى نظام routes',
+        e1Text: 'وجود router.js وقائمة validRoutes جعل التطبيق يعمل كـSPA ثابتة، مع انتقالات hash بدل صفحات منفصلة كثيرة.',
+        e2Title: 'بيانات مفصولة عن الواجهة',
+        e2Text: 'ملفات data/site-data.js و data/injuries-data.js جعلت تحديث المباريات والإصابات والتكتيكات أقرب لتحرير بيانات بدل تعديل layout.',
+        e3Title: 'جوال أقل ازدحامًا',
+        e3Text: 'وثائق V4 و V5.6 تشير إلى تقليل ازدحام الجوال، فصل صفحات المزيد، وتحسين جودة تفاعل AI على الشاشات الصغيرة.',
+        e4Title: 'خصوصية أوضح',
+        e4Text: 'تمت إضافة مركز خصوصية، إعدادات Cookies، حذف بيانات الجهاز، ورسالة صريحة بأن المفاتيح السرية لا توضع داخل ملفات الواجهة.',
+        e5Title: 'رادار أكثر استقرارًا',
+        e5Text: 'الرادار مر بدورة إيقاف ثم إعادة بناء، وهي إشارة نضج: حفظ الملفات، إصلاح التخزين، ثم العودة بمفاتيح v5 ومنطق جديد.',
+        e6Title: 'كاش أوضح',
+        e6Text: 'Service Worker يضع قائمة ملفات صريحة ويتجنب إرجاع HTML لطلبات JS/CSS عند الفشل، لتقليل أخطاء syntax في المتصفح.',
+        heritageKicker: 'Technical Heritage',
+        heritageTitle: 'الإرث التقني',
+        heritage1Title: 'نضج تدريجي لا قفزة واحدة',
+        heritage1Text: 'المستودع يوضح مشروعًا نما بإصلاحات متتابعة: صحة وقبلة، إصابات، رادار، تنقل، أمان، ثم AI. هذا يعطيه قيمة كأثر تقني لمسار تعلّم وتطوير عملي.',
+        map1: 'App shell واحد يحتوي الصفحات والحوارات والأزرار الأساسية.',
+        map2: 'نقطة boot تستدعي الساعة، الثيم، الراوتر، الخدمات، AI، الرادار، الإصابات، والقبلة.',
+        map3: 'تنقل hash routes مع active states وإغلاق قوائم الجوال والمزيد.',
+        map4: 'بيانات الموقع والإصابات منفصلة عن منطق العرض.',
+        map5: 'كاش للأصول الأساسية وتعامل حذر مع الطلبات الخارجية والملفات البرمجية.',
+        sourceTitle: 'مصادر التحليل:',
+        sourceText: ' README.md، docs/V3_5_UPDATE_NOTES.md، docs/V3_8_RADAR_PRO_NOTES.md، docs/V3_9_RADAR_PAUSED_NOTES.md، docs/V4_0_NAVIGATION_STABILITY_NOTES.md، docs/V5_*، sw.js، manifest.json، js/app.js، js/modules/router.js، وسجل commits.'
+      },
+      en: {
+        metaTitle: 'Taameen | Technical Heritage',
+        backPortfolio: 'Back to Portfolio',
+        heroKicker: 'Preserved Technical Heritage',
+        heroTitle: 'Taameen',
+        heroLede: 'A technical showcase for Taameen 2026: a static app that evolved from a match platform into a system with archives, tactical radar, weather and prayer services, privacy controls, and a local AI assistant.',
+        visitProject: 'Visit Project',
+        githubRepo: 'GitHub Repository',
+        backShort: 'Portfolio',
+        statusLabel: 'Status',
+        versionLabel: 'Current build',
+        updatedLabel: 'Last update',
+        metricsKicker: 'Repository Metrics',
+        metricsTitle: 'Current Project Scale',
+        metricsText: 'README, docs, structure, Service Worker, and available commit history were analyzed from the repository on 2026-07-05.',
+        metricFiles: 'tracked files',
+        metricLines: 'approx. lines',
+        metricCss: 'CSS files',
+        metricJs: 'JavaScript files',
+        metricModules: 'JS modules',
+        metricDocs: 'documentation files',
+        infoKicker: 'Project Information',
+        infoTitle: 'Technical Snapshot',
+        cardVersionLabel: 'Version',
+        cardVersionText: 'The repository includes a v5.2 tag, while the current cache name points to v5-11-focused-ux-cleanup.',
+        cardArchitectureLabel: 'Architecture',
+        cardArchitectureText: 'One HTML app shell, hash router, ES modules, and separated local data files.',
+        cardStackLabel: 'Stack',
+        cardStackText: 'No build system or npm. The project can be deployed directly on GitHub Pages.',
+        cardLanguagesLabel: 'Language',
+        cardLanguagesValue: 'Arabic primary',
+        cardLanguagesText: 'The original app is Arabic RTL. This showcase page supports Arabic and English.',
+        cardActivityLabel: 'Activity',
+        cardActivityText: '12 available commits were read, with the latest dated 2026-06-30.',
+        cardDataLabel: 'Data',
+        cardDataText: 'Uses data/site-data.js and data/injuries-data.js, plus local storage for preferences.',
+        cardPwaLabel: 'Offline',
+        cardPwaText: 'sw.js prepares an explicit asset cache and avoids bad HTML fallbacks for JS/CSS.',
+        cardLicenseLabel: 'License',
+        cardLicenseValue: 'Not specified',
+        cardLicenseText: 'No LICENSE file appeared in the analyzed files, so no license was assumed.',
+        timelineKicker: 'Project Evolution',
+        timelineTitle: 'Evolution Timeline',
+        timelineText: 'This timeline is based on README, docs, and available commits. Dates not present in the repository are not invented.',
+        timelineNoDate: 'No date in docs',
+        t1Title: 'Health and Qibla Layer',
+        t1Text: 'Docs describe injury and status pages, a hidden log, qibla and compass pages, device capability checks, mobile UX improvements, and page capture sharing.',
+        t2Title: 'Recovery and Radar Fixes',
+        t2Text: 'Active injuries were separated from recovery history, a status stage bar was added, radar touch and drag improved, and fixes were isolated in a dedicated CSS layer.',
+        t3Title: 'Tactical Radar Evolution',
+        t3Text: 'Drag and movement logic was rebuilt, side panels and quick names were added, the player edit dialog improved, a 2-1-1 counter tactic appeared, and old storage could be repaired.',
+        t4Title: 'Temporary Radar Pause',
+        t4Text: 'The radar route and buttons were temporarily removed from the interface to protect the rest of the site, while radar files stayed preserved for a later return.',
+        t5Title: 'Navigation Stability',
+        t5Text: 'V4 focused on strengthening the More button, organizing secondary pages, preventing decorative layers from blocking clicks, and updating the Service Worker.',
+        t6Title: 'Privacy and Security Center',
+        t6Text: '#security, cookie consent, preference controls, local data deletion, and a security report template were added, with an explicit static-site privacy note.',
+        t7Title: 'Radar Returns as a Real Page',
+        t7Text: 'The radar route returned, js/modules/tactical.js was rebuilt from scratch, css/22-radar-rebuild.css was added, and v5 storage keys included safe migration from old keys.',
+        t8Title: 'AI Assistant Maturity',
+        t8Text: 'The assistant grew from site-data reading into local knowledge packs, intent classification, safety levels, retrieval, response templates, accordion suggestions, and floating chat without a frontend API key.',
+        t9Title: 'Focused UX Cleanup',
+        t9Text: 'The latest available commits mention decluttering the home page, refining Taamen page UX, and updating site-data.js. The Service Worker names the current build focused UX cleanup.',
+        evoKicker: 'What Changed',
+        evoTitle: 'Project Evolution',
+        evoText: 'The changes were not only visual. Most releases addressed practical limits in navigation, storage, radar, privacy, and the local assistant.',
+        e1Title: 'From pages to routes',
+        e1Text: 'router.js and validRoutes let the app behave as a static SPA with hash navigation instead of many separate pages.',
+        e2Title: 'Data separated from UI',
+        e2Text: 'data/site-data.js and data/injuries-data.js make matches, injuries, and tactics closer to data editing than layout editing.',
+        e3Title: 'Cleaner mobile experience',
+        e3Text: 'V4 and V5.6 documentation point to reducing mobile clutter, separating More pages, and improving AI interaction quality on small screens.',
+        e4Title: 'Clearer privacy',
+        e4Text: 'The project added a privacy center, cookie settings, local data deletion, and a direct warning that secrets should not live in frontend files.',
+        e5Title: 'More stable radar',
+        e5Text: 'The radar went through pause and rebuild, which shows maturity: preserve files, repair storage, then return with v5 keys and new logic.',
+        e6Title: 'Cleaner cache behavior',
+        e6Text: 'The Service Worker uses an explicit asset list and avoids returning HTML for failed JS/CSS requests, reducing browser syntax failures.',
+        heritageKicker: 'Technical Heritage',
+        heritageTitle: 'Technical Heritage',
+        heritage1Title: 'Gradual maturity, not one jump',
+        heritage1Text: 'The repository shows a project that grew through repeated fixes: health and qibla, injuries, radar, navigation, security, then AI. That gives it value as a technical record of practical learning.',
+        map1: 'One app shell contains core pages, dialogs, and controls.',
+        map2: 'The boot point initializes clock, theme, router, services, AI, radar, injuries, and qibla.',
+        map3: 'Hash-route navigation with active states and mobile/More menu cleanup.',
+        map4: 'Site and injury data are separated from display logic.',
+        map5: 'Core asset cache with careful handling for external requests and code files.',
+        sourceTitle: 'Analysis sources:',
+        sourceText: ' README.md, docs/V3_5_UPDATE_NOTES.md, docs/V3_8_RADAR_PRO_NOTES.md, docs/V3_9_RADAR_PAUSED_NOTES.md, docs/V4_0_NAVIGATION_STABILITY_NOTES.md, docs/V5_*, sw.js, manifest.json, js/app.js, js/modules/router.js, and commit history.'
+      }
+    };
+
+    const html = document.documentElement;
+    const saved = (() => {
+      try { return localStorage.getItem('taameen_showcase_lang') || localStorage.getItem('omar_site_lang') || 'ar'; }
+      catch (_) { return 'ar'; }
+    })();
+
+    function applyLanguage(lang) {
+      const next = lang === 'en' ? 'en' : 'ar';
+      const data = dict[next];
+      html.lang = next;
+      html.dir = next === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-i18n]').forEach((node) => {
+        const key = node.getAttribute('data-i18n');
+        if (data[key]) node.textContent = data[key];
+      });
+      document.title = data.metaTitle;
+      document.getElementById('langToggle')?.setAttribute('aria-label', next === 'ar' ? 'Switch language to English' : 'تغيير اللغة إلى العربية');
+      try { localStorage.setItem('taameen_showcase_lang', next); } catch (_) {}
+    }
+
+    function initReveal() {
+      const items = Array.from(document.querySelectorAll('.reveal'));
+      if (!('IntersectionObserver' in window)) {
+        items.forEach((item) => item.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: .12, rootMargin: '0px 0px -30px' });
+      items.forEach((item, index) => {
+        if (!item.style.getPropertyValue('--delay')) item.style.setProperty('--delay', `${Math.min(index * 45, 420)}ms`);
+        observer.observe(item);
+      });
+    }
+
+    function initCounters() {
+      const counters = Array.from(document.querySelectorAll('[data-count]'));
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const formatter = new Intl.NumberFormat('en-US');
+      const run = (node) => {
+        const target = Number(node.dataset.count || 0);
+        if (reduced) {
+          node.textContent = formatter.format(target);
+          return;
+        }
+        const start = performance.now();
+        const duration = 900;
+        const tick = (now) => {
+          const progress = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          node.textContent = formatter.format(Math.round(target * eased));
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      if (!('IntersectionObserver' in window)) {
+        counters.forEach(run);
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          run(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: .4 });
+      counters.forEach((counter) => observer.observe(counter));
+    }
+
+    function initPointerGlow() {
+      if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      document.addEventListener('pointermove', (event) => {
+        const card = event.target.closest?.('.glass-card');
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+        card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+      }, { passive: true });
+    }
+
+    document.getElementById('langToggle')?.addEventListener('click', () => {
+      applyLanguage(html.lang === 'ar' ? 'en' : 'ar');
+    });
+
+    applyLanguage(saved);
+    initReveal();
+    initCounters();
+    initPointerGlow();
+  </script>
 </body>
 </html>

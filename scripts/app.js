@@ -953,4 +953,10 @@
   } else {
     init();
   }
+
+  const brandIcon = window.OMAR_BRANDS?.render(item);
+
+if (brandIcon) {
+  iconContainer.appendChild(brandIcon);
+}
 })();

@@ -197,32 +197,42 @@ window.OMAR_SITE = {
       "handle": "Omar",
       "url": "https://open.spotify.com/user/31zq4egkwu5qt6armgjuvey2tgga"
     },
-    {
-      "id": "kick",
-      "group": "media",
-      "className": "kick-card",
-      "badge": "PUBLIC",
-      "badgeType": "neo",
-      "badges": ["public"],
-      "icon": "fa-brands fa-kickstarter",
-      "titleKey": "kickAr",
-      "title": "كيك",
-      "handle": "GDMI-3",
-      "url": "https://kick.com/gdmi-3"
-    },
-    {
-      "id": "twitch",
-      "group": "media",
-      "className": "twitch-card",
-      "badge": "PUBLIC",
-      "badgeType": "neo",
-      "badges": ["public"],
-      "icon": "fa-brands fa-twitch",
-      "titleKey": "twitchAr",
-      "title": "تويتش",
-      "handle": "GDMI3",
-      "url": "https://www.twitch.tv/gdmi3"
-    },
+{
+  id: "rockstar-games",
+  group: "gaming",
+  className: "rockstar-card",
+  badges: ["official"],
+  icon: "brand-image",
+  iconImage: "assets/img/brands/rockstar-games.svg",
+  titleKey: "rockstarGames",
+  title: "Rockstar Games",
+  handle: "Rockstar Games",
+  url: "https://www.rockstargames.com/"
+},
+{
+  id: "ubisoft",
+  group: "gaming",
+  className: "ubisoft-card",
+  badges: ["official"],
+  icon: "brand-image",
+  iconImage: "assets/img/brands/ubisoft.svg",
+  titleKey: "ubisoft",
+  title: "Ubisoft",
+  handle: "Ubisoft",
+  url: "https://www.ubisoft.com/"
+},
+{
+  id: "ea",
+  group: "gaming",
+  className: "ea-card",
+  badges: ["official"],
+  icon: "brand-image",
+  iconImage: "assets/img/brands/ea.svg",
+  titleKey: "ea",
+  title: "Electronic Arts",
+  handle: "EA",
+  url: "https://www.ea.com/"
+},
     {
       "id": "discord",
       "group": "gaming",
@@ -607,7 +617,10 @@ window.OMAR_SITE = {
       "projectStatus": "الحالة",
       "projectTaameenSummary": "مشروع تأمين محفوظ كإرث تقني خفيف ضمن رحلة عمر.",
       "projectEvSummary": "لوحة حية لتجربة بيانات سيارة كهربائية مع مؤشرات مباشرة.",
-      "projectDetails": "تفاصيل المشروع"
+      "projectDetails": "تفاصيل المشروع",
+      "rockstarGames": "Rockstar Games",
+      "ubisoft": "Ubisoft",
+      "ea": "Electronic Arts"
     },
     "en": {
       "heroName": "Omar | عُـمَر",
@@ -691,7 +704,10 @@ window.OMAR_SITE = {
       "projectStatus": "Status",
       "projectTaameenSummary": "Taamenn is preserved as a lightweight technical legacy from Omar's journey.",
       "projectEvSummary": "A live EV telemetry experience with direct dashboard-style indicators.",
-      "projectDetails": "Project details"
+      "projectDetails": "Project details",
+      "rockstarGames": "Rockstar Games",
+      "ubisoft": "Ubisoft",
+      "ea": "Electronic Arts"
     }
   },
   "version": "v9 Preview • Portfolio Upgrade",
