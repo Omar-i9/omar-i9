@@ -283,11 +283,11 @@ function renderCopyRows() {
     const list = $('#versionList');
     const badge = $('#versionBadge');
     const github = $('#versionGithub');
-    const versionText = `${release.version || 'v9 Preview'} • ${release.name || 'Portfolio Upgrade'}`;
+    const versionText = `${release.version || 'v8.1.0 Preview'} • ${release.name || 'Portfolio Upgrade'}`;
     if (badge) badge.textContent = versionText;
-    if (title) title.textContent = release.version || 'v9 Preview';
+    if (title) title.textContent = release.version || 'v8.1.0 Preview';
     if (subtitle) subtitle.textContent = release.name || 'Portfolio Upgrade';
-    if (date) date.textContent = release.date || '2026-06-18';
+    if (date) date.textContent = release.date || '2026-08-14';
     const changes = lang === 'en' ? release.changesEn : release.changesAr;
     if (list) list.innerHTML = (changes || []).slice(0, 5).map((item) => `<li>${escapeHtml(item)}</li>`).join('');
     if (github && release.githubUrl) github.href = release.githubUrl;
