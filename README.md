@@ -1,4 +1,4 @@
-# Omar Profiles — v9 Preview
+# Omar Profiles — v8.1.0 Preview
 
 صفحة بروفايل شخصية تجمع روابط التواصل، النسخ السريع، المشاريع، بطاقة EV، بطاقة آيات، وصفحة Discord داخلية.
 
@@ -56,9 +56,6 @@ v7.0.0 - Mobile Remake
 - Smooth tiny Ayah card with language-aware side switching.
 - Added an alternate TikTok card for @gdmi33 with a different visual logo treatment.
 - Improved Ayah drag performance using transform + requestAnimationFrame.
-
-## v9.0.0 Preview
-
 - Added a lightweight skeleton loader, smoother reveal timing, and mobile performance tuning.
 - Improved the ayah card with compact controls, safe saved state, and detail-only copy.
 - Added translated social badges, smoother card interactions, a version modal, and stronger share fallbacks.
