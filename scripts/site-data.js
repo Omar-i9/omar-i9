@@ -4,7 +4,7 @@ window.OMAR_SITE = {
   "baseUrl": "https://omar-i9.github.io/omar-i9/",
   "discordPage": "pages/discord.html",
   "release": {
-    "version": "v9 Preview",
+    "version": "v8.1.0 Preview",
     "name": "Portfolio Upgrade",
     "date": "2026-06-18",
     "githubUrl": "https://github.com/Omar-i9/omar-i9",
@@ -13,14 +13,14 @@ window.OMAR_SITE = {
       "بطاقة آية أصغر وأذكى مع تبديل سلس ونسخ عند فتح التفاصيل.",
       "بحث سريع للروابط وشارات اجتماعية أوضح.",
       "مشاركة وإصدار وديسكورد بنوافذ أخف.",
-      "صفحات مشاريع داخلية كبداية لمحفظة v9."
+      "صفحات مشاريع داخلية كبداية لمحفظة v8.1.0."
     ],
     "changesEn": [
       "Lighter first load and smoother staggered reveal.",
       "Smaller smarter ayah card with smooth switching and detail-only copy.",
       "Clearer social badges with smoother card interactions.",
       "Cleaner share, version, and Discord modals.",
-      "Internal project pages as a v9 portfolio preview."
+      "Internal project pages as a v8.1.0 portfolio preview."
     ]
   },
   "titles": [
@@ -561,7 +561,7 @@ window.OMAR_SITE = {
       "pageTitle": "Omar Profiles",
       "ariaBtn": "تبديل اللغة إلى الإنجليزية",
       "profileKicker": "نبذة سريعة",
-      "profileBio": "طالب توجيهي 2009، هندسة كهربائية للسيارات الكهربائية والهايبرد، وبحاول أطلع من السنة بعقلي كامل.",
+      "profileBio": "طالب توجيهي 2009، هندسة كهربائية سيارات، وبحاول أطلع من السنة بعقلي كامل.",
       "statusSleeping": "نائم",
       "statusBusy": "مشغول",
       "statusOnline": "متصل",
@@ -683,7 +683,7 @@ window.OMAR_SITE = {
       "ea": "Electronic Arts"
     }
   },
-  "version": "v9 Preview • Portfolio Upgrade",
+  "version": "v8.1.0 Preview • Portfolio Upgrade",
   "smartStatuses": {
     "sleeping": {
       "labelKey": "statusSleeping",
