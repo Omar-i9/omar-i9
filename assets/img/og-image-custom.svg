@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050a12"/>
+      <stop offset="55%" stop-color="#08111f"/>
+      <stop offset="100%" stop-color="#061722"/>
+    </linearGradient>
+    <radialGradient id="cyanGlow"><stop offset="0%" stop-color="#00eaff" stop-opacity=".22"/><stop offset="100%" stop-color="#00eaff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="tealGlow"><stop offset="0%" stop-color="#14e7c0" stop-opacity=".16"/><stop offset="100%" stop-color="#14e7c0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="violetGlow"><stop offset="0%" stop-color="#8b5cf6" stop-opacity=".14"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/></radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="28"/></filter>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#7da4c8" stroke-opacity=".13" stroke-width="1"/></pattern>
+    <linearGradient id="line" x1="0" x2="1"><stop stop-color="#00eaff"/><stop offset="1" stop-color="#14e7c0"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="930" cy="140" r="290" fill="url(#cyanGlow)" filter="url(#blur)"/>
+  <circle cx="280" cy="470" r="260" fill="url(#tealGlow)" filter="url(#blur)"/>
+  <circle cx="760" cy="520" r="230" fill="url(#violetGlow)" filter="url(#blur)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="34" y="34" width="1132" height="562" rx="28" fill="none" stroke="#00eaff" stroke-opacity=".34" stroke-width="2"/>
+  <rect x="44" y="44" width="1112" height="542" rx="22" fill="none" stroke="#14e7c0" stroke-opacity=".12"/>
+
+  <g transform="translate(145 315)">
+    <circle r="92" fill="none" stroke="#00eaff" stroke-opacity=".16" stroke-width="2"/>
+    <circle r="78" fill="none" stroke="#00eaff" stroke-opacity=".26" stroke-width="2"/>
+    <circle r="66" fill="#08111f" stroke="#00eaff" stroke-opacity=".55" stroke-width="3"/>
+    <text x="0" y="18" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="54" font-weight="800" fill="#f4f8ff">O9</text>
+    <path d="M30 -34 l20 -20 M36 -26 l20 -20 M42 -18 l20 -20" stroke="#14e7c0" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <text x="285" y="165" font-family="DejaVu Sans, Arial, sans-serif" font-size="20" letter-spacing="1.4" fill="#00eaff">PERSONAL PROFILE  •  PROJECTS  •  LINKS</text>
+  <text x="285" y="285" font-family="Noto Sans Arabic, DejaVu Sans, sans-serif" font-size="78" font-weight="900" fill="#f4f8ff">عُـمَر</text>
+  <text x="285" y="385" font-family="DejaVu Sans, Arial, sans-serif" font-size="58" font-weight="800" fill="#14e7c0">Omar Profiles</text>
+  <text x="285" y="438" font-family="Noto Sans Arabic, DejaVu Sans, sans-serif" font-size="28" font-weight="600" fill="#91a6bf">روابط  •  مشاريع  •  حسابات</text>
+  <text x="285" y="505" font-family="DejaVu Sans, Arial, sans-serif" font-size="20" fill="#f4f8ff" fill-opacity=".82">omar-i9.github.io/omar-i9/</text>
+  <text x="285" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="18" letter-spacing="1.5" fill="#6f839c">CYBER  •  CLEAN  •  MODERN</text>
+
+  <rect x="1010" y="170" width="30" height="290" rx="15" fill="#00eaff" fill-opacity=".52"/>
+  <rect x="1050" y="220" width="30" height="190" rx="15" fill="#14e7c0" fill-opacity=".52"/>
+  <path d="M1008 480 H1082" stroke="url(#line)" stroke-width="3" stroke-linecap="round"/>
+</svg>
