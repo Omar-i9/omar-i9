@@ -1,64 +1,131 @@
-# Omar Profiles — v8.1.0 Preview
+<div align="center">
 
-صفحة بروفايل شخصية تجمع روابط التواصل، النسخ السريع، المشاريع، بطاقة EV، بطاقة آيات، وصفحة Discord داخلية.
+# Omar AbuZeineh
+### EV & Hybrid Engineering Student · Web Developer · Technical Builder
 
-## المميزات
-- تصميم Dark / Neon / Glass بنفس هوية المصدر.
-- بدون مشغل موسيقى لتخفيف الصفحة.
-- ملفات CSS مقسمة وواضحة.
-- تبديل لغة عربي/إنجليزي مع ملف CSS مستقل.
-- ظهور تدريجي من تحت للعناصر.
-- تأثيرات ضغط، Ripple، Glow، وFlower Burst.
-- Avatar Radar Pulse.
-- 30 آية مع ترجمة معنى إنجليزية وشرح عربي/إنجليزي.
-- Discord internal card محسّنة.
+Building practical projects where **software, automotive technology, and engineering** meet.
 
-## التشغيل
-افتح `index.html` مباشرة أو ارفعه على GitHub Pages.
+[![GitHub](https://img.shields.io/badge/GitHub-Omar--i9-181717?style=for-the-badge&logo=github)](https://github.com/Omar-i9)
+[![TAAMEN](https://img.shields.io/badge/Project-TAAMEN-1D4ED8?style=for-the-badge&logo=github)](https://github.com/Omar-i9/taamenn)
 
-## الرفع على GitHub Pages
-ارفع الملفات التالية مباشرة في جذر الريبو:
+</div>
 
-```txt
-index.html
-assets/
-pages/
-scripts/
-styles/
-manifest.json
-robots.txt
-sitemap.xml
-404.html
-.nojekyll
+---
+
+## About
+
+I am an **Electric & Hybrid Vehicle Engineering student** interested in building real-world technical projects rather than isolated demos.
+
+My current direction combines:
+
+- **EV / Hybrid systems** — diagnostics, telemetry, battery systems, motors, CAN Bus and BMS concepts.
+- **Web development** — responsive interfaces, interactive tools, frontend architecture and browser APIs.
+- **Engineering projects** — turning technical ideas into usable prototypes and documented systems.
+- **Git & GitHub** — structured repositories, version control and project documentation.
+
+> فلسطيني بدرس هندسة السيارات الكهربائية والهايبرد، وببني مشاريعي بشكل عملي خطوة بخطوة.
+
+---
+
+## Featured Project
+
+### TAAMEN — Football Management & Tactical Platform
+
+A continuously evolving football platform built around **booking, match management, tactical planning and interactive web tools**.
+
+**Current direction:**
+- Football booking and match organization
+- Interactive tactical planning
+- Responsive mobile / desktop experience
+- Weather and prayer-time integrations
+- Injuries and player status management
+- Qibla / device capability tools
+- Local AI assistant architecture with a safe frontend-only fallback
+- GitHub Pages deployment and Service Worker caching
+
+**Repository:** [Omar-i9/taamenn](https://github.com/Omar-i9/taamenn)
+
+---
+
+## Current Technical Focus
+
+| Area | Focus |
+| --- | --- |
+| Web | HTML · CSS · JavaScript · Responsive UI · Browser APIs |
+| Engineering | EV / Hybrid Systems · Diagnostics · Telemetry |
+| Automotive | CAN Bus · BMS concepts · Battery systems · Electric motors |
+| Tools | Git · GitHub · VS Code · Chrome DevTools |
+| Next | TypeScript · React · Embedded systems · EV data visualization |
+
+---
+
+## Building Next
+
+These are **planned / developing directions**, not finished products:
+
+### EV Telemetry Dashboard
+A dashboard for visualizing EV data such as:
+
+`Battery Voltage` · `Pack Current` · `SOC` · `SOH` · `Cell Voltage` · `Temperature` · `Motor RPM` · `Fault Codes`
+
+### CAN Bus Toolkit
+A practical learning project for decoding and visualizing CAN frames, signals and diagnostic data.
+
+### BMS Simulator
+A simulation-oriented project for understanding cell monitoring, balancing, battery states and protection logic.
+
+---
+
+## Engineering Mindset
+
+```text
+Understand the system
+        ↓
+Design the architecture
+        ↓
+Build a working prototype
+        ↓
+Test real behavior
+        ↓
+Fix edge cases
+        ↓
+Document the result
 ```
 
-لا ترفع المجلد الأب كاملًا حتى لا يصبح `index.html` داخل مجلد فرعي.
+I prefer projects that are **usable, maintainable and explainable**, not just visually impressive.
 
+---
 
-## v5.0.0 Final Polish
+## Repository Philosophy
 
-- Ayah card spacing, smaller text, shuffled non-repeating Ayah rotation.
-- Native share action with page description and OG preview image.
-- One-line profile buttons, floating Chess Brilliant badge, translated PUBLIC/PRIVATE badges.
+My repositories are gradually being organized around a simple rule:
 
-## v6 Smart Polish
+> **One project = one clear purpose + clean structure + useful documentation.**
 
-This version adds automatic profile status, status-driven backgrounds, avatar micro-bio interaction, magnetic hero buttons, low-power detection for weaker phones, SEO/Open Graph cleanup, a version badge, and a better ayah card with a progress ring and detail-only copy button.
+Projects that are still experimental are treated as experiments. Finished projects are documented as products. Older work is kept when it provides useful history or reusable code.
 
+---
 
-## Current Version
+## GitHub Roadmap
 
-v7.0.0 - Mobile Remake
+**Now**
+- Improve TAAMEN architecture and UX
+- Clean up personal profile and project documentation
+- Build stronger EV-focused technical projects
 
+**Next**
+- EV Telemetry Dashboard
+- CAN Bus tooling
+- BMS simulation
+- More embedded / automotive prototypes
 
-## v8.1.0
+**Long term**
+- Combine automotive engineering with software into practical diagnostic and visualization tools.
 
-- Smooth tiny Ayah card with language-aware side switching.
-- Added an alternate TikTok card for @gdmi33 with a different visual logo treatment.
-- Improved Ayah drag performance using transform + requestAnimationFrame.
-- Added a lightweight skeleton loader, smoother reveal timing, and mobile performance tuning.
-- Improved the ayah card with compact controls, safe saved state, and detail-only copy.
-- Added translated social badges, smoother card interactions, a version modal, and stronger share fallbacks.
-- Simplified the Discord card and added internal project pages for Taamenn and EV Telemetry Dashboard.
+---
 
-Still static HTML/CSS/JS only. No React, Vite, npm, music player, tags, commits, or releases are required.
+<div align="center">
+
+### Build. Test. Diagnose. Improve.
+
+</div>
