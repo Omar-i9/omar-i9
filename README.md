@@ -7,6 +7,7 @@ Building practical projects where **software, automotive technology, and enginee
 
 [![GitHub](https://img.shields.io/badge/GitHub-Omar--i9-181717?style=for-the-badge&logo=github)](https://github.com/Omar-i9)
 [![TAAMEN](https://img.shields.io/badge/Project-TAAMEN-1D4ED8?style=for-the-badge&logo=github)](https://github.com/Omar-i9/taamenn)
+[![Site](https://img.shields.io/badge/Site-omar--i9.github.io-0F7A6C?style=for-the-badge)](https://omar-i9.github.io/omar-i9/)
 
 </div>
 
@@ -43,6 +44,7 @@ A continuously evolving football platform built around **booking, match manageme
 - Local AI assistant architecture with a safe frontend-only fallback
 - GitHub Pages deployment and Service Worker caching
 
+**Live:** [taamenn.com](https://taamenn.com)  
 **Repository:** [Omar-i9/taamenn](https://github.com/Omar-i9/taamenn)
 
 ---

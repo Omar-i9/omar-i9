@@ -1,0 +1,89 @@
+.hero {
+  display: grid;
+  gap: var(--space-6);
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-8);
+  align-items: center;
+}
+
+.hero-copy h1 {
+  font-size: var(--step-4);
+  max-width: 12ch;
+  margin-bottom: var(--space-4);
+}
+
+.role-stack {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.role-stack span {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.role-stack span::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-dim);
+}
+
+.hero-statement {
+  max-width: 38rem;
+  color: var(--text-soft);
+  font-size: clamp(1.02rem, 2vw, 1.22rem);
+  margin-bottom: var(--space-5);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.hero-schema {
+  position: relative;
+  min-height: 280px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 30% 30%, var(--accent-dim), transparent 42%),
+    var(--bg-elevated);
+  overflow: hidden;
+  box-shadow: var(--glow);
+}
+
+.hero-schema svg {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+}
+
+.schema-label {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: var(--space-7);
+    min-height: min(78vh, 760px);
+  }
+}

@@ -1,0 +1,110 @@
+.project-dialog {
+  width: min(720px, calc(100% - 1.5rem));
+  max-height: min(88vh, 860px);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.project-dialog::backdrop {
+  background: rgba(4, 5, 8, 0.62);
+  backdrop-filter: blur(8px);
+}
+
+.dialog-head,
+.dialog-body {
+  padding: 1.15rem 1.2rem;
+}
+
+.dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.dialog-body {
+  overflow: auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.dialog-body h3 {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  color: var(--accent-2);
+  margin-bottom: 0.4rem;
+}
+
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+body.dialog-open {
+  overflow: hidden;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-schema .orbit {
+    animation: none !important;
+  }
+}
+
+.orbit {
+  transform-origin: center;
+  animation: spin 28s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+html[dir="rtl"] .orbit {
+  animation-direction: reverse;
+}
+
+@media (max-width: 430px) {
+  .hero-copy h1 { max-width: none; }
+  .btn { width: 100%; }
+  .hero-actions { width: 100%; }
+  .featured-actions .btn,
+  .card-actions .btn { flex: 1; }
+}
+
+@media (max-width: 359px) {
+  .nav-bar { padding-inline-start: 0.7rem; }
+  .brand span { display: none; }
+}
