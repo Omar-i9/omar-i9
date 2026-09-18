@@ -23,7 +23,7 @@ export function openProject(id) {
         <p class="featured-sub">${escapeHtml(t(project.keys.subtitle))}</p>
       </div>
       <button class="icon-btn" type="button" data-close-dialog data-i18n-aria="project.close" aria-label="${escapeHtml(t('project.close'))}">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/></svg>
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.7 5.3 12 10.6l5.3-5.3 1.4 1.4L13.4 12l5.3 5.3-1.4 1.4L12 13.4l-5.3 5.3-1.4-1.4L10.6 12 5.3 6.7z"/></svg>
       </button>
     </div>
     <div class="dialog-body">

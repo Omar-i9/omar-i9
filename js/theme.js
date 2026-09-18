@@ -5,6 +5,10 @@ export function getTheme() {
 }
 
 export function detectInitialTheme() {
+  const params = new URLSearchParams(location.search);
+  if (params.get('theme') === 'light' || params.get('theme') === 'dark') {
+    return params.get('theme');
+  }
   try {
     const saved = localStorage.getItem(KEY);
     if (saved === 'light' || saved === 'dark') return saved;

@@ -158,6 +158,11 @@ h1, h2, h3 {
   letter-spacing: -0.03em;
 }
 
+.section,
+#top {
+  scroll-margin-top: 5.75rem;
+}
+
 .section {
   padding-block: var(--space-8);
 }
@@ -290,4 +295,14 @@ html[dir="rtl"] .toast {
 
 html[dir="rtl"] .toast.is-on {
   translate: 50% 0;
+}
+
+.dialog-body ul {
+  margin: 0;
+  padding-inline-start: 1.1rem;
+  color: var(--text-soft);
+}
+
+.dialog-body li + li {
+  margin-top: 0.25rem;
 }

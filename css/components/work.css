@@ -120,7 +120,7 @@
 
 @media (min-width: 768px) {
   .featured {
-    grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+    grid-template-columns: minmax(0, 1.28fr) minmax(220px, 0.72fr);
     align-items: center;
   }
   .project-grid {

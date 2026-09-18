@@ -13,14 +13,18 @@ export function t(path, lang = getLang()) {
   for (const part of parts) {
     node = node?.[part];
   }
-  if (node == null) {
+  if (node == null || typeof node === 'object') {
     node = I18N.en;
     for (const part of parts) node = node?.[part];
   }
-  return node == null ? path : node;
+  return (node == null || typeof node === 'object') ? path : node;
 }
 
 export function detectInitialLang() {
+  const params = new URLSearchParams(location.search);
+  if (params.get('lang') === 'ar' || params.get('lang') === 'en') {
+    return params.get('lang');
+  }
   try {
     const saved = localStorage.getItem(KEY);
     if (saved === 'ar' || saved === 'en') return saved;

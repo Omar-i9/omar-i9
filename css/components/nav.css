@@ -26,6 +26,7 @@
   align-items: center;
   gap: 0.65rem;
   min-height: 44px;
+  flex: none;
   font-weight: 700;
   letter-spacing: -0.03em;
 }
@@ -77,6 +78,8 @@ html[data-theme="light"] .nav-links a:hover {
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  margin-inline-start: auto;
+  flex: none;
 }
 
 .icon-btn,

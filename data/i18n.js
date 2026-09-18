@@ -155,7 +155,7 @@ export const I18N = {
       lead: 'A working notebook, not a corporate roadmap.',
       now: 'Now',
       next: 'Next',
-      long: 'Long term',
+      later: 'Long term',
       taamen: {
         title: 'TAAMEN architecture and UX',
         body: 'Keep the flagship football platform clearer, more maintainable, and honest about what is live.'
@@ -397,7 +397,7 @@ export const I18N = {
       lead: 'دفتر عمل، لا خارطة طريق مؤسسية.',
       now: 'الآن',
       next: 'التالي',
-      long: 'طويل الأمد',
+      later: 'طويل الأمد',
       taamen: {
         title: 'معمارية وتجربة تأمين',
         body: 'الإبقاء على المنصة الكروية أوضح وأسهل صيانة، مع صدق حول ما هو حي.'

@@ -157,7 +157,7 @@ export const FOCUS = [
   },
   {
     id: 'long',
-    horizon: 'long',
+    horizon: 'later',
     titleKey: 'focus.long.title',
     bodyKey: 'focus.long.body'
   }
@@ -173,10 +173,10 @@ export const MINDSET = [
 ];
 
 export const ENGINEERING_TOPICS = [
-  { id: 'battery', titleKey: 'eng.battery.title', bodyKey: 'eng.battery.body' },
-  { id: 'bms', titleKey: 'eng.bms.title', bodyKey: 'eng.bms.body' },
-  { id: 'can', titleKey: 'eng.can.title', bodyKey: 'eng.can.body' },
-  { id: 'diag', titleKey: 'eng.diag.title', bodyKey: 'eng.diag.body' },
-  { id: 'tele', titleKey: 'eng.tele.title', bodyKey: 'eng.tele.body' },
-  { id: 'motor', titleKey: 'eng.motor.title', bodyKey: 'eng.motor.body' }
+  { id: 'battery', titleKey: 'engineering.battery.title', bodyKey: 'engineering.battery.body' },
+  { id: 'bms', titleKey: 'engineering.bms.title', bodyKey: 'engineering.bms.body' },
+  { id: 'can', titleKey: 'engineering.can.title', bodyKey: 'engineering.can.body' },
+  { id: 'diag', titleKey: 'engineering.diag.title', bodyKey: 'engineering.diag.body' },
+  { id: 'tele', titleKey: 'engineering.tele.title', bodyKey: 'engineering.tele.body' },
+  { id: 'motor', titleKey: 'engineering.motor.title', bodyKey: 'engineering.motor.body' }
 ];

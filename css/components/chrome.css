@@ -98,13 +98,12 @@ html[dir="rtl"] .orbit {
 
 @media (max-width: 430px) {
   .hero-copy h1 { max-width: none; }
-  .btn { width: 100%; }
   .hero-actions { width: 100%; }
-  .featured-actions .btn,
-  .card-actions .btn { flex: 1; }
+  .hero-actions .btn { width: 100%; }
 }
 
 @media (max-width: 359px) {
-  .nav-bar { padding-inline-start: 0.7rem; }
-  .brand span { display: none; }
+  .nav-bar { padding-inline-start: 0.55rem; padding-inline-end: 0.35rem; }
+  .brand-name { display: none; }
+  #langBtn { font-size: 0.78rem; min-width: 44px; padding: 0 0.45rem; }
 }

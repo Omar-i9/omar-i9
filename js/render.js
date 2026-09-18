@@ -37,7 +37,6 @@ function renderFeatured(project) {
     .join('');
   mount.innerHTML = `
     <article class="featured" data-reveal>
-      <div class="featured-visual">${img}</div>
       <div class="featured-copy">
         <p class="kicker">${escapeHtml(t(project.keys.title))}</p>
         <div class="featured-meta">
@@ -55,6 +54,7 @@ function renderFeatured(project) {
         </div>
         <div class="highlight-row">${highlights}</div>
       </div>
+      <div class="featured-visual">${img}</div>
     </article>
   `;
 }
