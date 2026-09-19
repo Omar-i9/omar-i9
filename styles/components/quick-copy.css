@@ -1,0 +1,33 @@
+.copy-list { display: grid; gap: 10px; }
+
+.copy-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, rgba(10, 24, 38, .7), rgba(5, 12, 22, .82));
+}
+.copy-icon, .copy-brand { width: 28px; height: 28px; object-fit: contain; }
+.copy-meta { display: grid; gap: 2px; min-width: 0; }
+.copy-label { color: var(--muted); font-size: .78rem; font-weight: 800; }
+.copy-value { font-family: var(--font-display); letter-spacing: .04em; overflow-wrap: anywhere; }
+.copy-btn {
+  min-height: 40px;
+  padding-inline: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,234,255,.24);
+  background: rgba(0,234,255,.08);
+  font-weight: 800;
+}
+.copy-btn.is-done {
+  background: rgba(39,230,129,.16);
+  border-color: rgba(39,230,129,.4);
+  color: #b8ffd4;
+}
