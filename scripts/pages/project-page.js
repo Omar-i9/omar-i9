@@ -51,7 +51,7 @@ export function renderProjectShell(projectId) {
     <section class="project-hero reveal">
       <div class="project-hero-visual">${visual}</div>
       <div class="project-hero-copy">
-        <div class="project-meta-row">
+        <div class="project-meta-row" dir="ltr">
           <span class="project-status">${escapeHtml(status)}</span>
           ${project.version ? `<span class="project-version" dir="ltr">${escapeHtml(project.version)}</span>` : ''}
           ${project.versionDate ? `<span class="project-date" dir="ltr">${escapeHtml(project.versionDate)}</span>` : ''}

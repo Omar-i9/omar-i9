@@ -4,7 +4,8 @@
   transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease-spring);
   transition-delay: var(--delay, 0ms);
 }
-.reveal.is-in { opacity: 1; transform: none; }
+.reveal.is-in,
+body.site-ready .reveal { opacity: 1; transform: none; }
 
 .is-press { transform: scale(.97) !important; }
 

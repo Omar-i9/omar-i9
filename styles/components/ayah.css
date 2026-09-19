@@ -56,16 +56,17 @@
 }
 .ayah-translation, .ayah-ref, .ayah-note { color: var(--muted); font-size: .86rem; font-weight: 700; margin-block-start: 4px; }
 .ayah-meaning-label { color: var(--cyan-2); }
-.ayah-detail, .ayah-copy-btn { display: none; }
-.ayah-float.is-detail .ayah-detail,
-.ayah-float.is-detail .ayah-copy-btn { display: block; }
-.ayah-detail { margin-block-start: 8px; color: #d5e6f8; font-size: .86rem; line-height: 1.7; }
+.ayah-text { direction: rtl; unicode-bidi: isolate; }
+.ayah-translation { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.ayah-detail { display: none; margin-block-start: 8px; color: #d5e6f8; font-size: .86rem; line-height: 1.7; }
+.ayah-copy-btn { display: none; }
+.ayah-float.is-detail .ayah-detail { display: block; }
+.ayah-float.is-detail .ayah-copy-btn { display: inline-flex; }
 .ayah-new-btn,
 .ayah-copy-btn {
   margin-block-start: 10px;
   min-height: 40px;
   width: 100%;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -74,6 +75,7 @@
   background: rgba(0,234,255,.08);
   font-weight: 800;
 }
+.ayah-new-btn { display: inline-flex; }
 .ayah-dock {
   position: fixed;
   inset-inline-end: 16px;
@@ -95,8 +97,16 @@
 @keyframes ayahOut { to { opacity: 0; transform: translateY(12px) scale(.96); } }
 @keyframes ayahSpin { to { transform: rotate(1turn); } }
 
-@media (max-width: 430px) {
-  .ayah-float { inset-inline: 12px; width: auto; inset-block-end: 80px; }
+@media (max-width: 560px) {
+  .ayah-float {
+    inset-inline: 10px;
+    inset-block-end: 72px;
+    inset-block-start: auto;
+    width: auto;
+    max-height: 38dvh;
+    overflow: auto;
+  }
+  .ayah-text { font-size: .95rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ayah-ring, .ayah-float.is-water-in, .ayah-float.is-water-out { animation: none; }

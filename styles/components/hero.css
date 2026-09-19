@@ -140,6 +140,7 @@
 }
 .hero-action img,
 .action-icon { width: 18px; height: 18px; }
+.hero-action-github .action-icon { filter: invert(1); }
 .hero-action:hover { border-color: rgba(0,234,255,.5); box-shadow: var(--glow-cyan); }
 
 .profile-popover {

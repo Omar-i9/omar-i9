@@ -92,6 +92,7 @@
   color: var(--cyan);
   font-weight: 800;
 }
+html[dir="rtl"] .project-go svg { transform: scaleX(-1); }
 .project-hud {
   display: flex;
   flex-wrap: wrap;
