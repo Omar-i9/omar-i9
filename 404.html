@@ -1,37 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#08090c" />
-  <title>404 — Omar AbuZeineh</title>
-  <link rel="icon" href="favicon.ico" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/base.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Omar Profiles</title>
+  <meta http-equiv="refresh" content="2; url=./" />
+  <link rel="stylesheet" href="styles/tokens.css" />
   <style>
-    .miss { min-height: 100vh; display: grid; place-items: center; text-align: center; padding: 2rem; }
-    .miss h1 { font-size: clamp(3rem, 12vw, 6rem); margin-bottom: .5rem; }
-    .miss p { color: var(--muted); margin-bottom: 1.25rem; }
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:#050a12;color:#f4f8ff;font-family:Cairo,system-ui,sans-serif;text-align:center;padding:24px}
+    a{color:#00eaff;font-weight:800}
   </style>
 </head>
 <body>
-  <main class="miss">
-    <div>
-      <p class="kicker">404</p>
-      <h1>Omar-i9</h1>
-      <p data-error>This lab path does not exist.</p>
-      <a class="btn btn-primary" href="./">Back to home</a>
-    </div>
+  <main>
+    <h1>404</h1>
+    <p>الصفحة مش هون. واضح إنها أخذت إجازة بدون إذن.</p>
+    <a href="./">ارجع للرئيسية</a>
   </main>
-  <script>
-    const ar = (localStorage.getItem('omar_site_lang') || navigator.language || '').startsWith('ar')
-      || localStorage.getItem('omar_site_lang') === 'ar';
-    if (ar) {
-      document.documentElement.lang = 'ar';
-      document.documentElement.dir = 'rtl';
-      document.querySelector('[data-error]').textContent = 'المسار الذي طلبته غير موجود في المختبر.';
-      document.querySelector('.btn').textContent = 'العودة للرئيسية';
-    }
-  </script>
 </body>
 </html>

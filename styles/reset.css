@@ -1,0 +1,42 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  color: var(--text);
+  background:
+    radial-gradient(circle at 14% 12%, rgba(0, 234, 255, .22), transparent 32%),
+    radial-gradient(circle at 86% 34%, rgba(139, 92, 246, .16), transparent 34%),
+    linear-gradient(135deg, #031118 0%, #050a12 48%, #101022 100%);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.modal-open { overflow: hidden; }
+
+img, picture, svg { display: block; max-width: 100%; }
+svg { width: 1.15em; height: 1.15em; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: none; box-shadow: var(--focus); }
+::selection { background: rgba(0, 234, 255, .28); color: #fff; }
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 12px;
+  inset-block-start: -40px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #08111f;
+  color: var(--cyan);
+}
+.skip-link:focus { inset-block-start: 12px; }

@@ -1,0 +1,17 @@
+.site-footer {
+  width: min(var(--wrap), calc(100% - 32px));
+  margin: 0 auto 28px;
+  text-align: center;
+}
+.site-footer__brand { font-weight: 900; margin: 0; }
+.site-footer__text { color: var(--muted); font-weight: 700; margin: 6px 0; }
+.version-badge {
+  margin-block-start: 8px;
+  min-height: 40px;
+  padding-inline: 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,234,255,.24);
+  background: rgba(0,234,255,.08);
+  font-family: var(--font-display);
+  font-weight: 800;
+}

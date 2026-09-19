@@ -1,0 +1,32 @@
+.site-skeleton {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-skeleton);
+  display: grid;
+  place-items: center;
+  background: #050a12;
+  transition: opacity 320ms var(--ease);
+}
+.site-skeleton.is-done { opacity: 0; pointer-events: none; }
+.skeleton-shell {
+  width: min(420px, calc(100% - 40px));
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+.sk-avatar, .sk-line, .sk-grid span, .sk-actions span {
+  background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(0,234,255,.12), rgba(255,255,255,.05));
+  background-size: 200% 100%;
+  animation: sk 1.2s ease-in-out infinite;
+}
+.sk-avatar { width: 96px; height: 96px; border-radius: 50%; }
+.sk-card { width: 100%; display: grid; gap: 10px; }
+.sk-line { height: 14px; border-radius: 8px; width: 80%; }
+.sk-name { width: 55%; height: 22px; }
+.sk-actions, .sk-grid { display: flex; gap: 8px; width: 100%; justify-content: center; }
+.sk-actions span { width: 72px; height: 36px; border-radius: 12px; }
+.sk-grid span { flex: 1; height: 88px; border-radius: 16px; }
+@keyframes sk { 50% { background-position: 100% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .sk-avatar, .sk-line, .sk-grid span, .sk-actions span { animation: none; }
+}

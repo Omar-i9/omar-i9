@@ -1,0 +1,174 @@
+.hero-wrapper {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  padding-block-start: 18px;
+}
+
+.lang-toggle {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: 0;
+  min-height: 44px;
+  padding-inline: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,234,255,.22);
+  background: rgba(0,234,255,.08);
+  color: var(--cyan-2);
+  z-index: 2;
+}
+.lang-hint { font-size: .78rem; font-weight: 700; }
+
+.avatar {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  padding: 0;
+  border-radius: 50%;
+  isolation: isolate;
+}
+.avatar picture,
+.avatar img {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 8px;
+  border: 2px solid rgba(0,234,255,.35);
+  box-shadow: 0 0 28px rgba(0,234,255,.28);
+}
+.avatar::before,
+.avatar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.avatar::before {
+  border: 1px dashed rgba(0,234,255,.45);
+  animation: orbit 12s linear infinite;
+}
+.avatar::after {
+  inset: -10px;
+  background: radial-gradient(circle, rgba(0,234,255,.22), transparent 62%);
+  z-index: -1;
+  animation: pulseGlow 4.6s ease-in-out infinite;
+}
+.status-indicator {
+  position: absolute;
+  inset-inline-end: 14px;
+  inset-block-end: 14px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--status-color);
+  box-shadow: 0 0 12px var(--status-glow);
+  border: 2px solid #050a12;
+}
+
+.hero-card-body {
+  position: relative;
+  width: min(100%, 600px);
+  padding: 28px 28px 24px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  text-align: center;
+  background:
+    linear-gradient(145deg, rgba(14, 21, 39, .72), rgba(5, 9, 18, .76)),
+    radial-gradient(circle at 100% 0%, rgba(0,234,255,.12), transparent 36%);
+  border: 1px solid rgba(161, 187, 214, .18);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hero-card-body::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(110deg, transparent 0 28%, rgba(0,234,255,.18) 42%, transparent 56% 100%);
+  transform: translateX(-120%);
+  animation: heroScan 7s ease-in-out infinite;
+  pointer-events: none;
+}
+.moving-border-line {
+  position: absolute;
+  inset-inline: 12%;
+  inset-block-end: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,234,255,.85), rgba(20,231,192,.75), transparent);
+  animation: lineBreathe 3.4s ease-in-out infinite;
+}
+.status {
+  display: inline-flex;
+  min-height: 32px;
+  padding-inline: 14px;
+  align-items: center;
+  border-radius: 999px;
+  color: var(--status-color);
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: .08em;
+  background: color-mix(in srgb, var(--status-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--status-color) 35%, transparent);
+}
+.hero-text h1 {
+  margin: 10px 0 6px;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  line-height: 1.1;
+}
+.hero-text p { margin: 0; color: var(--muted); font-weight: 700; }
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.hero-action {
+  min-height: 44px;
+  padding-inline: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,234,255,.22);
+  background: rgba(0,234,255,.08);
+  font-weight: 800;
+}
+.hero-action img,
+.action-icon { width: 18px; height: 18px; }
+.hero-action:hover { border-color: rgba(0,234,255,.5); box-shadow: var(--glow-cyan); }
+
+.profile-popover {
+  width: min(100%, 420px);
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--panel-strong);
+  border: 1px solid var(--border);
+  text-align: start;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity var(--dur), transform var(--dur) var(--ease);
+}
+.profile-popover.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.profile-popover span { display: block; color: var(--cyan); font-size: .78rem; font-weight: 800; }
+
+@keyframes orbit { to { transform: rotate(1turn); } }
+@keyframes pulseGlow {
+  50% { opacity: .45; transform: scale(1.06); }
+}
+@keyframes heroScan {
+  0%, 24% { transform: translateX(-120%); }
+  58%, 100% { transform: translateX(120%); }
+}
+@keyframes lineBreathe {
+  50% { opacity: .2; filter: blur(1px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar::before, .avatar::after, .hero-card-body::before, .moving-border-line { animation: none; }
+}

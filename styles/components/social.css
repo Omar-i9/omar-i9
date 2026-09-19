@@ -1,0 +1,101 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.filter-chip {
+  min-height: 40px;
+  padding-inline: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  font-weight: 800;
+  font-size: .86rem;
+}
+.filter-chip.is-on {
+  border-color: rgba(0,234,255,.42);
+  background: rgba(0,234,255,.12);
+  color: var(--cyan-2);
+  box-shadow: var(--glow-cyan);
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.social-card {
+  position: relative;
+  min-height: 190px;
+  padding: 18px 16px 20px;
+  border-radius: var(--radius-lg);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(148, 184, 211, .14);
+  background:
+    radial-gradient(circle at 50% 0%, var(--card-glow, rgba(0,234,255,.18)), transparent 58%),
+    linear-gradient(145deg, rgba(10, 24, 38, .75), rgba(5, 12, 22, .82));
+  box-shadow: 0 18px 36px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.055);
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform var(--dur-slow) var(--ease-spring), border-color var(--dur), box-shadow var(--dur), opacity var(--dur);
+}
+.social-card:hover,
+.social-card:focus-visible {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-7px) scale(1.015);
+  border-color: rgba(0, 234, 255, .34);
+  box-shadow: 0 28px 60px rgba(0,0,0,.42), 0 0 38px var(--card-shadow, rgba(0,234,255,.16));
+}
+.social-card.is-filtered-out { display: none; }
+
+.social-badges {
+  position: absolute;
+  inset-block-start: 10px;
+  inset-inline-end: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: flex-end;
+}
+.social-badge {
+  min-height: 22px;
+  padding-inline: 8px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: .68rem;
+  font-weight: 900;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.075);
+}
+.social-badge-featured { background: linear-gradient(135deg, rgba(255,61,142,.86), rgba(139,92,246,.72)); }
+.social-badge-public { background: linear-gradient(135deg, rgba(0,234,255,.78), rgba(24,119,255,.72)); }
+.social-badge-private { background: linear-gradient(135deg, rgba(255,94,220,.76), rgba(122,77,255,.72)); }
+.social-badge-official { background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(0,234,255,.2)); }
+.social-badge-contact { background: linear-gradient(135deg, rgba(88,101,242,.76), rgba(0,234,255,.42)); }
+
+.social-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  color: var(--icon-color, #fff);
+  filter: drop-shadow(0 9px 18px rgba(0,0,0,.42));
+}
+.brand-icon-img { width: 52px; height: 52px; object-fit: contain; }
+.social-text { display: grid; gap: 2px; }
+.social-text strong { font-size: 1.02rem; }
+.social-text span { color: var(--muted); font-size: .86rem; font-weight: 700; }
+
+.ig-card { --icon-color: #ff3d8e; --card-glow: rgba(255,61,142,.22); --card-shadow: rgba(255,61,142,.22); }
+.sc-card { --icon-color: #f8ff00; --card-glow: rgba(248,255,0,.16); --card-shadow: rgba(248,255,0,.18); }
+.tk-card { --icon-color: #fff; --card-glow: rgba(0,234,255,.2); --card-shadow: rgba(255,61,142,.18); }
+.fb-card { --icon-color: #1877ff; --card-glow: rgba(24,119,255,.18); --card-shadow: rgba(24,119,255,.18); }
+.github-card { --icon-color: #fff; --card-glow: rgba(255,255,255,.15); --card-shadow: rgba(255,255,255,.14); }
+.chess-card { --icon-color: #f7f7f7; --card-glow: rgba(23,194,177,.2); --card-shadow: rgba(23,194,177,.18); }
+.steam-card { --icon-color: #d7e5ff; --card-glow: rgba(110,134,168,.24); --card-shadow: rgba(110,134,168,.18); }
+.spotify-card { --icon-color: #1ed760; --card-glow: rgba(30,215,96,.2); --card-shadow: rgba(30,215,96,.18); }
+.rockstar-card { --icon-color: #ffd200; --card-glow: rgba(255, 0, 102, .22); --card-shadow: rgba(255,0,102,.18); }
+.ds-card { --icon-color: #5865f2; --card-glow: rgba(88,101,242,.22); --card-shadow: rgba(88,101,242,.2); }
