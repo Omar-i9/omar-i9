@@ -7,7 +7,7 @@ Personal hub for **links, gaming IDs, projects, sharing, and a quiet ayah card**
 
 [![Site](https://img.shields.io/badge/Site-omar--i9.github.io-00eaff?style=for-the-badge)](https://omar-i9.github.io/omar-i9/)
 [![GitHub](https://img.shields.io/badge/GitHub-Omar--i9-181717?style=for-the-badge&logo=github)](https://github.com/Omar-i9)
-[![TAAMEN](https://img.shields.io/badge/TAAMEN-2.0%20beta-1D4ED8?style=for-the-badge)](https://taamenn.com/)
+[![TAAMEN](https://img.shields.io/badge/TAAMEN-2.0-1D4ED8?style=for-the-badge)](https://taamenn.com/)
 
 </div>
 
@@ -25,7 +25,7 @@ identity → actions → social → quick copy → projects → ayah → footer
 
 - Arabic is the default language. English is complete. Layout flips RTL/LTR.
 - Static only: HTML, CSS, Vanilla JS (ES modules). GitHub Pages is enough.
-- Flagship project showcase: **[TAAMEN](https://taamenn.com/)** (2.0 beta). Also: [EV Telemetry Dashboard](https://ev-telemetry-dashboard.onrender.com/).
+- Flagship project showcase: **[TAAMEN](https://taamenn.com/)** (2.0). Also: [EV Telemetry Dashboard](https://ev-telemetry-dashboard.onrender.com/).
 
 ---
 

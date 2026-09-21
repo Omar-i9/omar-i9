@@ -2,14 +2,14 @@ export const projects = [
   {
     id: 'taamenn',
     featured: true,
-    status: 'BETA',
-    statusKey: 'statusBeta',
+    status: 'ACTIVE',
+    statusKey: 'statusActive',
     categoryKey: 'projectCatFootball',
     titleKey: 'projectName',
     subtitleKey: 'taamenSubtitle',
     shortKey: 'taamenShort',
-    version: 'v2.0.0-beta.1',
-    versionDate: '2026-09-16',
+    openKey: 'projectOpenTaamen',
+    version: 'v2.0.0',
     image: 'assets/img/tameen-logo.webp',
     imageFallback: 'assets/img/tameen-logo.jpeg',
     pageUrl: 'pages/project-taameen.html',
@@ -18,7 +18,13 @@ export const projects = [
     repositoryUrl: 'https://github.com/Omar-i9/taamenn',
     releasesUrl: 'https://github.com/Omar-i9/taamenn/releases',
     technologies: ['React', 'TypeScript', 'Vite', 'GSAP', 'IndexedDB', 'PWA'],
-    hud: null
+    hud: null,
+    acquisition: {
+      enabled: true,
+      url: 'https://taamenn.com/acquisition',
+      price: 'USD 4,900',
+      negotiable: true
+    }
   },
   {
     id: 'ev-telemetry',
@@ -55,8 +61,8 @@ export const taamenShowcase = {
     en: 'A football workspace built around match organization, tactical planning, archives, profiles, notifications, and a bilingual local-first experience.'
   },
   overview: {
-    ar: 'تأمين 2.0 منصة إدارة وتنظيم مباريات تعمل أولًا على جهازك. المستودع يقدّمها كـ TAAMEN 2.0، والنطاق taamenn.com يعرض نفس الجيل. أحدث إصدار منشور: v2.0.0-beta.1 بتاريخ 2026-09-16 (نسخة أولية).',
-    en: 'TAAMEN 2.0 is a football management and match-organization platform that stays local-first on the device. The repository describes it as TAAMEN 2.0, and taamenn.com presents that generation. Latest published release: v2.0.0-beta.1 on 2026-09-16 (prerelease).'
+    ar: 'تأمين 2.0 منصة إدارة وتنظيم مباريات تعمل أولًا على جهازك. المنتج الحالي على taamenn.com هو TAAMEN 2.0 (v2.0.0).',
+    en: 'TAAMEN 2.0 is a football management and match-organization platform that stays local-first on the device. The current product on taamenn.com is TAAMEN 2.0 (v2.0.0).'
   },
   architectureLayers: [
     { ar: 'واجهة المستخدم', en: 'UI' },
@@ -113,8 +119,14 @@ export const taamenShowcase = {
     {
       tag: 'v2.0.0-beta.1',
       date: '2026-09-16',
-      ar: 'بيتا معلنة: أساس محلي أولًا، وتجهيز للمرحلة التالية على taamenn.com.',
-      en: 'Announced beta: local-first foundation, prepared for the next stage on taamenn.com.'
+      ar: 'مرحلة تاريخية: بيتا معلنة بأساس محلي أولًا، قبل المنتج الحالي على taamenn.com.',
+      en: 'Historical phase: announced beta with a local-first foundation, before the current product on taamenn.com.'
+    },
+    {
+      tag: 'v2.0.0',
+      date: null,
+      ar: 'المنتج الحالي: تأمين 2.0 على taamenn.com.',
+      en: 'Current product: TAAMEN 2.0 on taamenn.com.'
     }
   ],
   visualsNote: {

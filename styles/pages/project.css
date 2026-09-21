@@ -45,18 +45,89 @@ html[dir="rtl"] .crumb svg { transform: scaleX(-1); }
     linear-gradient(145deg, rgba(12,21,38,.86), rgba(5,10,18,.94));
   box-shadow: var(--shadow);
 }
-.project-logo {
-  width: 96px;
-  height: 96px;
-  border-radius: 24px;
-  object-fit: cover;
-  border: 1px solid rgba(0,234,255,.24);
-}
-.project-logo.is-bolt {
+.project-hero-visual {
   display: grid;
   place-items: center;
-  font-size: 2.6rem;
-  background: rgba(0,234,255,.08);
+}
+
+.project-hero-mark {
+  width: 108px;
+  height: 108px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(20, 231, 192, .16), transparent 62%),
+    #eef1f4;
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .28);
+}
+
+.project-hero-mark.is-bolt {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(0, 234, 255, .2), transparent 64%),
+    rgba(4, 14, 28, .82);
+  color: var(--cyan);
+  font-size: 2.4rem;
+}
+
+.project-hero-mark picture,
+.project-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.project-status,
+.project-version,
+.project-date {
+  min-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  letter-spacing: .04em;
+}
+
+.project-status {
+  padding-inline: 8px;
+  border-radius: 999px;
+  font-size: .7rem;
+  font-weight: 800;
+  border: 1px solid transparent;
+}
+
+.project-status.is-active {
+  color: var(--teal);
+  background: rgba(20, 231, 192, .1);
+  border-color: rgba(20, 231, 192, .28);
+}
+
+.project-status.is-beta {
+  color: var(--cyan-2);
+  background: rgba(0, 234, 255, .08);
+  border-color: rgba(0, 234, 255, .22);
+}
+
+.project-status.is-legacy {
+  color: var(--muted);
+  background: rgba(255, 255, 255, .04);
+  border-color: var(--border);
+}
+
+.project-version,
+.project-date {
+  padding-inline: 4px;
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--muted-2);
 }
 .project-hero h1 {
   margin: 8px 0 6px;
@@ -115,7 +186,12 @@ html[dir="rtl"] .crumb svg { transform: scaleX(-1); }
   background: rgba(255,255,255,.035);
   transition: transform var(--dur) var(--ease), border-color var(--dur);
 }
-.feat-card:hover { transform: translateY(-4px); border-color: rgba(0,234,255,.3); }
+@media (hover: hover) and (pointer: fine) {
+  .feat-card:hover { transform: translateY(-4px); border-color: rgba(0,234,255,.3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feat-card { transition: none; }
+}
 .feat-glyph {
   width: 28px;
   height: 28px;

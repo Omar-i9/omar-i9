@@ -8,6 +8,12 @@ import { initDialogs } from '../features/dialogs.js';
 import { initReveal } from '../motion/reveal.js';
 import { chromeIcon } from '../features/icons.js';
 
+function statusTone(statusKey) {
+  if (statusKey === 'statusActive') return 'is-active';
+  if (statusKey === 'statusLegacy') return 'is-legacy';
+  return 'is-beta';
+}
+
 function langText(value) {
   if (!value) return '';
   if (typeof value === 'string') return value;
@@ -29,16 +35,19 @@ export function renderProjectShell(projectId) {
   if (!root) return;
 
   const actions = [
-    project.liveUrl ? `<a class="btn btn-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectOpenLive'))}</a>` : '',
+    project.liveUrl ? `<a class="btn btn-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t(project.openKey || 'projectOpenLive'))}</a>` : '',
     project.repositoryUrl ? `<a class="btn" href="${escapeHtml(project.repositoryUrl)}" target="_blank" rel="noopener noreferrer">${chromeIcon('github')}<span>${escapeHtml(t('projectGithub'))}</span></a>` : '',
     project.releasesUrl ? `<a class="btn" href="${escapeHtml(project.releasesUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectReleases'))}</a>` : '',
-    project.pagesUrl ? `<a class="btn btn-ghost" href="${escapeHtml(project.pagesUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectPagesMirror'))}</a>` : ''
+    project.pagesUrl ? `<a class="btn btn-ghost" href="${escapeHtml(project.pagesUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectPagesMirror'))}</a>` : '',
+    project.acquisition?.enabled && project.acquisition.url
+      ? `<a class="btn btn-ghost" href="${escapeHtml(project.acquisition.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectAcquisitionOpen'))}</a>`
+      : ''
   ].filter(Boolean).join('');
 
   document.title = `${title} | Omar Profiles`;
   const visual = project.image
-    ? `<img class="project-logo" src="${escapeHtml(withBase(project.image))}" alt="${escapeHtml(title)}" width="96" height="96">`
-    : '<div class="project-logo is-bolt" aria-hidden="true">⚡</div>';
+    ? `<div class="project-hero-mark"><picture><source srcset="${escapeHtml(withBase(project.image))}" type="image/webp"><img class="project-logo" src="${escapeHtml(withBase(project.imageFallback || project.image))}" alt="${escapeHtml(title)}" width="96" height="96"></picture></div>`
+    : '<div class="project-hero-mark is-bolt" aria-hidden="true">⚡</div>';
   let extra = '';
   if (projectId === 'taamenn') extra = renderTaamen(lang);
   if (projectId === 'ev-telemetry') extra = renderEv(lang);
@@ -51,8 +60,8 @@ export function renderProjectShell(projectId) {
     <section class="project-hero reveal">
       <div class="project-hero-visual">${visual}</div>
       <div class="project-hero-copy">
-        <div class="project-meta-row" dir="ltr">
-          <span class="project-status">${escapeHtml(status)}</span>
+        <div class="project-meta-row">
+          <span class="project-status ${statusTone(project.statusKey)}">${escapeHtml(status)}</span>
           ${project.version ? `<span class="project-version" dir="ltr">${escapeHtml(project.version)}</span>` : ''}
           ${project.versionDate ? `<span class="project-date" dir="ltr">${escapeHtml(project.versionDate)}</span>` : ''}
         </div>
@@ -73,6 +82,7 @@ export function renderProjectShell(projectId) {
 
 function renderTaamen(lang) {
   const s = taamenShowcase;
+  const current = getProject('taamenn');
   const features = s.features.map((item, i) => `
     <article class="feat-card reveal" style="--delay:${i * 40}ms">
       ${featureIcon(item.icon)}
@@ -110,7 +120,7 @@ function renderTaamen(lang) {
     </section>
     <section class="project-block reveal">
       <h2 data-i18n="projectCurrent">${escapeHtml(t('projectCurrent'))}</h2>
-      <p dir="ltr">TAAMEN 2.0 · v2.0.0-beta.1 · BETA</p>
+      <p>${escapeHtml(t('projectName'))} · <span dir="ltr">${escapeHtml(current?.version || '')}</span> · ${escapeHtml(t(current?.statusKey || 'statusActive'))}</p>
     </section>`;
 }
 
