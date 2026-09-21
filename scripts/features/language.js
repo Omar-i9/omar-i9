@@ -2,7 +2,6 @@ import { translations } from '../../data/translations.js';
 import { storageGet, storageSet } from '../core/storage.js';
 import { $$ } from '../core/dom.js';
 import { emit, on } from '../core/events.js';
-import { chromeIcon } from './icons.js';
 
 const STORE_KEY = 'omar_site_lang';
 
@@ -53,7 +52,11 @@ export function applyLanguage(lang) {
     langBtn.dataset.lang = next;
     langBtn.setAttribute('aria-label', dict.ariaBtn || 'Switch language');
     langBtn.title = dict.ariaBtn || 'Switch language';
-    if (!langBtn.querySelector('svg')) langBtn.insertAdjacentHTML('afterbegin', chromeIcon('lang'));
+    const current = langBtn.querySelector('[data-lang-current]');
+    const other = langBtn.querySelector('[data-lang-other]');
+    if (current) current.textContent = next === 'ar' ? 'AR' : 'EN';
+    if (other) other.textContent = next === 'ar' ? 'EN' : 'AR';
+    langBtn.classList.toggle('is-en', next === 'en');
   }
 
   emit('omar:languagechange', { lang: next });

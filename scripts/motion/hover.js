@@ -3,7 +3,7 @@ import { state } from '../core/state.js';
 
 export function initHover() {
   on(document, 'pointerdown', (event) => {
-    const target = event.target.closest('.hero-action, .social-card, .copy-btn, .project-card, .filter-chip, .share-fab, .lang-toggle');
+    const target = event.target.closest('.hero-action, .social-card, .copy-btn, .filter-chip, .share-fab, .lang-toggle');
     if (!target) return;
     target.classList.add('is-press');
   });

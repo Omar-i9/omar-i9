@@ -2,48 +2,13 @@ import { siteConfig } from '../../data/site.js';
 import { $, escapeHtml } from '../core/dom.js';
 import { on, onEmit } from '../core/events.js';
 import { state } from '../core/state.js';
-import { storageGet, storageSet } from '../core/storage.js';
 import { withBase } from '../core/base-path.js';
 import { t } from './language.js';
 import { iconMarkup, chromeIcon } from './icons.js';
-
-function dateKey() {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-}
-
-function eveningStatus() {
-  const choices = ['online', 'coding', 'gaming'];
-  const key = `omar_evening_status_${dateKey()}`;
-  const saved = storageGet(key);
-  if (choices.includes(saved)) return saved;
-  const picked = choices[Math.floor(Math.random() * choices.length)];
-  storageSet(key, picked);
-  return picked;
-}
-
-function statusKey() {
-  const hour = new Date().getHours();
-  if (hour >= 0 && hour < 8) return 'sleeping';
-  if (hour >= 8 && hour < 18) return 'busy';
-  return eveningStatus();
-}
+import { applyPresence } from './presence.js';
 
 export function updateSmartStatus() {
-  const key = statusKey();
-  const config = siteConfig.smartStatuses[key] || siteConfig.smartStatuses.busy;
-  const statusEl = $('#statusText');
-  if (statusEl) {
-    statusEl.textContent = t(config.labelKey, key);
-    statusEl.dataset.status = key;
-    statusEl.setAttribute('aria-label', statusEl.textContent);
-  }
-  state.currentStatus = key;
-  document.body.dataset.status = key;
-  document.body.style.setProperty('--status-color', config.color);
-  document.body.style.setProperty('--status-glow', config.glow);
-  document.body.classList.remove('bg-mode-sleep', 'bg-mode-stars', 'bg-mode-aurora', 'bg-mode-coding', 'bg-mode-gaming');
-  document.body.classList.add(`bg-mode-${config.bg || 'aurora'}`);
+  applyPresence();
 }
 
 export function renderHeroActions() {
@@ -112,6 +77,7 @@ export function initProfile() {
       clearTimeout(state.titleTimer);
       if (titleEl) titleEl.textContent = siteConfig.hiddenTabTitle;
     } else {
+      updateSmartStatus();
       state.titlePaused = false;
       if (titleEl) titleEl.textContent = siteConfig.returnedTabTitle;
       clearTimeout(state.titleTimer);

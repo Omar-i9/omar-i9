@@ -38,6 +38,9 @@
   --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--cyan);
   --status-color: var(--cyan);
   --status-glow: rgba(0, 234, 255, .45);
+  --status-soft: rgba(0, 234, 255, .08);
+  --status-wash: rgba(0, 234, 255, .1);
+  --status-line: rgba(0, 234, 255, .35);
   --z-fab: 40;
   --z-ayah: 45;
   --z-modal: 60;

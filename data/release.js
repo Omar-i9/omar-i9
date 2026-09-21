@@ -1,21 +1,22 @@
 export const release = {
-  version: 'v10.0.0',
-  name: 'Omar Profiles 2.0',
-  date: '2026-09-19',
+  version: 'v3.0.0',
+  name: 'Omar Profiles 3.0',
+  tagline: 'Adaptive Experience',
+  date: '2026-09-21',
   githubUrl: 'https://github.com/Omar-i9/omar-i9',
   changesAr: [
-    'نفس صفحة عمر، بهندسة وحدات أوضح وحركة أنظف.',
-    'فلاتر الروابط تشتغل، والنسخ والمشاركة وQR بدون خدمة خارجية.',
-    'بطاقة الآية أخف مع تبديل محترم وإيقاف عند إخفاء الصفحة.',
-    'مشاريع ببطاقات أوضح: تأمين 2.0 الحالي، ولوحة EV كما هي.',
-    'عربي أولًا، إنجليزي كامل، واتجاه الصفحة ينعكس مع اللغة.'
+    'صف مشاريع قابلة للاختيار: صف مضغوط، وتفاصيل عند التحديد بدون مغادرة الصفحة.',
+    'حضور متكيّف حسب توقيت فلسطين، بتأثير جوّي خفيف على الخلفية.',
+    'تأمين 2.0 كمنتج حالي: فتح المنتج وملف الاستحواذ فقط في الواجهة العامة.',
+    'آية أوضح: تصنيف، الآية، الترجمة عند الإنجليزية، والشرح عند الطلب.',
+    'تحكّم لغة أصغر، وأيقونات تواصل أوضح، وتجربة أضيق على الجوال.'
   ],
   changesEn: [
-    'Same Omar Profiles hub, rebuilt as small static modules.',
-    'Working social filters, copy, share, and a local QR — no remote QR API.',
-    'Ayah card keeps rotation, hide/show, and pauses when the tab is hidden.',
-    'Project cards: TAAMEN 2.0 as the flagship, EV dashboard beside it.',
-    'Arabic-first, full English, and a real RTL/LTR layout switch.'
+    'Selectable project rows: a compact list that expands in place instead of a pile of giant cards.',
+    'Adaptive presence on Asia/Hebron time, with a quiet atmosphere shift — not a theme park.',
+    'TAAMEN 2.0 as the current product: Open TAAMEN and acquisition on the public surface.',
+    'Ayah 3.0: category, verse, English translation when needed, explanation on demand.',
+    'A smaller language control, clearer social marks, and tighter mobile layout.'
   ]
 };
 

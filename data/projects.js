@@ -12,11 +12,19 @@ export const projects = [
     version: 'v2.0.0',
     image: 'assets/img/tameen-logo.webp',
     imageFallback: 'assets/img/tameen-logo.jpeg',
-    pageUrl: 'pages/project-taameen.html',
     liveUrl: 'https://taamenn.com/',
-    pagesUrl: 'https://omar-i9.github.io/taamenn/',
-    repositoryUrl: 'https://github.com/Omar-i9/taamenn',
-    releasesUrl: 'https://github.com/Omar-i9/taamenn/releases',
+    capabilities: {
+      live: true,
+      acquisition: true,
+      repository: false,
+      caseStudy: false,
+      releases: false,
+      pages: false
+    },
+    media: {
+      screenshots: [],
+      video: null
+    },
     technologies: ['React', 'TypeScript', 'Vite', 'GSAP', 'IndexedDB', 'PWA'],
     hud: null,
     acquisition: {
@@ -40,7 +48,12 @@ export const projects = [
     pageUrl: 'pages/project-ev.html',
     liveUrl: 'https://ev-telemetry-dashboard.onrender.com/',
     repositoryUrl: 'https://github.com/Omar-i9/EV-Telemetry-Dashboard',
-    releasesUrl: null,
+    capabilities: {
+      live: true,
+      repository: true,
+      acquisition: false,
+      caseStudy: false
+    },
     technologies: ['Python', 'Flask', 'WebSocket', 'SQLite', 'HTML', 'CSS', 'JavaScript'],
     hud: {
       speed: '75',
@@ -53,6 +66,21 @@ export const projects = [
 
 export function getProject(id) {
   return projects.find((item) => item.id === id) || null;
+}
+
+export function hasCapability(project, capability) {
+  if (!project) return false;
+  const caps = project.capabilities;
+  if (caps && Object.prototype.hasOwnProperty.call(caps, capability)) {
+    return Boolean(caps[capability]);
+  }
+  if (capability === 'live') return Boolean(project.liveUrl);
+  if (capability === 'repository') return Boolean(project.repositoryUrl);
+  if (capability === 'releases') return Boolean(project.releasesUrl);
+  if (capability === 'pages') return Boolean(project.pagesUrl);
+  if (capability === 'acquisition') return Boolean(project.acquisition?.enabled);
+  if (capability === 'caseStudy') return Boolean(project.pageUrl);
+  return false;
 }
 
 export const taamenShowcase = {

@@ -43,11 +43,17 @@
   transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform var(--dur-slow) var(--ease-spring), border-color var(--dur), box-shadow var(--dur), opacity var(--dur);
 }
-.social-card:hover,
 .social-card:focus-visible {
   transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-7px) scale(1.015);
   border-color: rgba(0, 234, 255, .34);
   box-shadow: 0 28px 60px rgba(0,0,0,.42), 0 0 38px var(--card-shadow, rgba(0,234,255,.16));
+}
+@media (hover: hover) and (pointer: fine) {
+  .social-card:hover {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-7px) scale(1.015);
+    border-color: rgba(0, 234, 255, .34);
+    box-shadow: 0 28px 60px rgba(0,0,0,.42), 0 0 38px var(--card-shadow, rgba(0,234,255,.16));
+  }
 }
 .social-card.is-filtered-out { display: none; }
 
@@ -84,19 +90,29 @@
   color: var(--icon-color, #fff);
   filter: drop-shadow(0 9px 18px rgba(0,0,0,.42));
 }
-.github-card .social-icon {
-  background: #f6f8fa;
+.github-card .social-icon,
+.tk-card .social-icon,
+.sc-card .social-icon {
+  background: #f4f6f8;
   border-radius: 18px;
+  filter: none;
 }
-.github-card .brand-icon-img { filter: none; width: 40px; height: 40px; }
+.github-card .brand-icon-img,
+.tk-card .brand-icon-img,
+.sc-card .brand-icon-img {
+  filter: none;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
 .hero-action-github .action-icon { filter: invert(1); }
 .social-text { display: grid; gap: 2px; }
 .social-text strong { font-size: 1.02rem; }
 .social-text span { color: var(--muted); font-size: .86rem; font-weight: 700; }
 
 .ig-card { --icon-color: #ff3d8e; --card-glow: rgba(255,61,142,.22); --card-shadow: rgba(255,61,142,.22); }
-.sc-card { --icon-color: #f8ff00; --card-glow: rgba(248,255,0,.16); --card-shadow: rgba(248,255,0,.18); }
-.tk-card { --icon-color: #fff; --card-glow: rgba(0,234,255,.2); --card-shadow: rgba(255,61,142,.18); }
+.sc-card { --icon-color: #111; --card-glow: rgba(255,255,255,.08); --card-shadow: rgba(248,255,0,.08); }
+.tk-card { --icon-color: #111; --card-glow: rgba(255,255,255,.1); --card-shadow: rgba(0,0,0,.18); }
 .fb-card { --icon-color: #1877ff; --card-glow: rgba(24,119,255,.18); --card-shadow: rgba(24,119,255,.18); }
 .github-card { --icon-color: #fff; --card-glow: rgba(255,255,255,.15); --card-shadow: rgba(255,255,255,.14); }
 .chess-card { --icon-color: #f7f7f7; --card-glow: rgba(23,194,177,.2); --card-shadow: rgba(23,194,177,.18); }

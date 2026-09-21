@@ -5,7 +5,7 @@ export function initPointer() {
   if (state.lowPower || state.reducedMotion) return;
   if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   on(document, 'pointermove', (event) => {
-    const card = event.target.closest?.('.social-card, .project-card');
+    const card = event.target.closest?.('.social-card');
     if (!card) return;
     const rect = card.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -14,7 +14,7 @@ export function initPointer() {
     card.style.setProperty('--ry', `${(x * 7).toFixed(2)}deg`);
   });
   on(document, 'pointerleave', (event) => {
-    const card = event.target.closest?.('.social-card, .project-card');
+    const card = event.target.closest?.('.social-card');
     if (!card) return;
     card.style.setProperty('--rx', '0deg');
     card.style.setProperty('--ry', '0deg');
