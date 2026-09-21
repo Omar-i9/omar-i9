@@ -52,11 +52,8 @@ export function applyLanguage(lang) {
     langBtn.dataset.lang = next;
     langBtn.setAttribute('aria-label', dict.ariaBtn || 'Switch language');
     langBtn.title = dict.ariaBtn || 'Switch language';
-    const current = langBtn.querySelector('[data-lang-current]');
-    const other = langBtn.querySelector('[data-lang-other]');
-    if (current) current.textContent = next === 'ar' ? 'AR' : 'EN';
-    if (other) other.textContent = next === 'ar' ? 'EN' : 'AR';
     langBtn.classList.toggle('is-en', next === 'en');
+    langBtn.classList.toggle('is-ar', next === 'ar');
   }
 
   emit('omar:languagechange', { lang: next });

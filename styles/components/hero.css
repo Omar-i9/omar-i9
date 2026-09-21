@@ -23,10 +23,18 @@
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: .04em;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 .lang-sep { opacity: .45; }
-.lang-toggle .is-quiet { opacity: .45; }
-.lang-toggle.is-en [data-lang-current] { color: var(--text); }
+.lang-toggle [data-lang-ar],
+.lang-toggle [data-lang-en] { opacity: .45; }
+.lang-toggle.is-ar [data-lang-ar],
+.lang-toggle:not(.is-en) [data-lang-ar],
+.lang-toggle.is-en [data-lang-en] {
+  opacity: 1;
+  color: var(--text);
+}
 
 .avatar {
   position: relative;

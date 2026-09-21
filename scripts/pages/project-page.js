@@ -34,8 +34,6 @@ export function renderProjectShell(projectId) {
   if (!root) return;
 
   const lang = currentLang();
-  const langCurrent = lang === 'en' ? 'EN' : 'AR';
-  const langOther = lang === 'en' ? 'AR' : 'EN';
   const actions = [
     hasCapability(project, 'live') && project.liveUrl
       ? `<a class="btn btn-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t(project.openKey || 'projectOpenLive'))}</a>`
@@ -68,10 +66,10 @@ export function renderProjectShell(projectId) {
   root.innerHTML = `
     <header class="project-topbar reveal">
       <a class="crumb" href="${escapeHtml(withBase('index.html'))}">${chromeIcon('arrow')}<span data-i18n="projectBack">${escapeHtml(t('projectBack'))}</span></a>
-      <button id="langToggleBtn" class="lang-toggle" type="button" data-i18n-aria="ariaBtn" aria-label="${escapeHtml(t('ariaBtn'))}">
-        <span data-lang-current>${langCurrent}</span>
+      <button id="langToggleBtn" class="lang-toggle${lang === 'en' ? ' is-en' : ' is-ar'}" type="button" data-i18n-aria="ariaBtn" aria-label="${escapeHtml(t('ariaBtn'))}">
+        <span data-lang-ar>AR</span>
         <span class="lang-sep" aria-hidden="true">/</span>
-        <span data-lang-other class="is-quiet">${langOther}</span>
+        <span data-lang-en>EN</span>
       </button>
     </header>
     <section class="project-hero reveal">
