@@ -67,9 +67,11 @@ export function renderProjectShell(projectId) {
     <header class="project-topbar reveal">
       <a class="crumb" href="${escapeHtml(withBase('index.html'))}">${chromeIcon('arrow')}<span data-i18n="projectBack">${escapeHtml(t('projectBack'))}</span></a>
       <button id="langToggleBtn" class="lang-toggle${lang === 'en' ? ' is-en' : ' is-ar'}" type="button" data-i18n-aria="ariaBtn" aria-label="${escapeHtml(t('ariaBtn'))}">
-        <span data-lang-ar>AR</span>
-        <span class="lang-sep" aria-hidden="true">/</span>
-        <span data-lang-en>EN</span>
+        <span class="lang-pair">
+          <span data-lang-ar>AR</span>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <span data-lang-en>EN</span>
+        </span>
       </button>
     </header>
     <section class="project-hero reveal">

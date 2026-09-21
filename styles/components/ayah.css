@@ -109,11 +109,13 @@
     inset-inline-end: 10px;
     inset-inline-start: auto;
     inset-block-end: 84px;
-    width: min(228px, calc(100vw - 96px));
+    width: min(252px, calc(100vw - 88px));
     max-height: 36dvh;
     overflow: auto;
   }
   .ayah-text { font-size: .95rem; }
+  .ayah-new-btn,
+  .ayah-copy-btn { font-size: .78rem; min-height: 38px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ayah-ring, .ayah-float.is-water-in, .ayah-float.is-water-out { animation: none; }
