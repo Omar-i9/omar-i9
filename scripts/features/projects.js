@@ -1,9 +1,12 @@
-import { projects } from '../../data/projects.js';
+import { projects, hasCapability } from '../../data/projects.js';
 import { $, escapeHtml } from '../core/dom.js';
 import { on } from '../core/events.js';
 import { withBase } from '../core/base-path.js';
 import { t } from './language.js';
 import { chromeIcon } from './icons.js';
+
+let selectedId = null;
+let hudLoopStarted = false;
 
 function statusTone(statusKey) {
   if (statusKey === 'statusActive') return 'is-active';
@@ -11,8 +14,19 @@ function statusTone(statusKey) {
   return 'is-beta';
 }
 
-function hudMarkup(hud) {
+function can(project, capability) {
+  return hasCapability(project, capability);
+}
+
+function hudMarkup(hud, compact) {
   if (!hud) return '';
+  if (compact) {
+    return `
+      <div class="project-hud is-hint" dir="ltr" aria-hidden="true">
+        <span><b data-hud="speed">${escapeHtml(hud.speed)}</b><small>km/h</small></span>
+        <span><b data-hud="soc">${escapeHtml(hud.soc)}</b><small>SOC</small></span>
+      </div>`;
+  }
   return `
     <div class="project-hud" dir="ltr" aria-hidden="true">
       <span><b data-hud="speed">${escapeHtml(hud.speed)}</b><small>km/h</small></span>
@@ -27,8 +41,8 @@ function renderVisual(project) {
     const src = escapeHtml(withBase(project.image));
     const fallback = escapeHtml(withBase(project.imageFallback || project.image));
     const img = project.imageFallback
-      ? `<picture><source srcset="${src}" type="image/webp"><img src="${fallback}" alt="" width="88" height="88" loading="${project.featured ? 'eager' : 'lazy'}" decoding="async"></picture>`
-      : `<img src="${src}" alt="" width="88" height="88" loading="${project.featured ? 'eager' : 'lazy'}" decoding="async">`;
+      ? `<picture><source srcset="${src}" type="image/webp"><img src="${fallback}" alt="" width="56" height="56" loading="${project.featured ? 'eager' : 'lazy'}" decoding="async"></picture>`
+      : `<img src="${src}" alt="" width="56" height="56" loading="${project.featured ? 'eager' : 'lazy'}" decoding="async">`;
     return `<div class="project-visual"><div class="project-logo-shell">${img}</div></div>`;
   }
   return `<div class="project-visual"><div class="project-logo-shell"><span class="project-bolt" aria-hidden="true">⚡</span></div></div>`;
@@ -36,23 +50,26 @@ function renderVisual(project) {
 
 function renderActions(project) {
   const items = [];
-  if (project.liveUrl) {
+  if (can(project, 'live') && project.liveUrl) {
     const label = escapeHtml(t(project.openKey || 'projectOpenLive', t('projectOpenLive')));
     items.push(`<a class="project-action is-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer">${label} ${chromeIcon('arrow')}</a>`);
   }
-  if (project.pageUrl) {
-    items.push(`<a class="project-action is-secondary" href="${escapeHtml(withBase(project.pageUrl))}">${escapeHtml(t('projectCaseStudy', 'Case study'))}</a>`);
+  if (can(project, 'acquisition') && project.acquisition?.enabled && project.acquisition.url) {
+    items.push(`<a class="project-action is-acquisition" href="${escapeHtml(project.acquisition.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectAcquisitionOpen'))}</a>`);
   }
-  if (project.repositoryUrl) {
+  if (can(project, 'repository') && project.repositoryUrl) {
     items.push(`<a class="project-action is-tertiary" href="${escapeHtml(project.repositoryUrl)}" target="_blank" rel="noopener noreferrer">${chromeIcon('github')}<span>${escapeHtml(t('projectGithub', 'Repository'))}</span></a>`);
   }
+  if (can(project, 'caseStudy') && project.pageUrl) {
+    items.push(`<a class="project-action is-secondary" href="${escapeHtml(withBase(project.pageUrl))}">${escapeHtml(t('projectCaseStudy', 'Case study'))}</a>`);
+  }
   if (!items.length) return '';
-  return `<nav class="project-actions" aria-label="${escapeHtml(t('projectLinks', 'Links'))}">${items.join('')}</nav>`;
+  return `<nav class="project-actions">${items.join('')}</nav>`;
 }
 
 function renderProjectAcquisition(project) {
   const acq = project.acquisition;
-  if (!acq?.enabled || !acq.url) return '';
+  if (!can(project, 'acquisition') || !acq?.enabled || !acq.url) return '';
   const price = acq.price
     ? `<span class="project-acquisition-price" dir="ltr">${escapeHtml(acq.price)}</span>`
     : '';
@@ -65,43 +82,67 @@ function renderProjectAcquisition(project) {
       <p class="project-acquisition-label">${escapeHtml(t('projectAcquisitionLabel'))}</p>
       <p class="project-acquisition-title">${escapeHtml(t('projectAcquisitionTitle'))}</p>
       ${meta ? `<p class="project-acquisition-meta">${meta}</p>` : ''}
-      <a class="project-acquisition-open" href="${escapeHtml(acq.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectAcquisitionOpen'))} ${chromeIcon('arrow')}</a>
     </div>`;
+}
+
+function renderProjectMedia(project) {
+  const shots = project.media?.screenshots || [];
+  const video = project.media?.video;
+  if (!shots.length && !video) return '';
+  const gallery = shots.map((shot) => {
+    const src = escapeHtml(withBase(shot.src));
+    const alt = escapeHtml(shot.alt || '');
+    return `<img src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
+  }).join('');
+  const vid = video?.src
+    ? `<video class="project-video" poster="${escapeHtml(withBase(video.poster || ''))}" controls playsinline preload="metadata"><source src="${escapeHtml(withBase(video.src))}" type="${escapeHtml(video.type || 'video/mp4')}"></video>`
+    : '';
+  return `<div class="project-media">${vid}${gallery ? `<div class="project-shots">${gallery}</div>` : ''}</div>`;
 }
 
 export function renderProjects() {
   const wrap = $('#projectsList');
   if (!wrap) return;
   wrap.innerHTML = projects.map((project, index) => {
+    const open = selectedId === project.id;
     const title = escapeHtml(t(project.titleKey, project.id));
     const subtitle = escapeHtml(t(project.subtitleKey, ''));
     const short = escapeHtml(t(project.shortKey, ''));
     const status = escapeHtml(t(project.statusKey, project.status));
     const category = escapeHtml(t(project.categoryKey, ''));
-    const tech = (project.technologies || []).slice(0, 6).map((item) => `<span>${escapeHtml(item)}</span>`).join('');
     const version = project.version ? `<span class="project-version" dir="ltr">${escapeHtml(project.version)}</span>` : '';
-    const cold = project.id === 'ev-telemetry'
-      ? `<p class="project-note" data-i18n="evColdStart">${escapeHtml(t('evColdStart'))}</p>`
+    const cold = project.id === 'ev-telemetry' && open
+      ? `<p class="project-note">${escapeHtml(t('evColdStart'))}</p>`
       : '';
     const featured = project.featured ? ' is-featured' : '';
+    const panelId = `project-panel-${escapeHtml(project.id)}`;
+    const expandLabel = open ? t('projectCollapse') : t('projectExpand');
     return `
-      <article class="project-card${featured} reveal" data-project="${escapeHtml(project.id)}" style="--delay:${index * 80}ms">
-        <div class="project-card-layout">
+      <article class="project-row${featured}${open ? ' is-open' : ''} reveal" data-project="${escapeHtml(project.id)}" style="--delay:${index * 80}ms">
+        <button class="project-row-header" type="button" aria-expanded="${open ? 'true' : 'false'}" aria-controls="${panelId}" data-project-toggle="${escapeHtml(project.id)}" aria-label="${escapeHtml(expandLabel)} — ${title}">
           ${renderVisual(project)}
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-status ${statusTone(project.statusKey)}">${status}</span>
-              <span class="project-cat">${category}</span>
-              ${version}
+          <div class="project-row-copy">
+            <div class="project-row-top">
+              <h3>${title}</h3>
+              <p class="project-meta">
+                <span class="project-status ${statusTone(project.statusKey)}">${status}</span>
+                <span class="project-cat">${category}</span>
+                ${version}
+              </p>
             </div>
-            <h3>${title}</h3>
             <p class="project-sub">${subtitle}</p>
+            ${!open ? hudMarkup(project.hud, true) : ''}
+          </div>
+          <span class="project-chevron" aria-hidden="true">${chromeIcon('arrow')}</span>
+        </button>
+        <div class="project-row-panel" id="${panelId}"${open ? '' : ' inert'}>
+          <div class="project-row-panel-inner">
             <p class="project-short">${short}</p>
             ${cold}
-            ${hudMarkup(project.hud)}
-            <div class="project-tech" aria-label="${escapeHtml(t('projectTech', 'Tech'))}">${tech}</div>
-            ${renderActions(project)}
+            ${open ? hudMarkup(project.hud, false) : ''}
             ${renderProjectAcquisition(project)}
+            ${renderActions(project)}
+            ${open ? renderProjectMedia(project) : ''}
           </div>
         </div>
       </article>`;
@@ -130,5 +171,16 @@ function tickHud() {
 export function initProjects() {
   renderProjects();
   on(document, 'omar:languagechange', renderProjects);
-  tickHud();
+  on(document, 'click', (event) => {
+    const toggle = event.target.closest?.('[data-project-toggle]');
+    if (!toggle) return;
+    const id = toggle.getAttribute('data-project-toggle');
+    selectedId = selectedId === id ? null : id;
+    renderProjects();
+    document.querySelector(`[data-project-toggle="${id}"]`)?.focus();
+  });
+  if (!hudLoopStarted) {
+    hudLoopStarted = true;
+    tickHud();
+  }
 }

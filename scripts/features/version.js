@@ -14,6 +14,8 @@ export function paintVersion() {
   const link = $('#versionGithub');
   if (title) title.textContent = release.version;
   if (subtitle) subtitle.textContent = release.name;
+  const tagline = $('#versionTagline');
+  if (tagline) tagline.textContent = t('releaseTagline', release.tagline || '');
   if (date) date.textContent = release.date;
   if (link) link.href = release.githubUrl;
   if (list) {

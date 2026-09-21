@@ -17,7 +17,7 @@
   animation: floatBlob 14s var(--ease) infinite alternate;
   animation-play-state: paused;
 }
-.bg-aurora span:nth-child(1) { inset-inline-end: -160px; inset-block-start: -140px; background: #00eaff; }
+.bg-aurora span:nth-child(1) { inset-inline-end: -160px; inset-block-start: -140px; background: color-mix(in srgb, var(--status-color) 14%, #00eaff); }
 .bg-aurora span:nth-child(2) { inset-inline-start: -160px; inset-block-start: 22%; background: #14e7c0; animation-duration: 17s; }
 .bg-aurora span:nth-child(3) { inset-inline-start: 18%; inset-block-end: -250px; background: #8b5cf6; animation-duration: 19s; opacity: .18; }
 
@@ -45,11 +45,6 @@ body.site-ready .bg-aurora span { animation-play-state: running; }
   pointer-events: none;
 }
 
-body[data-status="sleeping"] { --status-wash: rgba(125, 211, 252, .12); }
-body[data-status="busy"] { --status-wash: rgba(247, 201, 72, .1); }
-body[data-status="online"] { --status-wash: rgba(39, 230, 129, .1); }
-body[data-status="coding"] { --status-wash: rgba(0, 234, 255, .12); }
-body[data-status="gaming"] { --status-wash: rgba(169, 112, 255, .12); }
 body::after {
   content: "";
   position: fixed;
@@ -57,6 +52,11 @@ body::after {
   pointer-events: none;
   z-index: -1;
   background: radial-gradient(circle at 50% 0%, var(--status-wash, transparent), transparent 42%);
+  transition: background 700ms var(--ease);
+}
+body[data-motion="calm"] .bg-aurora span {
+  opacity: .14;
+  animation-duration: 28s;
 }
 
 .toast {

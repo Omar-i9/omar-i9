@@ -1,4 +1,4 @@
-import { getProject, taamenShowcase, evShowcase } from '../../data/projects.js';
+import { getProject, hasCapability, taamenShowcase, evShowcase } from '../../data/projects.js';
 import { release } from '../../data/release.js';
 import { $, escapeHtml } from '../core/dom.js';
 import { withBase } from '../core/base-path.js';
@@ -27,20 +27,31 @@ function featureIcon(name) {
 export function renderProjectShell(projectId) {
   const project = getProject(projectId);
   if (!project) return;
-  const lang = currentLang();
   const title = t(project.titleKey, project.id);
   const subtitle = t(project.subtitleKey, '');
   const status = t(project.statusKey, project.status);
   const root = $('#projectRoot');
   if (!root) return;
 
+  const lang = currentLang();
   const actions = [
-    project.liveUrl ? `<a class="btn btn-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t(project.openKey || 'projectOpenLive'))}</a>` : '',
-    project.repositoryUrl ? `<a class="btn" href="${escapeHtml(project.repositoryUrl)}" target="_blank" rel="noopener noreferrer">${chromeIcon('github')}<span>${escapeHtml(t('projectGithub'))}</span></a>` : '',
-    project.releasesUrl ? `<a class="btn" href="${escapeHtml(project.releasesUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectReleases'))}</a>` : '',
-    project.pagesUrl ? `<a class="btn btn-ghost" href="${escapeHtml(project.pagesUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectPagesMirror'))}</a>` : '',
-    project.acquisition?.enabled && project.acquisition.url
+    hasCapability(project, 'live') && project.liveUrl
+      ? `<a class="btn btn-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t(project.openKey || 'projectOpenLive'))}</a>`
+      : '',
+    hasCapability(project, 'acquisition') && project.acquisition?.url
       ? `<a class="btn btn-ghost" href="${escapeHtml(project.acquisition.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectAcquisitionOpen'))}</a>`
+      : '',
+    hasCapability(project, 'repository') && project.repositoryUrl
+      ? `<a class="btn" href="${escapeHtml(project.repositoryUrl)}" target="_blank" rel="noopener noreferrer">${chromeIcon('github')}<span>${escapeHtml(t('projectGithub'))}</span></a>`
+      : '',
+    hasCapability(project, 'caseStudy') && project.pageUrl
+      ? `<a class="btn" href="${escapeHtml(withBase(project.pageUrl))}">${escapeHtml(t('projectCaseStudy'))}</a>`
+      : '',
+    hasCapability(project, 'releases') && project.releasesUrl
+      ? `<a class="btn" href="${escapeHtml(project.releasesUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectReleases'))}</a>`
+      : '',
+    hasCapability(project, 'pages') && project.pagesUrl
+      ? `<a class="btn btn-ghost" href="${escapeHtml(project.pagesUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('projectPagesMirror'))}</a>`
       : ''
   ].filter(Boolean).join('');
 
@@ -55,7 +66,13 @@ export function renderProjectShell(projectId) {
   root.innerHTML = `
     <header class="project-topbar reveal">
       <a class="crumb" href="${escapeHtml(withBase('index.html'))}">${chromeIcon('arrow')}<span data-i18n="projectBack">${escapeHtml(t('projectBack'))}</span></a>
-      <button id="langToggleBtn" class="lang-toggle" type="button" data-i18n-aria="ariaBtn">${chromeIcon('lang')}</button>
+      <button id="langToggleBtn" class="lang-toggle${lang === 'en' ? ' is-en' : ' is-ar'}" type="button" data-i18n-aria="ariaBtn" aria-label="${escapeHtml(t('ariaBtn'))}">
+        <span class="lang-pair">
+          <span data-lang-ar>AR</span>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <span data-lang-en>EN</span>
+        </span>
+      </button>
     </header>
     <section class="project-hero reveal">
       <div class="project-hero-visual">${visual}</div>
@@ -75,7 +92,7 @@ export function renderProjectShell(projectId) {
     <section class="project-links reveal">
       <h2 data-i18n="projectLinks">${escapeHtml(t('projectLinks'))}</h2>
       <div class="hero-actions-row">${actions}</div>
-      <p class="site-ver" dir="ltr">${escapeHtml(release.version)}</p>
+      <p class="site-ver" dir="ltr">${escapeHtml(release.version)} • ${escapeHtml(release.name)}</p>
     </section>
   `;
 }
@@ -121,6 +138,8 @@ function renderTaamen(lang) {
     <section class="project-block reveal">
       <h2 data-i18n="projectCurrent">${escapeHtml(t('projectCurrent'))}</h2>
       <p>${escapeHtml(t('projectName'))} · <span dir="ltr">${escapeHtml(current?.version || '')}</span> · ${escapeHtml(t(current?.statusKey || 'statusActive'))}</p>
+      ${current?.acquisition?.enabled && current.acquisition.url ? `
+      <p class="muted">${escapeHtml(t('projectAcquisitionLabel'))} · ${escapeHtml(t('projectAcquisitionTitle'))} · <span dir="ltr">${escapeHtml(current.acquisition.price || '')}</span> · ${escapeHtml(t('projectAcquisitionNegotiable'))}</p>` : ''}
     </section>`;
 }
 

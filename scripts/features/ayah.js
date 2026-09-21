@@ -46,8 +46,19 @@ function paintAyah() {
   const ayah = ayahs[state.ayahIndex];
   if (!ayah) return;
   const lang = currentLang();
+  const category = $('#ayahCategory');
+  if (category) category.textContent = lang === 'en' ? ayah.categoryEn : ayah.categoryAr;
   $('#ayahText').textContent = ayah.text;
-  $('#ayahTranslation').textContent = ayah.en;
+  const trans = $('#ayahTranslation');
+  if (trans) {
+    if (lang === 'en') {
+      trans.hidden = false;
+      trans.textContent = ayah.en;
+    } else {
+      trans.hidden = true;
+      trans.textContent = '';
+    }
+  }
   $('#ayahRef').textContent = lang === 'en' ? ayah.refEn : ayah.refAr;
   $('#ayahNote').innerHTML = `<span class="ayah-meaning-label">${escapeHtml(t('meaningLabel'))}</span> ${escapeHtml(lang === 'en' ? ayah.noteEn : ayah.noteAr)}`;
   $('#ayahDetail').textContent = lang === 'en' ? ayah.tafsirEn : ayah.tafsirAr;
@@ -141,8 +152,9 @@ export function initAyah() {
   card.addEventListener('click', (event) => {
     if (event.target.closest('button')) return;
     if (state.drag?.moved) return;
-    card.classList.toggle('is-detail');
-    scheduleNext();
+    const open = card.classList.toggle('is-detail');
+    const detail = $('#ayahDetail');
+    if (detail) detail.hidden = !open;
   });
 
   eye?.addEventListener('click', (event) => {

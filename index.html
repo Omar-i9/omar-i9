@@ -91,25 +91,26 @@
     </div>
   </div>
 
-  <aside class="ayah-float reveal is-hidden-hard" id="ayahFloat" aria-label="آية قرآنية متغيرة" aria-live="polite" aria-hidden="true">
+  <aside class="ayah-float reveal is-hidden-hard" id="ayahFloat" aria-label="آية قرآنية متغيرة" aria-hidden="true">
     <div class="ayah-orbit" aria-hidden="true"></div>
     <button class="ayah-eye" id="ayahEye" type="button" data-i18n-aria="hideAyah" aria-label="إخفاء بطاقة الآية"></button>
     <div class="ayah-top">
-      <span class="ayah-pill" data-i18n="ayahPill">آية</span>
+      <span class="ayah-pill" id="ayahCategory">آية</span>
       <span class="ayah-ring" id="ayahRing" aria-hidden="true"></span>
-      <span class="label-tag" id="ayahHint" data-i18n="ayahHint">اضغط لعرض تفاصيل الآية</span>
     </div>
     <div class="ayah-text" id="ayahText" dir="rtl"></div>
-    <div class="ayah-translation" id="ayahTranslation" dir="ltr"></div>
+    <div class="ayah-translation" id="ayahTranslation" dir="ltr" hidden></div>
     <div class="ayah-ref" id="ayahRef"></div>
     <div class="ayah-note" id="ayahNote"></div>
-    <div class="ayah-detail" id="ayahDetail"></div>
-    <button class="ayah-copy-btn" id="copyAyahBtn" type="button">
-      <span data-i18n="copyAyah">نسخ الآية</span>
-    </button>
-    <button class="ayah-new-btn" id="newAyahBtn" type="button">
-      <span data-i18n="newAyah">آية جديدة</span>
-    </button>
+    <div class="ayah-detail" id="ayahDetail" hidden></div>
+    <div class="ayah-actions">
+      <button class="ayah-new-btn" id="newAyahBtn" type="button">
+        <span data-i18n="newAyah">آية جديدة</span>
+      </button>
+      <button class="ayah-copy-btn" id="copyAyahBtn" type="button">
+        <span data-i18n="copyAyah">نسخ الآية</span>
+      </button>
+    </div>
   </aside>
 
   <button class="ayah-dock" id="ayahDock" type="button" data-i18n-aria="showAyah" aria-label="إظهار بطاقة الآية" aria-expanded="false">
@@ -118,8 +119,12 @@
 
   <main class="app" id="app">
     <section class="hero-wrapper reveal" id="heroSection" aria-label="بطاقة الملف الشخصي">
-      <button id="langToggleBtn" class="lang-toggle magnetic" type="button" aria-label="تبديل اللغة" title="تبديل اللغة">
-        <span class="lang-hint" data-i18n="langHint">تغيير اللغة</span>
+      <button id="langToggleBtn" class="lang-toggle is-ar" type="button" aria-label="تبديل اللغة" title="تبديل اللغة">
+        <span class="lang-pair">
+          <span data-lang-ar>AR</span>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <span data-lang-en>EN</span>
+        </span>
       </button>
 
       <button class="avatar" id="avatarBtn" type="button" aria-label="تفاعل مع الصورة الشخصية">
@@ -174,7 +179,7 @@
       <p class="site-footer__brand" data-i18n="footerBrand">عُـمَر | Omar</p>
       <p class="site-footer__text" data-i18n="footerText1">جميع الحقوق غير محفوظة © 2026</p>
       <p class="site-footer__text" data-i18n-html="footerText2">بتعرف انه كل هاد شغل ايدي؟</p>
-      <button class="version-badge" id="versionBadge" type="button">v10.0.0 • Omar Profiles 2.0</button>
+      <button class="version-badge" id="versionBadge" type="button">v3.0.0 • Omar Profiles 3.0</button>
     </div>
   </footer>
 
@@ -214,9 +219,10 @@
     <div class="version-modal" role="dialog" aria-modal="true" aria-labelledby="versionTitle">
       <button class="version-close" id="closeVersion" type="button" data-i18n-aria="closeModal" aria-label="إغلاق">&times;</button>
       <span class="version-kicker" data-i18n="versionLabel">الإصدار</span>
-      <h3 id="versionTitle">v10.0.0</h3>
-      <p class="version-subtitle" id="versionSubtitle">Omar Profiles 2.0</p>
-      <p class="version-date" id="versionDate">2026-09-19</p>
+      <h3 id="versionTitle">v3.0.0</h3>
+      <p class="version-subtitle" id="versionSubtitle">Omar Profiles 3.0</p>
+      <p class="version-tagline" id="versionTagline">Adaptive Experience</p>
+      <p class="version-date" id="versionDate">2026-09-21</p>
       <ul class="version-list" id="versionList"></ul>
       <a class="version-github" id="versionGithub" href="https://github.com/Omar-i9/omar-i9" target="_blank" rel="noopener noreferrer">
         <span data-i18n="versionGithub">GitHub</span>

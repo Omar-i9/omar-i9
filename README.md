@@ -1,6 +1,6 @@
 <div align="center">
 
-# Omar Profiles
+# Omar Profiles 3.0
 ### عُـمَر | Omar-i9
 
 Personal hub for **links, gaming IDs, projects, sharing, and a quiet ayah card** — Arabic first, English fully supported.
@@ -15,7 +15,7 @@ Personal hub for **links, gaming IDs, projects, sharing, and a quiet ayah card**
 
 ## What this is
 
-**Omar Profiles 2.0** is the same personal site, rebuilt as small static modules.
+**Omar Profiles 3.0 — Adaptive Experience** (`v3.0.0`, 2026-09-21) is the same personal site, still built as small static modules.
 
 Not a résumé. Not a generic developer landing page.
 
@@ -25,7 +25,7 @@ identity → actions → social → quick copy → projects → ayah → footer
 
 - Arabic is the default language. English is complete. Layout flips RTL/LTR.
 - Static only: HTML, CSS, Vanilla JS (ES modules). GitHub Pages is enough.
-- Flagship project showcase: **[TAAMEN](https://taamenn.com/)** (2.0). Also: [EV Telemetry Dashboard](https://ev-telemetry-dashboard.onrender.com/).
+- Compact selectable project rows. TAAMEN stays **2.0 / v2.0.0 / Active** on [taamenn.com](https://taamenn.com/). EV Telemetry stays live + public repo.
 
 ---
 
@@ -34,8 +34,9 @@ identity → actions → social → quick copy → projects → ayah → footer
 | Page | Path |
 | --- | --- |
 | Home | https://omar-i9.github.io/omar-i9/ |
-| TAAMEN case study | https://omar-i9.github.io/omar-i9/pages/project-taameen.html |
-| EV dashboard | https://omar-i9.github.io/omar-i9/pages/project-ev.html |
+| TAAMEN product | https://taamenn.com/ |
+| TAAMEN acquisition | https://taamenn.com/acquisition |
+| EV dashboard | https://ev-telemetry-dashboard.onrender.com/ |
 | Discord card | https://omar-i9.github.io/omar-i9/pages/discord.html |
 
 ---
@@ -45,3 +46,4 @@ identity → actions → social → quick copy → projects → ayah → footer
 HTML · CSS · JavaScript modules · no build step · no backend · no runtime GitHub API.
 
 Ayah text sources: see `SOURCES.md`.
+Release notes: `RELEASE_NOTES/RELEASE_NOTES_v3.0.0.md`.
