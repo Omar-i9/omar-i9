@@ -27,8 +27,8 @@ function renderVisual(project) {
     const src = escapeHtml(withBase(project.image));
     const fallback = escapeHtml(withBase(project.imageFallback || project.image));
     const img = project.imageFallback
-      ? `<picture><source srcset="${src}" type="image/webp"><img src="${fallback}" alt="" width="88" height="88" loading="lazy" decoding="async"></picture>`
-      : `<img src="${src}" alt="" width="88" height="88" loading="lazy" decoding="async">`;
+      ? `<picture><source srcset="${src}" type="image/webp"><img src="${fallback}" alt="" width="88" height="88" loading="${project.featured ? 'eager' : 'lazy'}" decoding="async"></picture>`
+      : `<img src="${src}" alt="" width="88" height="88" loading="${project.featured ? 'eager' : 'lazy'}" decoding="async">`;
     return `<div class="project-visual"><div class="project-logo-shell">${img}</div></div>`;
   }
   return `<div class="project-visual"><div class="project-logo-shell"><span class="project-bolt" aria-hidden="true">⚡</span></div></div>`;

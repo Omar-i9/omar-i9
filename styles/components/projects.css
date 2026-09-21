@@ -37,11 +37,9 @@
 .project-card::before {
   content: "";
   position: absolute;
-  inset: -50% auto auto -30%;
-  width: 48%;
-  height: 70%;
-  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, .06), transparent);
-  transform: rotate(18deg) translateX(-30%);
+  inset: 0;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, .05) 46%, transparent 72%);
+  transform: translateX(-55%);
   animation: cardSweep 14s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
@@ -200,6 +198,7 @@
   color: var(--muted);
   font-weight: 700;
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .project-note { font-size: .82rem; color: var(--muted-2); }
@@ -290,6 +289,10 @@ html[dir="rtl"] .project-acquisition-open svg {
 
 .project-acquisition-meta {
   margin: 6px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
   color: var(--muted);
   font-weight: 700;
   font-size: .86rem;
@@ -299,6 +302,7 @@ html[dir="rtl"] .project-acquisition-open svg {
   font-family: var(--font-display);
   font-weight: 800;
   color: var(--text);
+  unicode-bidi: isolate;
 }
 
 .project-acquisition-open {
@@ -381,8 +385,8 @@ html[dir="rtl"] .project-acquisition-open svg {
 }
 
 @keyframes cardSweep {
-  0% { transform: rotate(18deg) translateX(-40%); }
-  100% { transform: rotate(18deg) translateX(240%); }
+  0% { transform: translateX(-55%); }
+  100% { transform: translateX(55%); }
 }
 
 @media (max-width: 768px) {
@@ -406,10 +410,19 @@ html[dir="rtl"] .project-acquisition-open svg {
 }
 
 @media (max-width: 320px) {
+  .projects-list { padding-block-end: 72px; }
+
+  .project-card-layout { padding: 12px; gap: 10px; }
+
   .project-visual {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
   }
+
+  .project-body h3 { font-size: 1.18rem; margin-block-start: 8px; }
+  .project-short { line-height: 1.55; }
+  .project-action { min-height: 42px; }
+  .project-acquisition { margin-block-start: 10px; padding: 10px 12px; }
 
   .project-action,
   .project-acquisition-open {
