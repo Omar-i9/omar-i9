@@ -8,6 +8,7 @@ This project combines original site content with adaptations of the following re
   - React Bits: https://www.reactbits.dev/
 - **GitHub shine button:** visual adaptation of the Uiverse snippet attributed in the supplied code to **elijahgummer**. The implementation uses a real anchor to the owner's GitHub profile (`https://github.com/Omar-i9`) and deliberately omits the sample's static `6` star count.
   - Uiverse: https://uiverse.io/elements
+- **TAAMEN project-card hover:** adapted from the project's v6.0.0 release to the current expandable project card. The effect retains the elevated hover state, moving accent sheen, logo float, status-badge emphasis, and toggle-indicator response without replacing the current case-study interaction.
 - **Profile reveal card:** the existing visual treatment remains inspired by the Uiverse snippet attributed in the supplied code to **Smit-Prajapati**. The active interaction now expands once after the page intro and stays open; it is not a click-to-toggle control. The desktop magnetic tilt is adapted from the profile-card behavior in the project's own [v1.6.5 release](https://github.com/Omar-i9/omar-i9/releases/tag/v1.6.5).
   - Uiverse: https://uiverse.io/elements
 
