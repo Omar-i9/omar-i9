@@ -149,18 +149,18 @@ test('v6 status-driven Aurora background replaces the previous Canvas scene', ()
   assert.match(html, /class="bg-grid"/);
   assert.doesNotMatch(html, /wavesCanvas|scene-backdrop/);
   assert.doesNotMatch(main, /initWavesBackground/);
-  assert.match(css, /body\\.bg-mode-sleep/);
-  assert.match(css, /body\\.bg-mode-stars/);
-  assert.match(css, /body\\.bg-mode-coding/);
+  assert.match(css, /body\.bg-mode-sleep/);
+  assert.match(css, /body\.bg-mode-stars/);
+  assert.match(css, /body\.bg-mode-coding/);
   assert.match(css, /legacy-bg-float-blob/);
   assert.match(presence, /backgroundByPresence/);
-  assert.match(presence, /bg-mode-\\$\\{/);
+  assert.match(presence, /bg-mode-\$\{/);
 });
 
 test('TAAMEN project card restores the v6 hover lift without changing its panel behavior', () => {
   const css = read('styles/site.css');
   const script = read('scripts/features/projects.js');
-  assert.match(css, /project-card--taamenn:hover \\{ transform: translateY\\(-4px\\)/);
+  assert.match(css, /project-card--taamenn:hover \{ transform: translateY\(-4px\)/);
   assert.match(script, /data-project-toggle/);
   assert.match(script, /openCard\\(card\\)/);
   assert.match(script, /closeCard\\(card\\)/);
@@ -174,13 +174,14 @@ test('profile opens once after the intro and never collapses on click', () => {
   assert.match(html, /id="profileDetails"[^>]*aria-hidden="true" inert/);
   assert.doesNotMatch(html, /profileToggle|aria-expanded/);
   assert.match(script, /introDelay/);
-  assert.match(script, /setExpanded\\(false\\)/);
-  assert.match(script, /setExpanded\\(true\\)/);
+  assert.match(script, /setExpanded\(false\)/);
+  assert.match(script, /setExpanded\(true\)/);
   assert.match(script, /pointermove/);
   assert.match(script, /pointerleave/);
-  assert.match(script, /matchMedia\\('\(hover: hover\\) and \\(pointer: fine\\)'\\)/);
-  assert.doesNotMatch(script, /addEventListener\\(['"]click|addEventListener\\(['"]keydown/);
-  assert.match(css, /transform \\.38s ease/);
+  assert.match(script, /hover: hover.*pointer: fine/);
+  assert.doesNotMatch(script, /addEventListener\('click'/);
+  assert.doesNotMatch(script, /addEventListener\('keydown'/);
+  assert.match(css, /transform \.38s ease/);
   assert.match(css, /profile-photo-visual/);
 });
 
@@ -229,7 +230,7 @@ test('release modal does not link to GitHub', () => {
 
 test('site background and foreground cards have clear contrasting surfaces', () => {
   const css = read('styles/site.css');
-  assert.match(css, /\\.bg-grid/);
+  assert.match(css, /\.bg-grid/);
   assert.match(css, /#080c15/);
   assert.match(css, /rgba\(255,255,255/);
   assert.match(css, /--brand/);
