@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080c15"><meta name="color-scheme" content="dark">
+  <meta name="description" content="TAAMEN 2.0 — product overview and development journal.">
+  <link rel="icon" href="../favicon.ico"><link rel="apple-touch-icon" href="../assets/img/icon-180.png"><link rel="manifest" href="../manifest.json"><link rel="preload" href="../assets/fonts/thmanyahsans-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="../assets/fonts/thmanyahsans-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="../assets/fonts/thmanyahseriftext-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styles/fonts.css?v=4.1.1">
+<link rel="stylesheet" href="../styles/site.css?v=4.1.1">
+  <title>TAAMEN — Omar|عُمَر</title>
+</head>
+<body class="project-page project-page--taamen">
+  <div class="scene-backdrop" aria-hidden="true"><div class="scene-color scene-color--one"></div><div class="scene-color scene-color--two"></div><div class="scene-grid"></div><canvas class="waves-canvas" id="wavesCanvas"></canvas><div class="scene-soften"></div></div>
+  <header class="site-header">
+    <a class="site-wordmark" href="../">Omar<span>|</span>عُمَر</a>
+    <span class="header-caption" data-i18n="projectDetails">تفاصيل المشروع</span>
+    <div class="header-controls">
+      <button class="language-switch is-ar" id="langToggleBtn" type="button" aria-label="Switch language to English" aria-pressed="false"><span class="language-switch__track"><i></i></span><span class="language-switch__labels"><b data-lang-ar dir="rtl">العربية</b><b data-lang-en dir="ltr">English</b></span></button>
+      <a class="header-back" href="../" data-i18n="projectBack">العودة للموقع</a>
+    </div>
+  </header>
+  <main class="project-page-shell">
+    <section class="project-page-hero" data-reveal>
+      <img src="../assets/img/tameen-logo.webp" alt="TAAMEN logo" width="92" height="92">
+      <div><span class="project-page-kicker">FOOTBALL WORKSPACE · 2.0.0</span><h1>تأمين <span>TAAMEN</span></h1><p id="taamenHeroLead"></p><div class="taamen-actions"><a class="project-action project-action--primary" href="https://taamenn.com/" target="_blank" rel="noopener noreferrer" data-i18n="openLive">فتح الموقع الرسمي</a></div></div>
+    </section>
+    <section class="project-page-card" id="taamenPageShowcase" data-reveal>
+      <nav class="project-tabs" role="tablist" aria-label="TAAMEN details">
+        <button class="project-tab is-active" type="button" role="tab" aria-selected="true" data-page-tab="published" data-i18n="liveProduct">المنتج المنشور</button>
+        <button class="project-tab" type="button" role="tab" aria-selected="false" data-page-tab="development" data-i18n="devTrack">مسار التطوير</button>
+        <button class="project-tab" type="button" role="tab" aria-selected="false" data-page-tab="lab" data-i18n="labTrack">مختبر داخلي</button>
+      </nav>
+      <section class="project-pane is-active" data-page-pane="published" role="tabpanel"><div id="taamenPublished"></div></section>
+      <section class="project-pane" data-page-pane="development" role="tabpanel" hidden><div id="taamenDevelopment"></div></section>
+      <section class="project-pane" data-page-pane="lab" role="tabpanel" hidden><div id="taamenLab"></div></section>
+    </section>
+    <footer class="page-footer"><p>Omar|عُمَر</p><div class="footer-bottom"><a href="../" data-i18n="projectBack">العودة للموقع</a><span>TAAMEN · v2.0.0</span></div></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="../scripts/pages/taamen-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+/* Thmanyah family — local, preloaded, cache-versioned. */
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../assets/fonts/thmanyahsans-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../assets/fonts/thmanyahsans-Medium.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../assets/fonts/thmanyahsans-Bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../assets/fonts/thmanyahsans-Black.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Serif Text';
+  src: url('../assets/fonts/thmanyahseriftext-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Serif Text';
+  src: url('../assets/fonts/thmanyahseriftext-Bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+html, body, button, input, textarea, select, option {
+  font-family: 'Thmanyah Sans', system-ui, sans-serif;
+  font-synthesis: none;
+  font-kerning: normal;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+html[lang="en"] { font-family: 'Thmanyah Sans', Inter, Arial, system-ui, sans-serif; }

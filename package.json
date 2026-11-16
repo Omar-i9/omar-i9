@@ -1,0 +1,16 @@
+{
+  "name": "omar-profiles",
+  "version": "4.1.1",
+  "private": true,
+  "type": "module",
+  "description": "Omar|عُمَر — Thmanyah fonts preloaded locally, high-contrast frosted glass cards, and refined motion.",
+  "scripts": {
+    "check:js": "node scripts/quality/check-js.mjs",
+    "check:links": "node scripts/quality/check-local-links.mjs",
+    "test": "node --test",
+    "check": "npm run check:js && npm run check:links && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
