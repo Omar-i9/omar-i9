@@ -4,11 +4,11 @@ This project combines original site content with adaptations of the following re
 
 ## User-supplied component snippets
 
-- **Waves background:** based on the React Bits `Waves` component source supplied by the site owner in the project conversation. Its visual behaviour—silky flowing lines, pointer bending, spring return, and click ripples—was reimplemented as a native Canvas 2D module for this static HTML/JavaScript site. The original React/WebGL code is not shipped or executed.
+- **Previous Waves background:** the earlier React Bits-inspired Canvas 2D implementation remains in `scripts/background/waves.js` as an unused legacy module. It is no longer loaded by the site; the active animated background is the status-driven Aurora/grid system restored from this project's own [v6.0.0 release](https://github.com/Omar-i9/omar-i9/releases/tag/v6.0.0).
   - React Bits: https://www.reactbits.dev/
 - **GitHub shine button:** visual adaptation of the Uiverse snippet attributed in the supplied code to **elijahgummer**. The implementation uses a real anchor to the owner's GitHub profile (`https://github.com/Omar-i9`) and deliberately omits the sample's static `6` star count.
   - Uiverse: https://uiverse.io/elements
-- **Profile reveal card:** visual adaptation of the Uiverse snippet attributed in the supplied code to **Smit-Prajapati**. Its compact-to-expanded interaction is adapted to the site's image-first profile: a single automatic intro expansion follows the page fade, then the user can toggle it by activating the avatar. Hover does not open the card.
+- **Profile reveal card:** the existing visual treatment remains inspired by the Uiverse snippet attributed in the supplied code to **Smit-Prajapati**. The active interaction now expands once after the page intro and stays open; it is not a click-to-toggle control. The desktop magnetic tilt is adapted from the profile-card behavior in the project's own [v1.6.5 release](https://github.com/Omar-i9/omar-i9/releases/tag/v1.6.5).
   - Uiverse: https://uiverse.io/elements
 
 The Uiverse elements directory identifies its UI elements as open-source and lists the MIT License. Check the original element post for any element-specific notices before reusing its source elsewhere.

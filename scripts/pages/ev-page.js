@@ -1,7 +1,6 @@
 import { evShowcase } from '../../data/projects.js';
 import { currentLang, initLanguage, t } from '../core/i18n.js';
 import { onReady, escapeHtml } from '../core/dom.js';
-import { initWavesBackground } from '../background/waves.js';
 import { initReveal } from '../core/reveal.js';
 function value(item) { return item?.[currentLang()] ?? item?.ar ?? ''; }
 function paint() {
@@ -12,4 +11,4 @@ function paint() {
   if (note) note.textContent = value(evShowcase.note);
   if (highlights) highlights.innerHTML = evShowcase.highlights.map((item) => `<span>${escapeHtml(value(item))}</span>`).join('');
 }
-onReady(() => { initLanguage(); initWavesBackground(document.getElementById('wavesCanvas')); initReveal(); paint(); document.addEventListener('omar:languagechange', paint); });
+onReady(() => { initLanguage(); initReveal(); paint(); document.addEventListener('omar:languagechange', paint); });

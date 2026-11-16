@@ -21,6 +21,18 @@ function paint() {
   const remaining = Math.max(1, (presence.end - presence.minutes) * 60000 - presence.seconds * 1000);
   nextBoundary = Date.now() + remaining;
   document.body.dataset.status = presence.mode;
+  const backgroundByPresence = {
+    sleeping: 'sleep',
+    studying: 'stars',
+    coding: 'coding',
+    gaming: 'gaming',
+    friends: 'aurora',
+    rest: 'sleep',
+    available: 'aurora',
+    football: 'aurora'
+  };
+  document.body.classList.remove('bg-mode-sleep', 'bg-mode-stars', 'bg-mode-aurora', 'bg-mode-coding', 'bg-mode-gaming');
+  document.body.classList.add(`bg-mode-${backgroundByPresence[presence.mode] || 'aurora'}`);
   document.body.style.setProperty('--status-color', presence.theme.color);
   document.body.style.setProperty('--status-glow', presence.theme.glow);
   document.body.style.setProperty('--status-soft', presence.theme.soft);

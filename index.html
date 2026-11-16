@@ -39,7 +39,7 @@
   <link rel="preload" href="assets/fonts/thmanyahsans-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="assets/fonts/thmanyahseriftext-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/fonts.css?v=4.1.1">
-<link rel="stylesheet" href="styles/site.css?v=4.1.1">
+<link rel="stylesheet" href="styles/site.css?v=4.1.1-motion">
 
   <script type="application/ld+json">
   {
@@ -54,17 +54,12 @@
   }
   </script>
 </head>
-<body class="is-intro">
+<body class="is-intro bg-mode-aurora">
   <div class="site-intro-curtain" aria-hidden="true"></div>
   <a class="skip-link" href="#main" data-i18n="skip">تخطّي إلى المحتوى</a>
 
-  <div class="scene-backdrop" aria-hidden="true">
-    <div class="scene-color scene-color--one"></div>
-    <div class="scene-color scene-color--two"></div>
-    <div class="scene-grid"></div>
-    <canvas class="waves-canvas" id="wavesCanvas"></canvas>
-    <div class="scene-soften"></div>
-  </div>
+  <div class="bg-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="bg-grid" aria-hidden="true"></div>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <header class="site-header">
@@ -86,7 +81,7 @@
       <div class="profile-orbit profile-orbit--two" aria-hidden="true"></div>
 
       <div class="identity-card" id="profileCard">
-        <button class="profile-photo-button" id="profileToggle" type="button" aria-expanded="false" aria-controls="profileDetails" aria-label="Show profile details">
+        <div class="profile-photo-visual" id="profileVisual">
           <span class="profile-photo-frame">
             <picture>
               <source srcset="assets/img/profile.webp" type="image/webp">
@@ -94,7 +89,7 @@
             </picture>
           </span>
           <span class="profile-photo-halo" aria-hidden="true"></span>
-        </button>
+        </div>
         <div class="profile-card-details" id="profileDetails" aria-live="polite" aria-hidden="true" inert>
           <span class="profile-eyebrow" data-i18n="profileKicker">نبذة سريعة</span>
           <h1>Omar | عُمَر</h1>

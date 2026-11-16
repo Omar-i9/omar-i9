@@ -2,7 +2,6 @@ import { onReady } from './core/dom.js';
 import { initLanguage } from './core/i18n.js';
 import { initDialogs } from './core/dialogs.js';
 import { initReveal } from './core/reveal.js';
-import { initWavesBackground } from './background/waves.js';
 import { initPresence } from './features/presence.js';
 import { initProfile } from './features/profile.js';
 import { initSocial } from './features/social.js';
@@ -24,7 +23,6 @@ onReady(() => {
   initSharing();
   initVersion();
   initReveal();
-  initWavesBackground(document.getElementById('wavesCanvas'));
 
 
   const progress = document.getElementById('scrollProgress');
