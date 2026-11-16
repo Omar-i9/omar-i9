@@ -239,6 +239,64 @@ html[dir="ltr"] .scroll-progress { transform-origin: left center; }
 .project-card:hover, .project-card.is-open { border-color: color-mix(in srgb, var(--project-accent) 35%, white); box-shadow: 0 26px 64px rgba(0,0,0,.29), 0 0 0 3px color-mix(in srgb, var(--project-accent) 8%, transparent), inset 0 1px 0 #fff; }
 @media (hover: hover) and (pointer: fine) { .project-card--taamenn:hover { transform: translateY(-4px); } }
 .project-card--taamenn:focus-within { transform: translateY(-4px); }
+
+/* v6 project-card interaction, adapted to the current expandable TAAMEN case study. */
+.project-card--taamenn::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: '';
+  background:
+    linear-gradient(115deg, transparent 0 24%, color-mix(in srgb, var(--project-accent) 16%, transparent) 42%, transparent 58% 100%),
+    radial-gradient(circle at 0% 100%, color-mix(in srgb, var(--project-accent) 12%, transparent), transparent 38%);
+  opacity: 0;
+  transform: translateX(-90%);
+  transition: opacity .35s var(--ease-out), transform .7s var(--ease-out);
+}
+.project-card--taamenn .project-card-head,
+.project-card--taamenn .project-panel { position: relative; z-index: 1; }
+.project-card--taamenn .project-state { transition: color .28s ease, background .28s ease, box-shadow .28s ease; }
+@media (hover: hover) and (pointer: fine) {
+  .project-card--taamenn:hover::after { opacity: .82; transform: translateX(90%); }
+  .project-card--taamenn:hover .project-logo {
+    animation: taamen-v6-logo-float 1.2s ease-in-out infinite;
+    box-shadow: 0 16px 32px rgba(0,0,0,.24), 0 0 26px color-mix(in srgb, var(--project-accent) 24%, transparent);
+  }
+  .project-card--taamenn:hover .project-state {
+    color: #173e38;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--project-accent) 30%, white), color-mix(in srgb, var(--project-accent) 52%, white));
+    box-shadow: 0 0 18px color-mix(in srgb, var(--project-accent) 28%, transparent);
+  }
+  .project-card--taamenn:not(.is-open):hover .project-toggle-icon {
+    color: var(--project-accent);
+    background: color-mix(in srgb, var(--project-accent) 12%, white);
+    border-color: color-mix(in srgb, var(--project-accent) 26%, white);
+    box-shadow: 0 7px 18px color-mix(in srgb, var(--project-accent) 17%, transparent);
+    transform: translateY(-2px) scale(1.04);
+  }
+}
+.project-card--taamenn:focus-within::after { opacity: .82; transform: translateX(90%); }
+.project-card--taamenn:focus-within .project-logo {
+  animation: taamen-v6-logo-float 1.2s ease-in-out infinite;
+  box-shadow: 0 16px 32px rgba(0,0,0,.24), 0 0 26px color-mix(in srgb, var(--project-accent) 24%, transparent);
+}
+.project-card--taamenn:focus-within .project-state {
+  color: #173e38;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--project-accent) 30%, white), color-mix(in srgb, var(--project-accent) 52%, white));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--project-accent) 28%, transparent);
+}
+.project-card--taamenn:not(.is-open):focus-within .project-toggle-icon {
+  color: var(--project-accent);
+  background: color-mix(in srgb, var(--project-accent) 12%, white);
+  border-color: color-mix(in srgb, var(--project-accent) 26%, white);
+  box-shadow: 0 7px 18px color-mix(in srgb, var(--project-accent) 17%, transparent);
+  transform: translateY(-2px) scale(1.04);
+}
+@keyframes taamen-v6-logo-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(-2deg); }
+}
 .project-card-head { position: relative; display: flex; align-items: center; gap: 18px; width: 100%; min-height: 138px; padding: 24px 26px; color: inherit; text-align: start; background: transparent; border: 0; cursor: pointer; }
 .project-logo { display: grid; place-items: center; width: 76px; height: 76px; flex: 0 0 auto; padding: 7px; object-fit: contain; background: color-mix(in srgb, var(--project-accent) 10%, white); border: 1px solid color-mix(in srgb, var(--project-accent) 20%, white); border-radius: 22px; box-shadow: 0 8px 21px rgba(25,41,60,.09); }
 .project-logo--ev { color: #397cae; }

@@ -157,10 +157,17 @@ test('v6 status-driven Aurora background replaces the previous Canvas scene', ()
   assert.match(presence, /bg-mode-\$\{/);
 });
 
-test('TAAMEN project card restores the v6 hover lift without changing its panel behavior', () => {
+test('TAAMEN project card restores the v6 hover treatment without changing its panel behavior', () => {
   const css = read('styles/site.css');
   const script = read('scripts/features/projects.js');
-  assert.match(css, /project-card--taamenn:hover \{ transform: translateY\(-4px\)/);
+  assert.match(css, /project-card--taamenn:hover \\{ transform: translateY\\(-4px\\)/);
+  assert.match(css, /project-card--taamenn::after/);
+  assert.match(css, /project-card--taamenn:hover::after/);
+  assert.match(css, /project-card--taamenn:hover \\.project-logo/);
+  assert.match(css, /project-card--taamenn:hover \\.project-state/);
+  assert.match(css, /project-card--taamenn:not\\(\\.is-open\\):hover \\.project-toggle-icon/);
+  assert.match(css, /taamen-v6-logo-float/);
+  assert.match(css, /project-card--taamenn:focus-within::after/);
   assert.match(script, /data-project-toggle/);
   assert.match(script, /openCard/);
   assert.match(script, /closeCard/);
