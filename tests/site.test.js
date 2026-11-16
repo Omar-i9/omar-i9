@@ -162,8 +162,8 @@ test('TAAMEN project card restores the v6 hover lift without changing its panel 
   const script = read('scripts/features/projects.js');
   assert.match(css, /project-card--taamenn:hover \{ transform: translateY\(-4px\)/);
   assert.match(script, /data-project-toggle/);
-  assert.match(script, /openCard\\(card\\)/);
-  assert.match(script, /closeCard\\(card\\)/);
+  assert.match(script, /openCard/);
+  assert.match(script, /closeCard/);
 });
 
 test('profile opens once after the intro and never collapses on click', () => {

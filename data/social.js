@@ -63,12 +63,12 @@ export const socialLinks = [
   },
   {
     id: 'Nexusmods', className: 'nexusmods-card', badges: ['public'],
-    icon: 'assets/icons/social/nexusmods.svg', titleKey: 'nexusmodsAr', handle: 'gdmi33',
+    icon: 'assets/icons/social/NexusMods.svg', titleKey: 'nexusmodsAr', handle: 'gdmi33',
     url: 'https://www.nexusmods.com/profile/gdmi33'
   },
   {
     id: 'Pinterest', className: 'pinterest-card', badges: ['public'],
-    icon: 'assets/icons/social/pinterest.svg', titleKey: 'pinterestAr', handle: 'gdmi33',
+    icon: 'assets/icons/social/Pinterest.svg', titleKey: 'pinterestAr', handle: 'gdmi33',
     url: 'https://de.pinterest.com/omargdmi/'
   },
   {
