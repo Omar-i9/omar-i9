@@ -66,7 +66,6 @@ export const copy = {
   en: {
     skip: 'Skip to content',
     topEyebrow: "Omar's digital space",
-    profileHint: 'Select the photo to view profile details',
     profileAction: 'Show profile details',
     profileClose: 'Hide profile details',
     githubCta: 'View GitHub Profile',

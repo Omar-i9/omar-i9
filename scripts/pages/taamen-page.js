@@ -1,7 +1,6 @@
 import { taamenShowcase } from '../../data/projects.js';
 import { t, currentLang, initLanguage } from '../core/i18n.js';
 import { escapeHtml, onReady } from '../core/dom.js';
-import { initWavesBackground } from '../background/waves.js';
 import { initReveal } from '../core/reveal.js';
 import { icon } from '../core/icons.js';
 
@@ -45,7 +44,6 @@ function initTabs() {
 }
 onReady(() => {
   initLanguage();
-  initWavesBackground(document.getElementById('wavesCanvas'));
   initReveal();
   initTabs();
   paint();

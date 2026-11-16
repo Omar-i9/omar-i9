@@ -28,13 +28,13 @@ test('Arabic and English dictionaries have matching keys', () => {
 test('the site identity and release metadata are fixed and coherent', () => {
   assert.equal(release.version, 'v4.1.1');
   assert.match(siteVersionLabel, /Omar\|عُمَر/);
-  assert.match(read('index.html'), /<title>Omar\|عُمَر<\/title>/);
+  assert.match(read('index.html'), /<title>Omar\s*\|\s*عُمَر<\/title>/);
   assert.match(read('scripts/core/i18n.js'), /document\.title = 'Omar\|عُمَر'/);
 });
 
 test('the homepage keeps core sections, sharing, the profile card, and GitHub action', () => {
   const html = read('index.html');
-  for (const id of ['profileCard', 'profileToggle', 'linksGrid', 'copyList', 'projectsList', 'ayahCard', 'shareDialog', 'versionDialog']) {
+  for (const id of ['profileCard', 'profileVisual', 'linksGrid', 'copyList', 'projectsList', 'ayahCard', 'shareDialog', 'versionDialog']) {
     assert.match(html, new RegExp(`id=["']${id}["']`), `missing ${id}`);
   }
   assert.match(html, /href="https:\/\/github\.com\/Omar-i9"/);
@@ -51,7 +51,7 @@ test('the old social filter controls and Discord profile page are absent', () =>
 });
 
 test('social cards have one action per profile and every local icon exists', () => {
-  assert.equal(socialLinks.length, 10);
+  assert.equal(socialLinks.length, 15);
   assert.equal(new Set(socialLinks.map((item) => item.id)).size, socialLinks.length);
   for (const item of socialLinks) {
     assert.ok(item.titleKey, `${item.id} has a translation key`);
@@ -67,7 +67,7 @@ test('social cards have one action per profile and every local icon exists', () 
 });
 
 test('quick-copy values and their icon assets are valid', () => {
-  assert.equal(quickCopy.length, 4);
+  assert.equal(quickCopy.length, 6);
   for (const item of quickCopy) {
     assert.ok(item.value);
     assert.ok(existsSync(join(root, item.icon)));
@@ -140,34 +140,49 @@ test('presence resolver exposes a known theme and translation label', () => {
   assert.ok(presence.end > presence.minutes);
 });
 
-test('Waves background is a standalone adaptive Canvas module', () => {
-  const script = read('scripts/background/waves.js');
-  assert.match(script, /getContext\('2d'/);
-  assert.match(script, /requestAnimationFrame/);
-  assert.match(script, /IntersectionObserver/);
-  assert.match(script, /visibilitychange/);
-  assert.match(script, /prefers-reduced-motion/);
-  assert.doesNotMatch(script, /getContext\(['"]webgl2|from ['"]react|from ['"]react-dom/);
+test('v6 status-driven Aurora background replaces the previous Canvas scene', () => {
+  const html = read('index.html');
+  const css = read('styles/site.css');
+  const main = read('scripts/main.js');
+  const presence = read('scripts/features/presence.js');
+  assert.match(html, /class="bg-aurora"/);
+  assert.match(html, /class="bg-grid"/);
+  assert.doesNotMatch(html, /wavesCanvas|scene-backdrop/);
+  assert.doesNotMatch(main, /initWavesBackground/);
+  assert.match(css, /body\.bg-mode-sleep/);
+  assert.match(css, /body\.bg-mode-stars/);
+  assert.match(css, /body\.bg-mode-coding/);
+  assert.match(css, /legacy-bg-float-blob/);
+  assert.match(presence, /backgroundByPresence/);
+  assert.match(presence, /bg-mode-\$\{/);
 });
 
-test('Waves cleanup removes observers and event listeners', () => {
-  const script = read('scripts/background/waves.js');
-  assert.match(script, /resizeObserver\.disconnect\(\)/);
-  assert.match(script, /intersection\.disconnect\(\)/);
-  assert.match(script, /removeEventListener\('pointermove'/);
-  assert.match(script, /removeEventListener\('visibilitychange'/);
+test('TAAMEN project card restores the v6 hover lift without changing its panel behavior', () => {
+  const css = read('styles/site.css');
+  const script = read('scripts/features/projects.js');
+  assert.match(css, /project-card--taamenn:hover \{ transform: translateY\(-4px\)/);
+  assert.match(script, /data-project-toggle/);
+  assert.match(script, /openCard/);
+  assert.match(script, /closeCard/);
 });
 
-test('profile is image-first and reveals accessible details on interaction', () => {
+test('profile opens once after the intro and never collapses on click', () => {
   const html = read('index.html');
   const script = read('scripts/features/profile.js');
-  assert.match(html, /id="profileToggle"/);
-  assert.match(html, /aria-controls="profileDetails"/);
-  assert.match(script, /aria-expanded/);
-  assert.match(script, /Escape/);
+  const css = read('styles/site.css');
+  assert.match(html, /id="profileVisual"/);
+  assert.match(html, /id="profileDetails"[^>]*aria-hidden="true" inert/);
+  assert.doesNotMatch(html, /profileToggle|aria-expanded/);
   assert.match(script, /introDelay/);
+  assert.match(script, /setExpanded\(false\)/);
   assert.match(script, /setExpanded\(true\)/);
-  assert.doesNotMatch(script, /pointerdown/);
+  assert.match(script, /pointermove/);
+  assert.match(script, /pointerleave/);
+  assert.match(script, /hover: hover.*pointer: fine/);
+  assert.doesNotMatch(script, /addEventListener\('click'/);
+  assert.doesNotMatch(script, /addEventListener\('keydown'/);
+  assert.match(css, /transform \.38s ease/);
+  assert.match(css, /profile-photo-visual/);
 });
 
 test('GitHub button is a safe external link with the shine transition and no fake counter', () => {
@@ -215,7 +230,7 @@ test('release modal does not link to GitHub', () => {
 
 test('site background and foreground cards have clear contrasting surfaces', () => {
   const css = read('styles/site.css');
-  assert.match(css, /scene-grid/);
+  assert.match(css, /\.bg-grid/);
   assert.match(css, /#080c15/);
   assert.match(css, /rgba\(255,255,255/);
   assert.match(css, /--brand/);
@@ -247,7 +262,9 @@ test('every standalone page has the same identity and background engine', () => 
   for (const page of ['pages/project-taameen.html', 'pages/project-ev.html']) {
     const html = read(page);
     assert.match(html, /Omar\|عُمَر/);
-    assert.match(html, /id="wavesCanvas"/);
+    assert.match(html, /class="bg-aurora"/);
+    assert.match(html, /class="bg-grid"/);
+    assert.doesNotMatch(html, /wavesCanvas/);
     assert.match(html, /language-switch/);
     assert.match(html, /\.\.\/styles\/site\.css/);
   }
