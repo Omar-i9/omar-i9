@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#05070d" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="Omarr — المساحة الشخصية والحسابات ومشروع TAAMEN." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Omarr" />
+    <meta property="og:description" content="المساحة الشخصية والحسابات ومشروع TAAMEN." />
+    <meta property="og:image" content="https://omar-i9.github.io/omar-i9/assets/img/og-image.jpg" />
+    <meta property="og:url" content="https://omar-i9.github.io/omar-i9/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon.png" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
+    <title>Omarr</title>
+  </head>
+  <body data-scene="identity">
+    <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
+
+    <div class="ambient" aria-hidden="true">
+      <img class="aurora-image" src="./visuals/aurora-background.webp" alt="" fetchpriority="high" />
+      <div class="aurora-ribbons"><span></span><span></span><span></span></div>
+      <div class="aurora-wash"></div>
+      <div class="aurora-pointer"></div>
+      <div class="ambient-vignette"></div>
+    </div>
+
+    <div class="utility-cluster" aria-label="أدوات الموقع">
+      <button class="utility-button language-toggle" id="languageToggle" type="button" aria-label="Switch language">
+        <span class="language-toggle__ar">ع</span><span class="language-toggle__divider"></span><span class="language-toggle__en">EN</span>
+      </button>
+      <button class="utility-button share-trigger" id="shareButton" type="button" data-i18n-aria="shareLabel" aria-label="مشاركة الموقع">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5M5 13v5.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V13" /></svg>
+      </button>
+    </div>
+
+    <main id="main" class="story">
+      <section class="scene hero-scene" id="identity" data-scene="identity" aria-labelledby="heroTitle">
+        <div class="page-container hero-layout">
+          <article class="identity-card" id="identityCard" aria-label="Personal profile">
+            <div class="portrait-wrap">
+              <img class="portrait-image" data-src="https://raw.githubusercontent.com/Omar-i9/omar-i9/main/assets/img/profile.webp" data-fallback="https://raw.githubusercontent.com/Omar-i9/omar-i9/main/assets/img/profile.jpeg" alt="Omar's profile photo" width="176" height="176" fetchpriority="high" />
+            </div>
+            <h1 id="heroTitle">Omarr</h1>
+            <span class="identity-rule" aria-hidden="true"></span>
+          </article>
+        </div>
+      </section>
+
+      <section class="scene social-scene" id="social" data-scene="social" aria-labelledby="socialTitle">
+        <div class="page-container scene-inner">
+          <h2 id="socialTitle" data-i18n="socialHeading">الحسابات</h2>
+          <div class="social-grid" id="socialGrid" aria-label="Social accounts"></div>
+        </div>
+      </section>
+
+      <section class="scene gaming-scene" id="gaming" data-scene="gaming" aria-labelledby="gamingTitle">
+        <div class="page-container scene-inner">
+          <h2 id="gamingTitle" data-i18n="gamingHeading">معرّفات الألعاب</h2>
+          <div class="gaming-grid" id="gamingGrid" aria-label="Gaming identifiers"></div>
+        </div>
+      </section>
+
+      <section class="scene projects-scene" id="projects" data-scene="projects" aria-labelledby="projectsTitle">
+        <div class="page-container scene-inner scene-inner--project">
+          <h2 id="projectsTitle" data-i18n="projectHeading">مشروع مختار</h2>
+          <div class="projects-grid" id="projectsGrid"></div>
+        </div>
+      </section>
+
+      <section class="scene contact-scene" id="contact" data-scene="contact" aria-labelledby="contactTitle">
+        <div class="page-container contact-content">
+          <h2 id="contactTitle" data-i18n="contactHeading">كل الطرق تؤدي إلى روما</h2>
+          <p data-i18n="contactDescription">سواء بدك تتواصل، تتعرف على شغلي، أو تتابع مشاريعي القادمة — كل الطرق تؤدي إلى روما.</p>
+          <footer class="site-footer">
+            <span data-i18n="footerLabel">تابعني</span>
+            <div class="footer-socials" id="footerSocials" aria-label="Main social links"></div>
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="share-dialog" id="shareDialog" aria-labelledby="shareDialogTitle">
+      <div class="share-dialog__inner">
+        <button class="dialog-close" id="shareClose" type="button" data-i18n-aria="close" aria-label="إغلاق">×</button>
+        <span class="share-dialog__mark">O</span>
+        <h2 id="shareDialogTitle" data-i18n="shareTitle">مشاركة Omarr</h2>
+        <p data-i18n="shareDescription">شارك رابط المساحة الشخصية مباشرة.</p>
+        <div class="share-qr-shell"><canvas id="shareQrCanvas" width="144" height="144" aria-label="QR code for this website"></canvas></div>
+        <div class="share-dialog__actions">
+          <button class="share-action share-action--primary" id="nativeShareButton" type="button" data-i18n="shareNative">مشاركة</button>
+          <button class="share-action" id="copyShareButton" type="button" data-i18n="shareCopy">نسخ الرابط</button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="site-toast" id="siteToast" role="status" aria-live="polite"></div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

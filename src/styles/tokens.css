@@ -1,0 +1,19 @@
+:root {
+  color-scheme: dark;
+  --ink: #f3f7fb;
+  --muted: #a5b0bc;
+  --muted-soft: #798897;
+  --surface: rgba(9, 15, 26, .68);
+  --surface-strong: rgba(9, 15, 26, .86);
+  --line: rgba(207, 226, 243, .13);
+  --cyan: #8bdcf2;
+  --blue: #6a9fda;
+  --violet: #a68be9;
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

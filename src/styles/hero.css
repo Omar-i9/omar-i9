@@ -1,0 +1,56 @@
+.hero-layout { display: grid; place-items: center; perspective: 1100px; }
+.identity-card {
+  --card-shift-x: 0px;
+  --card-shift-y: 0px;
+  --card-rotate-x: 0deg;
+  --card-rotate-y: 0deg;
+  --card-light-x: 50%;
+  --card-light-y: 28%;
+  position: relative;
+  display: flex;
+  width: min(100%, 326px);
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+  padding: 24px 24px 21px;
+  overflow: hidden;
+  border: 1px solid rgba(219, 236, 249, .19);
+  border-radius: 31px;
+  color: var(--ink);
+  background: linear-gradient(145deg, rgba(16, 26, 42, .69), rgba(5, 10, 19, .63));
+  box-shadow: 0 28px 100px rgba(0, 0, 0, .39), inset 0 1px rgba(255, 255, 255, .075);
+  backdrop-filter: blur(25px) saturate(135%);
+  transform: translate3d(var(--card-shift-x), var(--card-shift-y), 0) rotateX(var(--card-rotate-x)) rotateY(var(--card-rotate-y));
+  transform-style: preserve-3d;
+  transition: transform .42s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+  will-change: transform;
+}
+.identity-card::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(280px circle at var(--card-light-x) var(--card-light-y), rgba(130, 204, 235, .17), transparent 72%);
+  transition: opacity .3s ease;
+}
+.identity-card.is-pointer-active { border-color: rgba(172, 219, 247, .35); box-shadow: 0 35px 100px rgba(0, 0, 0, .43), 0 0 38px rgba(61, 156, 203, .12), inset 0 1px rgba(255, 255, 255, .1); }
+.identity-card.is-pointer-active::before { opacity: 1; }
+.portrait-wrap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 164px;
+  height: 164px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(187, 222, 245, .4);
+  border-radius: 31px;
+  background: rgba(8, 14, 25, .6);
+  box-shadow: 0 0 42px rgba(54, 143, 183, .16), 0 14px 34px rgba(0, 0, 0, .24);
+  transform: translateZ(18px);
+}
+.portrait-image { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.identity-card h1 { position: relative; z-index: 1; margin: 0; color: #f4f7fb; font-size: clamp(34px, 5vw, 43px); font-weight: 600; line-height: 1.08; letter-spacing: .075em; text-shadow: 0 2px 25px rgba(0, 0, 0, .4); transform: translateZ(13px); }
+.identity-rule { position: relative; z-index: 1; display: block; width: 46px; height: 1px; margin-top: 1px; background: linear-gradient(90deg, transparent, rgba(139, 220, 242, .9), transparent); }

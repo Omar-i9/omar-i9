@@ -1,0 +1,51 @@
+@media (max-width: 1000px) {
+  .social-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .scene { min-height: 100svh; padding: 70px 17px; }
+  .identity-card { width: min(100%, 304px); padding: 21px 20px 18px; border-radius: 26px; }
+  .portrait-wrap { width: 148px; height: 148px; border-radius: 27px; }
+  .scene-inner { gap: 22px; }
+  .social-scene .scene-inner, .gaming-scene .scene-inner { min-height: calc(100svh - 138px); }
+  .social-grid { width: min(100%, 580px); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .social-card { min-height: 70px; gap: 9px; padding: 10px; border-radius: 14px; }
+  .social-card__icon { width: 36px; height: 36px; flex-basis: 36px; border-radius: 11px; }
+  .social-card__icon img { width: 23px; height: 23px; }
+  .social-card__copy strong { font-size: 12px; }
+  .social-card__copy small { font-size: 9px; }
+  .social-card__arrow { font-size: 13px; }
+  .gaming-grid { width: min(100%, 580px); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .gaming-card { min-height: 68px; gap: 9px; padding: 10px; }
+  .gaming-card__icon { width: 36px; height: 36px; flex-basis: 36px; }
+  .gaming-card__copy strong { font-size: 11px; }
+  .gaming-card__copy small { font-size: 10px; }
+  .project-card { width: min(100%, 530px); grid-template-columns: 1fr; gap: 14px; padding: 16px; border-radius: 19px; }
+  .project-card__brand { width: 94px; height: 94px; justify-self: center; border-radius: 15px; }
+  .project-card__topline { align-items: flex-start; }
+  .project-card__summary { font-size: 11px; }
+  .project-features { gap: 5px; margin: 10px 0 12px; }
+  .project-features li { font-size: 10px; }
+  .project-card__actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .project-link { min-height: 40px; padding-inline: 8px; font-size: 9px; }
+  .contact-content { min-height: 55svh; }
+  .contact-content > p { max-width: 500px; font-size: 12px; }
+  .site-footer { margin-top: 31px; }
+}
+@media (max-width: 390px) {
+  .scene { padding-inline: 12px; }
+  .social-grid { gap: 7px; }
+  .social-card { gap: 7px; padding: 8px; }
+  .social-card__icon { width: 32px; height: 32px; flex-basis: 32px; }
+  .social-card__icon img { width: 21px; height: 21px; }
+  .social-card__copy strong { font-size: 11px; }
+  .social-card__copy small { font-size: 8px; }
+  .gaming-grid { grid-template-columns: 1fr; }
+  .project-card__actions { grid-template-columns: 1fr; }
+}
+@media (pointer: coarse) {
+  .social-card:hover, .gaming-card:hover, .footer-socials a:hover, .project-link:hover, .utility-button:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

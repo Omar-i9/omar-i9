@@ -1,0 +1,23 @@
+.story { position: relative; z-index: 1; }
+.scene {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  padding: clamp(72px, 9vh, 104px) 24px;
+  place-items: center;
+  scroll-snap-align: center;
+  isolation: isolate;
+  opacity: var(--scene-focus, 1);
+  filter: blur(var(--scene-blur, 0px));
+  transition: opacity .18s ease-out, filter .18s ease-out;
+  will-change: opacity, filter;
+}
+.page-container { width: min(100%, 1120px); margin-inline: auto; }
+.scene-inner { display: flex; min-height: min(470px, 70svh); flex-direction: column; align-items: center; justify-content: center; gap: 28px; }
+.scene h2 { margin: 0; color: rgba(245, 249, 253, .96); font-size: clamp(23px, 2.8vw, 32px); font-weight: 530; letter-spacing: -.025em; text-align: center; }
+.social-scene .scene-inner, .gaming-scene .scene-inner { min-height: calc(100svh - 150px); }
+.projects-scene .scene-inner--project { min-height: calc(100svh - 150px); gap: 22px; }
+.contact-content { display: flex; min-height: 62svh; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.contact-content h2 { max-width: 100%; color: #f4f7fb; font-size: clamp(31px, 5vw, 55px); font-weight: 560; letter-spacing: -.045em; text-align: center; text-wrap: balance; text-shadow: 0 8px 45px rgba(0, 0, 0, .4); }
+.contact-content > p { max-width: 620px; margin: 14px auto 0; color: rgba(224, 235, 247, .76); font-size: clamp(13px, 1.45vw, 15px); line-height: 1.95; text-wrap: balance; }
+.reduce-motion .scene { opacity: 1 !important; filter: none !important; transition: none !important; }
