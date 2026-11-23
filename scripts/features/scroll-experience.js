@@ -6,7 +6,7 @@ export function initScrollExperience() {
   const body = document.body;
   const progress = document.getElementById('scrollProgress');
   const header = document.querySelector('[data-v5-header]');
-  const scenes = [...document.querySelectorAll('[data-v5-scene]')];
+  const scenes = [...document.querySelectorAll('[data-v5-scene]:not(body)')];
   const magneticItems = [...document.querySelectorAll('[data-v5-magnetic]')];
   const reducedMotion = prefersReducedMotion();
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
