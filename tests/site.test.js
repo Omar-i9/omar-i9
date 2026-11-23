@@ -333,7 +333,7 @@ test('profile intro curtain and delayed profile expansion run without hover-trig
   const script = read('scripts/features/profile.js');
   const css = read('styles/site.css');
   assert.match(html, /site-intro-curtain/);
-  assert.match(script, /1450/);
+  assert.match(script, /520/);
   assert.match(script, /setExpanded\(true\)/);
   assert.match(script, /details\.inert = !expanded/);
   assert.match(html, /id="profileDetails"[^>]*aria-hidden="true" inert/);
