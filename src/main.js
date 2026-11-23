@@ -1,4 +1,3 @@
-import './styles/index.css';
 import { initLanguage } from './core/i18n.js';
 import { renderSocialGrid } from './components/social-grid.js';
 import { renderGamingGrid } from './components/gaming-grid.js';

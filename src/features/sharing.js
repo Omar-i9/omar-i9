@@ -1,6 +1,26 @@
-import QRCode from 'qrcode';
 import { translate } from '../core/i18n.js';
 import { showToast } from './feedback.js';
+
+async function copyText(value) {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return true;
+    }
+  } catch { /* Use the legacy fallback below. */ }
+
+  const field = document.createElement('textarea');
+  field.value = value;
+  field.setAttribute('readonly', '');
+  field.style.position = 'fixed';
+  field.style.opacity = '0';
+  document.body.appendChild(field);
+  field.select();
+  let copied = false;
+  try { copied = document.execCommand('copy'); } catch { copied = false; }
+  field.remove();
+  return copied;
+}
 
 export function initSharing() {
   const dialog = document.getElementById('shareDialog');
@@ -8,7 +28,6 @@ export function initSharing() {
   const closeButton = document.getElementById('shareClose');
   const nativeButton = document.getElementById('nativeShareButton');
   const copyButton = document.getElementById('copyShareButton');
-  const qrCanvas = document.getElementById('shareQrCanvas');
   if (!dialog || !openButton) return;
 
   const shareData = () => ({
@@ -19,27 +38,12 @@ export function initSharing() {
     url: window.location.href
   });
 
-  const renderQr = async () => {
-    if (!qrCanvas) return;
-    try {
-      await QRCode.toCanvas(qrCanvas, window.location.href, {
-        width: 144,
-        margin: 1,
-        errorCorrectionLevel: 'M',
-        color: { dark: '#071421', light: '#ffffff' }
-      });
-    } catch {
-      qrCanvas.hidden = true;
-    }
-  };
-
   const openDialog = () => {
-    renderQr();
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
   };
 
-  openButton.addEventListener('click', async () => {
+  const shareOrFallback = async () => {
     if (navigator.share) {
       try {
         await navigator.share(shareData());
@@ -49,36 +53,32 @@ export function initSharing() {
       }
     }
     openDialog();
-  });
+  };
+
+  openButton.addEventListener('click', shareOrFallback);
   closeButton?.addEventListener('click', () => dialog.close?.());
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close?.();
   });
+
   nativeButton?.addEventListener('click', async () => {
-    if (!navigator.share) {
+    if (navigator.share) {
       try {
-        await navigator.clipboard.writeText(window.location.href);
-        showToast(translate('shareCopied', 'Link copied'));
+        await navigator.share(shareData());
         dialog.close?.();
-      } catch {
-        showToast(translate('copyFailed', 'Could not copy the link'));
+        return;
+      } catch (error) {
+        if (error?.name === 'AbortError') return;
       }
-      return;
     }
-    try {
-      await navigator.share(shareData());
-      dialog.close?.();
-    } catch (error) {
-      if (error?.name !== 'AbortError') showToast(translate('copyFailed', 'Sharing is unavailable'));
-    }
+    const copied = await copyText(window.location.href);
+    showToast(copied ? translate('shareCopied', 'Link copied') : translate('copyFailed', 'Could not copy the link'));
+    if (copied) dialog.close?.();
   });
+
   copyButton?.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      showToast(translate('shareCopied', 'Link copied'));
-      dialog.close?.();
-    } catch {
-      showToast(translate('copyFailed', 'Could not copy'));
-    }
+    const copied = await copyText(window.location.href);
+    showToast(copied ? translate('shareCopied', 'Link copied') : translate('copyFailed', 'Could not copy'));
+    if (copied) dialog.close?.();
   });
 }

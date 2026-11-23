@@ -1,6 +1,3 @@
-import './styles/index.css';
-import './styles/details.css';
-
 const key = 'omarr-language';
 let lang = 'ar';
 try {

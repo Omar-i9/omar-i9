@@ -4,16 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#05070d" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
     <meta name="color-scheme" content="dark" />
     <meta name="description" content="Omarr — المساحة الشخصية والحسابات ومشروع TAAMEN." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Omarr" />
     <meta property="og:description" content="المساحة الشخصية والحسابات ومشروع TAAMEN." />
-    <meta property="og:image" content="https://omar-i9.github.io/omar-i9/assets/img/og-image.jpg" />
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/152491762?v=4" />
     <meta property="og:url" content="https://omar-i9.github.io/omar-i9/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon.png" />
-    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./public/assets/favicon.png" />
+    <link rel="apple-touch-icon" href="./public/assets/apple-touch-icon.png" />
     <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
     <title>Omarr</title>
   </head>
@@ -21,7 +22,7 @@
     <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
 
     <div class="ambient" aria-hidden="true">
-      <img class="aurora-image" src="./visuals/aurora-background.webp" alt="" fetchpriority="high" />
+      <img class="aurora-image" src="./public/visuals/aurora-background.webp" alt="" fetchpriority="high" />
       <div class="aurora-ribbons"><span></span><span></span><span></span></div>
       <div class="aurora-wash"></div>
       <div class="aurora-pointer"></div>
@@ -42,7 +43,7 @@
         <div class="page-container hero-layout">
           <article class="identity-card" id="identityCard" aria-label="Personal profile">
             <div class="portrait-wrap">
-              <img class="portrait-image" data-src="https://raw.githubusercontent.com/Omar-i9/omar-i9/main/assets/img/profile.webp" data-fallback="https://raw.githubusercontent.com/Omar-i9/omar-i9/main/assets/img/profile.jpeg" alt="Omar's profile photo" width="176" height="176" fetchpriority="high" />
+              <img class="portrait-image" data-src="https://avatars.githubusercontent.com/u/152491762?v=4" data-fallback="https://avatars.githubusercontent.com/u/152491762?s=512" alt="Omar's profile photo" width="176" height="176" fetchpriority="high" />
             </div>
             <h1 id="heroTitle">Omarr</h1>
             <span class="identity-rule" aria-hidden="true"></span>
@@ -89,7 +90,7 @@
         <span class="share-dialog__mark">O</span>
         <h2 id="shareDialogTitle" data-i18n="shareTitle">مشاركة Omarr</h2>
         <p data-i18n="shareDescription">شارك رابط المساحة الشخصية مباشرة.</p>
-        <div class="share-qr-shell"><canvas id="shareQrCanvas" width="144" height="144" aria-label="QR code for this website"></canvas></div>
+        
         <div class="share-dialog__actions">
           <button class="share-action share-action--primary" id="nativeShareButton" type="button" data-i18n="shareNative">مشاركة</button>
           <button class="share-action" id="copyShareButton" type="button" data-i18n="shareCopy">نسخ الرابط</button>

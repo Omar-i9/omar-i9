@@ -1,9 +1,11 @@
 # Architecture
 
-The site is a static Vite multi-page application. `src/main.js` starts language handling, social cards, gaming identifiers, the TAAMEN summary card, the scene-fade engine, pointer repulsion on the profile card, and share actions.
+Omarr is a static, dependency-free website served directly from GitHub Pages.
 
-Content lives in `src/data/`. Social links and gaming IDs are based on `Omar-i9/omar-i9:data/social.js`; the official SVGs are requested from the matching repository paths over GitHub Raw. The TAAMEN information page is a second Vite entry at `projects/taamen.html`.
+`index.html` links to the CSS file and loads `src/main.js` as a native browser ES module. The modules in `src/` import only relative JavaScript files; there are no npm package imports, bundler transforms, or build step. The TAAMEN details page uses the same CSS and native module approach.
 
-The scene engine computes each section's distance from the viewport centre. The section crossing the centre stays visible; adjacent sections fade and blur progressively as the scroll position approaches them. There is no slide-up entrance or section navigation bar. Long sections retain natural document scrolling.
+Content lives in `src/data/`. Social and gaming SVG icons are local files under `public/assets/icons/`, while the Aurora background, TAAMEN mark, and favicon are local files under `public/`.
 
-The profile card repulsion effect runs only with a fine pointer and when reduced motion is not requested. Aurora ribbons are CSS-driven and animate independently of scroll. The share window uses the Web Share API where available, QRCode.js for a local QR canvas, and the Clipboard API for link copying.
+The scene engine fades and blurs scenes according to their distance from the viewport centre. Long content continues to scroll naturally. The profile card repulsion effect runs only with a fine pointer and when reduced motion is not requested.
+
+Sharing uses the native Web Share API where available and a clipboard fallback. No QR-code package or other runtime library is required.

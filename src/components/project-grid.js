@@ -13,7 +13,7 @@ export function renderProjectGrid() {
   root.innerHTML = `
     <article class="project-card" aria-labelledby="taamenName">
       <div class="project-card__brand">
-        <img src="./visuals/taamen-brand-opaque.webp" alt="TAAMEN official brand mark" width="112" height="112" loading="lazy" decoding="async" />
+        <img src="./public/visuals/taamen-brand-opaque.webp" alt="TAAMEN official brand mark" width="112" height="112" loading="lazy" decoding="async" />
       </div>
       <div class="project-card__body">
         <div class="project-card__topline">

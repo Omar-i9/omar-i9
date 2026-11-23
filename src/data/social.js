@@ -1,5 +1,5 @@
-const SOCIAL_ICON_ROOT = 'https://raw.githubusercontent.com/Omar-i9/omar-i9/main/assets/icons/social';
-const GAMING_ICON_ROOT = 'https://raw.githubusercontent.com/Omar-i9/omar-i9/main/assets/icons/gaming';
+const SOCIAL_ICON_ROOT = './public/assets/icons/social';
+const GAMING_ICON_ROOT = './public/assets/icons/gaming';
 
 // Links and handles are taken from Omar-i9/omar-i9:data/social.js.
 export const socialLinks = [
