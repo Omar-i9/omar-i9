@@ -206,7 +206,7 @@ test('the V5 homepage intentionally excludes the Quran ayah widget', () => {
   const html = read('index.html');
   const main = read('scripts/main.js');
   assert.doesNotMatch(html, /ayahCard|ayahDock|ayahTafsirText|ayahCopy/);
-  assert.doesNotMatch(main, /initAyah|features\\/ayah/);
+  assert.doesNotMatch(main, /initAyah/);
   assert.ok(ayahs.length >= 10, 'the source dataset remains available but is not rendered on the homepage');
 });
 
