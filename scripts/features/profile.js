@@ -15,7 +15,7 @@ export function initProfile() {
   // There is intentionally no click or keyboard toggle that can collapse the profile.
   setExpanded(false);
   const reducedMotion = prefersReducedMotion();
-  const introDelay = reducedMotion ? 0 : 1450;
+  const introDelay = reducedMotion ? 0 : 520;
   window.setTimeout(() => {
     if (!card.isConnected) return;
     card.classList.add('is-intro-opening');

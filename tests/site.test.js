@@ -34,9 +34,10 @@ test('the site identity and release metadata are fixed and coherent', () => {
 
 test('the homepage keeps core sections, sharing, the profile card, and GitHub action', () => {
   const html = read('index.html');
-  for (const id of ['profileCard', 'profileVisual', 'linksGrid', 'copyList', 'projectsList', 'ayahCard', 'shareDialog', 'versionDialog']) {
+  for (const id of ['profileCard', 'profileVisual', 'linksGrid', 'copyList', 'projectsList', 'shareDialog']) {
     assert.match(html, new RegExp(`id=["']${id}["']`), `missing ${id}`);
   }
+  assert.doesNotMatch(html, /id=["'](?:ayahCard|ayahDock|versionDialog|versionBadge)["']/);
   assert.match(html, /href="https:\/\/github\.com\/Omar-i9"/);
   assert.match(html, /View GitHub Profile/);
   assert.doesNotMatch(html, /github\.com\/Omar-i9\/omar-i9/);
@@ -201,21 +202,12 @@ test('GitHub button is a safe external link with the shine transition and no fak
   assert.doesNotMatch(html, /starCount|stars-count|<span[^>]*>6<\/span>/i);
 });
 
-test('ayah card is naturally sized, details are controlled, and it respects screen size', () => {
+test('the V5 homepage intentionally excludes the Quran ayah widget', () => {
   const html = read('index.html');
-  const css = read('styles/site.css');
-  const script = read('scripts/features/ayah.js');
-  assert.match(html, /id="ayahDock"/);
-  assert.match(html, /id="ayahTafsirText"/);
-  assert.match(html, /id="ayahCopy"/);
-  assert.doesNotMatch(html, /ayahDetailsToggle|ayahNew|ayahDetails/);
-  assert.match(script, /measureDefaultVisibility/);
-  assert.match(script, /getElementById\('ayahDock'\)/);
-  assert.match(script, /ayah\.refEn|ayah\.refAr/);
-  assert.match(script, /ayah\.tafsirEn|ayah\.tafsirAr/);
-  assert.match(css, /\.ayah-tafsir/);
-  assert.match(css, /\.ayah-dock\s*\{[^}]*left:\s*18px/s);
-  assert.doesNotMatch(css, /\.ayah-card\s*\{[^}]*overflow:\s*auto/s);
+  const main = read('scripts/main.js');
+  assert.doesNotMatch(html, /ayahCard|ayahDock|ayahTafsirText|ayahCopy/);
+  assert.doesNotMatch(main, /initAyah|features\\/ayah/);
+  assert.ok(ayahs.length >= 10, 'the source dataset remains available but is not rendered on the homepage');
 });
 
 test('language selector has explicit Arabic and English direction and labels', () => {
@@ -228,11 +220,9 @@ test('language selector has explicit Arabic and English direction and labels', (
   assert.match(script, /html\.dir = activeLang/);
 });
 
-test('release modal does not link to GitHub', () => {
+test('release information is intentionally omitted from the V5 homepage', () => {
   const html = read('index.html');
-  const dialog = html.match(/<dialog[^>]*id="versionDialog"[\s\S]*?<\/dialog>/)?.[0] || '';
-  assert.ok(dialog.length > 0);
-  assert.doesNotMatch(dialog, /github\.com/);
+  assert.doesNotMatch(html, /versionDialog|versionBadge|version-list/);
 });
 
 test('site background and foreground cards have clear contrasting surfaces', () => {
@@ -447,4 +437,31 @@ test('primary and supporting text colors meet WCAG AA contrast on pale glass car
   for (const color of ['#0b1220', '#111827', '#172235', '#1d2939', '#263449', '#344256']) {
     assert.ok(contrast(color, glassBase) >= 4.5, `${color} must meet WCAG AA for normal text`);
   }
+});
+
+
+test('V5 homepage defines the complete scroll scene sequence and direct actions', () => {
+  const html = read('index.html');
+  const main = read('scripts/main.js');
+  const scroll = read('scripts/features/scroll-experience.js');
+  const css = read('styles/v5-experience.css');
+  for (const scene of ['identity', 'social', 'gaming', 'projects', 'contact']) {
+    assert.match(html, new RegExp('data-v5-scene="' + scene + '"'));
+    assert.match(css, new RegExp('data-v5-scene="' + scene + '"'));
+  }
+  assert.match(main, /initScrollExperience/);
+  assert.match(scroll, /prefersReducedMotion/);
+  assert.match(scroll, /IntersectionObserver/);
+  assert.match(scroll, /data-v5-magnetic/);
+  assert.match(html, /data-v5-share/);
+  assert.match(html, /id="shareDialog"/);
+});
+
+test('V5 homepage remains mobile-first and does not force horizontal scrolling', () => {
+  const css = read('styles/v5-experience.css');
+  assert.match(css, /max-width: 640px/);
+  assert.match(css, /max-width: 380px/);
+  assert.match(css, /pointer: coarse/);
+  assert.match(css, /prefers-reduced-motion: reduce/);
+  assert.match(css, /overflow-x: clip/);
 });

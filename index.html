@@ -40,6 +40,7 @@
   <link rel="preload" href="assets/fonts/thmanyahseriftext-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/fonts.css?v=4.1.1">
 <link rel="stylesheet" href="styles/site.css?v=4.1.1-motion">
+  <link rel="stylesheet" href="styles/v5-experience.css?v=5.0.0">
 
   <script type="application/ld+json">
   {
@@ -54,7 +55,7 @@
   }
   </script>
 </head>
-<body class="is-intro bg-mode-aurora">
+<body class="is-intro bg-mode-aurora" data-v5-scene="identity">
   <div class="site-intro-curtain" aria-hidden="true"></div>
   <a class="skip-link" href="#main" data-i18n="skip">تخطّي إلى المحتوى</a>
 
@@ -62,8 +63,10 @@
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-  <header class="site-header">
+  <header class="site-header" data-v5-header>
     <a class="site-wordmark" href="./" aria-label="Omar | عُمَر home">Omar | عُمَر</a>
+    <a class="header-mini-profile" href="#main" aria-label="Back to profile"><img src="assets/img/profile.webp" alt="" width="30" height="30"><span>Omar | عُمَر</span></a>
+    <nav class="header-scene-nav" aria-label="Page sections"><a href="#socialHeading" data-i18n="socialsTitle">روابط التواصل</a><a href="#projectsHeading" data-i18n="projectsTitle">مشاريعي</a></nav>
     <div class="header-controls">
       <button class="language-switch is-ar" id="langToggleBtn" type="button" aria-label="Switch language to English" aria-pressed="false">
         <span class="language-switch__track" aria-hidden="true"><i></i></span>
@@ -76,7 +79,7 @@
   </header>
 
   <main class="page-shell" id="main">
-    <section class="profile-stage" aria-label="Profile" data-reveal>
+    <section class="profile-stage v5-scene v5-scene--identity" aria-label="Profile" data-v5-scene="identity" data-reveal>
       <div class="profile-orbit profile-orbit--one" aria-hidden="true"></div>
       <div class="profile-orbit profile-orbit--two" aria-hidden="true"></div>
 
@@ -113,9 +116,19 @@
         <span class="github-star-side" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></span>
       </a>
       <span class="github-star-caption" data-i18n="githubHint">عرض الملف الشخصي والأعمال على GitHub</span>
+      <div class="v5-hero-actions">
+        <a class="v5-action v5-action--primary" href="#projectsHeading" data-v5-magnetic data-i18n="heroExploreProjects">استكشف المشاريع</a>
+        <a class="v5-action v5-action--secondary" href="#socialHeading" data-v5-magnetic data-i18n="heroViewLinks">كل الحسابات</a>
+      </div>
+      <nav class="v5-hero-socials" aria-label="Quick social links">
+        <a href="https://github.com/Omar-i9" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="assets/icons/social/github.svg" alt="" width="20" height="20"></a>
+        <a href="https://www.instagram.com/omar.a.z3" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="assets/icons/social/instagram.svg" alt="" width="20" height="20"></a>
+        <a href="https://www.linkedin.com/in/omar-abuzeineh-235877439/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="assets/icons/social/linkedin.svg" alt="" width="20" height="20"></a>
+        <a href="https://www.tiktok.com/@gdmii_33" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="assets/icons/social/tiktok.svg" alt="" width="20" height="20"></a>
+      </nav>
     </section>
 
-    <section class="content-section" aria-labelledby="socialHeading" data-reveal>
+    <section class="content-section v5-scene v5-scene--social" aria-labelledby="socialHeading" data-v5-scene="social" data-reveal>
       <div class="section-heading">
         <span class="section-symbol">01</span>
         <div><h2 id="socialHeading" data-i18n="socialsTitle">روابط التواصل</h2><p data-i18n="socialsIntro">موقعي الرسمي! بعرض حساباتي ومشاريعي التقنية.</p></div>
@@ -123,7 +136,7 @@
       <div class="social-grid" id="linksGrid" aria-label="Social links"></div>
     </section>
 
-    <section class="content-section" aria-labelledby="quickCopyHeading" data-reveal>
+    <section class="content-section v5-scene v5-scene--gaming" aria-labelledby="quickCopyHeading" data-v5-scene="gaming" data-reveal>
       <div class="section-heading">
         <span class="section-symbol">02</span>
         <div><h2 id="quickCopyHeading" data-i18n="quickCopyTitle">نسخ سريع</h2><p data-i18n="copyIntro">معرّفات الألعاب جاهزة للنسخ بنقرة واحدة.</p></div>
@@ -131,7 +144,7 @@
       <div class="quick-copy-grid" id="copyList"></div>
     </section>
 
-    <section class="content-section projects-section" aria-labelledby="projectsHeading" data-reveal>
+    <section class="content-section projects-section v5-scene v5-scene--projects" aria-labelledby="projectsHeading" data-v5-scene="projects" data-reveal>
       <div class="section-heading">
         <span class="section-symbol">03</span>
         <div><h2 id="projectsHeading" data-i18n="projectsTitle">مشاريعي</h2><p data-i18n="projectsIntro">مشاريع أعمل عليها وتجارب تقنية، مع تفاصيل واضحة وحالة كل مشروع.</p></div>
@@ -139,36 +152,21 @@
       <div class="projects-stack" id="projectsList"></div>
     </section>
 
-    <footer class="page-footer" data-reveal>
-      <p data-i18n="footerNote">الفولو ما بكهربك</p>
-      <div class="footer-bottom">
-        <span>Omar | عُمَر</span>
-        <span>© 2026<span data-i18n="rights">جميع الحقوق غير محفوظة</span></span>
-        <button class="version-trigger" id="versionBadge" type="button">v4.1.0 · Omar | عُمَر</button>
+    <section class="v5-contact-scene v5-scene v5-scene--contact" id="contact" data-v5-scene="contact" aria-labelledby="contactHeading" data-reveal>
+      <span class="v5-contact-kicker">LET'S CONNECT</span>
+      <h2 id="contactHeading" data-i18n="contactTitle">خلينا على تواصل</h2>
+      <p data-i18n="contactText">سواء عندك استفسار أو حابب تتعرف على مشاريعي، بتقدر توصل إليّ من الروابط التالية.</p>
+      <div class="v5-contact-actions">
+        <a class="v5-action v5-action--primary" href="https://www.linkedin.com/in/omar-abuzeineh-235877439/" target="_blank" rel="noopener noreferrer" data-v5-magnetic data-i18n="contactLinkedIn">تواصل عبر LinkedIn</a>
+        <a class="v5-action v5-action--secondary" href="https://github.com/Omar-i9" target="_blank" rel="noopener noreferrer" data-v5-magnetic data-i18n="contactGithub">ملفي على GitHub</a>
+        <button class="v5-action v5-action--ghost" type="button" data-v5-share data-i18n="contactShare">مشاركة الصفحة</button>
       </div>
+    </section>
+    <footer class="v5-footer" data-reveal>
+      <span>Omar | عُمَر</span>
+      <a href="#main" data-i18n="backToTop">العودة للأعلى</a>
     </footer>
   </main>
-
-  <aside class="ayah-card is-hidden" id="ayahCard" aria-label="Ayah card" aria-hidden="true">
-    <div class="ayah-card-top">
-      <span class="ayah-chip" data-i18n="ayah">آية اليوم</span>
-      <button class="icon-button ayah-hide" id="ayahHide" type="button" data-i18n-aria="ayahHide" aria-label="إخفاء الآية">×</button>
-    </div>
-    <div class="ayah-content">
-      <p class="ayah-verse" id="ayahText" dir="rtl" lang="ar"></p>
-      <p class="ayah-translation" id="ayahTranslation" dir="ltr" lang="en" hidden></p>
-      <span class="ayah-reference" id="ayahRef"></span>
-      <div class="ayah-tafsir-block">
-        <span class="ayah-tafsir-label" data-i18n="ayahTafsirLabel">التفسير المختصر</span>
-        <p class="ayah-tafsir" id="ayahTafsirText"></p>
-      </div>
-    </div>
-    <div class="ayah-card-actions">
-      <button class="ayah-copy-button" type="button" id="ayahCopy" data-i18n="ayahCopy">نسخ الآية والتفسير</button>
-    </div>
-    <span class="ayah-card-accent" aria-hidden="true"></span>
-  </aside>
-  <button class="ayah-dock" id="ayahDock" type="button" data-i18n="ayahShow">إظهار الآية</button>
 
   <dialog class="app-dialog share-dialog" id="shareDialog" data-dialog aria-labelledby="shareDialogTitle">
     <div class="dialog-shell">
@@ -184,18 +182,6 @@
         <button type="button" data-share-target="instagram">Instagram</button>
         <button type="button" data-share-target="snapchat">Snapchat</button>
       </div>
-    </div>
-  </dialog>
-
-  <dialog class="app-dialog version-dialog" id="versionDialog" data-dialog aria-labelledby="versionTitle">
-    <div class="dialog-shell">
-      <button class="dialog-close" id="closeVersion" type="button" data-dialog-close aria-label="إغلاق" data-i18n-aria="close">×</button>
-      <div class="dialog-kicker" data-i18n="version">معلومات الإصدار</div>
-      <h2 id="versionTitle">v4.1.0</h2>
-      <p class="version-subtitle" id="versionSubtitle"></p>
-      <p class="version-tagline" id="versionTagline"></p>
-      <time id="versionDate"></time>
-      <ul class="version-list" id="versionList"></ul>
     </div>
   </dialog>
 
